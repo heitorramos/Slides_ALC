@@ -1,0 +1,185 @@
+---
+title: "Álgebra Linear Computacional"
+subtitle: "Aula 00: Detalhes sobre o curso"
+author: Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a>
+# date: 03/08/2022 
+# abstract-title: 
+format:
+  revealjs: 
+    slide-number: true
+    theme: default
+    controls: true
+    progress: true
+    # smaller: true
+    # scrollable: true
+    chalkboard:
+      buttons: true
+      chalk-width: 1
+      theme: whiteboard
+    preview-links: auto
+    logo:  common/UFMG_HEAD.png
+    css: common/style.css
+    footer: <https://homepages.dcc.ufmg.br/~ramosh/alc.html>
+search: true
+resources:
+  - aula01.pdf
+---
+## Créditos
+:::{.callout-important}
+Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento
+:::
+
+## Professor
+Heitor S. Ramos <ramosh@dcc.ufmg.br>
+
+- Forma de comunicação preferencial:
+    - Moodle (mensagens ou via forum)
+    - E-mail
+    - Teams (depende do monitor)
+
+## O que é Álgebra Linear Computacional?{.smaller}
+::: {.incremental}
+- Curso sobre a teoria, as aplicações e as considerações práticas de se implementar e executar operações matriciais em computadores usando dados reais
+    - Foco: como realizar cálculos matriciais com velocidade e precisão aceitáveis?
+- É o mesmo que "Análise Numérica", só mudou o nome?
+    - Não, embora alguns tópicos da ementa sejam comuns
+- É álgebra linear avançada?
+    - Não, alguns conceitos de AL serão revisados ao longo do semestre
+    - Eu diria que é mais próximo de uma Álgebra Linear aplicada à Computação
+:::
+
+## Objetivos
+:::{.incremental}
+- Revisar conceitos fundamentais de Álgebra Linear
+- Fornecer ao aluno métodos necessários à resolução numérica de problemas que envolvam decomposição de matrizes
+- Familiarizar e motivar o aluno com aplicações práticas em computação dos métodos vistos ao longo do curso
+- Manipular dados em um ambiente científico
+:::
+
+## Conteúdo Programático{.scrollable}
+| Aula | Data     | Conteúdo       |
+|:--:|:------:|:---------------|
+| 1|23/08/22|Vetores, Matrizes, Espaços Vetoriais e Espaço Coluna|
+|2|25/08/22| Introdução ao Python e Numpy|
+|3|30/08/22| Multiplicando e Fatorando Matrizes|
+|4|01/09/22|Quatro subspaços fundamentais|
+|5|06/09/22|Matrizes Ortogonais|
+|6|08/09/22| Autovalores e Autovetores|
+|7|13/09/22|PageRank|
+|8|15/09/22|Matrizes definidas positivas e semidefinidas positivas|
+|9|20/09/22|Decomposição em valores singulares (SVD)|
+|10|22/09/22|SVD e aproximação de matrizes|
+|11|27/09/22|Normas de vetores e matrizes|
+|12|29/09/22|Normas de vetores e matrizes II|
+|13|04/10/22|Análise de componentes principais (PCA)|
+|14|06/10/22|Análise de componentes principais (PCA) II|
+|15|11/10/22|[Prova 1]{.vermelho}|
+|16|13/10/22|Removendo Viés de word embeddings com PCA|
+|17|18/10/22|Regressão Linear|
+|18|20/10/22|Regressão Linear II|
+|19|25/10/22|Mínimos quadrados e coeficiente de determinação|
+|20|27/10/22|Três soluções para mínimos quadrados|
+|21|01/11/22|Dificuldades em se resolver Ax=b|
+|22|03/11/22|Calculando autovalores|
+|23|08/11/22|Calculando valores singulares|
+|24|10/11/22|Mudança de posto baixo em A e sua inversa|
+|25|17/11/22|Valores singulares que decrescem rapidamente|
+|26|22/11/22|Métodos interativos: Gauss-Jacobi|
+|27|24/11/22|Condição de convergência de Jacobi|
+|28|29/11/22| Método de Gauss-Seidel|
+|29|01/12/22|[Prova 2]{.vermelho}|
+|30|06/12/22|Prova suplementar|
+|31|13/12/22|Exame Especial|
+
+
+
+## Dinâmica
+- Aulas téóricas e alguns exemplos de aplicação dos conceitos 
+- Preciso comprar os livros? 
+    - Não, recomendo que comprem os livros apenas aqueles que quiserem aprofundar no conteúdo visto em sala de aula
+
+## Avaliação de Aprendizagem
+- Prova 1 (30 pontos)
+- Prova 2 (30 pontos)
+- Listas de exercícios teóricos e de programação (40 pontos) (a serem entregues ao longo do semestre)
+
+## Material de apoio
+- Moodle (slides e outros materiais) 
+- Vídeos
+- Software: Python
+
+
+## Bibliografia
+- Trefethen, L. N. & Bau III, D. Numerical Linear Algebra. Vol. 50. SIAM, 1997 Strang, Gilbert. Linear Algebra and Learning from Data. Wellesley-Cambridge Press, 2019.
+- Strang, Gilbert. Linear Algebra and Learning from Data. Wellesley-Cambridge Press, 2019.
+
+
+## Presença {.smaller}
+
+Sejam:
+
+ $M$ a média do aluno antes do exame especial
+
+ $P \in [0,100\%]$ a presença do aluno durante o semestre
+
+- Se $M>60$:
+    - [**APROVADO**]{.verde}, presença lançada: $\max(M, 75\%)$
+- Se $40\le M \le 59$: 
+    - se $P>75\%$: exame especial
+    - se $P< 75\%$: [**REPROVADO**]{.vermelho} por falta
+- Se $M < 40$:
+    - se $P\ge 75\%$: [**REPROVADO**]{.vermelho} por nota
+    - se $P \le 75\%$: [**REPROVADO**]{.vermelho} por falta
+
+## Python
+:::{.callout-important}
+"*Python is an interpreted, object-oriented, high-level programming language with dynamic semantics. Its high-level built in data structures, combined with dynamic typing and dynamic binding, make it very attractive for Rapid Application Development, as well as for use as a scripting or glue language to connect existing components together. Python's simple, easy to learn syntax emphasizes readability and therefore reduces the cost of program maintenance...*"
+
+Fonte: Executive summary (<http://www.python.org>)
+:::
+
+## Python para computação científica
+
+![](figs/python_ecosytem.png){fig-align="center"}
+
+## Python para ALC
+- Se você já sabe Python + Numpy, não precisa aprender mais nada  😀
+
+:::{.callout-tip collapse="true"}
+## Má notícia!
+Você não vai aprender Python nessa disciplina 🥹
+:::
+
+:::{.callout-tip collapse="true"}
+## Boa notícia!
+Você acaba de ganhar duas semanas para aprender Python por contra própria
+:::
+
+## O que é necessário aprender?
+:::: {.columns}
+
+::: {.column width="50%"}
+- Instalar o Anaconda (Python 3.0)
+- Se familiarizar com Jupyter
+- O básico da linguagem:
+    - declarar variáveis
+    - definir funções
+    - tipos como list, tuple, dict, set
+    - condições (if/else)
+    - laços (for/while)
+:::
+
+::: {.column width="50%"}
+- O básico da linguagem:
+    - imprimir
+    - leitura e escrita em arquivos
+    - importar bibliotecas
+    - usar numpy: declar e manipular vetores e matrizes
+    - usar matplotlib: gerar gráficos simples
+:::
+
+::::
+
+## Perguntas?{background-image="figs/questions.jpg"}
+
+![](figs/questions.jpeg)

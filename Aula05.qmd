@@ -1,0 +1,156 @@
+---
+title: "Álgebra Linear Computacional"
+subtitle: "Aula 05: Matrizes Ortogonais"
+author: Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a>
+# date: 03/08/2022 
+# abstract-title: 
+format:
+  revealjs: 
+    code-fold: true 
+    execute: 
+      enabled: true
+    echo: true
+    jupyter: python3
+    slide-number: true
+    theme: default
+    controls: true
+    progress: true
+    # smaller: true
+    # scrollable: true
+    chalkboard:
+      buttons: true
+      chalk-width: 1
+      theme: whiteboard
+    preview-links: auto
+    logo:  common/UFMG_HEAD.png
+    style: common/style.css
+    footer: <https://homepages.dcc.ufmg.br/~ramosh/alc.html>
+search: true
+resources:
+  - aula01.pdf
+---
+## Créditos
+:::{.callout-important}
+Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento
+:::
+
+## Objetivos de Aprendizagem{.scrollable}
+
+1. Saber definir matrizes ortogonais
+2. Saber definir matrizes de projeção e usá-las para
+projetar vetores
+3. Conhecer as vantagens computacionais de se usar
+vetores ortonormais para definir uma base
+
+## Referências
+- [Wikipedia](https://en.wikipedia.org/wiki/Orthogonal_matrix)
+- [Khan Academy](https://youtu.be/yDwIfYjKEeo)
+
+## Ortogonalidade
+
+- Ortogonal significa perpendicular
+- Vetores ortogonais
+
+$$ x \cdot y = x^\top y = x_1y_1 + \ldots + x_ny_n = 0$$
+
+- Para números complexos, use o conjugado ($z = a+bi$, o conjugado é $z = a - bi$)
+
+$$ \bar{x}^\top y = x_1y_1 + \ldots + x_ny_n = 0$$
+
+## Bases ortonormais {.scrollable}
+
+- São bases ortogonais de vetores unitários
+- Conjunto de vetores LI que gera o espaço
+- Ex: $\mathbb R^2$ é gerado por um par de vetores LI
+- Esses par de vetores não é único
+- Será que exite um par "melhor"?
+
+```{python}
+#| label: fig1
+#| fig-cap: "Produto Matrix x Vetor"
+import matplotlib.pyplot as plt
+import numpy as np
+V = np.array([[1,2], [2,1], [2,0],[0,3], [1,0], [0,1]])
+origin = ([0,0,0,0,0,0],[0,0,0,0,0,0])
+fig = plt.figure()
+plt.quiver(*origin, V[:,0], V[:,1], angles='xy', scale_units='xy', scale=1, color=['red', 'red', 'blue','blue', 'green', 'green'])
+plt.xlim((-1,3))
+plt.ylim((0,3)) 
+plt.grid()
+plt.show()
+```
+
+$$v_i^\top v_i = 1\\ v_{i,1}^2+ v_{i,2}^2+ \ldots +v_{i,n}^2 = 1 \\ ||v||^2 = 1 \\  ||v|| = 1$$
+
+- Com isso, conseguimos usar a base canônica:
+$$\begin{bmatrix}3 \\ 5 \\ -7\end{bmatrix} = 3 e_1 + 5 e_2 - 7 e_3$$
+
+## Tall-thin matrix $Q$ com colunas ortonormais {.scrollable}
+
+$$ Q^\top Q = \begin{bmatrix}- & q_1^\top & - \\ & \vdots& \\ & \vdots& \\ & \vdots&\\ - & q_n^\top & -\end{bmatrix}_{n\times m}\begin{bmatrix} - & \ldots & -\\ \vdots & \vdots & \vdots\\ q_1 & \ldots & q_n \\\vdots & \vdots & \vdots \\ - & \ldots & -\end{bmatrix}_{m\times n} \\= \begin{bmatrix}1 & 0 & 0 &\ldots & 0\\ 0 & 1 & 0 &\ldots &0  \\ 0 & 0 & 1 & \ldots & 0 \\ \vdots & \vdots & \vdots & \ldots & \vdots \\ 0 & 0 & 0 & \ldots & 1\end{bmatrix}_{n\times n} = I$$
+
+
+## Matrix ortogonal
+
+- Se $Q$ é quadrada, então
+
+$$ Q^\top Q = I \text{  e } QQ^\top = I$$
+
+- Ou seja, **a inversa de $Q$ é a sua transposta**
+
+## Matrix de projeção {.scrollable}
+
+- Toda matriz $P = QQ^\top$ tem $P^2 = P$ (idempotente)
+![projeção](figs/projection.png)
+
+- Suponha que a gente projete $x$ através da matriz $P$
+- Suponha que a gente tome o resultado anterior e projete novamente
+- O que teremos?
+
+$$Py = P(Px) = P^2 x = Px$$
+
+$$P^2 = QQ^\top(QQ^\top)\\ QQ^\top = P$$
+
+
+## Matrix de projeção{.scrollable}
+
+- Exemplo: Projete o vetor $b = (3,3,3)$ na linha $Q = \frac{1}{3} (2,2,-1)$
+
+:::{.callout-note}
+## Solução
+- Para calcular a matriz de projeção, basta calcular $P = Q Q^\top$
+- $b' = Pb = QQ^\top b$
+
+![projecao](figs/projecao2.svg.png)
+
+- $||b'|| = ||b||\cos\theta = ||b||\frac{Q^\top b}{||Q|| ||b||}$
+- $||b'|| = Q^\top b$
+- $b' = Q ||b'|| = QQ^\top b$ (vantagem de usar vetores ortonormais)
+:::
+
+
+## Bases Ortonormais
+
+- Seja uma matriz ortogonal $Q$, $n\times n$
+- Vetores colunas de $Q$ formam uma base para o $\mathbb R^n$
+- E todo vetor $v$ pode ser escrito como
+
+$$ v = c_1q_1+ \ldots + c_nq_n$$
+
+## Bases ortonormais
+
+- Os coeficientes em uma base ortonormal ($Qc = v$, $O(n^3)$)
+
+$$ c_1 =  q_1^\top v \ldots c_n = q_n^\top v$$
+
+\begin{align} q_1^\top v &= q_1^\top(c_1q_1 + c_2q_2 + \ldots + c_nq_n)\\ &= c_1q_1^\top q_1 + c_2q_1^\top q_2 + \ldots + c_nq_1^\top q_n \\ &= c1 \\ \vdots
+\end{align}
+
+## Bases ortonormais
+
+$$ v = Qc$$
+
+$$Q^{-1} v = Q^{-1}Qc\\ Q^\top v = c$$
+
+$$\begin{bmatrix}- & q_1^\top & - \\ & \vdots& \\ - & q_n^\top & -\end{bmatrix}\begin{bmatrix}\\ v \\ \\ \end{bmatrix} = \begin{bmatrix}\\ c \\ \\\end{bmatrix}$$
+

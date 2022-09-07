@@ -1,0 +1,407 @@
+---
+title: "Álgebra Linear Computacional"
+subtitle: "Aula 02: Multiplicando e Fatorando Matrizes"
+author: Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a>
+# date: 03/08/2022 
+# abstract-title: 
+format:
+  revealjs: 
+    code-fold: true 
+    execute: 
+      enabled: true
+    echo: true
+    jupyter: python3
+    slide-number: true
+    theme: default
+    controls: true
+    progress: true
+    # smaller: true
+    # scrollable: true
+    chalkboard:
+      buttons: true
+      chalk-width: 1
+      theme: whiteboard
+    preview-links: auto
+    logo:  common/UFMG_HEAD.png
+    style: common/style.css
+    footer: <https://homepages.dcc.ufmg.br/~ramosh/alc.html>
+search: true
+resources:
+  - aula02.pdf
+---
+## Créditos
+:::{.callout-important}
+Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento
+:::
+
+## Objetivos de Aprendizagem
+1. Conhecer três formas de operar multiplicação de matrizes
+2. Saber definir e identificar vetores linearmente dependentes
+3. Saber definir e calcular o posto de uma matriz, tanto pelo posto de linha quanto de coluna
+4. Entender a relação entre posto de $A$, posto de $B$ e posto de $AB$
+5. Saber realizar a decomposição CR manualmente para matrizes triviais
+6. Conhecer a notação tipicamente utilizada para repesentar matrizes com estruturas específicas
+
+## Referências adicionais{.scrollable}
+- Multiplicação de matrizes: 
+  - Wiki: <http://mlwiki.org/index.php/Matrix-Matrix_Multiplication>
+- Decomposição CR:
+  - Wiki: <https://en.wikipedia.org/wiki/&Rank_factorization>
+  - MH1200: <https://youtu.be/o8PiWO8C3zs>
+
+- Independência linear:
+  - 3Blue1Brown: <https://youtu.be/k7RM-ot2NWY>
+  - Khan Academy: <https://youtu.be/CrV1xCWdY-g>
+
+- Dimensão do espaço coluna ou posto        
+  -3Blue1Brown: <https://youtu.be/JUgrBkPteTg>
+
+
+## Duas formas de ver $Ax${.scrollable}
+
+- Produtos internos:
+
+
+$$ \begin{bmatrix} a_{11} &a_{12} &\ldots &a_{1n} \\a_{21} &a_{22} &\ldots &a_{2n} \\ a_{31} &a_{32} &\ldots &a_{3n} \\ \vdots & \vdots & \vdots &\vdots \\ a_{m1} &a_{m2} &\ldots &a_{mn} \\ \end{bmatrix} \begin{bmatrix} x_1  \\ \vdots \\ \vdots\\ \vdots\\ x_n\end{bmatrix} = \begin{bmatrix} y_1 \\ \vdots\\ \vdots\\ \vdots\\ y_m\end{bmatrix}$$
+
+
+$$ y_1 = a_{11}x_1+a_{12}x_2+\ldots + a_{1n}x_n \\ \vdots \\ y_m = a_{m1}x_1+a_{m2}x_2+\ldots + a_{mn}x_n$$
+
+
+
+- Combinação linear das colunas de $A$
+
+- $$ \begin{bmatrix} | &| &\ldots &| \\ a_1 & a_2 &\ldots & a_n \\ | &| &\ldots &| \\\end{bmatrix} \begin{bmatrix} x_1 \\ \vdots \\x_n\end{bmatrix} = x_1\overrightarrow{a_1} + x_2\overrightarrow{a_2} + \ldots + x_n\overrightarrow{a_n}$$
+
+
+
+## Exemplo 1{.scrollable}
+
+$$\begin{bmatrix} 1 & 3 & 8\\ 1 & 3 & 8\\ 1 & 3 & 8\end{bmatrix}\begin{bmatrix}x_1 \\ x_2 \\ x_3\end{bmatrix}= ?$$
+
+
+```{python}
+#| label: fig1
+#| fig-cap: "Vetores coluna"
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+x1 = [1, 3, 8]
+x2 = [1, 3, 8]
+x3 = [1, 3, 8]
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+ax.set_xlim([0, 2])
+ax.set_ylim([5, 0])
+ax.set_zlim([0, 10])
+start = [0,0,0]
+ax.quiver(start[0], start[1], start[2], x1[0], x1[1], x1[2])
+ax.quiver(start[0], start[1], start[2], x2[0], x2[1], x2[2])
+ax.quiver(start[0], start[1], start[2], x3[0], x3[1], x3[2])
+ax.view_init(15, 180)
+plt.show()
+```
+
+- Todas as combinações de coluna são apenas...
+
+- $posto(A) = rank(A) = 1$
+ $$ x_1\begin{bmatrix}1\\1\\1\end{bmatrix}+x_2\begin{bmatrix}3\\3\\3\end{bmatrix} + x_3\begin{bmatrix}8\\8\\8\end{bmatrix}$$
+
+ $$x_1 + 3x_2 + 8x_3$$
+
+
+## Exemplo 2{.scrollable}
+
+$$\begin{bmatrix} 2 & 1 & 3\\ 3 & 1 & 4\\ 5 & 7 & 12\end{bmatrix}\begin{bmatrix}x_1 \\ x_2 \\ x_3\end{bmatrix}= ?$$
+
+
+```{python}
+#| label: fig2
+#| fig-cap: "Vetores coluna"
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+
+x1 = [2, 1, 3]
+x2 = [3, 1, 4]
+x3 = [5, 7, 12]
+
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+ax.set_xlim([0, 6])
+ax.set_ylim([7, 0])
+ax.set_zlim([0, 14])
+start = [0,0,0]
+ax.quiver(start[0], start[1], start[2], x1[0], x1[1], x1[2], color='r')
+ax.quiver(start[0], start[1], start[2], x2[0], x2[1], x2[2],color='b')
+ax.quiver(start[0], start[1], start[2], x3[0], x3[1], x3[2], color='g')
+ax.view_init(15, 180)
+plt.show()
+```
+
+- $posto(A) = rank(A) = 2$ (por quê?)
+ $$ x_1\begin{bmatrix}2\\3\\5\end{bmatrix}+x_2\begin{bmatrix}1\\1\\7\end{bmatrix} + x_3\begin{bmatrix}3\\4\\12\end{bmatrix}$$
+
+ $$\begin{cases}2x_1 + x_2 + 3x_3\\3x_1 + x_2 + 4x_3\\5x_1 + 7x_2 + 12x_3\end{cases}$$
+
+## Exemplo 3{.scrollable}
+
+$$\begin{bmatrix} 2 & 1 & 3\\ 3 & 1 & 4\\ 5 & 7 & 1\end{bmatrix}\begin{bmatrix}x_1 \\ x_2 \\ x_3\end{bmatrix}= ?$$
+
+
+```{python}
+#| label: fig3
+#| fig-cap: "Vetores coluna"
+
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+
+x1 = [2, 1, 3]
+x2 = [3, 1, 4]
+x3 = [5, 7, 1]
+
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+ax.set_xlim([0, 6])
+ax.set_ylim([7, 0])
+ax.set_zlim([0, 14])
+start = [0,0,0]
+ax.quiver(start[0], start[1], start[2], x1[0], x1[1], x1[2], color='r')
+ax.quiver(start[0], start[1], start[2], x2[0], x2[1], x2[2],color='b')
+ax.quiver(start[0], start[1], start[2], x3[0], x3[1], x3[2], color='g')
+ax.view_init(15, 180)
+plt.show()
+```
+
+- $posto(A) = rank(A) = 3$ (por quê?)
+ $$ x_1\begin{bmatrix}2\\3\\5\end{bmatrix}+x_2\begin{bmatrix}1\\1\\7\end{bmatrix} + x_3\begin{bmatrix}3\\4\\1\end{bmatrix}$$
+
+ $$\begin{cases}2x_1 + x_2 + 3x_3\\3x_1 + x_2 + 4x_3\\5x_1 + 7x_2 + 1\end{cases}$$
+ 
+## Conceito: Espaço Coluna
+
+- Duas formas de ver $Ax$
+  1. Produto interno
+  2. Combinação linear das colunas de $A$
+
+:::{.callout-note}
+E se multiplicarmos $A$ por todos os vetores $x$?
+
+o que é o espaço formado por todos os $Ax$?
+
+Resposta: Espaço coluna $C(A)$
+:::
+
+## Duas formas de ver $x^\top A${.scrollable}
+- Produtos internos:
+
+:::{ul.no-bullets}
+$$ \begin{bmatrix} x_1  & \ldots& x_m\end{bmatrix} \begin{bmatrix} a_{11} &a_{12} &\ldots &a_{1n} \\a_{21} &a_{22} &\ldots &a_{2n} \\ a_{31} &a_{32} &\ldots &a_{3n} \\ \vdots & \vdots & \vdots &\vdots \\ a_{m1} &a_{m2} &\ldots &a_{mn} \\ \end{bmatrix}$$
+:::
+
+$$ y_1 = x_1a_{11}+x_2a_{21}+\ldots + x_ma_{m1} \\ \vdots \\ y_n = x_1a_{1n}+x_2a_{2n}+\ldots + x_ma_{mn}$$
+
+
+
+- Combinação linear das colunas de $A$
+
+$$ \begin{bmatrix} x_1 & \ldots& x_m\end{bmatrix}\begin{bmatrix} - & a_1^\top & -\\ - &a_2^\top & -\\ & \vdots &\\- & a_m^\top & - \\\end{bmatrix} $$
+$$  x_1\overrightarrow{a_1} + x_2\overrightarrow{a_2} + \ldots + x_m\overrightarrow{a_m}$$ 
+
+$$  x_1\begin{bmatrix}a_{11} \\ a_{12}\\ \vdots \\ a_{1n} \end{bmatrix} + x_2\begin{bmatrix}a_{21} \\ a_{22}\\ \vdots \\ a_{2n} \end{bmatrix} + \ldots + x_m \begin{bmatrix}a_{m1} \\ a_{m2}\\ \vdots\\ a_{mn} \end{bmatrix}$$
+
+## Conceito: colunas linearmente independentes
+
+$$ A = \begin{bmatrix}2 & 1 &3 \\ 3 & 1 & 4 \\ 5 & 7 & 12\end{bmatrix}$$
+
+:::{.callout-important}
+As duas 1$^\text{as}$ colunas formam uma **base** para o espaço coluna (por quê?)
+
+$$ C(A) = \text{Span} \{[2,3,5]^\top, [1,1,7]^\top\}$$
+:::
+
+
+## Conceito: Posto de uma matriz
+
+- Número de colunas (linhas) linearmente independentes
+- Posto de uma matriz $m\times n$ é no máximo $\min(m,n)$
+- Posto de $A\times B$ é no máximo $\min(\text{posto}(A), \text{posto}(B))$
+
+
+## Exemplo 1 (posto){.scrollable}
+
+$$ A = \begin{bmatrix}2 & 1 &3 \\ 3 & 1 & 4 \\ 5 & 7 & 12\end{bmatrix}$$
+
+$$ x_1\begin{bmatrix}2\\1\\3\end{bmatrix} + x_2\begin{bmatrix}3\\1\\4\end{bmatrix} = \begin{bmatrix}5\\7\\12\end{bmatrix}$$
+
+$$\begin{cases}2x_1 + 3 x_2 = 5\\ x_1 + x_2 = 7 \\ 3 x_1 + 4 x_2 = 12\end{cases}$$
+
+<!-- ```{R}
+Sys.setenv(RGL_USE_NULL=T)
+library(matlib)
+A = matrix(c(2,1,3,3,1,4),3,2)
+b = matrix(c(5,7,12), ncol=1)
+Solve(A,b)
+``` -->
+```{python}
+import numpy as np
+A = np.array([[2,1,3],[3,1,4]])
+b = np.array([[5],[7],[12]])
+np.transpose(np.linalg.pinv(A)).dot(b)
+```
+:::{.callout-note}
+![Conjunto Solução](figs/posto_ex1.png)
+:::
+
+## Exemplo 2 (posto){.scrollable}
+
+$$ A = \begin{bmatrix}2 & 1 &3 \\ 3 & 1 & 4 \\ 5 & 7 & 17 \\ 2& 7 & 11\end{bmatrix}$$
+
+$$ x_1\begin{bmatrix}2\\1\\3\end{bmatrix} + x_2\begin{bmatrix}3\\1\\4\end{bmatrix} + x_3 \begin{bmatrix}5\\7\\17\end{bmatrix} = \begin{bmatrix}2\\7\\11\end{bmatrix}$$
+
+$$\begin{cases}2x_1 + 3 x_2 + 5x_3 = 2\\ x_1 + x_2 + 7x_3 = 7 \\ 3 x_1 + 4 x_2 + 17 x_3= 11 \end{cases}$$
+
+<!-- ```{R}
+Sys.setenv(RGL_USE_NULL=T)
+library(matlib)
+A = matrix(c(2,1,3,3,1,4,5,7,17),3,3)
+b = matrix(c(2,7,11), ncol=1)
+Solve(A,b, fraction=T)
+``` -->
+```{python}
+import numpy as np
+A = np.array([[2,1,3],[3,1,4],[5,7,17]])
+b = np.array([[2],[7],[11]])
+np.transpose(np.linalg.pinv(A)).dot(b)
+```
+## Exemplo 3 (posto){.scrollable}
+
+$$ A = \begin{bmatrix}2 & 3 &5 \\ 7 & 11 & 13 \\ 17 & 19 & 23 \\ 29& 31 & 37\end{bmatrix}$$
+
+$$ x_1\begin{bmatrix}2\\3\\5\end{bmatrix} + x_2\begin{bmatrix}7\\11\\13\end{bmatrix} + x_3 \begin{bmatrix}17\\19\\23\end{bmatrix} = \begin{bmatrix}29\\31\\37\end{bmatrix}$$
+
+$$\begin{cases}2x_1 + 7 x_2 + 17x_3 = 29\\ 3x_1 + 11x_2 + 19x_3 = 31 \\ 5 x_1 + 13 x_2 + 23 x_3= 37 \end{cases}$$
+
+<!-- ```{R}
+Sys.setenv(RGL_USE_NULL=T)
+library(matlib)
+A = matrix(c(2,3,5,7,11,13,17,19,23),3,3)
+b = matrix(c(29,31,37), ncol=1)
+Solve(A,b, fraction=T)
+``` -->
+```{python}
+import numpy as np
+A = np.array([[2,7,17],[3,11,19],[5,13,23]])
+b = np.array([[29],[31],[37]])
+np.linalg.pinv(A).dot(b)
+```
+:::{.callout-note appearance="simple"}
+Teorema do Posto: Seja $M$ em $M_{m\times n}(\mathbb R)$ e $p$ (o posto de $M$) o número máximo de linhas LI de $M$, então, o número máximo de colunas LI de $M$ é $p$.
+::: 
+## Multiplicação de matrizes
+- $A_{m\times n}B_{n\times p}$ como concatenação:
+  - dos vetores $A\, b_{*j}$ ou vetores $a_{i*}\, B$
+
+$$ AB = \begin{bmatrix} | & | & & | \\ Ab_{*1} & Ab_{*2} & \ldots & Ab_{*p}\\ | & | & & | \ \end{bmatrix} = \begin{bmatrix} - & a_{1*}B & - \\ - & a_{2*}B & - \\ - & a_{m*}B & - \end{bmatrix}$$
+
+:::{.callout-tip appearance="simple"}
+Quantas multiplicações são realizadas em $AB$?
+
+Resposta: $mnp$
+:::
+
+## Multiplicação de matrizes
+
+$$ A = \begin{bmatrix} 1 & 3 & 8\\ 1 & 3 & 8\\ 1 & 3 & 8\end{bmatrix} = BC$$ 
+
+## Produto externo
+
+$$ u \oplus v = uv^\top = \begin{bmatrix}u_1\\u_2\\u_3\\u_4\end{bmatrix}\begin{bmatrix}v_1 & v_2 & v_3\end{bmatrix}$$
+$$ u \oplus v =  \begin{bmatrix} u_1v_1 & u_1v_2 & u_1v_3 \\ u_2v_1 & u_2v_2 & u_2v_3 \\ u_3v_1 & u_3v_2 & u_3v_3 \\ u_4v_1 & u_4v_2 & u_4v_3\end{bmatrix}$$
+
+## Produto de matrizes como soma de produtos externos {.scrollable}
+
+$$\begin{bmatrix}a_{11} & a_{12} & \ldots & a_{1n} \\ a_{21} & a_{22} & \ldots & a_{2n}  \\ \vdots & \vdots & \ddots & \vdots \\a_{m1} & a_{m2} & \ldots & a_{mn}  \end{bmatrix} \begin{bmatrix}b_{11} & b_{12} & \ldots & b_{1p} \\ b_{21} & b_{22} & \ldots & b_{2p}  \\ \vdots & \vdots & \ddots & \vdots \\ b_{n1} & b_{n2} & \ldots & b_{np}  \end{bmatrix}$$
+
+$$ a_1 = \begin{bmatrix}a_{11}\\ a_{21} \\ \vdots\\ a_{m1} \end{bmatrix},   b_1 = \begin{bmatrix}b_{11}\\ b_{12} \\ \vdots\\ b_{1p} \end{bmatrix}$$
+$$ a_1b_1^\top + a_2b_2^\top + \ldots + a_nb_n^\top$$
+
+$$ a_1b_1^\top = a_1 \oplus b_1 \ldots$$
+
+:::{.callout-note appearance="simple"}
+Cada matriz do somatório obtida como produto externo tem posto 1 (por quê?).
+
+A soma de duas dessas matrizes, $a_ib_i^\top$, terá posto 2, desde que as colunas $a_i$ e $a_j$ sejam LI e as linhas $b_i$ e $b_j$ também sejam LI. 
+
+O que poderemos dizer sobre a soma de três matrizes de posto 1?
+:::
+
+
+## Exemplo
+
+$$\begin{bmatrix}1 & 0 \\ 3 & 1\end{bmatrix}\begin{bmatrix}2 & 4 \\ 0 & 5\end{bmatrix} = $$
+
+## Exemplo
+
+$$\begin{bmatrix}1 & 0 \\ 3 & 1\end{bmatrix}\begin{bmatrix}2 & 4 \\ 0 & 5\end{bmatrix} = \begin{bmatrix}1\\3\end{bmatrix}\begin{bmatrix}2 & 4\end{bmatrix} + \begin{bmatrix} 0 \\  1\end{bmatrix}\begin{bmatrix} 0 & 5\end{bmatrix}$$
+
+$$\begin{bmatrix}1 & 0 \\ 3 & 1\end{bmatrix}\begin{bmatrix}2 & 4 \\ 0 & 5\end{bmatrix} =  \begin{bmatrix}2 & 4 \\ 6 & 12\end{bmatrix} + \begin{bmatrix}0 & 0 \\ 0 & 5\end{bmatrix} = \begin{bmatrix}2 & 4 \\ 6 & 17\end{bmatrix}$$
+
+## Colunas linearmente dependentes e decomposição de matrizes
+
+$$ A = \begin{bmatrix}1 & 3 & 8 \\1 & 3 & 8 \\1 & 3 & 8 \end{bmatrix}_{3\times 3}= \begin{bmatrix} 1\\1\\1\end{bmatrix}_{3\times 1}\begin{bmatrix} 1 & 3 & 8\end{bmatrix}_{1 \times 3}$$
+
+## Multiplicação de matrizes
+
+$$ A=\begin{bmatrix}2 & 1 & 3\\ 3 & 1 &4\\ 5 & 7 & 12\end{bmatrix}_{3x3} = \begin{bmatrix}2 & 1 \\ 3 & 1 \\ 5 & 7\end{bmatrix}_{3\times 2} \begin{bmatrix}1 & 0 & 1\\ 0 & 1 & 1\end{bmatrix}_{2\times 3}$$
+
+- $A_{m\times n} B_{n\times p}$ como soma de produtos externos:
+  - Lembrando que $A_{m\times n} B_{n\times p} = A_1\oplus  B_1^\top + A_2\oplus B_2^\top + \ldots + A_n\oplus B_m^\top$
+
+  $$A=\begin{bmatrix}2\\3\\5\end{bmatrix}\begin{bmatrix}1 & 0 & 1\end{bmatrix}+ \begin{bmatrix}1\\1\\7\end{bmatrix}\begin{bmatrix}0 & 1 & 1\end{bmatrix} $$
+
+## Decomposição $A= CR$
+
+  - Considere a base que encontramos 
+
+  $$\begin{bmatrix}2 & 1\\ 3 & 1\\ 5 & 7\end{bmatrix}\begin{bmatrix}1 & 0 & 1\\ 0 & 1 & 1\end{bmatrix} = A$$
+  $$ A = CR$$
+
+:::{.callout-note}
+posto de coluna = posto de linha
+:::
+
+## Espaço linha de $A$
+
+Todas as combinações de linha
+- Espaço linha $C(A^\top)$
+$$ C = \begin{bmatrix}2 & 1\\ 3 & 1\\ 5 & 7\end{bmatrix}$$
+$$ R = \begin{bmatrix}1 & 0 & 1\\ 0 & 1 & 1\end{bmatrix}$$
+
+:::{.callout-note}
+$C$ é a base para espaço coluna $C(A) = \{Ax\mid x \in \mathbb R^n\}$
+
+$R$ é a base para o espaço linha $C(A^\top)= \{A^\top y\mid y \in \mathbb R^m\}$
+:::
+
+## Fatorações: visão geral
+
+:::: {.columns}
+::: {.column width="50%"}
+1. $A = LU$
+2. $A = QR$
+3. $A = X \Lambda X^{-1}$
+:::
+::: {.column width="50%"}
+4. $S = Q \Lambda Q^\top$
+5. $A = U\Sigma V^\top$
+:::
+::::
+:::{.callout-note}
+1. Decomposição em matrizes triangulares ($L$ -> inferior e $U$ -> Superior)
+2. Decomposição em uma matriz orgonal ($Q$ e uma matriz triangular $R$ superior)
+3. Decomposição espectral ($\Sigma$ é matriz diagonal com os autovalores de $A$)
+4. Decomposição espectral para matrizes simétricas
+5. Decomposição em valores singulares, $U$ e $V$ são ortogonais e $\Sigma$ contém os valores singulares de $A$
+:::
