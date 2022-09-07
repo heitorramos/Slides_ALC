@@ -8,7 +8,7 @@ format:
   revealjs: 
     slide-number: true
     theme: default
-    controls: true
+    controls: true 
     progress: true
     # smaller: true
     # scrollable: true
