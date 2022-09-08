@@ -1,0 +1,140 @@
+---
+title: "Álgebra Linear Computacional"
+subtitle: "Aula 06: Normas de Vetores e Matrizes"
+author: Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a>
+# date: 03/08/2022 
+# abstract-title: 
+format:
+  revealjs: 
+    code-fold: true 
+    execute: 
+      enabled: true
+    echo: true
+    jupyter: python3
+    slide-number: true
+    theme: default
+    controls: true
+    progress: true
+    # smaller: true
+    # scrollable: true
+    chalkboard:
+      buttons: true
+      chalk-width: 1
+      theme: whiteboard
+    preview-links: auto
+    logo:  common/UFMG_HEAD.png
+    style: common/style.css
+    footer: <https://homepages.dcc.ufmg.br/~ramosh/alc.html>
+search: true
+resources:
+  - aula01.pdf
+---
+## Créditos
+:::{.callout-important}
+Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento
+:::
+
+## Objetivos de Aprendizagem{.scrollable}
+
+1. Conhecer a definição de *embedding* se algumas aplicações
+2. Saber calcular normas vetoriais 1,2, $\infty$, $p$ e $S$ (onde $S$ é uma matriz definida positiva)
+3. Conhecer as propriedades das normas vetoriais
+4. Saber normalizar um vetor
+5. Conhecer a geometria das normas vetoriais 
+
+## Referências
+- Wikipedia
+    - [Normas vetoriais](https://en.wikipedia.org/wiki/Norm_(mathematics))
+    - [Normas matriciais](https://en.wikipedia.org/wiki/Norm_(mathematics))
+- Youtube
+    - [Chad Higdon-Topaz](https://en.wikipedia.org/wiki/Norm_(mathematics))
+
+## Onde usar normas vetoriais?{.scrollable}
+
+- Normas vetoriais são associadas a **tamanhos** e a **distâncias**
+- Existem várias aplicações em que queremos medir a (dis-)similaridade entre objetos. Em geral, isso é feito em 2 passos:
+    - Passo 1: representar objetos como vetores. Estes vetores são conhecidos como ***embeddings***
+    - Passo 2: calcular distância entre ***embeddings***
+
+## Embeddings (representação vetorial)
+![Vetores com 26 dimensões projetados no “melhor” espaço de dimensão 2](figs/Aula05/embeddings_song.png)
+
+::: aside 
+Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Random Playlists Smoothly Commuting Between Styles. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 15(4), pp.1-20.
+:::
+
+## Embeddings (representação vetorial) {.scrollable}
+![Objetivo: gerar playlists que passem de um estilo a outro de forma SUAVE.
+Playlists devem ser aleatórias, diferentes a cada dia.](figs/Aula05/embeddings_songs_2.png)
+
+<!-- ::: aside 
+Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Random Playlists Smoothly Commuting Between Styles. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 15(4), pp.1-20.
+::: -->
+
+## Norma de vetor em $\mathbb R^2$ e $\mathbb R^3$
+
+![Normas em $\mathbb R^2$ e $\mathbb R^3$](figs/Aula05/norma_r2_r3.png)
+
+## Norma de vetor em  $\mathbb R^n$
+
+$$x = (x_1,x_2,\ldots,x_n)^\top$$ 
+
+$$\Vert x \Vert = \sqrt{x_1^2 + x_2^2 + \ldots + x_n^n}$$
+
+$$\Vert x \Vert = \sqrt{x^\top x}$$
+
+
+## Exemplo {.scrollable}
+
+$$u = \begin{bmatrix}0\\-1\\2\\-2\\4\end{bmatrix} \text{ e } v = \begin{bmatrix}i\\2\\1+i\\0\\1-i\end{bmatrix}$$
+
+$$\Vert u \Vert = \sqrt{u^\top u} = \sqrt{0+1+4+4+16} = 5 $$
+
+$$\Vert v \Vert = \sqrt{v^\top v} = \sqrt{1+4+2+0+2} = 3 $$
+
+## Propriedades{.scrollable}
+- A definição de norma euclidiana garante que para todos os escalares $\alpha$
+
+$$\Vert x\Vert \ge 0 \text{, } \Vert x\Vert = 0 \Leftrightarrow x =0 \text{ e } \Vert \alpha x\Vert = \mid \alpha\mid \, \Vert x \Vert$$
+
+:::{.callout-important}
+## Normalização do vetor
+Dado um vetor $x \ne 0$, é frequentemente conveniente termos outro vetor que aponta para a mesma direção que $x$ mas apresenta comprimento unitário. Para isso, **normalizamos** o vetor
+
+$$\lVert u\rVert = \left\lVert\frac{x}{\lVert x\rVert} \right\rVert= \frac{1}{\lVert x\rVert} \lVert x\rVert = 1$$
+
+:::
+
+## Intuição do produto interno
+
+:::{.columns}
+
+:::{.column width="70%"}
+$$ a^\top b = \Vert a \Vert \Vert b\Vert \cos(\theta)$$
+
+O comprimento da projeção ortogonal de um vetor $a$ sobre o vetor $b$ é
+
+$$ \Vert a\Vert \cos(\theta) = a^\top \frac{b}{\vert b\vert}$$
+:::
+
+:::{.column width="30%"}
+![](figs/Aula05/projecao2.svg.png)
+:::
+
+:::
+
+## Desigualdade de Cauchy-Schwarz
+
+$$ | x^\top y| = \Vert x \Vert \Vert y \Vert |\cos(\theta)| \le \Vert x \Vert \Vert y \Vert$$
+
+
+Teorema da Desigualdade Triangular
+
+$$ \Vert x+y\Vert \le \Vert x \Vert + \vert y\vert \text{, para todo $x,y$}$$ 
+
+
+## Distância entre dois vetores {.scrollable}
+
+\begin{align} d(p,q) = d(q,p) &= \sqrt{(q_1 - p_1)^2 + (q_2 - p_2)^2 + \ldots + (q_n - p_n)^2} \\ &= \sqrt{\sum_{i=1}^n (q_i-p_i)^2}\end{align}
+
+- Caso Bidimensional

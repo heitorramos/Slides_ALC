@@ -314,6 +314,48 @@ $$ A = \begin{bmatrix}.6 & .2 \\ .4 & .8\end{bmatrix} \,\,\,A^\infty=\begin{bmat
 
 - Como saber o termo $F(n)$, com $n\in \mathbb N$ arbitrário sem resolver toda a sequência?
 
+- Iterativo: 
+
+```{python}
+#n = int(input("Que termo deseja encontrar: "))
+n = 7
+ultimo=1
+penultimo=1
+
+
+if (n==1) or (n==2):
+    print("1")
+else:
+    count=3
+    while count <= n:
+        termo = ultimo + penultimo
+        penultimo = ultimo
+        ultimo = termo
+        count += 1
+    print(termo)
+```
+- Recursivo
+```{python}
+# Python program to display the Fibonacci sequence
+
+def recur_fibo(n):
+   if n <= 1:
+       return n
+   else:
+       return(recur_fibo(n-1) + recur_fibo(n-2))
+
+nterms = 10
+
+# check if the number of terms is valid
+if nterms <= 0:
+   print("Plese enter a positive integer")
+else:
+   print("Fibonacci sequence:")
+   for i in range(nterms):
+       print(recur_fibo(i))
+```
+![Árvore de recursão Fib](figs/Aula03/fib_arvore.png)
+
 :::{.callout-note}
 ## Solução
 
@@ -361,7 +403,21 @@ $$\begin{bmatrix}F(n) \\ F(n+1)\end{bmatrix} = A^{n-1}\begin{bmatrix}1 \\ 1\end{
 
 :::
 
+```{python}
+import numpy as np
+import math
+from numpy import linalg as LA
 
+A = np.array([[1,1],[1/2+1/2*math.sqrt(5), 1/2-1/2*math.sqrt(5)]])
+
+L = np.array([[1/2+1/2*math.sqrt(5),0],[0, 1/2-1/2*math.sqrt(5)]])
+#n = int(input("Que termo deseja encontrar: "))
+n = 7
+Fn = A.dot((L**(n-1))).dot(LA.inv(A)).dot(np.array([[1],[1]]))
+
+print(Fn)
+
+```
 <!-- ## Número de autovetores indep.
 
 - Autovalores distintos estão associados a autovetores independentes
