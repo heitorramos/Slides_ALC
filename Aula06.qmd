@@ -24,7 +24,7 @@ format:
     preview-links: auto
     logo:  common/UFMG_HEAD.png
     style: common/style.css
-    footer: <https://homepages.dcc.ufmg.br/~ramosh/alc.html>
+    footer: <https://heitorramos.github.io/alc.html>
 search: true
 resources:
   - aula06.pdf
