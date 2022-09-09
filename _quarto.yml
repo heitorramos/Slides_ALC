@@ -1,6 +1,6 @@
 project:
   title: "Slides_Heitor"
-  output-dir: _out
+  output-dir: docs
 render:
   - Aula*.qmd
 
