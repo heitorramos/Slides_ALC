@@ -22,7 +22,7 @@ format:
     footer: <https://homepages.dcc.ufmg.br/~ramosh/alc.html>
 search: true
 resources:
-  - aula01.pdf
+  - aula00.pdf
 ---
 ## Créditos
 :::{.callout-important}

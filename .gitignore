@@ -1,5 +1,10 @@
-/.quarto/
-/_out/
-/PDF/
+.quarto/
+_out/
+PDF/
 .DS_Store
-/figs/.DS_Store
+figs/.DS_Store
+build/
+*.aux
+*.log
+*.pdf
+/.quarto/
