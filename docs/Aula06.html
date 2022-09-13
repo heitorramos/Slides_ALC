@@ -455,10 +455,112 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 <h2>Distância entre dois vetores</h2>
 <p><span class="math display">\[\begin{align} d(p,q) = d(q,p) &amp;= \sqrt{(q_1 - p_1)^2 + (q_2 - p_2)^2 + \ldots + (q_n - p_n)^2} \\ &amp;= \sqrt{\sum_{i=1}^n (q_i-p_i)^2}\end{align}\]</span></p>
 <ul>
-<li>Caso Bidimensional</li>
+<li>Caso Bidimensional <img data-src="figs/Aula06/dist_bidimensional.png" style="width:150.0%" alt="Distância"></li>
 </ul>
+</section>
+<section id="outras-distâncias" class="slide level2 scrollable">
+<h2>Outras distâncias</h2>
+<p>Manhattan distance</p>
 
-<img src="common/UFMG_HEAD.png" class="slide-logo r-stretch"><div class="footer footer-default">
+<img data-src="figs/Aula06/manhattan_distance.png" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Manhatan vs Euclidian</p></section>
+<section id="norma-l1" class="slide level2">
+<h2>Norma L1</h2>
+<p><span class="math display">\[\Vert x \Vert_1 = \mid x_1\mid + \mid x_2 \mid + \ldots + \mid x_n\mid\]</span></p>
+<p>Caso bi-dimensional:</p>
+<p><span class="math display">\[\Vert (x,y) \Vert_1 = \mid x\mid + \mid y\mid\]</span></p>
+<p><span class="math display">\[d(x,y) = \mid x_1 - y_1 \mid + \ldots + \mid x_n - y_n\mid\]</span></p>
+</section>
+<section id="norma" class="slide level2">
+<h2>Norma</h2>
+<ul>
+<li>Quando algo pode ser considerado uma função de distância ou tamanho de vetores?</li>
+<li>Quando não teremos contradição?</li>
+<li>Que propriedades valem para uma norma (válida) qualquer?</li>
+</ul>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Matemáticos possuem uma definição genérica de norma que vale também para outras situações além de matrizes</p>
+</div>
+</div>
+</div>
+</section>
+<section id="norma-definição" class="slide level2">
+<h2>Norma: definição</h2>
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Norma de um vetor (definição geral)</strong></p>
+</div>
+<div class="callout-content">
+<p>A norma para um espaço vetorial <span class="math inline">\(\mathcal V\)</span> real ou complexo é uma função <span class="math inline">\(\Vert \star \Vert\)</span> que mapeia <span class="math inline">\(\mathcal V\)</span> em <span class="math inline">\(\mathbb R\)</span> e que satisfaz as seguintes condições</p>
+<ul>
+<li><span class="math inline">\(\Vert x \Vert \ge 0 \text{ e } \Vert x \Vert =0 \Leftrightarrow x = 0\)</span></li>
+<li><span class="math inline">\(\Vert \alpha x\Vert = \mid \alpha \mid \Vert x\Vert\)</span> para todos escalares <span class="math inline">\(\alpha\)</span></li>
+<li><span class="math inline">\(\Vert x+y\Vert \le \Vert x \Vert + \Vert y \Vert\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="norma-l2-e-lp" class="slide level2">
+<h2>Norma L2 e Lp</h2>
+<p>Generalizando:</p>
+<ul>
+<li><p><span class="math inline">\(\Vert x \Vert_1 = \sqrt[1]{\sum_{i=1}^n \mid x_i \mid^1}\)</span></p></li>
+<li><p><span class="math inline">\(\Vert x \Vert_2 = \sqrt{\sum_{i=1}^n \mid x_i \mid^2}\)</span></p></li>
+<li><p><span class="math inline">\(\Vert x \Vert_p = \sqrt[p]{\sum_{i=1}^n \mid x_i \mid^p}\)</span></p></li>
+<li><p><span class="math inline">\(\Vert x \Vert_\infty = \max_i \mid x_i\mid\)</span></p></li>
+</ul>
+</section>
+<section id="pontos-a-igual-distância-de-00" class="slide level2">
+<h2>Pontos a igual distância de <span class="math inline">\((0,0)\)</span></h2>
+<p>As normas induzem geometrias distintas</p>
+
+<img data-src="figs/Aula06/norm_geometry.png" class="r-stretch"></section>
+<section id="para-quê-normas-diferentes" class="slide level2">
+<h2>Para quê normas diferentes?</h2>
+<ul>
+<li><p>Às vezes é fácil provar um resultado usando uma definição de distância, mas é impossível usando outra</p>
+<ul>
+<li>Por exemplo, poderia ser fácil mostrar que L1 ou L<span class="math inline">\(_\infty\)</span> de um vetor decresce para zero</li>
+<li>Mas queremos mesmo é que sua norma L2 vá para zero</li>
+<li>Mas isso será verdade!</li>
+</ul></li>
+</ul>
+</section>
+<section id="para-quê-normas-diferentes-1" class="slide level2 scrollable">
+<h2>Para quê normas diferentes?</h2>
+<p>De certa forma o que acontece em uma norma acontece nas outras normas também</p>
+<ul>
+<li>Temos</li>
+</ul>
+<p><span class="math display">\[\Vert x\Vert_2 \le \Vert x\Vert_1 \le \sqrt n \Vert x\Vert_2\]</span></p>
+<p><span class="math display">\[ \Vert x \Vert_\infty \le \Vert x\Vert_2 \le \sqrt n \Vert x\Vert_\infty\]</span></p>
+<p><span class="math display">\[\Vert x\Vert_\infty \le \Vert x \Vert_1 \le n \Vert x \Vert_\infty\]</span></p>
+<ul>
+<li>Se <span class="math inline">\(\Vert x\Vert_1\)</span> for pequena, <span class="math inline">\(\Vert x \Vert_2\)</span> será pequena também</li>
+</ul>
+</section>
+<section id="propriedades-com-lp" class="slide level2">
+<h2>Propriedades com Lp</h2>
+<p>Normas Lp possuem as mesmas propriedades que vimos antes</p>
+<ul>
+<li><span class="math inline">\(\Vert x \Vert_p \ge 0 \text{ e } \Vert x \Vert_p =0 \Leftrightarrow x = 0\)</span></li>
+<li><span class="math inline">\(\Vert \alpha x\Vert_p = \mid \alpha \mid \Vert x\Vert_p\)</span> para todos escalares <span class="math inline">\(\alpha\)</span></li>
+<li><span class="math inline">\(\Vert x+y\Vert_p \le \Vert x \Vert_p + \Vert y \Vert_p\)</span></li>
+</ul>
+<p>Se <span class="math inline">\(p&gt;1\)</span>, <span class="math inline">\(q&gt;1\)</span> com <span class="math inline">\(\frac{1}{p} + \frac{1}{q} = 1\)</span>, então</p>
+<p><span class="math display">\[\mid x^\top y\mid \le \Vert x\Vert_p \Vert y\Vert_p\]</span></p>
+</section>
+<section id="uma-razão-menos-teórica" class="slide level2">
+<h2>Uma razão menos teórica</h2>
+<p>Vamos querer o menor vetor <span class="math inline">\((w_1, w_2)\)</span> que pertença a um certo conjunto <img data-src="figs/Aula06/Norma_menor_vetor.png"></p>
+<p><img src="common/UFMG_HEAD.png" class="slide-logo"></p>
+<div class="footer footer-default">
 <p><a href="https://heitorramos.github.io/alc.html" class="uri">https://heitorramos.github.io/alc.html</a></p>
 </div>
 </section>
