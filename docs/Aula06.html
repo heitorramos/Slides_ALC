@@ -410,14 +410,14 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 <h2>Exemplo</h2>
 <p><span class="math display">\[u = \begin{bmatrix}0\\-1\\2\\-2\\4\end{bmatrix} \text{ e } v = \begin{bmatrix}i\\2\\1+i\\0\\1-i\end{bmatrix}\]</span></p>
 <p><span class="math display">\[\Vert u \Vert = \sqrt{u^\top u} = \sqrt{0+1+4+4+16} = 5 \]</span></p>
-<p><span class="math display">\[\Vert v \Vert = \sqrt{v^\top v} = \sqrt{1+4+2+0+2} = 3 \]</span></p>
+<p><span class="math display">\[\Vert v \Vert = \sqrt{v^* v} = \sqrt{1+4+2+0+2} = 3 \]</span></p>
 </section>
 <section id="propriedades" class="slide level2 scrollable">
 <h2>Propriedades</h2>
 <ul>
 <li>A definição de norma euclidiana garante que para todos os escalares <span class="math inline">\(\alpha\)</span></li>
 </ul>
-<p><span class="math display">\[\Vert x\Vert \ge 0 \text{, } \Vert x\Vert = 0 \Leftrightarrow x =0 \text{ e } \Vert \alpha x\Vert = \mid \alpha\mid \, \Vert x \Vert\]</span></p>
+<p><span class="math display">\[\Vert x\Vert \ge 0 \text{, } \Vert x\Vert = 0 \Leftrightarrow x =0 \text{ e } \Vert \alpha x\Vert = \vert \alpha\vert \, \Vert x \Vert\]</span></p>
 <div class="callout callout-important callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -439,36 +439,40 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 <div class="column" style="width:70%;">
 <p><span class="math display">\[ a^\top b = \Vert a \Vert \Vert b\Vert \cos(\theta)\]</span></p>
 <p>O comprimento da projeção ortogonal de um vetor <span class="math inline">\(a\)</span> sobre o vetor <span class="math inline">\(b\)</span> é</p>
-<p><span class="math display">\[ \Vert a\Vert \cos(\theta) = a^\top \frac{b}{\vert b\vert}\]</span></p>
+<p><span class="math display">\[ \Vert a\Vert \cos(\theta) = a^\top \frac{b}{\Vert b\Vert}\]</span></p>
 </div><div class="column" style="width:30%;">
 <p><img data-src="figs/Aula05/projecao2.svg.png"></p>
 </div>
 </div>
 </section>
-<section id="desigualdade-de-cauchy-schwarz" class="slide level2">
+<section id="desigualdade-de-cauchy-schwarz" class="slide level2 scrollable">
 <h2>Desigualdade de Cauchy-Schwarz</h2>
 <p><span class="math display">\[ | x^\top y| = \Vert x \Vert \Vert y \Vert |\cos(\theta)| \le \Vert x \Vert \Vert y \Vert\]</span></p>
 <p>Teorema da Desigualdade Triangular</p>
-<p><span class="math display">\[ \Vert x+y\Vert \le \Vert x \Vert + \vert y\vert \text{, para todo $x,y$}\]</span></p>
+<p><span class="math display">\[ \Vert x+y\Vert \le \Vert x \Vert + \Vert y\Vert \text{, para todo $x,y$}\]</span></p>
+<p>vamos elevar os dois lados ao quadrado, temos</p>
+<p><span class="math display">\[(\Vert x+y\Vert)^2 \le (\Vert x \Vert + \Vert y\Vert)^2 \le \Vert x\Vert^2 + 2\Vert x\Vert \Vert y\Vert + \Vert y\Vert^2\]</span></p>
+<p><span class="math display">\[\begin{align}\Vert v\Vert^2 &amp;= (\sqrt{v^\top v})^2\\ &amp;= (x+y)^\top (x+y) \\ &amp;= \Vert x\Vert^2 + 2x^\top y+\Vert y\Vert^2 \\ &amp;\le \Vert x\Vert^2 + 2\vert x^\top y\vert + \Vert y\Vert^2 \\&amp;\le \Vert x\Vert^2 + 2\Vert x\Vert \Vert y\Vert + \Vert y\Vert^2
+\end{align}\]</span></p>
 </section>
 <section id="distância-entre-dois-vetores" class="slide level2 scrollable">
 <h2>Distância entre dois vetores</h2>
-<p><span class="math display">\[\begin{align} d(p,q) = d(q,p) &amp;= \sqrt{(q_1 - p_1)^2 + (q_2 - p_2)^2 + \ldots + (q_n - p_n)^2} \\ &amp;= \sqrt{\sum_{i=1}^n (q_i-p_i)^2}\end{align}\]</span></p>
+<p><span class="math display">\[\begin{align} d(p,q) = d(q,p) &amp;= \sqrt{(q_1 - p_1)^2 + \ldots + (q_n - p_n)^2} \\ &amp;= \sqrt{\sum_{i=1}^n (q_i-p_i)^2}\end{align}\]</span></p>
 <ul>
 <li>Caso Bidimensional <img data-src="figs/Aula06/dist_bidimensional.png" style="width:150.0%" alt="Distância"></li>
 </ul>
 </section>
 <section id="outras-distâncias" class="slide level2 scrollable">
 <h2>Outras distâncias</h2>
-<p>Manhattan distance</p>
+<p>Manhattan distance (norma L1)</p>
 
 <img data-src="figs/Aula06/manhattan_distance.png" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Manhatan vs Euclidian</p></section>
 <section id="norma-l1" class="slide level2">
 <h2>Norma L1</h2>
-<p><span class="math display">\[\Vert x \Vert_1 = \mid x_1\mid + \mid x_2 \mid + \ldots + \mid x_n\mid\]</span></p>
+<p><span class="math display">\[\Vert x \Vert_1 = \vert x_1\vert + \vert x_2 \vert + \ldots + \vert x_n\vert\]</span></p>
 <p>Caso bi-dimensional:</p>
-<p><span class="math display">\[\Vert (x,y) \Vert_1 = \mid x\mid + \mid y\mid\]</span></p>
-<p><span class="math display">\[d(x,y) = \mid x_1 - y_1 \mid + \ldots + \mid x_n - y_n\mid\]</span></p>
+<p><span class="math display">\[\Vert (x,y) \Vert_1 = \vert x\vert + \vert y\vert\]</span></p>
+<p><span class="math display">\[d(x,y) = \vert x_1 - y_1 \vert + \ldots + \vert x_n - y_n\vert\]</span></p>
 </section>
 <section id="norma" class="slide level2">
 <h2>Norma</h2>
@@ -499,7 +503,7 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 <p>A norma para um espaço vetorial <span class="math inline">\(\mathcal V\)</span> real ou complexo é uma função <span class="math inline">\(\Vert \star \Vert\)</span> que mapeia <span class="math inline">\(\mathcal V\)</span> em <span class="math inline">\(\mathbb R\)</span> e que satisfaz as seguintes condições</p>
 <ul>
 <li><span class="math inline">\(\Vert x \Vert \ge 0 \text{ e } \Vert x \Vert =0 \Leftrightarrow x = 0\)</span></li>
-<li><span class="math inline">\(\Vert \alpha x\Vert = \mid \alpha \mid \Vert x\Vert\)</span> para todos escalares <span class="math inline">\(\alpha\)</span></li>
+<li><span class="math inline">\(\Vert \alpha x\Vert = \vert \alpha \vert \Vert x\Vert\)</span> para todos escalares <span class="math inline">\(\alpha\)</span></li>
 <li><span class="math inline">\(\Vert x+y\Vert \le \Vert x \Vert + \Vert y \Vert\)</span>.</li>
 </ul>
 </div>
@@ -510,18 +514,18 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 <h2>Norma L2 e Lp</h2>
 <p>Generalizando:</p>
 <ul>
-<li><p><span class="math inline">\(\Vert x \Vert_1 = \sqrt[1]{\sum_{i=1}^n \mid x_i \mid^1}\)</span></p></li>
-<li><p><span class="math inline">\(\Vert x \Vert_2 = \sqrt{\sum_{i=1}^n \mid x_i \mid^2}\)</span></p></li>
-<li><p><span class="math inline">\(\Vert x \Vert_p = \sqrt[p]{\sum_{i=1}^n \mid x_i \mid^p}\)</span></p></li>
-<li><p><span class="math inline">\(\Vert x \Vert_\infty = \max_i \mid x_i\mid\)</span></p></li>
+<li><p><span class="math inline">\(\Vert x \Vert_1 = \sqrt[1]{\sum_{i=1}^n \vert x_i \vert^1}\)</span></p></li>
+<li><p><span class="math inline">\(\Vert x \Vert_2 = \sqrt{\sum_{i=1}^n \vert x_i \vert^2}\)</span></p></li>
+<li><p><span class="math inline">\(\Vert x \Vert_p = \sqrt[p]{\sum_{i=1}^n \vert x_i \vert^p}\)</span></p></li>
+<li><p><span class="math inline">\(\Vert x \Vert_\infty = \max_i \vert x_i\vert\)</span></p></li>
 </ul>
 </section>
 <section id="exemplo-1" class="slide level2">
 <h2>Exemplo</h2>
 <p>Calcular as normas 1, 2 e <span class="math inline">\(\infty\)</span> do vetor <span class="math inline">\(x = \begin{bmatrix}2 &amp;-3&amp; 1\end{bmatrix}^\top\)</span></p>
-<p><span class="math display">\[ \Vert x\Vert_1 = \mid 2\mid + \mid -3\mid +\mid 1 \mid =6\]</span></p>
-<p><span class="math display">\[ \Vert x\Vert_2 = \sqrt{\mid 2\mid^2 + \mid -3\mid^2 +\mid 1 \mid^2}= \sqrt{14} \approx 3,7417\]</span></p>
-<p><span class="math display">\[ \Vert x\Vert_\infty = \max{\mid 2\mid + \mid -3\mid +\mid 1 \mid} =  3\]</span></p>
+<p><span class="math display">\[ \Vert x\Vert_1 = \vert 2\vert + \vert -3\vert +\vert 1 \vert =6\]</span></p>
+<p><span class="math display">\[ \Vert x\Vert_2 = \sqrt{\vert 2\vert^2 + \vert -3\vert^2 +\vert 1 \vert^2}= \sqrt{14} \approx 3,7417\]</span></p>
+<p><span class="math display">\[ \Vert x\Vert_\infty = \max{\vert 2\vert + \vert -3\vert +\vert 1 \vert} =  3\]</span></p>
 </section>
 <section id="pontos-a-igual-distância-de-00" class="slide level2">
 <h2>Pontos a igual distância de <span class="math inline">\((0,0)\)</span></h2>
@@ -558,11 +562,11 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 <p>Normas Lp possuem as mesmas propriedades que vimos antes</p>
 <ul>
 <li><span class="math inline">\(\Vert x \Vert_p \ge 0 \text{ e } \Vert x \Vert_p =0 \Leftrightarrow x = 0\)</span></li>
-<li><span class="math inline">\(\Vert \alpha x\Vert_p = \mid \alpha \mid \Vert x\Vert_p\)</span> para todos escalares <span class="math inline">\(\alpha\)</span></li>
+<li><span class="math inline">\(\Vert \alpha x\Vert_p = \vert \alpha \vert \Vert x\Vert_p\)</span> para todos escalares <span class="math inline">\(\alpha\)</span></li>
 <li><span class="math inline">\(\Vert x+y\Vert_p \le \Vert x \Vert_p + \Vert y \Vert_p\)</span></li>
 </ul>
 <p>Se <span class="math inline">\(p&gt;1\)</span>, <span class="math inline">\(q&gt;1\)</span> com <span class="math inline">\(\frac{1}{p} + \frac{1}{q} = 1\)</span>, então</p>
-<p><span class="math display">\[\mid x^\top y\mid \le \Vert x\Vert_p \Vert y\Vert_p\]</span></p>
+<p><span class="math display">\[\vert x^\top y\vert \le \Vert x\Vert_p \Vert y\Vert_p\]</span></p>
 </section>
 <section id="uma-razão-menos-teórica" class="slide level2">
 <h2>Uma razão menos teórica</h2>
