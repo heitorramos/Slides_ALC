@@ -182,7 +182,7 @@ A norma para um espaço vetorial $\mathcal V$ real ou complexo é uma função $
 
 :::
 
-## Norma L2 e Lp
+## Norma L2 e Lp{.scrollable}
 
 Generalizando:
 
@@ -193,6 +193,14 @@ Generalizando:
 - $\Vert x \Vert_p = \sqrt[p]{\sum_{i=1}^n \vert x_i \vert^p}$
 
 - $\Vert x \Vert_\infty = \max_i \vert x_i\vert$
+
+:::{.callout-tip}
+## Falhas
+
+$p=0$ não é uma norma válida pois $\Vert 2v\Vert_0 = \Vert v \Vert_0$, que viola a propriedade da multiplicação por um escalar.
+
+$p<1$ também não é norma. Ex: $p=1/2$ falha na desigualdade triangular pois $(1,0)$ e $(0,1)$ têm norma 1, mas a soma $(1,1)$ teria norma $2^{1/p}=4>2$. Apenas $1\le p\le \infty$ produz normas aceitáveis $\Vert v \Vert_p$ 
+:::
 
 ## Exemplo
 
@@ -242,9 +250,9 @@ Normas Lp possuem as mesmas propriedades que vimos antes
 - $\Vert \alpha x\Vert_p = \vert \alpha \vert \Vert x\Vert_p$ para todos escalares $\alpha$
 - $\Vert x+y\Vert_p \le \Vert x \Vert_p + \Vert y \Vert_p$
 
-Se $p>1$, $q>1$ com $\frac{1}{p} + \frac{1}{q} = 1$, então
+<!-- Se $p>1$, $q>1$ com $\frac{1}{p} + \frac{1}{q} = 1$, então
 
-$$\vert x^\top y\vert \le \Vert x\Vert_p \Vert y\Vert_p$$
+$$\vert x^\top y\vert \le \Vert x\Vert_p \Vert y\Vert_p$$ -->
 
 
 ## Uma razão menos teórica

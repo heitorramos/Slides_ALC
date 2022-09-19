@@ -200,7 +200,7 @@ $$\mathbb E(Y) = \mathbb E(Y_1,Y_2) = (\mathbb E(Y_1), \mathbb E(Y_2)) = (\mu_1,
 
 - $(\mu_1,\mu_2) = (120,80)$ e $(\sigma_1, \sigma_2) = (10,2)$
 - Andar $n\sigma_1$ ao longo do eixo 1 é EQUIVALENTE a andar $n\sigma_2$ no eixo 2
-- Por exemplo, 20 unidades ao longo do eixo 1 (ou $2\sigma_1) é ESTATISTICAMENTE EQUIVALENTE a 4 unidades ao (ou $2\sigma_2$) longo do eixo 2
+- Por exemplo, 20 unidades ao longo do eixo 1 (ou $2\sigma_1$) é ESTATISTICAMENTE EQUIVALENTE a 4 unidades ao (ou $2\sigma_2$) longo do eixo 2
 
 ![](figs/Aula07/distancia_centro.png){width="55%" fig-align="center"}
 

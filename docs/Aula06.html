@@ -510,7 +510,7 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 </div>
 </div>
 </section>
-<section id="norma-l2-e-lp" class="slide level2">
+<section id="norma-l2-e-lp" class="slide level2 scrollable">
 <h2>Norma L2 e Lp</h2>
 <p>Generalizando:</p>
 <ul>
@@ -519,6 +519,20 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 <li><p><span class="math inline">\(\Vert x \Vert_p = \sqrt[p]{\sum_{i=1}^n \vert x_i \vert^p}\)</span></p></li>
 <li><p><span class="math inline">\(\Vert x \Vert_\infty = \max_i \vert x_i\vert\)</span></p></li>
 </ul>
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Falhas</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(p=0\)</span> não é uma norma válida pois <span class="math inline">\(\Vert 2v\Vert_0 = \Vert v \Vert_0\)</span>, que viola a propriedade da multiplicação por um escalar.</p>
+<p><span class="math inline">\(p&lt;1\)</span> também não é norma. Ex: <span class="math inline">\(p=1/2\)</span> falha na desigualdade triangular pois <span class="math inline">\((1,0)\)</span> e <span class="math inline">\((0,1)\)</span> têm norma 1, mas a soma <span class="math inline">\((1,1)\)</span> teria norma <span class="math inline">\(2^{1/p}=4&gt;2\)</span>. Apenas <span class="math inline">\(1\le p\le \infty\)</span> produz normas aceitáveis <span class="math inline">\(\Vert v \Vert_p\)</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="exemplo-1" class="slide level2">
 <h2>Exemplo</h2>
@@ -565,8 +579,11 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 <li><span class="math inline">\(\Vert \alpha x\Vert_p = \vert \alpha \vert \Vert x\Vert_p\)</span> para todos escalares <span class="math inline">\(\alpha\)</span></li>
 <li><span class="math inline">\(\Vert x+y\Vert_p \le \Vert x \Vert_p + \Vert y \Vert_p\)</span></li>
 </ul>
-<p>Se <span class="math inline">\(p&gt;1\)</span>, <span class="math inline">\(q&gt;1\)</span> com <span class="math inline">\(\frac{1}{p} + \frac{1}{q} = 1\)</span>, então</p>
-<p><span class="math display">\[\vert x^\top y\vert \le \Vert x\Vert_p \Vert y\Vert_p\]</span></p>
+<!-- Se $p>1$, $q>1$ com $\frac{1}{p} + \frac{1}{q} = 1$, então
+
+
+
+$$\vert x^\top y\vert \le \Vert x\Vert_p \Vert y\Vert_p$$ -->
 </section>
 <section id="uma-razão-menos-teórica" class="slide level2">
 <h2>Uma razão menos teórica</h2>
