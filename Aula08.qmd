@@ -153,6 +153,11 @@ f(x) &= 3x^2_1 + 6x^2_2 + 8x_1x_2\\
 \end{align}
 
 :::{.callout-note}
+
+se $x_1 \ne 0 \Rightarrow$ $(E >0 + D \ge 0)>0$
+
+se $x_2 \ne 0 \Rightarrow$ $(E \ge 0 + D > 0)>0$ 
+
 $f(x)>0$ para todo $x\ne 0$, portanto, S é DP
 :::
 
@@ -180,13 +185,19 @@ Para $S$  com autovalores $\lambda_1, \lambda_2, \ldots, \lambda_n$ , temos que 
 
 Portanto, $S$ é DP $\Leftrightarrow S^{-1}$ é DP
 
-## O que podemos dizer sobre...
+## O que podemos dizer sobre... {.scrollable}
 
 $SM$, onde $M$ é quadrada
 
 Não muito....
 
 $SM$ não é necessariamente simétrica
+
+Ex: $$ \begin{bmatrix} \vert & \vert \\ s_1 & s_2 \\ \vert & \vert\end{bmatrix}\begin{bmatrix}1 & 1 \\ 0 & 0\end{bmatrix} = \begin{bmatrix}\vert & \vert \\ s_1 & s_1 \\ \vert &\vert\end{bmatrix}$$
+
+:::{.callout-important}
+essa última matriz não necessariamente é simétrica
+:::
 
 ## O que podemos dizer sobre...
 $Q^\top S Q$?
@@ -195,7 +206,7 @@ $Q^\top S Q$?
 - É DP? $Q^\top SQ = Q^{-1}SQ$ é similar a S
 
 :::{.callout-warning}
-Definição de matrizes similares: $A = MBM^{-1} = P^{-1}BP$
+Definição de matrizes similares: $A = MBM^{-1}$
 :::
 
 ## O que podemos dizer sobre...

@@ -502,6 +502,8 @@ f(x) &amp;= 3x^2_1 + 6x^2_2 + 8x_1x_2\\
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
+<p>se <span class="math inline">\(x_1 \ne 0 \Rightarrow\)</span> <span class="math inline">\((E &gt;0 + D \ge 0)&gt;0\)</span></p>
+<p>se <span class="math inline">\(x_2 \ne 0 \Rightarrow\)</span> <span class="math inline">\((E \ge 0 + D &gt; 0)&gt;0\)</span></p>
 <p><span class="math inline">\(f(x)&gt;0\)</span> para todo <span class="math inline">\(x\ne 0\)</span>, portanto, S é DP</p>
 </div>
 </div>
@@ -527,11 +529,25 @@ f(x) &amp;= 3x^2_1 + 6x^2_2 + 8x_1x_2\\
 <p>Para <span class="math inline">\(S\)</span> com autovalores <span class="math inline">\(\lambda_1, \lambda_2, \ldots, \lambda_n\)</span> , temos que os autovalores de <span class="math inline">\(S^{-1}\)</span> são <span class="math inline">\(\frac{1}{\lambda_1}, \frac{1}{\lambda_2}, \ldots, \frac{1}{\lambda_n}\)</span></p>
 <p>Portanto, <span class="math inline">\(S\)</span> é DP <span class="math inline">\(\Leftrightarrow S^{-1}\)</span> é DP</p>
 </section>
-<section id="o-que-podemos-dizer-sobre-2" class="slide level2">
+<section id="o-que-podemos-dizer-sobre-2" class="slide level2 scrollable">
 <h2>O que podemos dizer sobre…</h2>
 <p><span class="math inline">\(SM\)</span>, onde <span class="math inline">\(M\)</span> é quadrada</p>
 <p>Não muito….</p>
 <p><span class="math inline">\(SM\)</span> não é necessariamente simétrica</p>
+<p>Ex: <span class="math display">\[ \begin{bmatrix} \vert &amp; \vert \\ s_1 &amp; s_2 \\ \vert &amp; \vert\end{bmatrix}\begin{bmatrix}1 &amp; 1 \\ 0 &amp; 0\end{bmatrix} = \begin{bmatrix}\vert &amp; \vert \\ s_1 &amp; s_1 \\ \vert &amp;\vert\end{bmatrix}\]</span></p>
+<div class="callout callout-important callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>essa última matriz não necessariamente é simétrica</p>
+</div>
+</div>
+</div>
 </section>
 <section id="o-que-podemos-dizer-sobre-3" class="slide level2">
 <h2>O que podemos dizer sobre…</h2>
@@ -549,7 +565,7 @@ f(x) &amp;= 3x^2_1 + 6x^2_2 + 8x_1x_2\\
 <p><strong>Warning</strong></p>
 </div>
 <div class="callout-content">
-<p>Definição de matrizes similares: <span class="math inline">\(A = MBM^{-1} = P^{-1}BP\)</span></p>
+<p>Definição de matrizes similares: <span class="math inline">\(A = MBM^{-1}\)</span></p>
 </div>
 </div>
 </div>
