@@ -83,7 +83,7 @@ Como $S$ possui $n$ autovetores independentes, existe a decomposição espectral
 onde colunas $x_i$ são os autovetores. Como os autovetores são ortogonais, normalizando cada $x_i$, temos
 $$ S = Q\Lambda Q^{-1}$$
 
-Como $Q$ é quadrada (e ortogonal), $$Q^{-1} = Q\Lambda Q^\top$$
+Como $Q$ é quadrada (e ortogonal), $$S = Q\Lambda Q^\top$$
 
 ## Matrizes definidas positivas {.scrollable}
 
