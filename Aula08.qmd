@@ -101,7 +101,7 @@ Cada definição se traduz em um teste para DP
 
 Ex1: $\begin{bmatrix}3 &4\\4&5\end{bmatrix}$
 
-Em geral, o teste (1) é caro pois a decomposição espectral é $O(n^3$)$
+Em geral, o teste (1) é caro pois a decomposição espectral é $O(n^3)$
 Nesse exemplo pequeno, podemos aplicar (1), porém, o teste (4) é ainda mais simples
 
 ## Exemplos: Como testar se uma matriz é DP?{.scrollable}
@@ -110,7 +110,7 @@ Ex1: $\begin{bmatrix}3 &4\\4&5\end{bmatrix}$
 
 $$\text{det}(\begin{bmatrix}3\end{bmatrix})= 3 >0$$
 
-$$ \text{det}\left($\begin{bmatrix}3 &4\\4&5\end{bmatrix}$\right) = 15 - 16 = -1 <0$$
+$$ \text{det}\left(\begin{bmatrix}3 &4\\4&5\end{bmatrix}\right) = 15 - 16 = -1 <0$$
 
 :::{.callout-important}
 a matriz não é DP
