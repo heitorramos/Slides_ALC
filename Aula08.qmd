@@ -75,3 +75,191 @@ $$\lambda_1 = ?, \lambda_2 = ?$$
 - Polinômio característico: $\lambda^2 = 1 \Rightarrow \lambda_1 = 1, \lambda_2 = -1$ (note que o traço é zero)
 
 - Autovetores: $x_1 = \begin{bmatrix}1\\1\end{bmatrix}$ e $x_2 = \begin{bmatrix}1\\-1\end{bmatrix}$
+
+## Decomposição espectral de $S${.scrollable}
+
+Como $S$ possui $n$ autovetores independentes, existe a decomposição espectral $$S = X \Lambda X^{-1}$$
+
+onde coluns $x_i$ são os autovetores. Como os autovetores são ortogonais, normalizando cada $x_i$, temos
+$$ S = Q\Lambda Q^{-1}$$
+
+Como $Q$ é quadrada (e ortogonal), $$Q^{-1} = Q\Lambda Q^\top$$
+
+## Matrizes definidas positivas {.scrollable}
+
+1. Todos os $\lambda_i >0$
+2. Energia $x^\top S x>0$ $\forall x>0$
+3. $S = A^\top A$(com colunas de $A$ independentes)
+4. Todos os determinantes dos menores principais líderes são estritamente positivos, i.e., $\text{det}(A[:k,:k])>0$, $k=1,2,\ldots,n$
+5. Todos os pivôs na eliminação são estritamente positivos
+
+:::{.callout-tip}
+Cada definição se traduz em um teste para DP
+:::
+
+## Exemplos: Como testar se uma matriz é DP?
+
+Ex1: $\begin{bmatrix}3 &4\\4&5\end{bmatrix}$
+
+Em geral, o teste (1) é caro pois a decomposição espectral é $O(n^3$)$
+Nesse exemplo pequeno, podemos aplicar (1), porém, o teste (4) é ainda mais simples
+
+## Exemplos: Como testar se uma matriz é DP?{.scrollable}
+
+Ex1: $\begin{bmatrix}3 &4\\4&5\end{bmatrix}$
+
+$$\text{det}(\begin{bmatrix}3\end{bmatrix})= 3 >0$$
+
+$$ \text{det}\left($\begin{bmatrix}3 &4\\4&5\end{bmatrix}$\right) = 15 - 16 = -1 <0$$
+
+:::{.callout-important}
+a matriz não é DP
+:::
+
+## Como tornar o Ex1 DP?{.scrollable}
+
+Ex2: $S=\begin{bmatrix}3 &4\\4&x\end{bmatrix}$
+
+$$ \text{det}(S) = 3x - 16>0$$
+$$ x> \frac{16}{3}$$
+
+$$S=\begin{bmatrix}3 &4\\4&6\end{bmatrix}$$
+
+
+## Como testar se uma matriz é DP?{.scrollable}
+$$S=\begin{bmatrix}3 &4\\4&6\end{bmatrix}$$
+
+Vamos usar o teste (5)
+
+$$ \begin{bmatrix}3 & 4 \\ 4 & 6\end{bmatrix} = \begin{bmatrix}\mathbf{3} & 4 \\ 0 & \mathbf{\frac{2}{3}}\end{bmatrix}$$
+
+:::{.callout-note}
+Pivôs estritamente postivos, portanto, matriz é DP
+Observe que o último pivô $\frac{2}{3}$ é o valor do $\frac{2\times 2 \text{det}}{1\times 1\text{det}} = \frac{2}{3}$
+:::
+
+## Como testar se uma matriz é DP?{.scrollable}
+$$S=\begin{bmatrix}3 &4\\4&6\end{bmatrix}$$
+
+Vamos usar o teste (2)
+
+Energia (ou forma quadrática) é uma função 
+$$\begin{bmatrix}x_1 & x_2\end{bmatrix}\begin{bmatrix}3&4\\4&6\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix} = f(x) $$
+
+\begin{align} 
+f(x) &= 3x^2_1 + 6x^2_2 + 8x_1x_2\\
+&= 3\left(x_1 + \frac{4x_2}{3}\right)^2 + \frac{2x_2^2}{3}
+
+\end{align}
+
+:::{.callout-note}
+$f(x)>0$ para todo $x\ne 0$, portanto, S é DP
+:::
+
+
+## O que podemos dizer sobre...
+
+$S + T$, onde $S$ e $T$ são DP?
+
+- Teste(1)? não vai ser muito útil
+- Teste(2)?
+
+$$x^\top (S+T) x = x^\top S x + x^\top T x>0$$
+
+Como $x^\top S x$ e $x^\top T x>0$ são estritamente positivos, $S+T$ é DP
+
+
+## O que podemos dizer sobre...
+
+$S^{-1}$?
+
+- É simétrica? $(S^{-1})^\top = (S^\top)^{-1} = S^{-1}$, Sim!
+- Teste(1)?
+
+Para $S$  com autovalores $\lambda_1, \lambda_2, \ldots, \lambda_n$ , temos que os autovalores de $S^{-1}$ são $\frac{1}{\lambda_1}, \frac{1}{\lambda_2}, \ldots, \frac{1}{\lambda_n}$
+
+Portanto, $S$ é DP $\Leftrightarrow S^{-1}$ é DP
+
+## O que podemos dizer sobre...
+
+$SM$, onde $M$ é quadrada
+
+Não muito....
+
+$SM$ não é necessariamente simétrica
+
+## O que podemos dizer sobre...
+$Q^\top S Q$?
+
+- É simétrica? $(Q^\top S Q)^\top = Q^\top S^\top Q = Q^\top S Q$, Sim!
+- É DP? $Q^\top SQ = Q^{-1}SQ$ é similar a S
+
+:::{.callout-warning}
+Definição de matrizes similares: $A = MBM^{-1} = P^{-1}BP$
+:::
+
+## O que podemos dizer sobre...
+$QS Q^\top$?
+
+- É simétrica? Sim!
+- É DP?
+    - $Q S Q^\top = QSQ^{-1}$, Logo $QS Q^\top$ é similar a $S$ e, portanto, tem os mesmos autovalores
+    - Outro caminho (2): $x^\top QSQ^\top x = y^\top Sy>0$
+
+## Matrizes simidefinidas positivas
+
+1. Todos os $\lambda_i \ge 0$
+2. Energia $x^\top S x \ge 0$ $\forall x\ne 0$
+3. $S = A^\top A$(com colunas dependentes permitadas em  $A$ )
+4. Todos os determinantes dos menores principais líderes são positivos ou zero, i.e., $\text{det}(A[:k,:k])\ge 0$, $k=1,2,\ldots,n$
+5. $r$ pivôs na eliminação são estritamente positivos, $r\le n$
+
+## Como testar se $S$ é SDP?
+
+Ex4: $\begin{bmatrix}3&4\\4 &x\end{bmatrix}$
+
+$$ 3x - 16 = 0$$
+$$ x = \frac{16}{3}$$ para que seja SDP, mas não DP
+
+## Como testar se $S$ é SDP?
+
+Ex4: $\begin{bmatrix}3&4\\4 &\frac{16}{3}\end{bmatrix}$
+
+$\text{det}(S) = 0 \Rightarrow$ pelo menos um autovalor é zero
+
+$\text{traço}(S) = 3 + \frac{16}{3}\Rightarrow \lambda_1 = 0, \lambda_2=\frac{25}{3}$
+
+
+## Como testar se $S$ é SDP?
+
+Ex4: $S=\begin{bmatrix}1&1&1\\1&1&1\\1&1&1\end{bmatrix}$
+
+\# de autovalores $\ne 0$ é o posto$(S)=1$
+
+Então, $\lambda_1 = 0 , \lambda_2=0, \lambda_3 = 3$ 
+
+$$\begin{bmatrix}1&1&1\\1&1&1\\1&1&1\end{bmatrix} \begin{bmatrix}1\\1\\1\end{bmatrix} = 3\begin{bmatrix}1\\1\\1\end{bmatrix}$$
+
+## Como testar se $S$ é SDP?{.scrollable}
+
+Ex5: $S=\begin{bmatrix}1&1&1\\1&1&1\\1&1&1\end{bmatrix}$
+
+Teste(3): Como escrever $S = A^\top A$?
+
+\begin{align}
+S &= Q \Lambda Q^\top\\
+ &=\begin{bmatrix}\vert&\vert&&\vert\\q_1&q_2&\ldots&q_n\\\vert&\vert&&\vert\end{bmatrix} \begin{bmatrix}\lambda_1 &&\\ &\ddots&\\&&\lambda_n\end{bmatrix}\begin{bmatrix}-&q_1^\top&-\\\vdots&\vdots&\vdots\\ -&q_n^\top&-\\\end{bmatrix} \\
+ 
+ &=\begin{bmatrix}\vert&\vert&&\vert\\\lambda_1q_1&\lambda_2q_2&\ldots&\lambda_nq_n\\\vert&\vert&&\vert\end{bmatrix} \begin{bmatrix}-&q_1^\top&-\\\vdots&\vdots&\vdots\\ -&q_n^\top&-\\\end{bmatrix} \\ 
+ &= \lambda_1q_1q_1^\top + \ldots + \lambda_nq_nq_n^\top
+
+\end{align}
+
+Então, $S = \lambda_1 q_1q_1^\top + \lambda_2 q_2q_2^\top + \lambda_3 q_3q_3^\top$
+
+$$x_1 = \begin{bmatrix}1\\1\\1\end{bmatrix}$$
+$$q_1 = \frac{x_1}{\Vert x_1\Vert} = \begin{bmatrix}\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\end{bmatrix}$$
+
+$$S = \lambda_3q_3q_3^\top = 3\begin{bmatrix}\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\end{bmatrix} \begin{bmatrix}\frac{1}{\sqrt{3}}&\frac{1}{\sqrt{3}}&\frac{1}{\sqrt{3}}\end{bmatrix}$$
+
+$$S = \begin{bmatrix}1\\1\\1\end{bmatrix}\begin{bmatrix}1&1&1\end{bmatrix}$$
