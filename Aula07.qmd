@@ -247,8 +247,8 @@ $$\frac{\text{eixo maior}}{\text{eixo menor}} = \frac{c\sigma_1}{c\sigma2} = \fr
 
 \begin{align}
 d^2(y,\mu) &= \left(\frac{y_1-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y_2-\mu_2}{\sigma_2}\right)^2 \\
-&= \begin{bmatrix}y_1 - \mu_1& y_2- \mu_2\end{bmatrix} \begin{bmatrix}1/\sigma_1 & 0 \\ 0 & 1/\sigma_2\end{bmatrix}\begin{bmatrix}y_1 - \mu_1 \\ y_2 - \mu_2\end{bmatrix}\\
-&= \begin{bmatrix}y_1 - \mu_1& y_2- \mu_2\end{bmatrix} \begin{bmatrix}\sigma_1 & 0 \\ 0 & \sigma_2\end{bmatrix}^{-1}\begin{bmatrix}y_1 - \mu_1 \\ y_2 - \mu_2\end{bmatrix}\\
+&= \begin{bmatrix}y_1 - \mu_1& y_2- \mu_2\end{bmatrix} \begin{bmatrix}1/\sigma_1^2 & 0 \\ 0 & 1/\sigma_2^2\end{bmatrix}\begin{bmatrix}y_1 - \mu_1 \\ y_2 - \mu_2\end{bmatrix}\\
+&= \begin{bmatrix}y_1 - \mu_1& y_2- \mu_2\end{bmatrix} \begin{bmatrix}\sigma_1^2 & 0 \\ 0 & \sigma_2^2\end{bmatrix}^{-1}\begin{bmatrix}y_1 - \mu_1 \\ y_2 - \mu_2\end{bmatrix}\\
 &= (y-\mu)^\top \Sigma^{-1}(y-\mu)
 
 \end{align}
