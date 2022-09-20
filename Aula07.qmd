@@ -369,7 +369,7 @@ Seja $S$ uma matriz simétrica e definida positiva
 :::{.callout-note}
 ## Definição Norma-S
 
-$$\Vert x\Vert = x^\top S x = \Sigma_{i,j}x_ix_jS_{ij}$$
+$$\Vert x\Vert = x^\top S x = \sum_{i,j}x_ix_jS_{ij}$$
 :::
 
 ## Norma de matrizes

@@ -1,0 +1,77 @@
+---
+title: "Álgebra Linear Computacional"
+subtitle: "Aula 08: Matrizes simétricas positivas definidas e semidefinidas"
+author: Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a>
+# date: 03/08/2022 
+# abstract-title: 
+format:
+  revealjs: 
+    code-fold: true 
+    execute: 
+      enabled: true
+    echo: true
+    jupyter: python3
+    slide-number: true
+    theme: default
+    controls: true
+    progress: true
+    # smaller: true
+    # scrollable: true
+    chalkboard:
+      buttons: true
+      chalk-width: 1
+      theme: whiteboard
+    preview-links: auto
+    logo:  common/UFMG_HEAD.png
+    style: common/style.css
+    footer: <https://heitorramos.github.io/alc.html>
+search: true
+resources:
+  - aula08.pdf
+---
+## Créditos
+:::{.callout-important}
+Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento
+:::
+
+## Objetivos
+
+- Saber que matrizes simétricas reais sempre admitem decomposição espectral $S=Q\Lambda Q^\top$
+- Conhecer as 5 definições de matrizes definidas positivas (DP) e semi-definidas positivas (SDP)
+- Saber aplicar os testes para verificar DP e SDP, escolhendo o mais fácil de ser aplicado
+
+## Referências adicionais{.scrollable}
+
+- Matrizes definidas positivas:
+    - [Wikipedia](https://en.wikipedia.org/wiki/Definite_symmetric_matrix)
+- Demonstração do teorema (decomposição espectral de matrizes simétricas)
+    - [MathThe Beautiful](https://www.youtube.com/watch?v=gJhlkEBZsfI)
+- Exemplo usando teste dos menores principais líderes:
+    -[Youtube](https://www.youtube.com/watch?v=ttMZB5Gm_fM)
+- Importância de matrizes definidas positivas:
+    - [Link](https://stats.stackexchange.com/questions/224005/why-are-symmetric-positive-definite-spd-matrices-so-important)
+- Aplicação à detecção de quinas em imagens (detector de Harris)
+    - [Youtube](https://www.youtube.com/watch?v=WyrVzTRZuXA http://www.cs.cmu.edu/~16385/s17/Slides/6.2_Harris_Corner_Detector.pdf)
+
+## Recapitulando
+
+- Seja $A$ uma matriz real quadrada (arbittrária)
+- O que sabemos sobre seus autovalores e autovetores?
+    - Pode ter autovalores complexos
+    - Pode não ter $n$ autovetores independentes
+
+## Matrizes simétricas $S = S^\top$
+
+- **Teorema:** Seja $S$ uma matriz real simétrica de ordem $n$. Todos autovalores são reais e possui $n$ autovetores ortogonais (mesmo se autovalores repetidos).
+- Matrizes simétricas aparecem em várias aplicações importantes (e.g., visão computacional, grafos, otimização)
+
+## Ex: Matrizes simétricas {.scrollable}
+
+- Ex: 1:
+$$ S = \begin{bmatrix}0 & 1 \\1 & 0\end{bmatrix}$$
+
+$$\lambda_1 = ?, \lambda_2 = ?$$
+
+- Polinômio característico: $\lambda^2 = 1 \Rightarrow \lambda_1 = 1, \lambda_2 = -1$ (note que o traço é zero)
+
+- Autovetores: $x_1 = \begin{bmatrix}1\\1\end{bmatrix}$ e $x_2 = \begin{bmatrix}1\\-1\end{bmatrix}$
