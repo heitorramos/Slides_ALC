@@ -7,7 +7,7 @@
 <link href="Aula07_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula07_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula07_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.38">
+  <meta name="generator" content="quarto-1.0.37">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -487,7 +487,7 @@
 <li><strong>Resposta:</strong> Medindo distâncias em unidades de <strong>DESVIOS PADRÕES</strong></li>
 </ul>
 
-<img data-src="figs/Aula07/distancia_centro.png" style="width:55.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="figs/Aula07/distancia_centro.png" style="width:55.0%" class="r-stretch quarto-figure-center"><p class="caption">Distância Euclidiana</p></section>
 <section id="medida-de-dispersão" class="slide level2">
 <h2>Medida de dispersão</h2>
 <ul>
@@ -535,10 +535,9 @@
 <ul>
 <li><span class="math inline">\((\mu_1,\mu_2) = (120,80)\)</span> e <span class="math inline">\((\sigma_1, \sigma_2) = (10,2)\)</span></li>
 <li>Andar <span class="math inline">\(n\sigma_1\)</span> ao longo do eixo 1 é EQUIVALENTE a andar <span class="math inline">\(n\sigma_2\)</span> no eixo 2</li>
-<li>Por exemplo, 20 unidades ao longo do eixo 1 (ou <span class="math inline">\(2\sigma_1\)</span>) é ESTATISTICAMENTE EQUIVALENTE a 4 unidades ao (ou <span class="math inline">\(2\sigma_2\)</span>) longo do eixo 2</li>
+<li>Por exemplo, 20 unidades ao longo do eixo 1 (ou <span class="math inline">\(2\sigma_1\)</span>) é ESTATISTICAMENTE EQUIVALENTE a 4 unidades ao (ou <span class="math inline">\(2\sigma_2\)</span>) longo do eixo 2 <img data-src="figs/Aula07/distancia_centro.png" data-fig-align="center" style="width:55.0%"></li>
 </ul>
-
-<img data-src="figs/Aula07/distancia_centro.png" style="width:55.0%" class="r-stretch quarto-figure-center"></section>
+</section>
 <section id="distância-medida-em-dp-2" class="slide level2 scrollable">
 <h2>Distância medida em DP</h2>
 <ul>
@@ -558,11 +557,10 @@ d(y_1,y_2) &amp;= \sqrt{z_1^2 + z_2^2} \\
 <ul>
 <li>NESSA NOVA MÉTRICA, quais os pontos <span class="math inline">\((y_1, y_2)\)</span> que estão a uma MESMA distância do centro <span class="math inline">\((\mu_1, \mu_2)\)</span>?</li>
 <li>Tome uma distância fixa (por exemplo, 1)</li>
-<li>Eles formam uma ELIPSE centrada em <span class="math inline">\((\mu_1, \mu_2)\)</span> e com eixos paralelos aos eixos coordenados</li>
+<li>Eles formam uma ELIPSE centrada em <span class="math inline">\((\mu_1, \mu_2)\)</span> e com eixos paralelos aos eixos coordenados <img data-src="figs/Aula07/elipse.png" data-fig-align="center" style="width:100.0%"></li>
 </ul>
 <p><span class="math display">\[ d(y, \mu)  = \sqrt{\left(\frac{y_1-120}{10}\right)^2 + \left(\frac{y_2-80}{2}\right)^2} =1 \]</span></p>
-
-<img data-src="figs/Aula07/elipse.png" style="width:55.0%" class="r-stretch quarto-figure-center"></section>
+</section>
 <section id="tamanho-dos-eixos" class="slide level2 scrollable">
 <h2>Tamanho dos eixos</h2>
 <ul>

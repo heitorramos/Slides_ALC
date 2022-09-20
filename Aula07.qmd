@@ -159,7 +159,7 @@ $$\mathbb E(Y) = \mathbb E(Y_1,Y_2) = (\mathbb E(Y_1), \mathbb E(Y_2)) = (\mu_1,
 - Como equalizar as distâncias?
 - **Resposta:**  Medindo distâncias em unidades de **DESVIOS PADRÕES**
 
-![](figs/Aula07/distancia_centro.png){width="55%" fig-align="center"}
+![Distância Euclidiana](figs/Aula07/distancia_centro.png){width="55%" fig-align="center"}
 
 ## Medida de dispersão
 
@@ -201,7 +201,6 @@ $$\mathbb E(Y) = \mathbb E(Y_1,Y_2) = (\mathbb E(Y_1), \mathbb E(Y_2)) = (\mu_1,
 - $(\mu_1,\mu_2) = (120,80)$ e $(\sigma_1, \sigma_2) = (10,2)$
 - Andar $n\sigma_1$ ao longo do eixo 1 é EQUIVALENTE a andar $n\sigma_2$ no eixo 2
 - Por exemplo, 20 unidades ao longo do eixo 1 (ou $2\sigma_1$) é ESTATISTICAMENTE EQUIVALENTE a 4 unidades ao (ou $2\sigma_2$) longo do eixo 2
-
 ![](figs/Aula07/distancia_centro.png){width="55%" fig-align="center"}
 
 ## Distância medida em DP{.scrollable}
@@ -222,9 +221,10 @@ d(y_1,y_2) &= \sqrt{z_1^2 + z_2^2} \\
 - NESSA NOVA MÉTRICA, quais os pontos $(y_1, y_2)$ que estão a uma MESMA distância do centro $(\mu_1, \mu_2)$?
 - Tome uma distância fixa (por exemplo, 1)
 - Eles formam uma ELIPSE centrada em $(\mu_1, \mu_2)$ e com eixos paralelos aos eixos coordenados
+![](figs/Aula07/elipse.png){width="100%" fig-align="center"}
+
 $$ d(y, \mu)  = \sqrt{\left(\frac{y_1-120}{10}\right)^2 + \left(\frac{y_2-80}{2}\right)^2} =1 $$
 
-![](figs/Aula07/elipse.png){width="55%" fig-align="center"}
 
 ## Tamanho dos eixos{.scrollable}
 

@@ -62,7 +62,7 @@ Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do 
 
 ## Matrizes simétricas $S = S^\top$
 
-- **Teorema:** Seja $S$ uma matriz real simétrica de ordem $n$. Todos autovalores são reais e possui $n$ autovetores ortogonais (mesmo se autovalores repetidos).
+- **Teorema:** Seja $S$ uma matriz real simétrica de ordem $n$. **Todos autovalores são reais** e possui **$n$ autovetores ortogonais** (mesmo se autovalores repetidos).
 - Matrizes simétricas aparecem em várias aplicações importantes (e.g., visão computacional, grafos, otimização)
 
 ## Ex: Matrizes simétricas {.scrollable}
