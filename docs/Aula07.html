@@ -789,28 +789,35 @@ d^2(y,\mu) &amp;= \left(\frac{y_1-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y_2-\m
 <li><span class="math inline">\(\Vert A + B \Vert \le \Vert A \Vert + \Vert B \Vert\)</span> para matrizes do mesmo tamanho</li>
 <li><strong><span class="math inline">\(\Vert AB\Vert \le \Vert A \Vert \Vert B \Vert\)</span> para todas as matriz compatíveis </strong></li>
 </ul>
-</section>
-<section id="normas-induzidas" class="slide level2">
-<h2>Normas induzidas</h2>
-<ul>
-<li>Uma norma qualquer para vetores do <span class="math inline">\(\mathbb R^n\)</span> induz uma norma no espaço das matrizes <span class="math inline">\(m\times n\)</span></li>
-<li>Seja <span class="math inline">\(C\)</span> conjunto dos <span class="math inline">\(x\)</span> em <span class="math inline">\(\mathbb R^n\)</span> tais que <span class="math inline">\(\Vert x \Vert = 1\)</span></li>
-<li>Seja <span class="math inline">\(A\)</span> uma matriz <span class="math inline">\(m\times n\)</span> qualquer, então</li>
-</ul>
-<p><span class="math display">\[ \Vert A \Vert = \max_{x\in C}{\Vert Ax\Vert}\]</span></p>
-</section>
-<section id="interpretação" class="slide level2">
-<h2>Interpretação</h2>
-<p><span class="math inline">\(\Vert A\Vert\)</span> é a extensão máxima que um vetor em <span class="math inline">\(C\)</span> pode ser “espichado”</p>
+<!--
+## Normas induzidas
+- Uma norma qualquer para vetores do $\mathbb R^n$ induz uma norma no espaço das matrizes $m\times n$
+- Seja $C$ conjunto dos $x$ em $\mathbb R^n$ tais que $\Vert x \Vert = 1$
+- Seja $A$ uma matriz $m\times n$ qualquer, então
 
-<img data-src="figs/Aula07/norma_interpretacao.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
-<section id="norma-espectral-induzida-pela-norma-vetorial-euclidiana" class="slide level2">
-<h2>Norma espectral (induzida pela norma vetorial euclidiana)</h2>
-<ul>
-<li>A norma matricial induzida pela norma vetorial euclidiana é</li>
-</ul>
-<p><span class="math display">\[ \Vert A \Vert^2 = \max_{\Vert x\Vert^2 = 1}{\Vert Ax\Vert^2 = \sqrt{\lambda_{\text{max}}}}\]</span></p>
-<p>onde <span class="math inline">\(\lambda_{\text{max}}\)</span> é o maior autovalor tal que <span class="math inline">\(A^\top A-\lambda I\)</span> é singular</p>
+
+$$ \Vert A \Vert = \max_{x\in C}{\Vert Ax\Vert}$$ 
+
+
+
+## Interpretação
+
+$\Vert A\Vert$ é a extensão máxima que um vetor em $C$ pode ser "espichado"
+
+![](figs/Aula07/norma_interpretacao.png){width="100%" fig-align="center"}
+
+## Norma espectral (induzida pela norma vetorial euclidiana)
+
+- A norma matricial induzida pela norma vetorial euclidiana é
+
+
+
+$$ \Vert A \Vert^2 = \max_{\Vert x\Vert^2 = 1}{\Vert Ax\Vert^2 = \sqrt{\lambda_{\text{max}}}}$$
+
+
+
+onde $\lambda_{\text{max}}$ é o maior autovalor tal que $A^\top A-\lambda I$ é singular
+-->
 
 <img src="common/UFMG_HEAD.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://heitorramos.github.io/alc.html" class="uri">https://heitorramos.github.io/alc.html</a></p>

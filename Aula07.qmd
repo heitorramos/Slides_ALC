@@ -414,6 +414,7 @@ A norma de uma matriz é uma função $\Vert \star\Vert$ do conjunto de todas as
 - $\Vert A + B \Vert \le \Vert A \Vert + \Vert B \Vert$ para matrizes do mesmo tamanho
 - **$\Vert AB\Vert \le \Vert A \Vert \Vert B \Vert$ para todas as matriz compatíveis **
 
+<!--
 ## Normas induzidas
 - Uma norma qualquer para vetores do $\mathbb R^n$ induz uma norma no espaço das matrizes $m\times n$
 - Seja $C$ conjunto dos $x$ em $\mathbb R^n$ tais que $\Vert x \Vert = 1$
@@ -433,4 +434,4 @@ $\Vert A\Vert$ é a extensão máxima que um vetor em $C$ pode ser "espichado"
 $$ \Vert A \Vert^2 = \max_{\Vert x\Vert^2 = 1}{\Vert Ax\Vert^2 = \sqrt{\lambda_{\text{max}}}}$$
 
 onde $\lambda_{\text{max}}$ é o maior autovalor tal que $A^\top A-\lambda I$ é singular
-
+-->
