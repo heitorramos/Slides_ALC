@@ -89,7 +89,7 @@ Como $Q$ é quadrada (e ortogonal), $$S = Q\Lambda Q^\top$$
 
 
 1. Todos os $\lambda_i >0$
-2. Energia $x^\top S x>0$ $\forall x>0$
+2. Energia $x^\top S x>0$ $\forall x \ne 0$
 3. $S = A^\top A$(com colunas de $A$ independentes)
 4. Todos os determinantes dos menores principais líderes são estritamente positivos, i.e., $\text{det}(A[:k,:k])>0$, $k=1,2,\ldots,n$
 5. Todos os pivôs na eliminação são estritamente positivos
@@ -218,7 +218,7 @@ $QS Q^\top$?
     - $Q S Q^\top = QSQ^{-1}$, Logo $QS Q^\top$ é similar a $S$ e, portanto, tem os mesmos autovalores
     - Outro caminho (2): $x^\top QSQ^\top x = y^\top Sy>0$
 
-## Matrizes simidefinidas positivas
+## Matrizes semidefinidas positivas
 
 1. Todos os $\lambda_i \ge 0$
 2. Energia $x^\top S x \ge 0$ $\forall x\ne 0$

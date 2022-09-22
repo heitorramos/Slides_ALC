@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="Aula08_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Aula08_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Aula08_files/libs/quarto-html/popper.min.js"></script>
-<script src="Aula08_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Aula08_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Aula08_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="Aula08_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="Aula10_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Aula10_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Aula10_files/libs/quarto-html/popper.min.js"></script>
+<script src="Aula10_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Aula10_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Aula10_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Aula10_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.0.37">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
@@ -14,8 +14,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Aula08_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Aula08_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="Aula10_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Aula10_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -24,13 +24,13 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
   </style>
-  <link rel="stylesheet" href="Aula08_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link href="Aula08_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Aula08_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Aula08_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Aula08_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="Aula08_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="Aula08_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="Aula10_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="Aula10_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Aula10_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Aula10_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Aula10_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="Aula10_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="Aula10_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -322,7 +322,7 @@
 
 <section id="title-slide" class="center">
   <h1 class="title">Álgebra Linear Computacional</h1>
-  <p class="subtitle">Aula 08: Matrizes simétricas positivas definidas e semidefinidas</p>
+  <p class="subtitle">Aula 10: Decomposição por valores singulares</p>
   <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
 </section>
 
@@ -342,132 +342,53 @@
 </div>
 </div>
 </section>
-<section id="objetivos" class="slide level2">
-<h2>Objetivos</h2>
-<ul>
-<li>Saber que matrizes simétricas reais sempre admitem decomposição espectral <span class="math inline">\(S=Q\Lambda Q^\top\)</span></li>
-<li>Conhecer as 5 definições de matrizes definidas positivas (DP) e semi-definidas positivas (SDP)</li>
-<li>Saber aplicar os testes para verificar DP e SDP, escolhendo o mais fácil de ser aplicado</li>
-</ul>
+<section id="objetivos-de-aprendizagem" class="slide level2">
+<h2>Objetivos de aprendizagem</h2>
+<ol type="1">
+<li>Conhecer relação entre posto, valores singulares e vetores singulares esquerdos e direitos de uma matriz</li>
+<li>Saber transformar o SVD completo em SVD reduzido e vice-versa</li>
+<li>Entender o SVD como uma decomposição em soma de matrizes de posto 1</li>
+<li>Saber como calcular o SVD a partir da decomposição espectral de <span class="math inline">\(Aˆ\top A\)</span> ou <span class="math inline">\(AAˆ\top\)</span> Entender a multiplicação <span class="math inline">\(Ax\)</span> da perspectiva geométrica do SVD</li>
+</ol>
 </section>
-<section id="referências-adicionais" class="slide level2 scrollable">
+<section id="referências-adicionais" class="slide level2">
 <h2>Referências adicionais</h2>
 <ul>
-<li>Matrizes definidas positivas:
+<li><a href="https://en.wikipedia.org/wiki/Singular_value_decomposition">Wikipedia</a></li>
+<li>YouTube:
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Definite_symmetric_matrix">Wikipedia</a></li>
-</ul></li>
-<li>Demonstração do teorema (decomposição espectral de matrizes simétricas)
-<ul>
-<li><a href="https://www.youtube.com/watch?v=gJhlkEBZsfI">MathThe Beautiful</a></li>
-</ul></li>
-<li>Exemplo usando teste dos menores principais líderes: -<a href="https://www.youtube.com/watch?v=ttMZB5Gm_fM">Youtube</a></li>
-<li>Importância de matrizes definidas positivas:
-<ul>
-<li><a href="https://stats.stackexchange.com/questions/224005/why-are-symmetric-positive-definite-spd-matrices-so-important">Link</a></li>
-</ul></li>
-<li>Aplicação à detecção de quinas em imagens (detector de Harris)
-<ul>
-<li><a href="https://www.youtube.com/watch?v=WyrVzTRZuXA%20http://www.cs.cmu.edu/~16385/s17/Slides/6.2_Harris_Corner_Detector.pdf">Youtube</a></li>
+<li><a href="https://www.youtube.com/watch?v=gXbThCXjZFM&amp;list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv">Steve Brunton’s series on SVD (U. Washington)</a></li>
+<li><a href="https://web.mit.edu/be.400/www/SVD/Singular_Value_Decomposition.htm">Exemplo numérico de SVD</a></li>
 </ul></li>
 </ul>
 </section>
-<section id="recapitulando" class="slide level2">
-<h2>Recapitulando</h2>
-<ul>
-<li>Seja <span class="math inline">\(A\)</span> uma matriz real quadrada (arbittrária)</li>
-<li>O que sabemos sobre seus autovalores e autovetores?
-<ul>
-<li>Pode ter autovalores complexos</li>
-<li>Pode não ter <span class="math inline">\(n\)</span> autovetores independentes</li>
-</ul></li>
-</ul>
+<section id="e-quando-a-matriz-não-é-quadrada" class="slide level2">
+<h2>E quando a matriz não é quadrada?</h2>
+<p><span class="math display">\[A = \begin{bmatrix}1&amp;2\\3&amp;4\\5&amp;6\end{bmatrix}\]</span></p>
+<p><span class="math display">\[y = \begin{bmatrix}1&amp;2\\3&amp;4\\5&amp;6\end{bmatrix}\begin{bmatrix}10\\100\end{bmatrix} = 10\begin{bmatrix}1\\3\\5\end{bmatrix}+100\begin{bmatrix}2\\4\\6\end{bmatrix} = y\in \mathbb R^3\]</span></p>
 </section>
-<section id="matrizes-simétricas-s-stop" class="slide level2">
-<h2>Matrizes simétricas <span class="math inline">\(S = S^\top\)</span></h2>
-<ul>
-<li><strong>Teorema:</strong> Seja <span class="math inline">\(S\)</span> uma matriz real simétrica de ordem <span class="math inline">\(n\)</span>. <strong>Todos autovalores são reais</strong> e possui <strong><span class="math inline">\(n\)</span> autovetores ortogonais</strong> (mesmo se autovalores repetidos).</li>
-<li>Matrizes simétricas aparecem em várias aplicações importantes (e.g., visão computacional, grafos, otimização)</li>
-</ul>
+<section id="exemplo-de-uma-matriz-tall-thin" class="slide level2">
+<h2>Exemplo de uma matriz tall-thin</h2>
+
+<img data-src="figs/Aula10/tallthin.png" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Tall-thin matrix</p></section>
+<section id="e-como-ficam-os-autovetores" class="slide level2">
+<h2>E como ficam os autovetores?</h2>
+<p>Não é possível usarmos <span class="math inline">\(Ax=\lambda x\)</span></p>
+<p>O que podemos fazer? Será que existem vetores escalares tais que</p>
+<p><span class="math display">\[Av_i = \sigma_i u_i \]</span></p>
 </section>
-<section id="ex-matrizes-simétricas" class="slide level2 scrollable">
-<h2>Ex: Matrizes simétricas</h2>
-<ul>
-<li>Ex: 1:</li>
-</ul>
-<p><span class="math display">\[ S = \begin{bmatrix}0 &amp; 1 \\1 &amp; 0\end{bmatrix}\]</span></p>
-<p><span class="math display">\[\lambda_1 = ?, \lambda_2 = ?\]</span></p>
-<ul>
-<li><p>Polinômio característico: <span class="math inline">\(\lambda^2 = 1 \Rightarrow \lambda_1 = 1, \lambda_2 = -1\)</span> (note que o traço é zero)</p></li>
-<li><p>Autovetores: <span class="math inline">\(x_1 = \begin{bmatrix}1\\1\end{bmatrix}\)</span> e <span class="math inline">\(x_2 = \begin{bmatrix}1\\-1\end{bmatrix}\)</span></p></li>
-</ul>
+<section id="quantos-vetoes-independentes-de-u_i" class="slide level2">
+<h2>Quantos vetoes independentes de <span class="math inline">\(u_i\)</span>?</h2>
+<p>Como <span class="math inline">\(u_i\)</span> está em <span class="math inline">\(C(A)\)</span>, existem no máximo <span class="math inline">\(r\)</span> vetores <span class="math inline">\(u_i\)</span>’s independentes, onde <span class="math inline">\(r=\text{posto}(A)\)</span></p>
+<p>Note que sempre existe um <span class="math inline">\(v_i\)</span> para cada <span class="math inline">\(u_i\)</span></p>
+<p><span class="math display">\[Av_1 = \sigma_1 u_1\]</span></p>
+<p><span class="math display">\[Av_2 = \sigma_2 u_2\]</span></p>
+<p><span class="math display">\[ \vdots\]</span></p>
+<p><span class="math display">\[Av_\gamma = \sigma_\gamma u_\gamma \]</span></p>
 </section>
-<section id="decomposição-espectral-de-s" class="slide level2 scrollable">
-<h2>Decomposição espectral de <span class="math inline">\(S\)</span></h2>
-<p>Como <span class="math inline">\(S\)</span> possui <span class="math inline">\(n\)</span> autovetores independentes, existe a decomposição espectral <span class="math display">\[S = X \Lambda X^{-1}\]</span></p>
-<p>onde colunas <span class="math inline">\(x_i\)</span> são os autovetores. Como os autovetores são ortogonais, normalizando cada <span class="math inline">\(x_i\)</span>, temos</p>
-<p><span class="math display">\[ S = Q\Lambda Q^{-1}\]</span></p>
-<p>Como <span class="math inline">\(Q\)</span> é quadrada (e ortogonal), <span class="math display">\[S = Q\Lambda Q^\top\]</span></p>
-</section>
-<section id="matrizes-definidas-positivas" class="slide level2 scrollable">
-<h2>Matrizes definidas positivas</h2>
-<ol type="1">
-<li>Todos os <span class="math inline">\(\lambda_i &gt;0\)</span></li>
-<li>Energia <span class="math inline">\(x^\top S x&gt;0\)</span> <span class="math inline">\(\forall x \ne 0\)</span></li>
-<li><span class="math inline">\(S = A^\top A\)</span>(com colunas de <span class="math inline">\(A\)</span> independentes)</li>
-<li>Todos os determinantes dos menores principais líderes são estritamente positivos, i.e., <span class="math inline">\(\text{det}(A[:k,:k])&gt;0\)</span>, <span class="math inline">\(k=1,2,\ldots,n\)</span></li>
-<li>Todos os pivôs na eliminação são estritamente positivos</li>
-</ol>
-<div class="callout callout-tip callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p>Cada definição se traduz em um teste para DP</p>
-</div>
-</div>
-</div>
-</section>
-<section id="exemplos-como-testar-se-uma-matriz-é-dp" class="slide level2">
-<h2>Exemplos: Como testar se uma matriz é DP?</h2>
-<p>Ex1: <span class="math inline">\(\begin{bmatrix}3 &amp;4\\4&amp;5\end{bmatrix}\)</span></p>
-<p>Em geral, o teste (1) é caro pois a decomposição espectral é <span class="math inline">\(O(n^3)\)</span> Nesse exemplo pequeno, podemos aplicar (1), porém, o teste (4) é ainda mais simples</p>
-</section>
-<section id="exemplos-como-testar-se-uma-matriz-é-dp-1" class="slide level2 scrollable">
-<h2>Exemplos: Como testar se uma matriz é DP?</h2>
-<p>Ex1: <span class="math inline">\(\begin{bmatrix}3 &amp;4\\4&amp;5\end{bmatrix}\)</span></p>
-<p><span class="math display">\[\text{det}(\begin{bmatrix}3\end{bmatrix})= 3 &gt;0\]</span></p>
-<p><span class="math display">\[ \text{det}\left(\begin{bmatrix}3 &amp;4\\4&amp;5\end{bmatrix}\right) = 15 - 16 = -1 &lt;0\]</span></p>
-<div class="callout callout-important callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Important</strong></p>
-</div>
-<div class="callout-content">
-<p>a matriz não é DP</p>
-</div>
-</div>
-</div>
-</section>
-<section id="como-tornar-o-ex1-dp" class="slide level2 scrollable">
-<h2>Como tornar o Ex1 DP?</h2>
-<p>Ex2: <span class="math inline">\(S=\begin{bmatrix}3 &amp;4\\4&amp;x\end{bmatrix}\)</span></p>
-<p><span class="math display">\[ \text{det}(S) = 3x - 16&gt;0\]</span></p>
-<p><span class="math display">\[ x&gt; \frac{16}{3}\]</span></p>
-<p><span class="math display">\[S=\begin{bmatrix}3 &amp;4\\4&amp;6\end{bmatrix}\]</span></p>
-</section>
-<section id="como-testar-se-uma-matriz-é-dp" class="slide level2 scrollable">
-<h2>Como testar se uma matriz é DP?</h2>
-<p><span class="math display">\[S=\begin{bmatrix}3 &amp;4\\4&amp;6\end{bmatrix}\]</span></p>
-<p>Vamos usar o teste (5)</p>
-<p><span class="math display">\[ \begin{bmatrix}3 &amp; 4 \\ 4 &amp; 6\end{bmatrix} = \begin{bmatrix}\mathbf{3} &amp; 4 \\ 0 &amp; \mathbf{\frac{2}{3}}\end{bmatrix}\]</span></p>
+<section id="em-forma-matricial" class="slide level2 scrollable">
+<h2>Em forma matricial</h2>
+<p><span class="math display">\[A\begin{bmatrix}\vert &amp; \vert &amp; \ldots &amp; \vert \\ v_1 &amp; v_2 &amp; \ldots &amp; v_r\\\vert &amp; \vert &amp; \ldots &amp; \vert  \end{bmatrix} = \begin{bmatrix}\vert &amp; \vert &amp; \ldots &amp; \vert \\ u_1 &amp; u_2 &amp; \ldots &amp; u_r\\\vert &amp; \vert &amp; \ldots &amp; \vert \end{bmatrix}\begin{bmatrix}\sigma_1 &amp; &amp; \\ &amp;\ddots&amp;\\&amp;&amp;\sigma_r\end{bmatrix} \]</span></p>
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -477,156 +398,48 @@
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>Pivôs estritamente postivos, portanto, matriz é DP Observe que o último pivô <span class="math inline">\(\frac{2}{3}\)</span> é o valor do <span class="math inline">\(\frac{2\times 2 \text{det}}{1\times 1\text{det}} = \frac{2}{3}\)</span></p>
+<p>Essas dimensões correspondem ao SVD reduzido</p>
 </div>
 </div>
 </div>
 </section>
-<section id="como-testar-se-uma-matriz-é-dp-1" class="slide level2 scrollable">
-<h2>Como testar se uma matriz é DP?</h2>
-<p><span class="math display">\[S=\begin{bmatrix}3 &amp;4\\4&amp;6\end{bmatrix}\]</span></p>
-<p>Vamos usar o teste (2)</p>
-<p>Energia (ou forma quadrática) é uma função</p>
-<p><span class="math display">\[\begin{bmatrix}x_1 &amp; x_2\end{bmatrix}\begin{bmatrix}3&amp;4\\4&amp;6\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix} = f(x) \]</span></p>
-<p><span class="math display">\[\begin{align}
-f(x) &amp;= 3x^2_1 + 6x^2_2 + 8x_1x_2\\
-&amp;= 3\left(x_1 + \frac{4x_2}{3}\right)^2 + \frac{2x_2^2}{3}
-
-\end{align}\]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>se <span class="math inline">\(x_1 \ne 0 \Rightarrow\)</span> <span class="math inline">\((E &gt;0 + D \ge 0)&gt;0\)</span></p>
-<p>se <span class="math inline">\(x_2 \ne 0 \Rightarrow\)</span> <span class="math inline">\((E \ge 0 + D &gt; 0)&gt;0\)</span></p>
-<p><span class="math inline">\(f(x)&gt;0\)</span> para todo <span class="math inline">\(x\ne 0\)</span>, portanto, S é DP</p>
-</div>
-</div>
-</div>
+<section id="exemplo-av-usigma" class="slide level2">
+<h2>Exemplo <span class="math inline">\(AV = U\Sigma\)</span></h2>
+<p><span class="math display">\[\begin{bmatrix}3&amp;0\\4&amp;5\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}1&amp;-1\\1&amp;1\end{bmatrix} = \frac{1}{\sqrt{10}}\begin{bmatrix}1&amp;-3\\3&amp;1\end{bmatrix}\begin{bmatrix}3\sqrt{5}&amp;\\&amp;3\sqrt{5}\end{bmatrix} \]</span></p>
 </section>
-<section id="o-que-podemos-dizer-sobre" class="slide level2">
-<h2>O que podemos dizer sobre…</h2>
-<p><span class="math inline">\(S + T\)</span>, onde <span class="math inline">\(S\)</span> e <span class="math inline">\(T\)</span> são DP?</p>
-<ul>
-<li>Teste(1)? não vai ser muito útil</li>
-<li>Teste(2)?</li>
-</ul>
-<p><span class="math display">\[x^\top (S+T) x = x^\top S x + x^\top T x&gt;0\]</span></p>
-<p>Como <span class="math inline">\(x^\top S x\)</span> e <span class="math inline">\(x^\top T x&gt;0\)</span> são estritamente positivos, <span class="math inline">\(S+T\)</span> é DP</p>
+<section id="tornando-v-quadrada" class="slide level2 scrollable">
+<h2>Tornando <span class="math inline">\(V\)</span> quadrada</h2>
+<p>istem <span class="math inline">\(r\)</span> vetores <span class="math inline">\(\sigma_iu_i\)</span> independentes que podem ser escritos como <span class="math inline">\(Av_i\)</span></p>
+<p>Sabemos ainda que o espaço nulo <span class="math inline">\(N(A)\)</span> tem dimensão <span class="math inline">\(n-r\)</span></p>
+<p>Logo, existem <span class="math inline">\(n-r\)</span> vetores <span class="math inline">\(v_j\)</span> independentes tais que <span class="math inline">\(Av_j=0\)</span></p>
+<p>Esses vetores são orgotonais a <span class="math inline">\(v_1,\ldots,v_r\)</span></p>
+<p><span class="math display">\[
+A\underbrace{\begin{bmatrix}
+\vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert\\
+v_1 &amp;\ldots &amp; v_r &amp;&amp; v_{r+1} &amp; \ldots &amp; v_n\\
+\vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert
+\end{bmatrix}}_{m\times n}  =
+\underbrace{\begin{bmatrix}
+\vert &amp; \ldots &amp; \vert\\
+u_1 &amp; \ldots &amp; u_r\\
+\vert &amp; \ldots &amp; \vert\\
+\end{bmatrix}}_{m\times r}
+\underbrace{\begin{bmatrix}
+\sigma_1 &amp;\ldots &amp; 0 &amp;&amp; 0 &amp;\ldots &amp; 0\\
+\vdots &amp;\ddots &amp; \vdots &amp;&amp; \vdots &amp;\ddots &amp; \vdots\\
+0 &amp;\ldots &amp; \sigma_r &amp;&amp; 0 &amp;\ldots &amp; 0\\
+\end{bmatrix}}_{r\times n}
+\]</span></p>
 </section>
-<section id="o-que-podemos-dizer-sobre-1" class="slide level2">
-<h2>O que podemos dizer sobre…</h2>
-<p><span class="math inline">\(S^{-1}\)</span>?</p>
-<ul>
-<li>É simétrica? <span class="math inline">\((S^{-1})^\top = (S^\top)^{-1} = S^{-1}\)</span>, Sim!</li>
-<li>Teste(1)?</li>
-</ul>
-<p>Para <span class="math inline">\(S\)</span> com autovalores <span class="math inline">\(\lambda_1, \lambda_2, \ldots, \lambda_n\)</span> , temos que os autovalores de <span class="math inline">\(S^{-1}\)</span> são <span class="math inline">\(\frac{1}{\lambda_1}, \frac{1}{\lambda_2}, \ldots, \frac{1}{\lambda_n}\)</span></p>
-<p>Portanto, <span class="math inline">\(S\)</span> é DP <span class="math inline">\(\Leftrightarrow S^{-1}\)</span> é DP</p>
+<section id="em-forma-matricial-1" class="slide level2">
+<h2>Em forma matricial</h2>
+<p>Se todos os vetores <span class="math inline">\(v\)</span>’s forem ortogonais (e eles são), podemos reescrever como</p>
+<p><span class="math display">\[ AV = U \Sigma\]</span></p>
+<p><span class="math display">\[ AVV^{-1} = U \Sigma V^{-1}\]</span></p>
+<p><span class="math display">\[ A = U \Sigma V^\top\]</span></p>
 </section>
-<section id="o-que-podemos-dizer-sobre-2" class="slide level2 scrollable">
-<h2>O que podemos dizer sobre…</h2>
-<p><span class="math inline">\(SM\)</span>, onde <span class="math inline">\(M\)</span> é quadrada</p>
-<p>Não muito….</p>
-<p><span class="math inline">\(SM\)</span> não é necessariamente simétrica</p>
-<p>Ex: <span class="math display">\[ \begin{bmatrix} \vert &amp; \vert \\ s_1 &amp; s_2 \\ \vert &amp; \vert\end{bmatrix}\begin{bmatrix}1 &amp; 1 \\ 0 &amp; 0\end{bmatrix} = \begin{bmatrix}\vert &amp; \vert \\ s_1 &amp; s_1 \\ \vert &amp;\vert\end{bmatrix}\]</span></p>
-<div class="callout callout-important callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Important</strong></p>
-</div>
-<div class="callout-content">
-<p>essa última matriz não necessariamente é simétrica</p>
-</div>
-</div>
-</div>
-</section>
-<section id="o-que-podemos-dizer-sobre-3" class="slide level2">
-<h2>O que podemos dizer sobre…</h2>
-<p><span class="math inline">\(Q^\top S Q\)</span>?</p>
-<ul>
-<li>É simétrica? <span class="math inline">\((Q^\top S Q)^\top = Q^\top S^\top Q = Q^\top S Q\)</span>, Sim!</li>
-<li>É DP? <span class="math inline">\(Q^\top SQ = Q^{-1}SQ\)</span> é similar a S</li>
-</ul>
-<div class="callout callout-warning callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Warning</strong></p>
-</div>
-<div class="callout-content">
-<p>Definição de matrizes similares: <span class="math inline">\(A = MBM^{-1}\)</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="o-que-podemos-dizer-sobre-4" class="slide level2">
-<h2>O que podemos dizer sobre…</h2>
-<p><span class="math inline">\(QS Q^\top\)</span>?</p>
-<ul>
-<li>É simétrica? Sim!</li>
-<li>É DP?
-<ul>
-<li><span class="math inline">\(Q S Q^\top = QSQ^{-1}\)</span>, Logo <span class="math inline">\(QS Q^\top\)</span> é similar a <span class="math inline">\(S\)</span> e, portanto, tem os mesmos autovalores</li>
-<li>Outro caminho (2): <span class="math inline">\(x^\top QSQ^\top x = y^\top Sy&gt;0\)</span></li>
-</ul></li>
-</ul>
-</section>
-<section id="matrizes-semidefinidas-positivas" class="slide level2">
-<h2>Matrizes semidefinidas positivas</h2>
-<ol type="1">
-<li>Todos os <span class="math inline">\(\lambda_i \ge 0\)</span></li>
-<li>Energia <span class="math inline">\(x^\top S x \ge 0\)</span> <span class="math inline">\(\forall x\ne 0\)</span></li>
-<li><span class="math inline">\(S = A^\top A\)</span>(com colunas dependentes permitadas em <span class="math inline">\(A\)</span> )</li>
-<li>Todos os determinantes dos menores principais líderes são positivos ou zero, i.e., <span class="math inline">\(\text{det}(A[:k,:k])\ge 0\)</span>, <span class="math inline">\(k=1,2,\ldots,n\)</span></li>
-<li><span class="math inline">\(r\)</span> pivôs na eliminação são estritamente positivos, <span class="math inline">\(r\le n\)</span></li>
-</ol>
-</section>
-<section id="como-testar-se-s-é-sdp" class="slide level2">
-<h2>Como testar se <span class="math inline">\(S\)</span> é SDP?</h2>
-<p>Ex4: <span class="math inline">\(\begin{bmatrix}3&amp;4\\4 &amp;x\end{bmatrix}\)</span></p>
-<p><span class="math display">\[ 3x - 16 = 0\]</span></p>
-<p><span class="math display">\[ x = \frac{16}{3}\]</span> para que seja SDP, mas não DP</p>
-</section>
-<section id="como-testar-se-s-é-sdp-1" class="slide level2">
-<h2>Como testar se <span class="math inline">\(S\)</span> é SDP?</h2>
-<p>Ex4: <span class="math inline">\(\begin{bmatrix}3&amp;4\\4 &amp;\frac{16}{3}\end{bmatrix}\)</span></p>
-<p><span class="math inline">\(\text{det}(S) = 0 \Rightarrow\)</span> pelo menos um autovalor é zero</p>
-<p><span class="math inline">\(\text{traço}(S) = 3 + \frac{16}{3}\Rightarrow \lambda_1 = 0, \lambda_2=\frac{25}{3}\)</span></p>
-</section>
-<section id="como-testar-se-s-é-sdp-2" class="slide level2">
-<h2>Como testar se <span class="math inline">\(S\)</span> é SDP?</h2>
-<p>Ex4: <span class="math inline">\(S=\begin{bmatrix}1&amp;1&amp;1\\1&amp;1&amp;1\\1&amp;1&amp;1\end{bmatrix}\)</span></p>
-<p># de autovalores <span class="math inline">\(\ne 0\)</span> é o posto<span class="math inline">\((S)=1\)</span></p>
-<p>Então, <span class="math inline">\(\lambda_1 = 0 , \lambda_2=0, \lambda_3 = 3\)</span></p>
-<p><span class="math display">\[\begin{bmatrix}1&amp;1&amp;1\\1&amp;1&amp;1\\1&amp;1&amp;1\end{bmatrix} \begin{bmatrix}1\\1\\1\end{bmatrix} = 3\begin{bmatrix}1\\1\\1\end{bmatrix}\]</span></p>
-</section>
-<section id="como-testar-se-s-é-sdp-3" class="slide level2 scrollable">
-<h2>Como testar se <span class="math inline">\(S\)</span> é SDP?</h2>
-<p>Ex5: <span class="math inline">\(S=\begin{bmatrix}1&amp;1&amp;1\\1&amp;1&amp;1\\1&amp;1&amp;1\end{bmatrix}\)</span></p>
-<p>Teste(3): Como escrever <span class="math inline">\(S = A^\top A\)</span>?</p>
-<p><span class="math display">\[\begin{align}
-S &amp;= Q \Lambda Q^\top\\
-&amp;=\begin{bmatrix}\vert&amp;\vert&amp;&amp;\vert\\q_1&amp;q_2&amp;\ldots&amp;q_n\\\vert&amp;\vert&amp;&amp;\vert\end{bmatrix} \begin{bmatrix}\lambda_1 &amp;&amp;\\ &amp;\ddots&amp;\\&amp;&amp;\lambda_n\end{bmatrix}\begin{bmatrix}-&amp;q_1^\top&amp;-\\\vdots&amp;\vdots&amp;\vdots\\ -&amp;q_n^\top&amp;-\\\end{bmatrix} \\
-&amp;=\begin{bmatrix}\vert&amp;\vert&amp;&amp;\vert\\\lambda_1q_1&amp;\lambda_2q_2&amp;\ldots&amp;\lambda_nq_n\\\vert&amp;\vert&amp;&amp;\vert\end{bmatrix} \begin{bmatrix}-&amp;q_1^\top&amp;-\\\vdots&amp;\vdots&amp;\vdots\\ -&amp;q_n^\top&amp;-\\\end{bmatrix} \\
-&amp;= \lambda_1q_1q_1^\top + \ldots + \lambda_nq_nq_n^\top
-
-\end{align}\]</span></p>
-<p>Então, <span class="math inline">\(S = \lambda_1 q_1q_1^\top + \lambda_2 q_2q_2^\top + \lambda_3 q_3q_3^\top\)</span></p>
-<p><span class="math display">\[x_1 = \begin{bmatrix}1\\1\\1\end{bmatrix}\]</span></p>
-<p><span class="math display">\[q_1 = \frac{x_1}{\Vert x_1\Vert} = \begin{bmatrix}\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\end{bmatrix}\]</span></p>
-<p><span class="math display">\[S = \lambda_3q_3q_3^\top = 3\begin{bmatrix}\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\end{bmatrix} \begin{bmatrix}\frac{1}{\sqrt{3}}&amp;\frac{1}{\sqrt{3}}&amp;\frac{1}{\sqrt{3}}\end{bmatrix}\]</span></p>
-<p><span class="math display">\[S = \begin{bmatrix}1\\1\\1\end{bmatrix}\begin{bmatrix}1&amp;1&amp;1\end{bmatrix}\]</span></p>
+<section id="do-svd-completo-ao-reduzido" class="slide level2">
+<h2>Do SVD completo ao reduzido</h2>
 
 <img src="common/UFMG_HEAD.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://heitorramos.github.io/alc.html" class="uri">https://heitorramos.github.io/alc.html</a></p>
@@ -636,20 +449,20 @@ S &amp;= Q \Lambda Q^\top\\
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Aula08_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="Aula10_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Aula08_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Aula08_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Aula08_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Aula08_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Aula08_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="Aula08_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="Aula10_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Aula10_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Aula10_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Aula10_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Aula10_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="Aula10_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Aula08_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Aula08_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Aula08_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Aula08_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="Aula10_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Aula10_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Aula10_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Aula10_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

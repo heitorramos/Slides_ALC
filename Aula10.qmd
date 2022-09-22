@@ -1,0 +1,134 @@
+---
+title: "Álgebra Linear Computacional"
+subtitle: "Aula 10: Decomposição por valores singulares"
+author: Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a>
+# date: 03/08/2022 
+# abstract-title: 
+format:
+  revealjs: 
+    code-fold: true 
+    execute: 
+      enabled: true
+    echo: true
+    jupyter: python3
+    slide-number: true
+    theme: default
+    controls: true
+    progress: true
+    # smaller: true
+    # scrollable: true
+    chalkboard:
+      buttons: true
+      chalk-width: 1
+      theme: whiteboard
+    preview-links: auto
+    logo:  common/UFMG_HEAD.png
+    style: common/style.css
+    footer: <https://heitorramos.github.io/alc.html>
+search: true
+resources:
+  - aula10.pdf
+---
+## Créditos
+:::{.callout-important}
+Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento
+:::
+
+## Objetivos de aprendizagem
+
+1. Conhecer relação entre posto, valores singulares e vetores singulares esquerdos e direitos de uma matriz
+2. Saber transformar o SVD completo em SVD reduzido e vice-versa
+3. Entender o SVD como uma decomposição em soma de matrizes de posto 1
+4. Saber como calcular o SVD a partir da decomposição espectral de $Aˆ\top A$ ou $AAˆ\top$
+Entender a multiplicação $Ax$ da perspectiva geométrica do SVD
+
+## Referências adicionais
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Singular_value_decomposition)
+- YouTube:
+    - [Steve Brunton’s series on SVD (U. Washington)](https://www.youtube.com/watch?v=gXbThCXjZFM&list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv)
+    - [Exemplo numérico de SVD](https://web.mit.edu/be.400/www/SVD/Singular_Value_Decomposition.htm)
+
+
+## E quando a matriz não é quadrada?
+
+$$A = \begin{bmatrix}1&2\\3&4\\5&6\end{bmatrix}$$
+
+$$y = \begin{bmatrix}1&2\\3&4\\5&6\end{bmatrix}\begin{bmatrix}10\\100\end{bmatrix} = 10\begin{bmatrix}1\\3\\5\end{bmatrix}+100\begin{bmatrix}2\\4\\6\end{bmatrix} = y\in \mathbb R^3$$
+
+## Exemplo de uma matriz tall-thin
+![Tall-thin matrix](figs/Aula10/tallthin.png){width="50%"}
+
+## E como ficam os autovetores?
+
+Não é possível usarmos $Ax=\lambda x$
+
+O que podemos fazer? Será que existem vetores escalares tais que
+
+$$Av_i = \sigma_i u_i $$
+
+
+## Quantos vetoes independentes de $u_i$?
+
+Como $u_i$ está em $C(A)$, existem no máximo $r$ vetores $u_i$'s independentes, onde $r=\text{posto}(A)$
+
+Note que sempre existe um $v_i$ para cada $u_i$
+
+$$Av_1 = \sigma_1 u_1$$
+$$Av_2 = \sigma_2 u_2$$
+
+$$ \vdots$$
+
+$$Av_\gamma = \sigma_\gamma u_\gamma $$
+
+
+## Em forma matricial{.scrollable}
+
+$$A\begin{bmatrix}\vert & \vert & \ldots & \vert \\ v_1 & v_2 & \ldots & v_r\\\vert & \vert & \ldots & \vert  \end{bmatrix} = \begin{bmatrix}\vert & \vert & \ldots & \vert \\ u_1 & u_2 & \ldots & u_r\\\vert & \vert & \ldots & \vert \end{bmatrix}\begin{bmatrix}\sigma_1 & & \\ &\ddots&\\&&\sigma_r\end{bmatrix} $$
+
+:::{.callout-note}
+Essas dimensões correspondem ao SVD reduzido
+:::
+
+## Exemplo $AV = U\Sigma$
+
+$$\begin{bmatrix}3&0\\4&5\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}1&-1\\1&1\end{bmatrix} = \frac{1}{\sqrt{10}}\begin{bmatrix}1&-3\\3&1\end{bmatrix}\begin{bmatrix}3\sqrt{5}&\\&3\sqrt{5}\end{bmatrix} $$
+
+## Tornando $V$ quadrada {.scrollable}
+istem $r$ vetores $\sigma_iu_i$ independentes que podem ser escritos como $Av_i$
+
+Sabemos ainda que o espaço nulo $N(A)$ tem dimensão $n-r$
+
+Logo, existem $n-r$ vetores $v_j$ independentes tais que $Av_j=0$
+
+Esses vetores são orgotonais a $v_1,\ldots,v_r$
+
+$$
+A\underbrace{\begin{bmatrix}
+\vert & \ldots & \vert & & \vert& \ldots &\vert\\ 
+v_1 &\ldots & v_r && v_{r+1} & \ldots & v_n\\
+\vert & \ldots & \vert & & \vert& \ldots &\vert
+\end{bmatrix}}_{m\times n}  = 
+\underbrace{\begin{bmatrix}
+\vert & \ldots & \vert\\
+u_1 & \ldots & u_r\\
+\vert & \ldots & \vert\\
+\end{bmatrix}}_{m\times r}
+\underbrace{\begin{bmatrix}
+\sigma_1 &\ldots & 0 && 0 &\ldots & 0\\
+\vdots &\ddots & \vdots && \vdots &\ddots & \vdots\\
+0 &\ldots & \sigma_r && 0 &\ldots & 0\\
+\end{bmatrix}}_{r\times n}
+$$
+
+## Em forma matricial
+
+Se todos os vetores $v$'s forem ortogonais (e eles são), podemos reescrever como
+
+$$ AV = U \Sigma$$
+
+$$ AVV^{-1} = U \Sigma V^{-1}$$
+
+$$ A = U \Sigma V^\top$$
+
+## Do SVD completo ao reduzido
