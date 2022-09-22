@@ -393,7 +393,7 @@ Solução 1: Para fazer uma busca na web e responder uma consulta, podemos
 ## Uma busca básica na Web
 
 Podemos melhorar solução usando escores de similaridade entre página e consulta.
-
+ 
 Solução 2: (passos 1 e 2 iguais à anterior)
 
 3. Ordene estes documentos por PageRank e mantenha apenas os top K (e.g. $K=5000$)
