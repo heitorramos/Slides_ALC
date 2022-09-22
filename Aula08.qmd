@@ -87,6 +87,7 @@ Como $Q$ é quadrada (e ortogonal), $$S = Q\Lambda Q^\top$$
 
 ## Matrizes definidas positivas {.scrollable}
 
+
 1. Todos os $\lambda_i >0$
 2. Energia $x^\top S x>0$ $\forall x>0$
 3. $S = A^\top A$(com colunas de $A$ independentes)

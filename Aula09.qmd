@@ -1,0 +1,403 @@
+---
+title: "Álgebra Linear Computacional"
+subtitle: "Aula 09: PageRank "
+author: Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a>
+# date: 03/08/2022 
+# abstract-title: 
+format:
+  revealjs: 
+    code-fold: true 
+    execute: 
+      enabled: true
+    echo: true
+    jupyter: python3
+    slide-number: true
+    theme: default
+    controls: true
+    progress: true
+    # smaller: true
+    # scrollable: true
+    chalkboard:
+      buttons: true
+      chalk-width: 1
+      theme: whiteboard
+    preview-links: auto
+    logo:  common/UFMG_HEAD.png
+    style: common/style.css
+    footer: <https://heitorramos.github.io/alc.html>
+search: true
+resources:
+  - aula09.pdf
+---
+## Créditos
+:::{.callout-important}
+Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento
+:::
+
+## Objetivos de aprendizagem {.scrollable}
+
+1. Conhecer fatores que afetam *rank* de uma página Web e entender a recursividade do *Rank*
+2. Entender relação entre descrição do *BrokenRank*, modelo *Random Surfer* e sistema de equações
+3. Saber escrever sistema de equações do *rank* dado um grafo
+4. Entender por que a solução do *rank* é o autovetor do autovalor 1
+5. Entender por que o *BrokenRank* é “quebrado” e como corrigí-lo
+6. Entender quando  $\lim_{k\rightarrow \infty} A^k p$  converge
+7. Saber executar manualmente o método da potência
+8. Conhecer fatores que influenciam o tempo de execução do método da potência
+
+## Referências adicionais
+
+- [Wikipedia](https://en.wikipedia.org/wiki/PageRank)
+- Textos:
+    - [Texto1](http://statweb.stanford.edu/~tibs/sta306bfiles/pagerank/ryan/01-24-pr.pdf)
+    - [Texto 2](https://web.stanford.edu/class/cs54n/handouts/24-GooglePageRankAlgorithm.pdf)
+- Videos
+    - [Mathematics for Machine Learning: Linear Algebra, Module 5 Eigenvalues and Eigenvectors - Application to Data Problems](https://youtu.be/F5fcEtqysGs)
+
+    - [Computational Linear Algebra 9: PageRank with Eigen Decompositions](https://youtu.be/AbB-w77yxD0)
+
+## Aplicações de $A = X\Lambda X^{-1}$
+
+- Potenciação rápida de matrizes
+- N-ésimo número de Fibonacci
+- Comportamento de EDOs
+- Linear Discriminant Analysis 
+- Cadeias de Markov (health care economics, Page Rank)
+
+##
+![](figs/Aula09/PR-paper.png)
+
+
+## Google
+
+:::: {.columns}
+
+::: {.column width="50%"}
+Uma grande inovação do final dos anos 90 é o surgimento das ferramentas de busca, começando com Alta Vista do DEC’s Western Research Lab e tendo como ápice o Google, fundado pelos doutorandos de Stanford Larry Page e Sergey Brin
+
+:::
+
+::: {.column width="50%"}
+![](figs/Aula09/page_brin.webp)
+:::
+
+::::
+
+## Google
+
+:::{.callout-note}
+O coração da ferramenta de busca do Google é o algoritmo PageRank, escrito por Larry Page, Sergey Brin, Rajeev Motwani (que se afogou em acidente trágico em 2009) e Terry Winograd.
+
+:::
+
+## Fundamentos do PageRank
+
+- Tipicamente uma ferramenta de busca encontra centenas ou milhares de respostas relevantes a uma consulta
+
+- **Problema:** como ordenar as respostas recuperadas?
+
+
+## Possíveis soluções
+
+Usar a frequência com que os termos buscados aparecem na página
+Analisar o histórico de acesso às páginas, para definir as mais importantes
+
+:::{.callout-important}
+Estas soluções não são muito objetivas, nem escaláveis!
+:::
+
+##
+:::{.callout-tip}
+Felizmente, existe uma estrutura subjacente que pode ser usada para resolver ambos os problemas: os links entre as páginas! 
+
+:::
+
+## Ideia original do Google{.scrollable}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Pagerank (importância) de uma página i é baseada nos links que recebe de outras páginas:
+    - Se i recebe links de páginas com pagerank alto, links contribuem bastante (recursão!)
+    - Se as páginas que tem link para i, tem link para muitas páginas, contribuição é menor
+
+
+:::
+
+::: {.column width="50%"}
+![](figs/Aula09/ideia.png)
+:::
+
+::::
+
+## *BrokenRank* (quase PageRank)
+
+Seja $L_{ij} = 1$ se a página $j$ tem *link* para a página $i$ ($j\rightarrow i$) e $L{ij} = 0$ caso contrário. Sejam $m_j=\sum_k L_{kj}$ o grau de saída de $j$. O *BrokenRank* $p_i$ da página $i$ será
+
+$$ p_i = \sum_{j\rightarrow i} \frac{p_j}{m_j} = \sum_{j=1}^n \frac{L_{ij}}{m_j}p_j $$
+
+:::{.callout-caution}
+Essa definição satisfaz as condições anteriores?
+:::
+
+## *BrokenRank* em notação matricial {.scrollable}
+
+$$p = \begin{bmatrix}p_1 \\ p_2\\ \vdots \\ p_n\end{bmatrix}_{n\times 1}, L = \begin{bmatrix}L_{11} & L_{12} & \ldots & L_{1n}\\ L_{21} & L_{22} & \ldots & L_{2n} \\ \vdots &\vdots&\ddots&\vdots\\ L_{n1} & L_{n2} & \ldots & L_{nn}\end{bmatrix}_{n\times n}$$
+
+$$M = \begin{bmatrix}m_1 & 0 &\ldots & 0\\ 0 & m_2 & \ldots & 0\\\vdots &\vdots&\ddots&\vdots\\ 0 & 0 & \dots & m_n\end{bmatrix}_{n\times n}$$
+
+Vetor *BrokenRank* de $p$
+$$ p = LM^{-1}p$$
+
+## Autovalroes e Autovetores
+
+Seja $A = LM^{-1}$, então $p = Ap$. O que isso quer dizer? 
+
+:::{.callout-important}
+p é um **autovetor** de $A$ com **autovalor** 1!
+:::
+
+Agora precisamos saber como calcular os **autovalores** e **autovetores** de $A$. Existem métodos eficientes para isso quando $A$ é **grande e esparsa**. Por que isso se aplica nesse caso?
+
+## *Random Surfer* model{.scrollable}
+
+Podemos pensar no BrokenRank como um usuário que surfa a Web clicando nos links de maneira uniformemente aleatória
+
+Suponha que $p^{(0)}$ seja o vetor n-dimensional que dá a probabilidade de começar em cada página. Depois de um passo, a probabilidade de estar em cada página é dada por $p^{(1)} = Ap^{(0)}$. (Por quê?)
+
+$$p^{(1)} = p_1^{(0)}\frac{L_{i1}}{m_1} +  p_2^{(0)}\frac{L_{i2}}{m_2} + \ldots + p_n^{(0)}\frac{L_{in}}{m_n} = \sum_{i=1}^n\frac{L_{ij}}{mij}p_j^{(0)}$$
+
+$$p^{(i+1)} = A p^{(i)}$$
+
+## Conexão c/ cadeias de Markov {.scrollable}
+
+- A matriz $A$ é uma matriz de transição de probabilidade que governa uma Cadeia de Markov.
+
+- Teoria de Cadeias de Markov nos diz que o vetor $p^{(t)}$ converge para um $p$ único quando o grafo é:
+    - Fortemente conectado (cada página possui caminho p/ todas outras páginas) e
+    - É não-bipartido
+    - Não periódico
+
+**Interpretação:** $p_i$ é a proporção do tempo que o usuário passa na página $i$ se deixarmos ele navegar infinitamente.
+
+## Por que *BrokenRank* é *broken*?{.scrollable}
+
+Problema: o grafo sobre o qual o *random surfer* navega não é fortemente conectado 
+![](figs/Aula09/PR_componentes.png){fig-align="center"}
+
+:::{.callout-note}
+Vetor p sempre existe, mas pode não ser único. Ou seja, o vetor BrokenRank $p$ existe, mas é ambíguo.
+:::
+
+## Exemplo com *BrokenRank*{.scrollable}
+
+:::: {.columns}
+
+::: {.column width="70%"}
+$$ A = LM^{-1} = \begin{bmatrix}0&0&1&0&0\\1&0&0&0&0\\0&1&0&0&0\\0&0&0&0&1\\0&0&0&1&0\end{bmatrix}$$
+
+:::
+
+::: {.column width="30%"}
+![Grafo de conectividade](figs/Aula09/exemplo_BR.png){fig-align="center"}
+:::
+
+::::
+
+
+2 autovetores de $A$ com $\lambda=1$
+
+$$p = \begin{bmatrix}\frac{1}{3}\\\frac{1}{3}\\\frac{1}{3}\\0\\0\end{bmatrix} \text{ e } \begin{bmatrix}0\\0\\0\\\frac{1}{2}\\\frac{1}{2}\end{bmatrix}$$
+
+:::{.callout-important}
+Estes *rankings* são totalmente opostos!
+:::
+
+## Definição de *PageRank*
+
+- *PageRank* é uma pequena variação do *BrokenRank*
+
+- Com probabilidade $1-d$ o random surfer dá um salto aleatório (escolhe uma página uniformemente do universo de páginas);
+
+- Com probabilidade $d$ ele escolhe um dos links da página atual de maneira uniforme aleatória.
+
+## Definição de *PageRank* {.scrollable}
+
+- *PageRank* é uma pequena variação do *BrokenRank*
+
+$$ p_i = \frac{1-d}{n} + d\sum_{j\rightarrow i} \frac{p_j}{m_j} = \frac{1-d}{n} + d\sum_{j=1}\frac{L_{ij}}{m_j}p_j$$
+onde $0<d<1$ é uma constante (ex: $d=0.85$)
+
+Em notação matricial
+$$ p =  \left( \frac{1-d}{n}E + dLM^{-1}\right)p$$
+
+onde $E$ é a matriz $n\times n$ de $1s$
+
+## Definição do *PageRank* {.scrollable}
+
+Conferindo equivalência das duas definições
+
+$$ p_i = \frac{1-d}{n} + d\sum_{j\rightarrow i} \frac{p_j}{m_j} = \frac{1-d}{n} + d\sum_{j=1}\frac{L_{ij}}{m_j}p_j$$
+
+$$ p = \left(\frac{1-d}{n}E + dLM^{-1}\right)p$$
+
+
+$$ \begin{bmatrix}p\end{bmatrix} = \frac{1-d}{n}\begin{bmatrix}1&\ldots&1\\\vdots&\ddots&\vdots\\1&\ldots&1\end{bmatrix}\begin{bmatrix}p\end{bmatrix} + d\begin{bmatrix}LM^{-1}\end{bmatrix}\begin{bmatrix}p\end{bmatrix}$$
+
+$$ \begin{bmatrix}p\end{bmatrix} = 1-d\begin{bmatrix}1/n&\ldots&1/n\\\vdots&\ddots&\vdots\\1/n&\ldots&1/n\end{bmatrix}\begin{bmatrix}p\end{bmatrix} + d\begin{bmatrix}LM^{-1}\end{bmatrix}\begin{bmatrix}p\end{bmatrix}$$
+
+$$p_i = \frac{1-d}{n}(p_1+p_2+\dots+p_n) + d \sum_{i=1}^n \frac{L_{ij}}{m_j}p_j$$
+
+$$p_i = \frac{1-d}{n} + d \sum_{i=1}^n \frac{L_{ij}}{m_j}p_j$$
+
+
+## *PageRank* possui $p$ único
+
+:::: {.columns}
+
+::: {.column width="80%"}
+
+Este modelo é um *random surfer* com *random jumps*
+
+Agora existe um caminho de cada página para todas as outras páginas. Portanto, o vetor $p$ é único (quando sujeito à restrição $\sum_{i} p_i = 1$).
+
+:::
+
+::: {.column width="20%"}
+![](figs/Aula09/randomSurfer.png)
+:::
+
+::::
+
+## Exemplo
+:::: {.columns}
+
+::: {.column width="70%"}
+
+Com $d = 0.85, A= \frac{1-d}{n}E + d LM^{-1}$  
+
+:::
+
+::: {.column width="30%"}
+![](figs/Aula09/exemplo_BR.png)
+:::
+
+::::
+
+## Exemplo{.scrollable}
+:::: {.columns}
+
+::: {.column width="70%"}
+
+Com $d = 0.85, A= \frac{1-d}{n}E + d LM^{-1}$  
+
+:::
+
+::: {.column width="30%"}
+![](figs/Aula09/exemplo_BR.png)
+:::
+
+\begin{align}
+&= \frac{0.15}{5}\begin{bmatrix}1 & 1 & 1 & 1 & 1\\1 & 1 & 1 & 1 & 1\\1 & 1 & 1 & 1 & 1\\1 & 1 & 1 & 1 & 1\\1 & 1 & 1 & 1 & 1\end{bmatrix} + 0.85\begin{bmatrix}0 & 0 & 1 & 0 & 0\\1 & 0 & 0 & 0 & 0\\0 & 1 & 0 & 0 & 0\\0 & 0 & 0 & 0 & 1\\0 & 0 & 0 & 1 & 0\end{bmatrix}\\
+
+&= \begin{bmatrix}0.03 & 0.03 & 0.88 & 0.03 & 0.03\\0.88 & 0.03 & 0.03 & 0.03 & 0.03\\0.03 & 0.88 & 0.03 & 0.03 & 0.03\\0.03 & 0.03 & 0.03 & 0.03 & 0.88\\0.03 & 0.03 & 0.03 & 0.88 & 0.03\end{bmatrix}
+\end{align}
+
+Agora possui apenas um autovetor
+
+$$ p = \begin{bmatrix}0.2\\0.2\\0.2\\0.2\\0.2\end{bmatrix}$$
+::::
+
+## Computando o vetor *PageRank*
+
+- Poderíamos calcular o vetor *PageRank* $p$ com decomposição espectral, mas o custo é da ordem de $n^3$ operações. Quando $n=3\times 10^{10}$, $n^3 = 2.7x10^{31}…$  (isto sem falar na memória)
+
+- Felizmente, só precisamos do autovetor com $\lambda=1$. Melhor ainda: sabe-se que todos os outros autovalores tem valor absoluto $< 1$.
+
+## Computando o vetor *PageRank* {.scrollable}
+
+Lembrando que 
+
+$$ p^{(i)} = A p^{(i-1)}= A^2p^{(i-2)} = A^3p^{(i-3)}\ldots$$
+
+$$p = c_1x_1 + c_2x_2 + \ldots + c_nx_n$$
+
+$$A^kp = c_1\lambda^k x_1 + \ldots + c_n\lambda_n^kx_n$$
+
+Sem perda de generalidade, suponha
+
+$$ \lambda_1 = 1 > \vert \lambda_2\vert \ge \vert \lambda_3 \vert \ge \ldots \ge \vert \lambda_n\vert$$
+
+O que acontece se pré-multiplicarmos o vetor $p^{(0)}$ por $A$ muitas vezes?
+
+**Resposta**: quando $t\rightarrow \infty$ vai convergir para $c_1x_1$
+
+:::{.callout-note}
+Lembrando que $c_1x_1$ é uma constante vezes o autovetor cujo autovalor é igual a 1
+:::
+
+## Método da potência (Power Method) {.scrollable}
+
+Comece com qualquer distribuição $p^{(0)}$ (ex: uniforme)
+
+Faça:
+
+\begin{align}
+p^{(1)} &= Ap^{(0)}\\
+p^{(2)} &= Ap^{(1)}\\
+\vdots\\
+p^{(t)} &= Ap^{(t-1)}\approx c_1x_1\\
+\end{align}
+
+:::{.callout-note}
+Não precisamos nos preocupar com $c_1$, pois basta normalizar (soma um). Na prática normalizamos a cada passo e repetimos até que $p$ não mude "muito"
+:::
+
+## Método da potência (Exemplo){.scrollable}
+
+Comece com qualquer distribuição  (ex: uniforme)
+![](figs/Aula09/ex_metodo_potencia.png){width="60%"}
+
+$$ p^{(0)} = \begin{bmatrix}1/3\\1/3\\1/3\end{bmatrix}$$
+
+\begin{align}
+A &= \frac{1-d}{n}E + dLM^{-1}\\
+&= \begin{bmatrix}0.05 & 0.05 & 0.05\\0.05 &0.05&0.05\\0.05&0.05&0.05\end{bmatrix} + \begin{bmatrix}0.425 & 0.425&0\\0.425&0&0.85\\0&0.425&0\end{bmatrix}\\
+p^{(1)} &= \begin{bmatrix}0.475&0.475&0.05\\0.475&0.05&0.9\\0.05&0.475&0.05\end{bmatrix}\begin{bmatrix}1/3\\1/3\\1/3\end{bmatrix}\\
+p^{(1)}&= \begin{bmatrix}0.333\\0.475\\0.192\end{bmatrix}\\
+p^{(2)} &= \begin{bmatrix}0.475&0.475&0.05\\0.475&0.05&0.9\\0.05&0.475&0.05\end{bmatrix}\begin{bmatrix}0.333\\0.495\\0.192\end{bmatrix}\\
+p^{(2)}&= \begin{bmatrix}0.394\\0.355\\0.252\end{bmatrix}
+\end{align}
+
+
+## Método da potência (continuação)
+
+- Há ainda duas questões importantes sobre o cálculo do vetor pagerank $p$ usando power method
+  - Como executar cada iteração rapidamente? (custo de multiplicar matriz por vetor é $O(n^2)$).
+  - Quantas iterações $t$ são necessárias?
+
+## Método da potência (continuação)
+
+- A grosso modo, as respostas são:
+  - Usando a esparsidade do grafo da web (como?)
+  - Não muitas se o spectral gap (diferença entre primeiro e segundo maiores autovalores absolutos) for grande; o maior é 1, o segundo maior é $\le d$.
+
+## Uma busca básica na Web
+
+Solução 1: Para fazer uma busca na web e responder uma consulta, podemos
+
+1. Calcular o vetor *PageRank* $p$ uma vez (Google recomputa-o de tempos em tempos).
+2. Encontre os documentos contendo todas palavras da consulta.
+3. Ordene estes documentos por *PageRank* e retorne os top $k$ (e.g. $k=50$)
+
+## Uma busca básica na Web
+
+Podemos melhorar solução usando escores de similaridade entre página e consulta.
+
+Solução 2: (passos 1 e 2 iguais à anterior)
+
+3. Ordene estes documentos por PageRank e mantenha apenas os top K (e.g. $K=5000$)
+4. Ordene por similaridade à consulta (e.g., normalized IDF weighted-distance), e retorne os top k (e.g., $k=50$)
+
+## Variantes / Extensões do *PageRank*
+![](figs/Aula09/variantes.png)
