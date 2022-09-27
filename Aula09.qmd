@@ -364,7 +364,7 @@ $$ p = \begin{bmatrix}0.2\\0.2\\0.2\\0.2\\0.2\end{bmatrix}$$
 
 ## Computando o vetor *PageRank* {.scrollable}
 
-Lembrando que 
+Lembrando que  
 
 $$ p^{(i)} = A p^{(i-1)}= A^2p^{(i-2)} = A^3p^{(i-3)}\ldots$$
 
