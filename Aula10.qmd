@@ -131,4 +131,141 @@ $$ AVV^{-1} = U \Sigma V^{-1}$$
 
 $$ A = U \Sigma V^\top$$
 
-## Do SVD completo ao reduzido
+## Do SVD completo ao reduzido{.scrollable}
+
+:::{.callout-note}
+## SVD Completo
+<!-- >> SVD Completo -->
+
+ $$\underbrace{A}_{m\times n} = \underbrace{U}_{m\times m} \underbrace{\Sigma}_{m\times n}\underbrace{V^\top}_{n\times n}$$
+:::
+
+Como apenas os $r$ primeiros termos da diagonal de $\Sigma$ são não-nulos, podemos tomar essa submatriz descartando as colunas $r+1,\ldots,m$ de $U$ e as linhas $r+1,\ldots,n$ de $V^\top$. O resultado, denotado pelas mesmas letras é
+
+:::{.callout-note}
+## SVD Reduzido
+ $$\underbrace{A}_{m\times n} = \underbrace{U}_{m\times r} \underbrace{\Sigma}_{r\times r}\underbrace{V^\top}_{r\times n}$$
+:::
+
+## Decomposição por valor singular
+
+A decomposição $A = U\Sigma V^\top$ é chamada de *Singular Value Decomposition (SVD)*
+
+- Os escalares na matriz $\Sigma$ são os valores singulares
+- Os vetores coluna de $U$ são os vetores singulares à esquerda
+- Os vetores coluna de $V$ (ou seja, linhas de $V^\top$) são os vetores singulares à direita
+
+## SVD em "pedaços"
+
+Podemos escrever a decomposição como soma de matrizes de posto 1
+
+$$ A = U \Sigma V^\top = \sigma_1u_1v_1^\top + \ldots + \sigma_r u_r v_r^\top$$
+
+## Exemplo
+
+$$ \frac{3\sqrt{5}}{\sqrt{10}\sqrt{2}}\begin{bmatrix}1\\3\end{bmatrix}\begin{bmatrix}1 & 1\end{bmatrix} +\frac{\sqrt{5}}{\sqrt{10}\sqrt{2}}\begin{bmatrix}-3\\1\end{bmatrix}\begin{bmatrix}-1 & 1\end{bmatrix}$$
+
+$$ = \frac{3}{2}\begin{bmatrix}1&1\\3&3\end{bmatrix} + \frac{1}{2}\begin{bmatrix}3&-3\\-1&1\end{bmatrix} = \begin{bmatrix}3&0\\4&5\end{bmatrix}$$
+
+## Autovalores e valores singulares
+
+Existe alguma relação entre autovalores e valores singulares?
+
+$$A = U\Sigma V^\top$$
+$$S = X\Lambda X^{-1} $$
+
+## Autovalores e valores singulares
+
+Existe alguma relação entre autovalores e valores singulares?
+
+$$ A^\top A = ?$$
+
+## Autovalores e valores singulares
+
+Existe alguma relação entre autovalores e valores singulares?
+
+$$ AA^\top  = ?$$
+
+## Autovalores e valores singulares
+
+- $V$ possui os autovetores de $A^\top A$
+- $U$ possui os autovetores de $AA^\top$
+- O quadrado dos valores da diagonal de $\Sigma$ são os autovalores de $A^\top A$ e $AA^\top$
+
+## Decompondo A
+
+1. Calcule os autovetores $v$'s de $A^\top A$
+2. Faça $\sigma_k = \sqrt{\lambda_k}$
+3. Então calcule:   
+$$ u_k = \frac{Av_k}{\sigma_k} $$
+
+## Geometria de SVD
+
+Vamos começar por uma matriz de rotação $R$:
+
+$$R(\theta) = 
+\begin{bmatrix}
+\cos(\theta) & -\sin(\theta)\\
+\sin(\theta) & \cos(\theta)
+\end{bmatrix}
+$$
+
+$$R(\pi/4) = 
+\begin{bmatrix}
+\cos(\pi/4) & -\sin(\pi/4)\\
+\sin(\pi/4) & \cos(\pi/4)
+\end{bmatrix}
+$$
+
+$$R(\pi/4) = 
+\begin{bmatrix}
+1/\sqrt{2} & -1/\sqrt{2}\\
+1/\sqrt{2}& 1/\sqrt{2}
+\end{bmatrix}
+$$
+
+## Geometria de SVD
+
+Vamos começar por uma matriz de rotação $R$:
+$$R(\pi/4)x = 
+\begin{bmatrix}
+1/\sqrt{2} & -1/\sqrt{2}\\
+1/\sqrt{2}& 1/\sqrt{2}
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}
+= ?
+$$
+
+## Geometria de SVD
+
+O que significa multiplicar um vetor $v$ por $A$
+
+$$A v = (U\Sigma V^\top)v =  $$
+
+## Geometria de SVD
+![](figs/Aula10/geometria1.png){fig-align="center"}
+
+## Geometria de SVD
+
+$$ \Sigma(\sigma_1, \sigma_2) = 
+\begin{bmatrix}
+\sigma_1 & 0\\
+0 & \sigma_2
+\end{bmatrix}
+$$
+
+$$ \Sigma(2.0, 0.5) = 
+\begin{bmatrix}
+2.0 & 0\\
+0 & 0.5
+\end{bmatrix}
+$$
+
+## Geometria de SVD
+![](figs/Aula10/geometria2.png){fig-align="center"}
+
+## Geometria de SVD
+![](figs/Aula10/geometria3.png){fig-align="center"}

@@ -438,10 +438,163 @@ u_1 &amp; \ldots &amp; u_r\\
 <p><span class="math display">\[ AVV^{-1} = U \Sigma V^{-1}\]</span></p>
 <p><span class="math display">\[ A = U \Sigma V^\top\]</span></p>
 </section>
-<section id="do-svd-completo-ao-reduzido" class="slide level2">
+<section id="do-svd-completo-ao-reduzido" class="slide level2 scrollable">
 <h2>Do SVD completo ao reduzido</h2>
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>SVD Completo</strong></p>
+</div>
+<div class="callout-content">
+<!-- >> SVD Completo -->
+<p><span class="math display">\[\underbrace{A}_{m\times n} = \underbrace{U}_{m\times m} \underbrace{\Sigma}_{m\times n}\underbrace{V^\top}_{n\times n}\]</span></p>
+</div>
+</div>
+</div>
+<p>Como apenas os <span class="math inline">\(r\)</span> primeiros termos da diagonal de <span class="math inline">\(\Sigma\)</span> são não-nulos, podemos tomar essa submatriz descartando as colunas <span class="math inline">\(r+1,\ldots,m\)</span> de <span class="math inline">\(U\)</span> e as linhas <span class="math inline">\(r+1,\ldots,n\)</span> de <span class="math inline">\(V^\top\)</span>. O resultado, denotado pelas mesmas letras é</p>
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>SVD Reduzido</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\underbrace{A}_{m\times n} = \underbrace{U}_{m\times r} \underbrace{\Sigma}_{r\times r}\underbrace{V^\top}_{r\times n}\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="decomposição-por-valor-singular" class="slide level2">
+<h2>Decomposição por valor singular</h2>
+<p>A decomposição <span class="math inline">\(A = U\Sigma V^\top\)</span> é chamada de <em>Singular Value Decomposition (SVD)</em></p>
+<ul>
+<li>Os escalares na matriz <span class="math inline">\(\Sigma\)</span> são os valores singulares</li>
+<li>Os vetores coluna de <span class="math inline">\(U\)</span> são os vetores singulares à esquerda</li>
+<li>Os vetores coluna de <span class="math inline">\(V\)</span> (ou seja, linhas de <span class="math inline">\(V^\top\)</span>) são os vetores singulares à direita</li>
+</ul>
+</section>
+<section id="svd-em-pedaços" class="slide level2">
+<h2>SVD em “pedaços”</h2>
+<p>Podemos escrever a decomposição como soma de matrizes de posto 1</p>
+<p><span class="math display">\[ A = U \Sigma V^\top = \sigma_1u_1v_1^\top + \ldots + \sigma_r u_r v_r^\top\]</span></p>
+</section>
+<section id="exemplo" class="slide level2">
+<h2>Exemplo</h2>
+<p><span class="math display">\[ \frac{3\sqrt{5}}{\sqrt{10}\sqrt{2}}\begin{bmatrix}1\\3\end{bmatrix}\begin{bmatrix}1 &amp; 1\end{bmatrix} +\frac{\sqrt{5}}{\sqrt{10}\sqrt{2}}\begin{bmatrix}-3\\1\end{bmatrix}\begin{bmatrix}-1 &amp; 1\end{bmatrix}\]</span></p>
+<p><span class="math display">\[ = \frac{3}{2}\begin{bmatrix}1&amp;1\\3&amp;3\end{bmatrix} + \frac{1}{2}\begin{bmatrix}3&amp;-3\\-1&amp;1\end{bmatrix} = \begin{bmatrix}3&amp;0\\4&amp;5\end{bmatrix}\]</span></p>
+</section>
+<section id="autovalores-e-valores-singulares" class="slide level2">
+<h2>Autovalores e valores singulares</h2>
+<p>Existe alguma relação entre autovalores e valores singulares?</p>
+<p><span class="math display">\[A = U\Sigma V^\top\]</span></p>
+<p><span class="math display">\[S = X\Lambda X^{-1} \]</span></p>
+</section>
+<section id="autovalores-e-valores-singulares-1" class="slide level2">
+<h2>Autovalores e valores singulares</h2>
+<p>Existe alguma relação entre autovalores e valores singulares?</p>
+<p><span class="math display">\[ A^\top A = ?\]</span></p>
+</section>
+<section id="autovalores-e-valores-singulares-2" class="slide level2">
+<h2>Autovalores e valores singulares</h2>
+<p>Existe alguma relação entre autovalores e valores singulares?</p>
+<p><span class="math display">\[ AA^\top  = ?\]</span></p>
+</section>
+<section id="autovalores-e-valores-singulares-3" class="slide level2">
+<h2>Autovalores e valores singulares</h2>
+<ul>
+<li><span class="math inline">\(V\)</span> possui os autovetores de <span class="math inline">\(A^\top A\)</span></li>
+<li><span class="math inline">\(U\)</span> possui os autovetores de <span class="math inline">\(AA^\top\)</span></li>
+<li>O quadrado dos valores da diagonal de <span class="math inline">\(\Sigma\)</span> são os autovalores de <span class="math inline">\(A^\top A\)</span> e <span class="math inline">\(AA^\top\)</span></li>
+</ul>
+</section>
+<section id="decompondo-a" class="slide level2">
+<h2>Decompondo A</h2>
+<ol type="1">
+<li>Calcule os autovetores <span class="math inline">\(v\)</span>’s de <span class="math inline">\(A^\top A\)</span></li>
+<li>Faça <span class="math inline">\(\sigma_k = \sqrt{\lambda_k}\)</span></li>
+<li>Então calcule:</li>
+</ol>
+<p><span class="math display">\[ u_k = \frac{Av_k}{\sigma_k} \]</span></p>
+</section>
+<section id="geometria-de-svd" class="slide level2">
+<h2>Geometria de SVD</h2>
+<p>Vamos começar por uma matriz de rotação <span class="math inline">\(R\)</span>:</p>
+<p><span class="math display">\[R(\theta) =
+\begin{bmatrix}
+\cos(\theta) &amp; -\sin(\theta)\\
+\sin(\theta) &amp; \cos(\theta)
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[R(\pi/4) =
+\begin{bmatrix}
+\cos(\pi/4) &amp; -\sin(\pi/4)\\
+\sin(\pi/4) &amp; \cos(\pi/4)
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[R(\pi/4) =
+\begin{bmatrix}
+1/\sqrt{2} &amp; -1/\sqrt{2}\\
+1/\sqrt{2}&amp; 1/\sqrt{2}
+\end{bmatrix}
+\]</span></p>
+</section>
+<section id="geometria-de-svd-1" class="slide level2">
+<h2>Geometria de SVD</h2>
+<p>Vamos começar por uma matriz de rotação <span class="math inline">\(R\)</span>:</p>
+<p><span class="math display">\[R(\pi/4)x =
+\begin{bmatrix}
+1/\sqrt{2} &amp; -1/\sqrt{2}\\
+1/\sqrt{2}&amp; 1/\sqrt{2}
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}
+= ?
+\]</span></p>
+</section>
+<section id="geometria-de-svd-2" class="slide level2">
+<h2>Geometria de SVD</h2>
+<p>O que significa multiplicar um vetor <span class="math inline">\(v\)</span> por <span class="math inline">\(A\)</span></p>
+<p><span class="math display">\[A v = (U\Sigma V^\top)v =  \]</span></p>
+</section>
+<section id="geometria-de-svd-3" class="slide level2">
+<h2>Geometria de SVD</h2>
 
-<img src="common/UFMG_HEAD.png" class="slide-logo r-stretch"><div class="footer footer-default">
+<img data-src="figs/Aula10/geometria1.png" class="r-stretch quarto-figure-center"></section>
+<section id="geometria-de-svd-4" class="slide level2">
+<h2>Geometria de SVD</h2>
+<p><span class="math display">\[ \Sigma(\sigma_1, \sigma_2) =
+\begin{bmatrix}
+\sigma_1 &amp; 0\\
+0 &amp; \sigma_2
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[ \Sigma(2.0, 0.5) =
+\begin{bmatrix}
+2.0 &amp; 0\\
+0 &amp; 0.5
+\end{bmatrix}
+\]</span></p>
+</section>
+<section id="geometria-de-svd-5" class="slide level2">
+<h2>Geometria de SVD</h2>
+
+<img data-src="figs/Aula10/geometria2.png" class="r-stretch quarto-figure-center"></section>
+<section id="geometria-de-svd-6" class="slide level2">
+<h2>Geometria de SVD</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula10/geometria3.png"></p>
+</figure>
+</div>
+<p><img src="common/UFMG_HEAD.png" class="slide-logo"></p>
+<div class="footer footer-default">
 <p><a href="https://heitorramos.github.io/alc.html" class="uri">https://heitorramos.github.io/alc.html</a></p>
 </div>
 </section>

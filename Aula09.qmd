@@ -45,7 +45,7 @@ Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do 
 7. Saber executar manualmente o método da potência
 8. Conhecer fatores que influenciam o tempo de execução do método da potência
 
-## Referências adicionais
+## Referências adicionais{.scrollable}
 
 - [Wikipedia](https://en.wikipedia.org/wiki/PageRank)
 - Textos:
@@ -62,7 +62,7 @@ Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do 
 - N-ésimo número de Fibonacci
 - Comportamento de EDOs
 - Linear Discriminant Analysis 
-- Cadeias de Markov (health care economics, Page Rank)
+- Cadeias de Markov (health care, economics, Page Rank)
 
 ##
 ![](figs/Aula09/PR-paper.png)
@@ -117,9 +117,9 @@ Felizmente, existe uma estrutura subjacente que pode ser usada para resolver amb
 :::: {.columns}
 
 ::: {.column width="50%"}
-- Pagerank (importância) de uma página i é baseada nos links que recebe de outras páginas:
-    - Se i recebe links de páginas com pagerank alto, links contribuem bastante (recursão!)
-    - Se as páginas que tem link para i, tem link para muitas páginas, contribuição é menor
+- Pagerank (importância) de uma página $i$ é baseada nos links que recebe de outras páginas:
+    - Se $i$ recebe links de páginas com pagerank alto, links contribuem bastante (recursão!)
+    - Se as páginas que tem link para $i$, tem link para muitas páginas, contribuição é menor
 
 
 :::
@@ -149,9 +149,54 @@ $$M = \begin{bmatrix}m_1 & 0 &\ldots & 0\\ 0 & m_2 & \ldots & 0\\\vdots &\vdots&
 Vetor *BrokenRank* de $p$
 $$ p = LM^{-1}p$$
 
-## Autovalroes e Autovetores
+$$
+\begin{bmatrix}
+\\
+P
+\\
+\\
+\end{bmatrix} = 
+\begin{bmatrix}
+&\\
+&L 
+&\\
+&\\
+\end{bmatrix} 
+ \begin{bmatrix}m_1 & 0 &\ldots & 0\\ 0 & m_2 & \ldots & 0\\\vdots &\vdots&\ddots&\vdots\\ 0 & 0 & \dots & m_n\end{bmatrix}
+ \begin{bmatrix}
+\\
+P
+\\
+\\
+\end{bmatrix}
+$$
 
-Seja $A = LM^{-1}$, então $p = Ap$. O que isso quer dizer? 
+$$
+\begin{bmatrix}
+\\
+P
+\\
+\\
+\end{bmatrix} = 
+ \begin{bmatrix}L_{11}/m_1 & L_{12}/m_2 &\ldots & L_{1n}/m_n\\ L_{21}/m_1 & L_{22}/m_2 &\ldots & L_{2n}/m_n\\\vdots &\vdots&\ddots&\vdots\\L_{n1}/m_1 & L_{n2}/m_2 &\ldots & L_{nn}/m_n\end{bmatrix}
+ \begin{bmatrix}
+\\
+P
+\\
+\\
+\end{bmatrix}
+$$
+Se tomarmos um elemento $i$ da matriz $P$, teremos:
+
+$$ p_i = \frac{L_{i1}}{m_1}p_i +  \frac{L_{i2}}{m_1}p_2 + \ldots + \frac{L_{in}}{m_n}p_n$$
+
+reescrevendo :
+$$p_i = \sum_{j=1}^n \frac{L_{ij}}{m_j}p_j$$
+
+## Autovalores e Autovetores
+
+$$p = LM^{-1}p$$
+Seja $A = LM^{-1}$, então $p = Ap$ (ou $Ap = p$). O que isso quer dizer? 
 
 :::{.callout-important}
 p é um **autovetor** de $A$ com **autovalor** 1!
@@ -173,10 +218,10 @@ $$p^{(i+1)} = A p^{(i)}$$
 
 - A matriz $A$ é uma matriz de transição de probabilidade que governa uma Cadeia de Markov.
 
-- Teoria de Cadeias de Markov nos diz que o vetor $p^{(t)}$ converge para um $p$ único quando o grafo é:
+- Teoria de Cadeias de Markov nos diz que o vetor $p^{(t)}$ **converge** para um $p$ único quando o grafo é:
     - Fortemente conectado (cada página possui caminho p/ todas outras páginas) e
     - É não-bipartido
-    - Não periódico
+    <!-- - Não periódico -->
 
 **Interpretação:** $p_i$ é a proporção do tempo que o usuário passa na página $i$ se deixarmos ele navegar infinitamente.
 
@@ -225,7 +270,7 @@ Estes *rankings* são totalmente opostos!
 
 - *PageRank* é uma pequena variação do *BrokenRank*
 
-$$ p_i = \frac{1-d}{n} + d\sum_{j\rightarrow i} \frac{p_j}{m_j} = \frac{1-d}{n} + d\sum_{j=1}\frac{L_{ij}}{m_j}p_j$$
+$$ p_i = \frac{1-d}{n} + d\sum_{j\rightarrow i} \frac{p_j}{m_j} = \frac{1-d}{n} + d\sum_{j=1}^n\frac{L_{ij}}{m_j}p_j$$
 onde $0<d<1$ é uma constante (ex: $d=0.85$)
 
 Em notação matricial
@@ -246,7 +291,10 @@ $$ \begin{bmatrix}p\end{bmatrix} = \frac{1-d}{n}\begin{bmatrix}1&\ldots&1\\\vdot
 
 $$ \begin{bmatrix}p\end{bmatrix} = 1-d\begin{bmatrix}1/n&\ldots&1/n\\\vdots&\ddots&\vdots\\1/n&\ldots&1/n\end{bmatrix}\begin{bmatrix}p\end{bmatrix} + d\begin{bmatrix}LM^{-1}\end{bmatrix}\begin{bmatrix}p\end{bmatrix}$$
 
-$$p_i = \frac{1-d}{n}(p_1+p_2+\dots+p_n) + d \sum_{i=1}^n \frac{L_{ij}}{m_j}p_j$$
+A matriz com elementos $1/n$ indica que não importa em qual página o surfista aleatório esteja, ele irá para qualquer página com probabilidade $1/n$, ou seja, é um salto aleatório uniformemente distribuído entre todas as páginas.
+
+Tomando uma linha específica:
+$$p_i = (1-d)\frac{1}{n}\underbrace{(p_1+p_2+\dots+p_n)}_{1} + d \sum_{i=1}^n \frac{L_{ij}}{m_j}p_j$$
 
 $$p_i = \frac{1-d}{n} + d \sum_{i=1}^n \frac{L_{ij}}{m_j}p_j$$
 
@@ -312,7 +360,7 @@ $$ p = \begin{bmatrix}0.2\\0.2\\0.2\\0.2\\0.2\end{bmatrix}$$
 
 - Poderíamos calcular o vetor *PageRank* $p$ com decomposição espectral, mas o custo é da ordem de $n^3$ operações. Quando $n=3\times 10^{10}$, $n^3 = 2.7x10^{31}…$  (isto sem falar na memória)
 
-- Felizmente, só precisamos do autovetor com $\lambda=1$. Melhor ainda: sabe-se que todos os outros autovalores tem valor absoluto $< 1$.
+- Felizmente, só precisamos do autovetor com $\lambda=1$. Melhor ainda: sabe-se que todos os outros autovalores tem valor absoluto $< 1$ (resultado derivado do teorema de Perron-Frobenius).
 
 ## Computando o vetor *PageRank* {.scrollable}
 

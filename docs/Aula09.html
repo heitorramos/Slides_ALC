@@ -355,7 +355,7 @@
 <li>Conhecer fatores que influenciam o tempo de execução do método da potência</li>
 </ol>
 </section>
-<section id="referências-adicionais" class="slide level2">
+<section id="referências-adicionais" class="slide level2 scrollable">
 <h2>Referências adicionais</h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/PageRank">Wikipedia</a></li>
@@ -378,7 +378,7 @@
 <li>N-ésimo número de Fibonacci</li>
 <li>Comportamento de EDOs</li>
 <li>Linear Discriminant Analysis</li>
-<li>Cadeias de Markov (health care economics, Page Rank)</li>
+<li>Cadeias de Markov (health care, economics, Page Rank)</li>
 </ul>
 </section>
 <section id="section" class="slide level2">
@@ -456,10 +456,10 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>Pagerank (importância) de uma página i é baseada nos links que recebe de outras páginas:
+<li>Pagerank (importância) de uma página <span class="math inline">\(i\)</span> é baseada nos links que recebe de outras páginas:
 <ul>
-<li>Se i recebe links de páginas com pagerank alto, links contribuem bastante (recursão!)</li>
-<li>Se as páginas que tem link para i, tem link para muitas páginas, contribuição é menor</li>
+<li>Se <span class="math inline">\(i\)</span> recebe links de páginas com pagerank alto, links contribuem bastante (recursão!)</li>
+<li>Se as páginas que tem link para <span class="math inline">\(i\)</span>, tem link para muitas páginas, contribuição é menor</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -491,10 +491,51 @@
 <p><span class="math display">\[M = \begin{bmatrix}m_1 &amp; 0 &amp;\ldots &amp; 0\\ 0 &amp; m_2 &amp; \ldots &amp; 0\\\vdots &amp;\vdots&amp;\ddots&amp;\vdots\\ 0 &amp; 0 &amp; \dots &amp; m_n\end{bmatrix}_{n\times n}\]</span></p>
 <p>Vetor <em>BrokenRank</em> de <span class="math inline">\(p\)</span></p>
 <p><span class="math display">\[ p = LM^{-1}p\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+\\
+P
+\\
+\\
+\end{bmatrix} =
+\begin{bmatrix}
+&amp;\\
+&amp;L
+&amp;\\
+&amp;\\
+\end{bmatrix}
+\begin{bmatrix}m_1 &amp; 0 &amp;\ldots &amp; 0\\ 0 &amp; m_2 &amp; \ldots &amp; 0\\\vdots &amp;\vdots&amp;\ddots&amp;\vdots\\ 0 &amp; 0 &amp; \dots &amp; m_n\end{bmatrix}
+\begin{bmatrix}
+\\
+P
+\\
+\\
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+\\
+P
+\\
+\\
+\end{bmatrix} =
+\begin{bmatrix}L_{11}/m_1 &amp; L_{12}/m_2 &amp;\ldots &amp; L_{1n}/m_n\\ L_{21}/m_1 &amp; L_{22}/m_2 &amp;\ldots &amp; L_{2n}/m_n\\\vdots &amp;\vdots&amp;\ddots&amp;\vdots\\L_{n1}/m_1 &amp; L_{n2}/m_2 &amp;\ldots &amp; L_{nn}/m_n\end{bmatrix}
+\begin{bmatrix}
+\\
+P
+\\
+\\
+\end{bmatrix}
+\]</span></p>
+<p>Se tomarmos um elemento <span class="math inline">\(i\)</span> da matriz <span class="math inline">\(P\)</span>, teremos:</p>
+<p><span class="math display">\[ p_i = \frac{L_{i1}}{m_1}p_i +  \frac{L_{i2}}{m_1}p_2 + \ldots + \frac{L_{in}}{m_n}p_n\]</span></p>
+<p>reescrevendo :</p>
+<p><span class="math display">\[p_i = \sum_{j=1}^n \frac{L_{ij}}{m_j}p_j\]</span></p>
 </section>
-<section id="autovalroes-e-autovetores" class="slide level2">
-<h2>Autovalroes e Autovetores</h2>
-<p>Seja <span class="math inline">\(A = LM^{-1}\)</span>, então <span class="math inline">\(p = Ap\)</span>. O que isso quer dizer?</p>
+<section id="autovalores-e-autovetores" class="slide level2">
+<h2>Autovalores e Autovetores</h2>
+<p><span class="math display">\[p = LM^{-1}p\]</span></p>
+<p>Seja <span class="math inline">\(A = LM^{-1}\)</span>, então <span class="math inline">\(p = Ap\)</span> (ou <span class="math inline">\(Ap = p\)</span>). O que isso quer dizer?</p>
 <div class="callout callout-important callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -521,11 +562,10 @@
 <h2>Conexão c/ cadeias de Markov</h2>
 <ul>
 <li><p>A matriz <span class="math inline">\(A\)</span> é uma matriz de transição de probabilidade que governa uma Cadeia de Markov.</p></li>
-<li><p>Teoria de Cadeias de Markov nos diz que o vetor <span class="math inline">\(p^{(t)}\)</span> converge para um <span class="math inline">\(p\)</span> único quando o grafo é:</p>
+<li><p>Teoria de Cadeias de Markov nos diz que o vetor <span class="math inline">\(p^{(t)}\)</span> <strong>converge</strong> para um <span class="math inline">\(p\)</span> único quando o grafo é:</p>
 <ul>
 <li>Fortemente conectado (cada página possui caminho p/ todas outras páginas) e</li>
-<li>É não-bipartido</li>
-<li>Não periódico</li>
+<li>É não-bipartido <!-- - Não periódico --></li>
 </ul></li>
 </ul>
 <p><strong>Interpretação:</strong> <span class="math inline">\(p_i\)</span> é a proporção do tempo que o usuário passa na página <span class="math inline">\(i\)</span> se deixarmos ele navegar infinitamente.</p>
@@ -590,7 +630,7 @@
 <ul>
 <li><em>PageRank</em> é uma pequena variação do <em>BrokenRank</em></li>
 </ul>
-<p><span class="math display">\[ p_i = \frac{1-d}{n} + d\sum_{j\rightarrow i} \frac{p_j}{m_j} = \frac{1-d}{n} + d\sum_{j=1}\frac{L_{ij}}{m_j}p_j\]</span></p>
+<p><span class="math display">\[ p_i = \frac{1-d}{n} + d\sum_{j\rightarrow i} \frac{p_j}{m_j} = \frac{1-d}{n} + d\sum_{j=1}^n\frac{L_{ij}}{m_j}p_j\]</span></p>
 <p>onde <span class="math inline">\(0&lt;d&lt;1\)</span> é uma constante (ex: <span class="math inline">\(d=0.85\)</span>)</p>
 <p>Em notação matricial</p>
 <p><span class="math display">\[ p =  \left( \frac{1-d}{n}E + dLM^{-1}\right)p\]</span></p>
@@ -603,7 +643,9 @@
 <p><span class="math display">\[ p = \left(\frac{1-d}{n}E + dLM^{-1}\right)p\]</span></p>
 <p><span class="math display">\[ \begin{bmatrix}p\end{bmatrix} = \frac{1-d}{n}\begin{bmatrix}1&amp;\ldots&amp;1\\\vdots&amp;\ddots&amp;\vdots\\1&amp;\ldots&amp;1\end{bmatrix}\begin{bmatrix}p\end{bmatrix} + d\begin{bmatrix}LM^{-1}\end{bmatrix}\begin{bmatrix}p\end{bmatrix}\]</span></p>
 <p><span class="math display">\[ \begin{bmatrix}p\end{bmatrix} = 1-d\begin{bmatrix}1/n&amp;\ldots&amp;1/n\\\vdots&amp;\ddots&amp;\vdots\\1/n&amp;\ldots&amp;1/n\end{bmatrix}\begin{bmatrix}p\end{bmatrix} + d\begin{bmatrix}LM^{-1}\end{bmatrix}\begin{bmatrix}p\end{bmatrix}\]</span></p>
-<p><span class="math display">\[p_i = \frac{1-d}{n}(p_1+p_2+\dots+p_n) + d \sum_{i=1}^n \frac{L_{ij}}{m_j}p_j\]</span></p>
+<p>A matriz com elementos <span class="math inline">\(1/n\)</span> indica que não importa em qual página o surfista aleatório esteja, ele irá para qualquer página com probabilidade <span class="math inline">\(1/n\)</span>, ou seja, é um salto aleatório uniformemente distribuído entre todas as páginas.</p>
+<p>Tomando uma linha específica:</p>
+<p><span class="math display">\[p_i = (1-d)\frac{1}{n}\underbrace{(p_1+p_2+\dots+p_n)}_{1} + d \sum_{i=1}^n \frac{L_{ij}}{m_j}p_j\]</span></p>
 <p><span class="math display">\[p_i = \frac{1-d}{n} + d \sum_{i=1}^n \frac{L_{ij}}{m_j}p_j\]</span></p>
 </section>
 <section id="pagerank-possui-p-único" class="slide level2">
@@ -645,7 +687,7 @@
 <h2>Computando o vetor <em>PageRank</em></h2>
 <ul>
 <li><p>Poderíamos calcular o vetor <em>PageRank</em> <span class="math inline">\(p\)</span> com decomposição espectral, mas o custo é da ordem de <span class="math inline">\(n^3\)</span> operações. Quando <span class="math inline">\(n=3\times 10^{10}\)</span>, <span class="math inline">\(n^3 = 2.7x10^{31}…\)</span> (isto sem falar na memória)</p></li>
-<li><p>Felizmente, só precisamos do autovetor com <span class="math inline">\(\lambda=1\)</span>. Melhor ainda: sabe-se que todos os outros autovalores tem valor absoluto <span class="math inline">\(&lt; 1\)</span>.</p></li>
+<li><p>Felizmente, só precisamos do autovetor com <span class="math inline">\(\lambda=1\)</span>. Melhor ainda: sabe-se que todos os outros autovalores tem valor absoluto <span class="math inline">\(&lt; 1\)</span> (resultado derivado do teorema de Perron-Frobenius).</p></li>
 </ul>
 </section>
 <section id="computando-o-vetor-pagerank-1" class="slide level2 scrollable">
