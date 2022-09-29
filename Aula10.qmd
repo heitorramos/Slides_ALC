@@ -39,7 +39,7 @@ Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do 
 1. Conhecer relação entre posto, valores singulares e vetores singulares esquerdos e direitos de uma matriz
 2. Saber transformar o SVD completo em SVD reduzido e vice-versa
 3. Entender o SVD como uma decomposição em soma de matrizes de posto 1
-4. Saber como calcular o SVD a partir da decomposição espectral de $Aˆ\top A$ ou $AAˆ\top$
+4. Saber como calcular o SVD a partir da decomposição espectral de $A^\top A$ ou $AA^\top$
 Entender a multiplicação $Ax$ da perspectiva geométrica do SVD
 
 ## Referências adicionais
