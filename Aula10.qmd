@@ -39,7 +39,7 @@ Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do 
 1. Conhecer relação entre posto, valores singulares e vetores singulares esquerdos e direitos de uma matriz
 2. Saber transformar o SVD completo em SVD reduzido e vice-versa
 3. Entender o SVD como uma decomposição em soma de matrizes de posto 1
-4. Saber como calcular o SVD a partir da decomposição espectral de $A^\top A$ ou $AA^\top$
+4. Saber como calcular o SVD a partir da decomposição espectral de $Aˆ\top A$ ou $AAˆ\top$
 Entender a multiplicação $Ax$ da perspectiva geométrica do SVD
 
 ## Referências adicionais
@@ -61,7 +61,7 @@ $$y = \begin{bmatrix}1&2\\3&4\\5&6\end{bmatrix}\begin{bmatrix}10\\100\end{bmatri
 
 ## E como ficam os autovetores?
 
-Não é possível usarmos $$Ax=\lambda x$$
+Não é possível usarmos $Ax=\lambda x$
 
 O que podemos fazer? Será que existem vetores escalares tais que
 
@@ -70,7 +70,7 @@ $$Av_i = \sigma_i u_i $$
 
 ## Quantos vetoes independentes de $u_i$?
 
-Como $u_i$ está em $C(A)$, existem no máximo $r$ vetores $u_i$'s independentes, onde $r=\text{posto}(A) \le \min\{m,n\}$
+Como $u_i$ está em $C(A)$, existem no máximo $r$ vetores $u_i$'s independentes, onde $r=\text{posto}(A)$
 
 Note que sempre existe um $v_i$ para cada $u_i$
 
@@ -79,7 +79,7 @@ $$Av_2 = \sigma_2 u_2$$
 
 $$ \vdots$$
 
-$$Av_r = \sigma_r u_r $$
+$$Av_\gamma = \sigma_\gamma u_\gamma $$
 
 
 ## Em forma matricial{.scrollable}
@@ -92,95 +92,34 @@ Essas dimensões correspondem ao SVD reduzido
 
 ## Exemplo $AV = U\Sigma$
 
-$$
-\underbrace{
-  \begin{bmatrix}
-    3&0\\
-    4&5
-  \end{bmatrix}}_A 
-\underbrace{
-  \frac{1}{\sqrt{2}}
-  \begin{bmatrix}
-    1&-1\\
-    1&1
-  \end{bmatrix}}_V = 
-\underbrace{
-  \frac{1}{\sqrt{10}}
-  \begin{bmatrix}
-    1&-3\\
-    3&1
-  \end{bmatrix}}_U
-\underbrace{
-  \begin{bmatrix}
-    3\sqrt{5}&\\
-    &\sqrt{5}
-  \end{bmatrix}}_\Sigma
-$$
+$$\begin{bmatrix}3&0\\4&5\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}1&-1\\1&1\end{bmatrix} = \frac{1}{\sqrt{10}}\begin{bmatrix}1&-3\\3&1\end{bmatrix}\begin{bmatrix}3\sqrt{5}&\\&3\sqrt{5}\end{bmatrix} $$
 
 ## Tornando $V$ quadrada {.scrollable}
-
-Se o espaço coluna $C(A)$ tem dimensão $r$, existem $r$ vetores $\sigma_iu_i$ independentes que podem ser escritos como $Av_i$
+istem $r$ vetores $\sigma_iu_i$ independentes que podem ser escritos como $Av_i$
 
 Sabemos ainda que o espaço nulo $N(A)$ tem dimensão $n-r$
 
 Logo, existem $n-r$ vetores $v_j$ independentes tais que $Av_j=0$
 
-Esses vetores são orgotonais a $v_1,\ldots,v_r$, concatenando-os a $V$,
+Esses vetores são orgotonais a $v_1,\ldots,v_r$
 
 $$
-A_{m\times n}
-\underbrace{
-  \begin{bmatrix}
-    \vert & \ldots & \vert & & \vert& \ldots &\vert\\ 
-    v_1 &\ldots & v_r && v_{r+1} & \ldots & v_n\\
-    \vert & \ldots & \vert & & \vert& \ldots &\vert
-  \end{bmatrix}}_{n\times n}  = 
-\underbrace{
-  \begin{bmatrix}
-    \vert & \ldots & \vert\\
-    u_1 & \ldots & u_r\\
-    \vert & \ldots & \vert\\
-  \end{bmatrix}}_{m\times r}
-\underbrace{
-  \begin{bmatrix}
-    \sigma_1 &\ldots & 0 && 0 &\ldots & 0\\
-    \vdots &\ddots & \vdots && \vdots &\ddots & \vdots\\
-    0 &\ldots & \sigma_r && 0 &\ldots & 0\\
+A\underbrace{\begin{bmatrix}
+\vert & \ldots & \vert & & \vert& \ldots &\vert\\ 
+v_1 &\ldots & v_r && v_{r+1} & \ldots & v_n\\
+\vert & \ldots & \vert & & \vert& \ldots &\vert
+\end{bmatrix}}_{m\times n}  = 
+\underbrace{\begin{bmatrix}
+\vert & \ldots & \vert\\
+u_1 & \ldots & u_r\\
+\vert & \ldots & \vert\\
+\end{bmatrix}}_{m\times r}
+\underbrace{\begin{bmatrix}
+\sigma_1 &\ldots & 0 && 0 &\ldots & 0\\
+\vdots &\ddots & \vdots && \vdots &\ddots & \vdots\\
+0 &\ldots & \sigma_r && 0 &\ldots & 0\\
 \end{bmatrix}}_{r\times n}
 $$
-
-## Tornando $U$ quadrada {.scrollable}
-
-Como os vetores $u_i$ estão no $\mathbb R^m$, existem $m-r$ vetores independentes $u_j$ ortogonais a $u_1, \ldots, u_r$. Logo, podemos concatená-los a $U$, desde que sejam adicionadas $m-r$ linhas nulas em $\Sigma$: 
-
-$$
-A_{m\times n}
-\underbrace{
-  \begin{bmatrix}
-    \vert & \ldots & \vert & & \vert& \ldots &\vert\\ 
-    v_1 &\ldots & v_r && v_{r+1} & \ldots & v_n\\
-    \vert & \ldots & \vert & & \vert& \ldots &\vert
-  \end{bmatrix}}_{n\times n}  = 
-\underbrace{
-  \begin{bmatrix}
-    \vert & \ldots & \vert & & \vert& \ldots &\vert\\
-    u_1 & \ldots & u_r && u_{r+1} & \ldots & u_m\\
-    \vert & \ldots & \vert & & \vert& \ldots &\vert\\
-  \end{bmatrix}}_{m\times m}
-\underbrace{
-  \begin{bmatrix}
-    \sigma_1 &\ldots & 0 && 0 &\ldots & 0\\
-    \vdots &\ddots & \vdots && \vdots &\ddots & \vdots\\
-    0 &\ldots & \sigma_r && 0 &\ldots & 0\\ \\ 
-    0 &\ldots & 0 && 0 &\ldots & 0\\
-    \vdots &\ddots & \vdots && \vdots &\ddots & \vdots\\
-    0 &\ldots & 0 && 0 &\ldots & 0\\
-\end{bmatrix}}_{m\times n}
-$$
-
-:::{.callout-note}
-Essas dimensões correspondem ao SVD completo
-:::
 
 ## Em forma matricial
 
@@ -216,155 +155,36 @@ A decomposição $A = U\Sigma V^\top$ é chamada de *Singular Value Decompositio
 - Os vetores coluna de $U$ são os vetores singulares à esquerda
 - Os vetores coluna de $V$ (ou seja, linhas de $V^\top$) são os vetores singulares à direita
 
-## SVD em "pedaços"{.scrollable}
+## SVD em "pedaços"
 
 Podemos escrever a decomposição como soma de matrizes de posto 1
 
-$$ A = U \Sigma V^\top = ?$$
+$$ A = U \Sigma V^\top = \sigma_1u_1v_1^\top + \ldots + \sigma_r u_r v_r^\top$$
 
-$$
-A = 
-\begin{bmatrix}
-\vert &\vert & \ldots &\vert \\ 
-\sigma_1u_1 &  \sigma_2u_2 & \ldots & \sigma_ru_r \\ 
-\vert &\vert & \ldots &\vert \\ 
-\end{bmatrix}
-\begin{bmatrix}
-  - & v_1^\top & -\\
-  - & v_2^\top & -\\
-  - & \vdots  & -\\
-  - & v_r^\top & -\\
-\end{bmatrix}
-$$
+## Exemplo
 
-$$A = \sigma_1u_1v_1^\top + \ldots + \sigma_r u_r v_r^\top$$
+$$ \frac{3\sqrt{5}}{\sqrt{10}\sqrt{2}}\begin{bmatrix}1\\3\end{bmatrix}\begin{bmatrix}1 & 1\end{bmatrix} +\frac{\sqrt{5}}{\sqrt{10}\sqrt{2}}\begin{bmatrix}-3\\1\end{bmatrix}\begin{bmatrix}-1 & 1\end{bmatrix}$$
 
-:::{.callout-note}
-cada termo da soma acima é uma matriz $m\times n$
-
-Observe que $\begin{bmatrix}\sigma_1u_1\end{bmatrix}_{m\times 1}$ e que $\begin{bmatrix}-&v_1^\top&-\end{bmatrix}_{1\times n}$
-:::
-
-## Exemplo{.scrollable}
-
-$$ 
-\underbrace{\frac{3\sqrt{5}}{\sqrt{10}\sqrt{2}}
-\begin{bmatrix}
-  1\\3
-\end{bmatrix}
-\begin{bmatrix}
-  1 & 1
-\end{bmatrix}}_{\sigma_1u_1v_1^\top} 
-+
-\underbrace{\frac{\sqrt{5}}{\sqrt{10}\sqrt{2}}
-\begin{bmatrix}
-  -3\\1
-\end{bmatrix}
-\begin{bmatrix}
-  -1 & 1
-\end{bmatrix}}_{\sigma_2u_2v_2^\top}
-$$
-
-$$ = 
-\frac{3}{2}
-\begin{bmatrix}
-  1&1\\3&3
-\end{bmatrix} + 
-\frac{1}{2}
-\begin{bmatrix}
-  3&-3\\-1&1
-\end{bmatrix} = 
-\underbrace{\begin{bmatrix}
-  3&0\\4&5
-\end{bmatrix}}_{A}
-$$
-
-:::{.callout-note}
-Como os vetores $u_i$ e $v_i^\top$ têm norma 1, então $u_1$ será dividido por $\sqrt{10}$ e $v_1^\top$ por $\sqrt{2}$. Sendo assim, $\sigma_1 = 3\sqrt{5}$. O mesmo procedimento pode ser empregado no segundo termo para chegar a $\sigma_2=\sqrt{5}$.
-:::
-
+$$ = \frac{3}{2}\begin{bmatrix}1&1\\3&3\end{bmatrix} + \frac{1}{2}\begin{bmatrix}3&-3\\-1&1\end{bmatrix} = \begin{bmatrix}3&0\\4&5\end{bmatrix}$$
 
 ## Autovalores e valores singulares
 
-Existe alguma relação entre autovalores e valores singulares? 
-
+Existe alguma relação entre autovalores e valores singulares?
 
 $$A = U\Sigma V^\top$$
 $$S = X\Lambda X^{-1} $$
 
-## Autovalores e valores singulares{.scrollable}
+## Autovalores e valores singulares
 
 Existe alguma relação entre autovalores e valores singulares?
 
-Sim, 2 matrizes simétricas
+$$ A^\top A = ?$$
 
-$$A^\top A = ?$$
-
-Como $A = U\Sigma V^\top$
-
-\begin{align} 
-A^\top A &= (U\Sigma V^\top)^\top U\Sigma V^\top \\ 
-&= V\Sigma \underbrace{U^\top U}_{I}\Sigma V^\top \\
-&= V\Sigma^2 V^\top \\
-&= \underbrace{
-  \begin{bmatrix}
-  \vert & \ldots & \vert \\ 
-  v_1 & \ldots & v_r \\ 
-  \vert & \ldots & \vert
-  \end{bmatrix}}_{Q}
-  \underbrace{
-    \begin{bmatrix}
-    \sigma_1^2 && \\ 
-    & \ddots & \\
-    && \sigma_r^2
-    \end{bmatrix}}_{\Lambda}
-  \underbrace{\begin{bmatrix}
-  - & v_1 & - \\ 
-  - & \vdots &- \\ 
-  - & v_r & - 
-  \end{bmatrix}}_{Q}
-\end{align}
-
-Observe que como $S = A^\top A$, e $S$ é simétrica, então $S = Q\Lambda Q^\top$
-
-:::{.callout-note}
-Autovalores de $S = A^\top A$ são valores singulares de $A$ elevados ao quadrado e autovetores de $S$ são vetores vetores singulares direitos de $A$
-:::
-
-## Autovalores e valores singulares{.scrollable}
+## Autovalores e valores singulares
 
 Existe alguma relação entre autovalores e valores singulares?
 
 $$ AA^\top  = ?$$
-
-Como $A = U\Sigma V^\top$
-
-\begin{align} 
-A A^\top  &= U\Sigma V^\top (U\Sigma V^\top)^\top \\ 
-&=  U \Sigma \underbrace{V^\top V}_{I}\Sigma U^\top\\
-&= U\Sigma^2 U^\top\\
-&= \underbrace{
-  \begin{bmatrix}
-  \vert & \ldots & \vert \\ 
-  u_1 & \ldots & u_r \\ 
-  \vert & \ldots & \vert
-  \end{bmatrix}}_{Q}
-  \underbrace{
-    \begin{bmatrix}
-    \sigma_1^2 && \\ 
-    & \ddots & \\
-    && \sigma_r^2
-    \end{bmatrix}}_{\Lambda}
-  \underbrace{\begin{bmatrix}
-  - & u_1 & - \\ 
-  - & \vdots &- \\ 
-  - & u_r & - 
-  \end{bmatrix}}_{Q}
-\end{align}
-
-:::{.callout-note}
-Autovalores de $S = AA^\top$ são valores singulares de $A$ elevados ao quadrado e autovetores de $S$ são vetores vetores singulares esquerdos de $A$
-:::
 
 ## Autovalores e valores singulares
 
@@ -372,24 +192,14 @@ Autovalores de $S = AA^\top$ são valores singulares de $A$ elevados ao quadrado
 - $U$ possui os autovetores de $AA^\top$
 - O quadrado dos valores da diagonal de $\Sigma$ são os autovalores de $A^\top A$ e $AA^\top$
 
-## Decompondo A{.scrollable}
+## Decompondo A
 
 1. Calcule os autovetores $v$'s de $A^\top A$
 2. Faça $\sigma_k = \sqrt{\lambda_k}$
 3. Então calcule:   
 $$ u_k = \frac{Av_k}{\sigma_k} $$
 
-:::{.callout-note}
-Primeiro calcule a decomposição espectral de $\overbrace{A^\top A}^{n\times n} = \overbrace{Q}^{n\times n} \overbrace{\Lambda}^{n\times n} \overbrace{Q^\top}^{n\times n} = V \Lambda V^\top$
-
-Observe que $\Lambda = \begin{bmatrix}\sigma_1^2 &&&&& \\ & \ddots &&&& \\ && \sigma_r^2& &&&\\ &&&  0 &&\\  &&&&  \ddots & \\ &&&&& 0      \end{bmatrix}$
-
-Observe também qu $Av_i = \sigma_i u_i \Rightarrow u_i = \frac{Av_i}{\sigma_i}$ ou matricialmente $U = AV\Sigma^{-1}$
-
-:::
-
-
-## Geometria de SVD{.scrollable}
+## Geometria de SVD
 
 Vamos começar por uma matriz de rotação $R$:
 
@@ -414,10 +224,7 @@ $$R(\pi/4) =
 \end{bmatrix}
 $$
 
-
-
-
-## Geometria de SVD{.scrollable}
+## Geometria de SVD
 
 Vamos começar por uma matriz de rotação $R$:
 $$R(\pi/4)x = 
@@ -432,50 +239,16 @@ x_2
 = ?
 $$
 
-Ex: $x = \begin{bmatrix}3\\2\end{bmatrix} = 3\begin{bmatrix}1\\0\end{bmatrix}+ 2\begin{bmatrix}0\\1\end{bmatrix} = 3e_1 + 2e_2$
-
-$$Rx = c_1Re_1 + c_2Re_2 = 3Re_1 + 2Re_2$$
-
-$$
-Rx = 3 \begin{bmatrix}
-1/\sqrt{2} & -1/\sqrt{2}\\
-1/\sqrt{2}& 1/\sqrt{2}
-\end{bmatrix}\begin{bmatrix}
-1\\
-0
-\end{bmatrix} + 
-2 \begin{bmatrix}
-1/\sqrt{2} & -1/\sqrt{2}\\
-1/\sqrt{2}& 1/\sqrt{2}
-\end{bmatrix}\begin{bmatrix}
-0\\
-1
-\end{bmatrix}
-$$
-
-$$
-Rx = 3 \begin{bmatrix}
-1/\sqrt{2} \\ 1/\sqrt{2}
-\end{bmatrix} + 
-2 \begin{bmatrix}
--1/\sqrt{2}\\ 1/\sqrt{2}
-\end{bmatrix}
-$$
 ## Geometria de SVD
 
 O que significa multiplicar um vetor $v$ por $A$
 
-$$A v = (U\Sigma V^\top)v =  U \Sigma (V^\top v)$$
+$$A v = (U\Sigma V^\top)v =  $$
 
-:::{.callout-note}
-$V$ ($V^\top$) é uma matriz ortogonal. Produto de um vetor por uma matriz ortogonal pode ser vista como rotação ou reflexão. Lembrando que $V^\top$ é a inversa de $V$
-:::
 ## Geometria de SVD
 ![](figs/Aula10/geometria1.png){fig-align="center"}
 
 ## Geometria de SVD
-
-Agora vamos ver o que acontece quando usamos uma matriz de escala $\Sigma$:
 
 $$ \Sigma(\sigma_1, \sigma_2) = 
 \begin{bmatrix}
@@ -484,15 +257,11 @@ $$ \Sigma(\sigma_1, \sigma_2) =
 \end{bmatrix}
 $$
 
-$$ \Sigma(2.0, 0.5)x = 
+$$ \Sigma(2.0, 0.5) = 
 \begin{bmatrix}
 2.0 & 0\\
 0 & 0.5
 \end{bmatrix}
-\begin{bmatrix}
-x_1\\ 
-x_2
-\end{bmatrix} = \begin{bmatrix}2.0 x_1 \\ 0.5 x_2\end{bmatrix}
 $$
 
 ## Geometria de SVD

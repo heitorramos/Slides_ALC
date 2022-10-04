@@ -7,7 +7,7 @@
 <link href="Aula10_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula10_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula10_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.38">
+  <meta name="generator" content="quarto-1.0.37">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -348,7 +348,7 @@
 <li>Conhecer relação entre posto, valores singulares e vetores singulares esquerdos e direitos de uma matriz</li>
 <li>Saber transformar o SVD completo em SVD reduzido e vice-versa</li>
 <li>Entender o SVD como uma decomposição em soma de matrizes de posto 1</li>
-<li>Saber como calcular o SVD a partir da decomposição espectral de <span class="math inline">\(A^\top A\)</span> ou <span class="math inline">\(AA^\top\)</span> Entender a multiplicação <span class="math inline">\(Ax\)</span> da perspectiva geométrica do SVD</li>
+<li>Saber como calcular o SVD a partir da decomposição espectral de <span class="math inline">\(Aˆ\top A\)</span> ou <span class="math inline">\(AAˆ\top\)</span> Entender a multiplicação <span class="math inline">\(Ax\)</span> da perspectiva geométrica do SVD</li>
 </ol>
 </section>
 <section id="referências-adicionais" class="slide level2">
@@ -373,18 +373,18 @@
 <img data-src="figs/Aula10/tallthin.png" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Tall-thin matrix</p></section>
 <section id="e-como-ficam-os-autovetores" class="slide level2">
 <h2>E como ficam os autovetores?</h2>
-<p>Não é possível usarmos <span class="math display">\[Ax=\lambda x\]</span></p>
+<p>Não é possível usarmos <span class="math inline">\(Ax=\lambda x\)</span></p>
 <p>O que podemos fazer? Será que existem vetores escalares tais que</p>
 <p><span class="math display">\[Av_i = \sigma_i u_i \]</span></p>
 </section>
 <section id="quantos-vetoes-independentes-de-u_i" class="slide level2">
 <h2>Quantos vetoes independentes de <span class="math inline">\(u_i\)</span>?</h2>
-<p>Como <span class="math inline">\(u_i\)</span> está em <span class="math inline">\(C(A)\)</span>, existem no máximo <span class="math inline">\(r\)</span> vetores <span class="math inline">\(u_i\)</span>’s independentes, onde <span class="math inline">\(r=\text{posto}(A) \le \min\{m,n\}\)</span></p>
+<p>Como <span class="math inline">\(u_i\)</span> está em <span class="math inline">\(C(A)\)</span>, existem no máximo <span class="math inline">\(r\)</span> vetores <span class="math inline">\(u_i\)</span>’s independentes, onde <span class="math inline">\(r=\text{posto}(A)\)</span></p>
 <p>Note que sempre existe um <span class="math inline">\(v_i\)</span> para cada <span class="math inline">\(u_i\)</span></p>
 <p><span class="math display">\[Av_1 = \sigma_1 u_1\]</span></p>
 <p><span class="math display">\[Av_2 = \sigma_2 u_2\]</span></p>
 <p><span class="math display">\[ \vdots\]</span></p>
-<p><span class="math display">\[Av_r = \sigma_r u_r \]</span></p>
+<p><span class="math display">\[Av_\gamma = \sigma_\gamma u_\gamma \]</span></p>
 </section>
 <section id="em-forma-matricial" class="slide level2 scrollable">
 <h2>Em forma matricial</h2>
@@ -405,99 +405,31 @@
 </section>
 <section id="exemplo-av-usigma" class="slide level2">
 <h2>Exemplo <span class="math inline">\(AV = U\Sigma\)</span></h2>
-<p><span class="math display">\[
-\underbrace{
-  \begin{bmatrix}
-    3&amp;0\\
-    4&amp;5
-  \end{bmatrix}}_A
-\underbrace{
-  \frac{1}{\sqrt{2}}
-  \begin{bmatrix}
-    1&amp;-1\\
-    1&amp;1
-  \end{bmatrix}}_V =
-\underbrace{
-  \frac{1}{\sqrt{10}}
-  \begin{bmatrix}
-    1&amp;-3\\
-    3&amp;1
-  \end{bmatrix}}_U
-\underbrace{
-  \begin{bmatrix}
-    3\sqrt{5}&amp;\\
-    &amp;\sqrt{5}
-  \end{bmatrix}}_\Sigma
-\]</span></p>
+<p><span class="math display">\[\begin{bmatrix}3&amp;0\\4&amp;5\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}1&amp;-1\\1&amp;1\end{bmatrix} = \frac{1}{\sqrt{10}}\begin{bmatrix}1&amp;-3\\3&amp;1\end{bmatrix}\begin{bmatrix}3\sqrt{5}&amp;\\&amp;3\sqrt{5}\end{bmatrix} \]</span></p>
 </section>
 <section id="tornando-v-quadrada" class="slide level2 scrollable">
 <h2>Tornando <span class="math inline">\(V\)</span> quadrada</h2>
-<p>Se o espaço coluna <span class="math inline">\(C(A)\)</span> tem dimensão <span class="math inline">\(r\)</span>, existem <span class="math inline">\(r\)</span> vetores <span class="math inline">\(\sigma_iu_i\)</span> independentes que podem ser escritos como <span class="math inline">\(Av_i\)</span></p>
+<p>istem <span class="math inline">\(r\)</span> vetores <span class="math inline">\(\sigma_iu_i\)</span> independentes que podem ser escritos como <span class="math inline">\(Av_i\)</span></p>
 <p>Sabemos ainda que o espaço nulo <span class="math inline">\(N(A)\)</span> tem dimensão <span class="math inline">\(n-r\)</span></p>
 <p>Logo, existem <span class="math inline">\(n-r\)</span> vetores <span class="math inline">\(v_j\)</span> independentes tais que <span class="math inline">\(Av_j=0\)</span></p>
-<p>Esses vetores são orgotonais a <span class="math inline">\(v_1,\ldots,v_r\)</span>, concatenando-os a <span class="math inline">\(V\)</span>,</p>
+<p>Esses vetores são orgotonais a <span class="math inline">\(v_1,\ldots,v_r\)</span></p>
 <p><span class="math display">\[
-A_{m\times n}
-\underbrace{
-  \begin{bmatrix}
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert\\
-    v_1 &amp;\ldots &amp; v_r &amp;&amp; v_{r+1} &amp; \ldots &amp; v_n\\
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert
-  \end{bmatrix}}_{n\times n}  =
-\underbrace{
-  \begin{bmatrix}
-    \vert &amp; \ldots &amp; \vert\\
-    u_1 &amp; \ldots &amp; u_r\\
-    \vert &amp; \ldots &amp; \vert\\
-  \end{bmatrix}}_{m\times r}
-\underbrace{
-  \begin{bmatrix}
-    \sigma_1 &amp;\ldots &amp; 0 &amp;&amp; 0 &amp;\ldots &amp; 0\\
-    \vdots &amp;\ddots &amp; \vdots &amp;&amp; \vdots &amp;\ddots &amp; \vdots\\
-    0 &amp;\ldots &amp; \sigma_r &amp;&amp; 0 &amp;\ldots &amp; 0\\
+A\underbrace{\begin{bmatrix}
+\vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert\\
+v_1 &amp;\ldots &amp; v_r &amp;&amp; v_{r+1} &amp; \ldots &amp; v_n\\
+\vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert
+\end{bmatrix}}_{m\times n}  =
+\underbrace{\begin{bmatrix}
+\vert &amp; \ldots &amp; \vert\\
+u_1 &amp; \ldots &amp; u_r\\
+\vert &amp; \ldots &amp; \vert\\
+\end{bmatrix}}_{m\times r}
+\underbrace{\begin{bmatrix}
+\sigma_1 &amp;\ldots &amp; 0 &amp;&amp; 0 &amp;\ldots &amp; 0\\
+\vdots &amp;\ddots &amp; \vdots &amp;&amp; \vdots &amp;\ddots &amp; \vdots\\
+0 &amp;\ldots &amp; \sigma_r &amp;&amp; 0 &amp;\ldots &amp; 0\\
 \end{bmatrix}}_{r\times n}
 \]</span></p>
-</section>
-<section id="tornando-u-quadrada" class="slide level2 scrollable">
-<h2>Tornando <span class="math inline">\(U\)</span> quadrada</h2>
-<p>Como os vetores <span class="math inline">\(u_i\)</span> estão no <span class="math inline">\(\mathbb R^m\)</span>, existem <span class="math inline">\(m-r\)</span> vetores independentes <span class="math inline">\(u_j\)</span> ortogonais a <span class="math inline">\(u_1, \ldots, u_r\)</span>. Logo, podemos concatená-los a <span class="math inline">\(U\)</span>, desde que sejam adicionadas <span class="math inline">\(m-r\)</span> linhas nulas em <span class="math inline">\(\Sigma\)</span>:</p>
-<p><span class="math display">\[
-A_{m\times n}
-\underbrace{
-  \begin{bmatrix}
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert\\
-    v_1 &amp;\ldots &amp; v_r &amp;&amp; v_{r+1} &amp; \ldots &amp; v_n\\
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert
-  \end{bmatrix}}_{n\times n}  =
-\underbrace{
-  \begin{bmatrix}
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert\\
-    u_1 &amp; \ldots &amp; u_r &amp;&amp; u_{r+1} &amp; \ldots &amp; u_m\\
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert\\
-  \end{bmatrix}}_{m\times m}
-\underbrace{
-  \begin{bmatrix}
-    \sigma_1 &amp;\ldots &amp; 0 &amp;&amp; 0 &amp;\ldots &amp; 0\\
-    \vdots &amp;\ddots &amp; \vdots &amp;&amp; \vdots &amp;\ddots &amp; \vdots\\
-    0 &amp;\ldots &amp; \sigma_r &amp;&amp; 0 &amp;\ldots &amp; 0\\ \\
-    0 &amp;\ldots &amp; 0 &amp;&amp; 0 &amp;\ldots &amp; 0\\
-    \vdots &amp;\ddots &amp; \vdots &amp;&amp; \vdots &amp;\ddots &amp; \vdots\\
-    0 &amp;\ldots &amp; 0 &amp;&amp; 0 &amp;\ldots &amp; 0\\
-\end{bmatrix}}_{m\times n}
-\]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Essas dimensões correspondem ao SVD completo</p>
-</div>
-</div>
-</div>
 </section>
 <section id="em-forma-matricial-1" class="slide level2">
 <h2>Em forma matricial</h2>
@@ -546,85 +478,15 @@ A_{m\times n}
 <li>Os vetores coluna de <span class="math inline">\(V\)</span> (ou seja, linhas de <span class="math inline">\(V^\top\)</span>) são os vetores singulares à direita</li>
 </ul>
 </section>
-<section id="svd-em-pedaços" class="slide level2 scrollable">
+<section id="svd-em-pedaços" class="slide level2">
 <h2>SVD em “pedaços”</h2>
 <p>Podemos escrever a decomposição como soma de matrizes de posto 1</p>
-<p><span class="math display">\[ A = U \Sigma V^\top = ?\]</span></p>
-<p><span class="math display">\[
-A =
-\begin{bmatrix}
-\vert &amp;\vert &amp; \ldots &amp;\vert \\
-\sigma_1u_1 &amp;  \sigma_2u_2 &amp; \ldots &amp; \sigma_ru_r \\
-\vert &amp;\vert &amp; \ldots &amp;\vert \\
-\end{bmatrix}
-\begin{bmatrix}
-  - &amp; v_1^\top &amp; -\\
-  - &amp; v_2^\top &amp; -\\
-  - &amp; \vdots  &amp; -\\
-  - &amp; v_r^\top &amp; -\\
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[A = \sigma_1u_1v_1^\top + \ldots + \sigma_r u_r v_r^\top\]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>cada termo da soma acima é uma matriz <span class="math inline">\(m\times n\)</span></p>
-<p>Observe que <span class="math inline">\(\begin{bmatrix}\sigma_1u_1\end{bmatrix}_{m\times 1}\)</span> e que <span class="math inline">\(\begin{bmatrix}-&amp;v_1^\top&amp;-\end{bmatrix}_{1\times n}\)</span></p>
-</div>
-</div>
-</div>
+<p><span class="math display">\[ A = U \Sigma V^\top = \sigma_1u_1v_1^\top + \ldots + \sigma_r u_r v_r^\top\]</span></p>
 </section>
-<section id="exemplo" class="slide level2 scrollable">
+<section id="exemplo" class="slide level2">
 <h2>Exemplo</h2>
-<p><span class="math display">\[
-\underbrace{\frac{3\sqrt{5}}{\sqrt{10}\sqrt{2}}
-\begin{bmatrix}
-  1\\3
-\end{bmatrix}
-\begin{bmatrix}
-  1 &amp; 1
-\end{bmatrix}}_{\sigma_1u_1v_1^\top}
-+
-\underbrace{\frac{\sqrt{5}}{\sqrt{10}\sqrt{2}}
-\begin{bmatrix}
-  -3\\1
-\end{bmatrix}
-\begin{bmatrix}
-  -1 &amp; 1
-\end{bmatrix}}_{\sigma_2u_2v_2^\top}
-\]</span></p>
-<p><span class="math display">\[ =
-\frac{3}{2}
-\begin{bmatrix}
-  1&amp;1\\3&amp;3
-\end{bmatrix} +
-\frac{1}{2}
-\begin{bmatrix}
-  3&amp;-3\\-1&amp;1
-\end{bmatrix} =
-\underbrace{\begin{bmatrix}
-  3&amp;0\\4&amp;5
-\end{bmatrix}}_{A}
-\]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Como os vetores <span class="math inline">\(u_i\)</span> e <span class="math inline">\(v_i^\top\)</span> têm norma 1, então <span class="math inline">\(u_1\)</span> será dividido por <span class="math inline">\(\sqrt{10}\)</span> e <span class="math inline">\(v_1^\top\)</span> por <span class="math inline">\(\sqrt{2}\)</span>. Sendo assim, <span class="math inline">\(\sigma_1 = 3\sqrt{5}\)</span>. O mesmo procedimento pode ser empregado no segundo termo para chegar a <span class="math inline">\(\sigma_2=\sqrt{5}\)</span>.</p>
-</div>
-</div>
-</div>
+<p><span class="math display">\[ \frac{3\sqrt{5}}{\sqrt{10}\sqrt{2}}\begin{bmatrix}1\\3\end{bmatrix}\begin{bmatrix}1 &amp; 1\end{bmatrix} +\frac{\sqrt{5}}{\sqrt{10}\sqrt{2}}\begin{bmatrix}-3\\1\end{bmatrix}\begin{bmatrix}-1 &amp; 1\end{bmatrix}\]</span></p>
+<p><span class="math display">\[ = \frac{3}{2}\begin{bmatrix}1&amp;1\\3&amp;3\end{bmatrix} + \frac{1}{2}\begin{bmatrix}3&amp;-3\\-1&amp;1\end{bmatrix} = \begin{bmatrix}3&amp;0\\4&amp;5\end{bmatrix}\]</span></p>
 </section>
 <section id="autovalores-e-valores-singulares" class="slide level2">
 <h2>Autovalores e valores singulares</h2>
@@ -632,89 +494,15 @@ A =
 <p><span class="math display">\[A = U\Sigma V^\top\]</span></p>
 <p><span class="math display">\[S = X\Lambda X^{-1} \]</span></p>
 </section>
-<section id="autovalores-e-valores-singulares-1" class="slide level2 scrollable">
+<section id="autovalores-e-valores-singulares-1" class="slide level2">
 <h2>Autovalores e valores singulares</h2>
 <p>Existe alguma relação entre autovalores e valores singulares?</p>
-<p>Sim, 2 matrizes simétricas</p>
-<p><span class="math display">\[A^\top A = ?\]</span></p>
-<p>Como <span class="math inline">\(A = U\Sigma V^\top\)</span></p>
-<p><span class="math display">\[\begin{align}
-A^\top A &amp;= (U\Sigma V^\top)^\top U\Sigma V^\top \\
-&amp;= V\Sigma \underbrace{U^\top U}_{I}\Sigma V^\top \\
-&amp;= V\Sigma^2 V^\top \\
-&amp;= \underbrace{
-  \begin{bmatrix}
-  \vert &amp; \ldots &amp; \vert \\
-  v_1 &amp; \ldots &amp; v_r \\
-  \vert &amp; \ldots &amp; \vert
-  \end{bmatrix}}_{Q}
-  \underbrace{
-    \begin{bmatrix}
-    \sigma_1^2 &amp;&amp; \\
-    &amp; \ddots &amp; \\
-    &amp;&amp; \sigma_r^2
-    \end{bmatrix}}_{\Lambda}
-  \underbrace{\begin{bmatrix}
-  - &amp; v_1 &amp; - \\
-  - &amp; \vdots &amp;- \\
-  - &amp; v_r &amp; -
-  \end{bmatrix}}_{Q}
-\end{align}\]</span></p>
-<p>Observe que como <span class="math inline">\(S = A^\top A\)</span>, e <span class="math inline">\(S\)</span> é simétrica, então <span class="math inline">\(S = Q\Lambda Q^\top\)</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Autovalores de <span class="math inline">\(S = A^\top A\)</span> são valores singulares de <span class="math inline">\(A\)</span> elevados ao quadrado e autovetores de <span class="math inline">\(S\)</span> são vetores vetores singulares direitos de <span class="math inline">\(A\)</span></p>
-</div>
-</div>
-</div>
+<p><span class="math display">\[ A^\top A = ?\]</span></p>
 </section>
-<section id="autovalores-e-valores-singulares-2" class="slide level2 scrollable">
+<section id="autovalores-e-valores-singulares-2" class="slide level2">
 <h2>Autovalores e valores singulares</h2>
 <p>Existe alguma relação entre autovalores e valores singulares?</p>
 <p><span class="math display">\[ AA^\top  = ?\]</span></p>
-<p>Como <span class="math inline">\(A = U\Sigma V^\top\)</span></p>
-<p><span class="math display">\[\begin{align}
-A A^\top  &amp;= U\Sigma V^\top (U\Sigma V^\top)^\top \\
-&amp;=  U \Sigma \underbrace{V^\top V}_{I}\Sigma U^\top\\
-&amp;= U\Sigma^2 U^\top\\
-&amp;= \underbrace{
-  \begin{bmatrix}
-  \vert &amp; \ldots &amp; \vert \\
-  u_1 &amp; \ldots &amp; u_r \\
-  \vert &amp; \ldots &amp; \vert
-  \end{bmatrix}}_{Q}
-  \underbrace{
-    \begin{bmatrix}
-    \sigma_1^2 &amp;&amp; \\
-    &amp; \ddots &amp; \\
-    &amp;&amp; \sigma_r^2
-    \end{bmatrix}}_{\Lambda}
-  \underbrace{\begin{bmatrix}
-  - &amp; u_1 &amp; - \\
-  - &amp; \vdots &amp;- \\
-  - &amp; u_r &amp; -
-  \end{bmatrix}}_{Q}
-\end{align}\]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Autovalores de <span class="math inline">\(S = AA^\top\)</span> são valores singulares de <span class="math inline">\(A\)</span> elevados ao quadrado e autovetores de <span class="math inline">\(S\)</span> são vetores vetores singulares esquerdos de <span class="math inline">\(A\)</span></p>
-</div>
-</div>
-</div>
 </section>
 <section id="autovalores-e-valores-singulares-3" class="slide level2">
 <h2>Autovalores e valores singulares</h2>
@@ -724,7 +512,7 @@ A A^\top  &amp;= U\Sigma V^\top (U\Sigma V^\top)^\top \\
 <li>O quadrado dos valores da diagonal de <span class="math inline">\(\Sigma\)</span> são os autovalores de <span class="math inline">\(A^\top A\)</span> e <span class="math inline">\(AA^\top\)</span></li>
 </ul>
 </section>
-<section id="decompondo-a" class="slide level2 scrollable">
+<section id="decompondo-a" class="slide level2">
 <h2>Decompondo A</h2>
 <ol type="1">
 <li>Calcule os autovetores <span class="math inline">\(v\)</span>’s de <span class="math inline">\(A^\top A\)</span></li>
@@ -732,23 +520,8 @@ A A^\top  &amp;= U\Sigma V^\top (U\Sigma V^\top)^\top \\
 <li>Então calcule:</li>
 </ol>
 <p><span class="math display">\[ u_k = \frac{Av_k}{\sigma_k} \]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Primeiro calcule a decomposição espectral de <span class="math inline">\(\overbrace{A^\top A}^{n\times n} = \overbrace{Q}^{n\times n} \overbrace{\Lambda}^{n\times n} \overbrace{Q^\top}^{n\times n} = V \Lambda V^\top\)</span></p>
-<p>Observe que <span class="math inline">\(\Lambda = \begin{bmatrix}\sigma_1^2 &amp;&amp;&amp;&amp;&amp; \\ &amp; \ddots &amp;&amp;&amp;&amp; \\ &amp;&amp; \sigma_r^2&amp; &amp;&amp;&amp;\\ &amp;&amp;&amp; 0 &amp;&amp;\\ &amp;&amp;&amp;&amp; \ddots &amp; \\ &amp;&amp;&amp;&amp;&amp; 0 \end{bmatrix}\)</span></p>
-<p>Observe também qu <span class="math inline">\(Av_i = \sigma_i u_i \Rightarrow u_i = \frac{Av_i}{\sigma_i}\)</span> ou matricialmente <span class="math inline">\(U = AV\Sigma^{-1}\)</span></p>
-</div>
-</div>
-</div>
 </section>
-<section id="geometria-de-svd" class="slide level2 scrollable">
+<section id="geometria-de-svd" class="slide level2">
 <h2>Geometria de SVD</h2>
 <p>Vamos começar por uma matriz de rotação <span class="math inline">\(R\)</span>:</p>
 <p><span class="math display">\[R(\theta) =
@@ -770,7 +543,7 @@ A A^\top  &amp;= U\Sigma V^\top (U\Sigma V^\top)^\top \\
 \end{bmatrix}
 \]</span></p>
 </section>
-<section id="geometria-de-svd-1" class="slide level2 scrollable">
+<section id="geometria-de-svd-1" class="slide level2">
 <h2>Geometria de SVD</h2>
 <p>Vamos começar por uma matriz de rotação <span class="math inline">\(R\)</span>:</p>
 <p><span class="math display">\[R(\pi/4)x =
@@ -784,50 +557,11 @@ x_2
 \end{bmatrix}
 = ?
 \]</span></p>
-<p>Ex: <span class="math inline">\(x = \begin{bmatrix}3\\2\end{bmatrix} = 3\begin{bmatrix}1\\0\end{bmatrix}+ 2\begin{bmatrix}0\\1\end{bmatrix} = 3e_1 + 2e_2\)</span></p>
-<p><span class="math display">\[Rx = c_1Re_1 + c_2Re_2 = 3Re_1 + 2Re_2\]</span></p>
-<p><span class="math display">\[
-Rx = 3 \begin{bmatrix}
-1/\sqrt{2} &amp; -1/\sqrt{2}\\
-1/\sqrt{2}&amp; 1/\sqrt{2}
-\end{bmatrix}\begin{bmatrix}
-1\\
-0
-\end{bmatrix} +
-2 \begin{bmatrix}
-1/\sqrt{2} &amp; -1/\sqrt{2}\\
-1/\sqrt{2}&amp; 1/\sqrt{2}
-\end{bmatrix}\begin{bmatrix}
-0\\
-1
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[
-Rx = 3 \begin{bmatrix}
-1/\sqrt{2} \\ 1/\sqrt{2}
-\end{bmatrix} +
-2 \begin{bmatrix}
--1/\sqrt{2}\\ 1/\sqrt{2}
-\end{bmatrix}
-\]</span></p>
 </section>
 <section id="geometria-de-svd-2" class="slide level2">
 <h2>Geometria de SVD</h2>
 <p>O que significa multiplicar um vetor <span class="math inline">\(v\)</span> por <span class="math inline">\(A\)</span></p>
-<p><span class="math display">\[A v = (U\Sigma V^\top)v =  U \Sigma (V^\top v)\]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math inline">\(V\)</span> (<span class="math inline">\(V^\top\)</span>) é uma matriz ortogonal. Produto de um vetor por uma matriz ortogonal pode ser vista como rotação ou reflexão. Lembrando que <span class="math inline">\(V^\top\)</span> é a inversa de <span class="math inline">\(V\)</span></p>
-</div>
-</div>
-</div>
+<p><span class="math display">\[A v = (U\Sigma V^\top)v =  \]</span></p>
 </section>
 <section id="geometria-de-svd-3" class="slide level2">
 <h2>Geometria de SVD</h2>
@@ -835,22 +569,17 @@ Rx = 3 \begin{bmatrix}
 <img data-src="figs/Aula10/geometria1.png" class="r-stretch quarto-figure-center"></section>
 <section id="geometria-de-svd-4" class="slide level2">
 <h2>Geometria de SVD</h2>
-<p>Agora vamos ver o que acontece quando usamos uma matriz de escala <span class="math inline">\(\Sigma\)</span>:</p>
 <p><span class="math display">\[ \Sigma(\sigma_1, \sigma_2) =
 \begin{bmatrix}
 \sigma_1 &amp; 0\\
 0 &amp; \sigma_2
 \end{bmatrix}
 \]</span></p>
-<p><span class="math display">\[ \Sigma(2.0, 0.5)x =
+<p><span class="math display">\[ \Sigma(2.0, 0.5) =
 \begin{bmatrix}
 2.0 &amp; 0\\
 0 &amp; 0.5
 \end{bmatrix}
-\begin{bmatrix}
-x_1\\
-x_2
-\end{bmatrix} = \begin{bmatrix}2.0 x_1 \\ 0.5 x_2\end{bmatrix}
 \]</span></p>
 </section>
 <section id="geometria-de-svd-5" class="slide level2">
