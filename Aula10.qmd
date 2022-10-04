@@ -469,6 +469,10 @@ $$A v = (U\Sigma V^\top)v =  U \Sigma (V^\top v)$$
 
 :::{.callout-note}
 $V$ ($V^\top$) é uma matriz ortogonal. Produto de um vetor por uma matriz ortogonal pode ser vista como rotação ou reflexão. Lembrando que $V^\top$ é a inversa de $V$
+
+Observe que $Ve_1 = v_1$ e $Ve_2 = v_2$
+
+Observe também que $V^\top v_1 = \begin{bmatrix}-&v_1^\top & - \\ - & v_2^\top & -\end{bmatrix}\begin{bmatrix}v_1\end{bmatrix} = \begin{bmatrix}1\\0\end{bmatrix}$. Lembrando que $v_1$ é ortogonal a $v_2$
 :::
 ## Geometria de SVD
 ![](figs/Aula10/geometria1.png){fig-align="center"}
