@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="Aula10_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Aula10_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Aula10_files/libs/quarto-html/popper.min.js"></script>
-<script src="Aula10_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Aula10_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Aula10_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="Aula10_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="Aula11_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Aula11_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Aula11_files/libs/quarto-html/popper.min.js"></script>
+<script src="Aula11_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Aula11_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Aula11_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Aula11_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.0.38">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
@@ -14,8 +14,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Aula10_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Aula10_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="Aula11_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Aula11_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -24,13 +24,13 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
   </style>
-  <link rel="stylesheet" href="Aula10_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link href="Aula10_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Aula10_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Aula10_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Aula10_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="Aula10_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="Aula10_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="Aula11_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="Aula11_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Aula11_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Aula11_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Aula11_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="Aula11_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="Aula11_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -322,7 +322,7 @@
 
 <section id="title-slide" class="center">
   <h1 class="title">Álgebra Linear Computacional</h1>
-  <p class="subtitle">Aula 10: Decomposição por valores singulares</p>
+  <p class="subtitle">Aula 11: SVD e aproximação de matrizes</p>
   <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
 </section>
 
@@ -345,49 +345,26 @@
 <section id="objetivos-de-aprendizagem" class="slide level2">
 <h2>Objetivos de aprendizagem</h2>
 <ol type="1">
-<li>Conhecer relação entre posto, valores singulares e vetores singulares esquerdos e direitos de uma matriz</li>
-<li>Saber transformar o SVD completo em SVD reduzido e vice-versa</li>
-<li>Entender o SVD como uma decomposição em soma de matrizes de posto 1</li>
-<li>Saber como calcular o SVD a partir da decomposição espectral de <span class="math inline">\(A^\top A\)</span> ou <span class="math inline">\(AA^\top\)</span> Entender a multiplicação <span class="math inline">\(Ax\)</span> da perspectiva geométrica do SVD</li>
+<li>Entender fundamentos da aplicação do SVD para sistemas de recomendação</li>
+<li>Calcular representação latente de usuários e filmes</li>
+<li>Saber fazer a compressão de imagens usando SVD</li>
+<li>Entender a relação entre qualidade da imagem comprimida e seu espectro (conjunto de valores singulares)</li>
+<li>Saber encontrar aproximação de matrizes (ou de elementos específicos) usando SVD truncado</li>
+<li>Conhecer e entender o Teorema de Eckart-Young</li>
 </ol>
 </section>
 <section id="referências-adicionais" class="slide level2">
 <h2>Referências adicionais</h2>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Singular_value_decomposition">Wikipedia</a></li>
-<li>YouTube:
+<li>YouTube
 <ul>
-<li><a href="https://www.youtube.com/watch?v=gXbThCXjZFM&amp;list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv">Steve Brunton’s series on SVD (U. Washington)</a></li>
-<li><a href="https://web.mit.edu/be.400/www/SVD/Singular_Value_Decomposition.htm">Exemplo numérico de SVD</a></li>
+<li><a href="https://youtu.be/K38wVcdNuFc">Jure Leskovec: SVD for Recommender Systems</a></li>
+<li><a href="https://youtu.be/H7qMMudo3e8">Steve Brunton: SVD for Image Compression (Python)</a></li>
 </ul></li>
 </ul>
 </section>
-<section id="e-quando-a-matriz-não-é-quadrada" class="slide level2">
-<h2>E quando a matriz não é quadrada?</h2>
-<p><span class="math display">\[A = \begin{bmatrix}1&amp;2\\3&amp;4\\5&amp;6\end{bmatrix}\]</span></p>
-<p><span class="math display">\[y = \begin{bmatrix}1&amp;2\\3&amp;4\\5&amp;6\end{bmatrix}\begin{bmatrix}10\\100\end{bmatrix} = 10\begin{bmatrix}1\\3\\5\end{bmatrix}+100\begin{bmatrix}2\\4\\6\end{bmatrix} = y\in \mathbb R^3\]</span></p>
-</section>
-<section id="exemplo-de-uma-matriz-tall-thin" class="slide level2">
-<h2>Exemplo de uma matriz tall-thin</h2>
-
-<img data-src="figs/Aula10/tallthin.png" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Tall-thin matrix</p></section>
-<section id="e-como-ficam-os-autovetores" class="slide level2">
-<h2>E como ficam os autovetores?</h2>
-<p>Não é possível usarmos <span class="math display">\[Ax=\lambda x\]</span></p>
-<p>O que podemos fazer? Será que existem vetores escalares tais que</p>
-<p><span class="math display">\[Av_i = \sigma_i u_i \]</span></p>
-</section>
-<section id="quantos-vetores-independentes-de-u_i" class="slide level2 scrollable">
-<h2>Quantos vetores independentes de <span class="math inline">\(u_i\)</span>?</h2>
-<p>Como <span class="math inline">\(u_i\)</span> está em <span class="math inline">\(C(A)\)</span>, existem no máximo <span class="math inline">\(r\)</span> vetores <span class="math inline">\(u_i\)</span>’s independentes, onde <span class="math inline">\(r=\text{posto}(A) \le \min\{m,n\}\)</span></p>
-<p>Note que sempre existe um <span class="math inline">\(v_i\)</span> para cada <span class="math inline">\(u_i\)</span></p>
-<p><span class="math display">\[Av_1 = \sigma_1 u_1\]</span></p>
-<p><span class="math display">\[Av_2 = \sigma_2 u_2\]</span></p>
-<p><span class="math display">\[ \vdots\]</span></p>
-<p><span class="math display">\[Av_r = \sigma_r u_r \]</span></p>
-</section>
-<section id="em-forma-matricial" class="slide level2 scrollable">
-<h2>Em forma matricial</h2>
+<section id="av-usigma" class="slide level2 scrollable">
+<h2><span class="math inline">\(AV = U\Sigma\)</span></h2>
 <p><span class="math display">\[A\begin{bmatrix}\vert &amp; \vert &amp; \ldots &amp; \vert \\ v_1 &amp; v_2 &amp; \ldots &amp; v_r\\\vert &amp; \vert &amp; \ldots &amp; \vert  \end{bmatrix} = \begin{bmatrix}\vert &amp; \vert &amp; \ldots &amp; \vert \\ u_1 &amp; u_2 &amp; \ldots &amp; u_r\\\vert &amp; \vert &amp; \ldots &amp; \vert \end{bmatrix}\begin{bmatrix}\sigma_1 &amp; &amp; \\ &amp;\ddots&amp;\\&amp;&amp;\sigma_r\end{bmatrix} \]</span></p>
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
@@ -399,36 +376,10 @@
 </div>
 <div class="callout-content">
 <p>Essas dimensões correspondem ao SVD reduzido</p>
+<p>Precisamos transformar <span class="math inline">\(U\)</span> e <span class="math inline">\(V\)</span> em matrizes quadradas</p>
 </div>
 </div>
 </div>
-</section>
-<section id="exemplo-av-usigma" class="slide level2">
-<h2>Exemplo <span class="math inline">\(AV = U\Sigma\)</span></h2>
-<p><span class="math display">\[
-\underbrace{
-  \begin{bmatrix}
-    3&amp;0\\
-    4&amp;5
-  \end{bmatrix}}_A
-\underbrace{
-  \frac{1}{\sqrt{2}}
-  \begin{bmatrix}
-    1&amp;-1\\
-    1&amp;1
-  \end{bmatrix}}_V =
-\underbrace{
-  \frac{1}{\sqrt{10}}
-  \begin{bmatrix}
-    1&amp;-3\\
-    3&amp;1
-  \end{bmatrix}}_U
-\underbrace{
-  \begin{bmatrix}
-    3\sqrt{5}&amp;\\
-    &amp;\sqrt{5}
-  \end{bmatrix}}_\Sigma
-\]</span></p>
 </section>
 <section id="tornando-v-quadrada" class="slide level2 scrollable">
 <h2>Tornando <span class="math inline">\(V\)</span> quadrada</h2>
@@ -499,13 +450,6 @@ A_{m\times n}
 </div>
 </div>
 </section>
-<section id="em-forma-matricial-1" class="slide level2">
-<h2>Em forma matricial</h2>
-<p>Se todos os vetores <span class="math inline">\(v\)</span>’s forem ortogonais (e eles são), podemos reescrever como</p>
-<p><span class="math display">\[ AV = U \Sigma\]</span></p>
-<p><span class="math display">\[ AVV^{-1} = U \Sigma V^{-1}\]</span></p>
-<p><span class="math display">\[ A = U \Sigma V^\top\]</span></p>
-</section>
 <section id="do-svd-completo-ao-reduzido" class="slide level2 scrollable">
 <h2>Do SVD completo ao reduzido</h2>
 <div class="callout callout-note callout-captioned callout-style-default">
@@ -537,335 +481,269 @@ A_{m\times n}
 </div>
 </div>
 </section>
-<section id="decomposição-por-valor-singular" class="slide level2">
-<h2>Decomposição por valor singular</h2>
-<p>A decomposição <span class="math inline">\(A = U\Sigma V^\top\)</span> é chamada de <em>Singular Value Decomposition (SVD)</em></p>
+<section id="exemplo-de-uma-matriz-tall-thin" class="slide level2">
+<h2>Exemplo de uma matriz tall-thin</h2>
+
+<img data-src="figs/Aula10/tallthin.png" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Tall-thin matrix</p></section>
+<section id="aprendendo-sobre-espaço-latente" class="slide level2">
+<h2>Aprendendo sobre espaço latente</h2>
+
+<img data-src="figs/Aula11/espaco_latente.png" style="width:120.0%" class="r-stretch"></section>
+<section id="usuário-e-conceito" class="slide level2">
+<h2>Usuário e conceito</h2>
+
+<img data-src="figs/Aula11/espaco_latente2.png" style="width:120.0%" class="r-stretch"></section>
+<section id="filme-e-conceito" class="slide level2">
+<h2>Filme e conceito</h2>
+
+<img data-src="figs/Aula11/espaco_latente3.png" style="width:120.0%" class="r-stretch"></section>
+<section id="peso-de-um-conceito" class="slide level2">
+<h2>Peso de um conceito</h2>
+
+<img data-src="figs/Aula11/espaco_latente4.png" style="width:120.0%" class="r-stretch"></section>
+<section id="exemplo-um-pouco-mais-real" class="slide level2">
+<h2>Exemplo um pouco mais real</h2>
+<p>Note que existem usuários que vão assistir filmes de vários tipos (isso pode ser apenas ruído) <img data-src="figs/Aula11/espaco_latente5.png" style="width:120.0%"></p>
+</section>
+<section id="exemplo-um-pouco-mais-real-1" class="slide level2">
+<h2>Exemplo um pouco mais real</h2>
+
+<img data-src="figs/Aula11/espaco_latente6.png" style="width:120.0%" class="r-stretch"></section>
+<section id="um-sistema-de-recomendação-simples" class="slide level2">
+<h2>Um sistema de recomendação simples</h2>
 <ul>
-<li>Os escalares na matriz <span class="math inline">\(\Sigma\)</span> são os valores singulares</li>
-<li>Os vetores coluna de <span class="math inline">\(U\)</span> são os vetores singulares à esquerda</li>
-<li>Os vetores coluna de <span class="math inline">\(V\)</span> (ou seja, linhas de <span class="math inline">\(V^\top\)</span>) são os vetores singulares à direita</li>
+<li>Temos <span class="math inline">\(k\)</span> perfis de usuários
+<ul>
+<li>Cada usuário será o resultado da combinação linear desses perfis (comédia, drama, ação)</li>
+<li>A matrix “verdadeira” então terá posto <span class="math inline">\(k\)</span>!</li>
+</ul></li>
+<li>Pergunta
+<ul>
+<li>Como recomendar um filme para um determinado usuário?</li>
+</ul></li>
 </ul>
 </section>
-<section id="svd-em-pedaços" class="slide level2 scrollable">
-<h2>SVD em “pedaços”</h2>
-<p>Podemos escrever a decomposição como soma de matrizes de posto 1</p>
-<p><span class="math display">\[ A = U \Sigma V^\top = ?\]</span></p>
-<p><span class="math display">\[
-A =
-\begin{bmatrix}
-\vert &amp;\vert &amp; \ldots &amp;\vert \\
-\sigma_1u_1 &amp;  \sigma_2u_2 &amp; \ldots &amp; \sigma_ru_r \\
-\vert &amp;\vert &amp; \ldots &amp;\vert \\
-\end{bmatrix}
-\begin{bmatrix}
-  - &amp; v_1^\top &amp; -\\
-  - &amp; v_2^\top &amp; -\\
-  - &amp; \vdots  &amp; -\\
-  - &amp; v_r^\top &amp; -\\
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[A = \sigma_1u_1v_1^\top + \ldots + \sigma_r u_r v_r^\top\]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>cada termo da soma acima é uma matriz <span class="math inline">\(m\times n\)</span></p>
-<p>Observe que <span class="math inline">\(\begin{bmatrix}\sigma_1u_1\end{bmatrix}_{m\times 1}\)</span> e que <span class="math inline">\(\begin{bmatrix}-&amp;v_1^\top&amp;-\end{bmatrix}_{1\times n}\)</span></p>
-</div>
-</div>
-</div>
+<section id="um-sistema-de-recomendação-simples-1" class="slide level2">
+<h2>Um sistema de recomendação simples</h2>
+
+<img data-src="figs/Aula11/SR1.png" style="width:120.0%" class="r-stretch"></section>
+<section id="um-sistema-de-recomendação-simples-2" class="slide level2">
+<h2>Um sistema de recomendação simples</h2>
+<p>Como estamos supondo termos <span class="math inline">\(k=2\)</span> perfis</p>
+
+<img data-src="figs/Aula11/SR2.png" style="width:120.0%" class="r-stretch"></section>
+<section id="um-sistema-de-recomendação-simples-3" class="slide level2 scrollable">
+<h2>Um sistema de recomendação simples</h2>
+<p>Ao realizar a multiplicação (após remover o menor valor singular)</p>
+
+<img data-src="figs/Aula11/SR3.png" style="width:80.0%" class="r-stretch"></section>
+<section id="compressão-de-imagens" class="slide level2">
+<h2>Compressão de imagens</h2>
+<p><span class="math inline">\(\approx 80\%\)</span> da internet é imagem!</p>
+
+<img data-src="figs/Aula11/imagem_web.png" style="width:70.0%" class="r-stretch quarto-figure-center"></section>
+<section id="compressão-de-imagens-1" class="slide level2">
+<h2>Compressão de imagens</h2>
+<p>Dimensões: (2560 x 1600) Número de bytes: 4.096.000 (imagem em tons de cinza - 1 byte por pixel)</p>
+
+<img data-src="figs/Aula11/cat.jpeg" style="width:70.0%" class="r-stretch quarto-figure-center"></section>
+<section id="compressão-de-imagens-2" class="slide level2">
+<h2>Compressão de imagens</h2>
+<p>Podemos tentar aproximar a matriz <span class="math inline">\(A\)</span> que representa a imagem por <span class="math inline">\(A_k\)</span></p>
+<p><span class="math display">\[ A_k = \sigma_1 u_1 v_1^\top + \ldots + \sigma_k u_k v_k^\top\]</span></p>
 </section>
-<section id="exemplo" class="slide level2 scrollable">
-<h2>Exemplo</h2>
-<p><span class="math display">\[
-\underbrace{\frac{3\sqrt{5}}{\sqrt{10}\sqrt{2}}
-\begin{bmatrix}
-  1\\3
-\end{bmatrix}
-\begin{bmatrix}
-  1 &amp; 1
-\end{bmatrix}}_{\sigma_1u_1v_1^\top}
-+
-\underbrace{\frac{\sqrt{5}}{\sqrt{10}\sqrt{2}}
-\begin{bmatrix}
-  -3\\1
-\end{bmatrix}
-\begin{bmatrix}
-  -1 &amp; 1
-\end{bmatrix}}_{\sigma_2u_2v_2^\top}
-\]</span></p>
-<p><span class="math display">\[ =
-\frac{3}{2}
-\begin{bmatrix}
-  1&amp;1\\3&amp;3
-\end{bmatrix} +
-\frac{1}{2}
-\begin{bmatrix}
-  3&amp;-3\\-1&amp;1
-\end{bmatrix} =
-\underbrace{\begin{bmatrix}
-  3&amp;0\\4&amp;5
-\end{bmatrix}}_{A}
-\]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Como os vetores <span class="math inline">\(u_i\)</span> e <span class="math inline">\(v_i^\top\)</span> têm norma 1, então <span class="math inline">\(u_1\)</span> será dividido por <span class="math inline">\(\sqrt{10}\)</span> e <span class="math inline">\(v_1^\top\)</span> por <span class="math inline">\(\sqrt{2}\)</span>. Sendo assim, <span class="math inline">\(\sigma_1 = 3\sqrt{5}\)</span>. O mesmo procedimento pode ser empregado no segundo termo para chegar a <span class="math inline">\(\sigma_2=\sqrt{5}\)</span>.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="autovalores-e-valores-singulares" class="slide level2">
-<h2>Autovalores e valores singulares</h2>
-<p>Existe alguma relação entre autovalores e valores singulares?</p>
-<p><span class="math display">\[A = U\Sigma V^\top\]</span></p>
-<p><span class="math display">\[S = X\Lambda X^{-1} \]</span></p>
-</section>
-<section id="autovalores-e-valores-singulares-1" class="slide level2 scrollable">
-<h2>Autovalores e valores singulares</h2>
-<p>Existe alguma relação entre autovalores e valores singulares?</p>
-<p>Sim, 2 matrizes simétricas</p>
-<p><span class="math display">\[A^\top A = ?\]</span></p>
-<p>Como <span class="math inline">\(A = U\Sigma V^\top\)</span></p>
-<p><span class="math display">\[\begin{align}
-A^\top A &amp;= (U\Sigma V^\top)^\top U\Sigma V^\top \\
-&amp;= V\Sigma \underbrace{U^\top U}_{I}\Sigma V^\top \\
-&amp;= V\Sigma^2 V^\top \\
-&amp;= \underbrace{
-  \begin{bmatrix}
-  \vert &amp; \ldots &amp; \vert \\
-  v_1 &amp; \ldots &amp; v_r \\
-  \vert &amp; \ldots &amp; \vert
-  \end{bmatrix}}_{Q}
-  \underbrace{
-    \begin{bmatrix}
-    \sigma_1^2 &amp;&amp; \\
-    &amp; \ddots &amp; \\
-    &amp;&amp; \sigma_r^2
-    \end{bmatrix}}_{\Lambda}
-  \underbrace{\begin{bmatrix}
-  - &amp; v_1 &amp; - \\
-  - &amp; \vdots &amp;- \\
-  - &amp; v_r &amp; -
-  \end{bmatrix}}_{Q}
-\end{align}\]</span></p>
-<p>Observe que como <span class="math inline">\(S = A^\top A\)</span>, e <span class="math inline">\(S\)</span> é simétrica, então <span class="math inline">\(S = Q\Lambda Q^\top\)</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Autovalores de <span class="math inline">\(S = A^\top A\)</span> são valores singulares de <span class="math inline">\(A\)</span> elevados ao quadrado e autovetores de <span class="math inline">\(S\)</span> são vetores vetores singulares direitos de <span class="math inline">\(A\)</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="autovalores-e-valores-singulares-2" class="slide level2 scrollable">
-<h2>Autovalores e valores singulares</h2>
-<p>Existe alguma relação entre autovalores e valores singulares?</p>
-<p><span class="math display">\[ AA^\top  = ?\]</span></p>
-<p>Como <span class="math inline">\(A = U\Sigma V^\top\)</span></p>
-<p><span class="math display">\[\begin{align}
-A A^\top  &amp;= U\Sigma V^\top (U\Sigma V^\top)^\top \\
-&amp;=  U \Sigma \underbrace{V^\top V}_{I}\Sigma U^\top\\
-&amp;= U\Sigma^2 U^\top\\
-&amp;= \underbrace{
-  \begin{bmatrix}
-  \vert &amp; \ldots &amp; \vert \\
-  u_1 &amp; \ldots &amp; u_r \\
-  \vert &amp; \ldots &amp; \vert
-  \end{bmatrix}}_{Q}
-  \underbrace{
-    \begin{bmatrix}
-    \sigma_1^2 &amp;&amp; \\
-    &amp; \ddots &amp; \\
-    &amp;&amp; \sigma_r^2
-    \end{bmatrix}}_{\Lambda}
-  \underbrace{\begin{bmatrix}
-  - &amp; u_1 &amp; - \\
-  - &amp; \vdots &amp;- \\
-  - &amp; u_r &amp; -
-  \end{bmatrix}}_{Q}
-\end{align}\]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Autovalores de <span class="math inline">\(S = AA^\top\)</span> são valores singulares de <span class="math inline">\(A\)</span> elevados ao quadrado e autovetores de <span class="math inline">\(S\)</span> são vetores vetores singulares esquerdos de <span class="math inline">\(A\)</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="autovalores-e-valores-singulares-3" class="slide level2">
-<h2>Autovalores e valores singulares</h2>
+<section id="compressão-de-imagens-3" class="slide level2">
+<h2>Compressão de imagens</h2>
 <ul>
-<li><span class="math inline">\(V\)</span> possui os autovetores de <span class="math inline">\(A^\top A\)</span></li>
-<li><span class="math inline">\(U\)</span> possui os autovetores de <span class="math inline">\(AA^\top\)</span></li>
-<li>O quadrado dos valores da diagonal de <span class="math inline">\(\Sigma\)</span> são os autovalores de <span class="math inline">\(A^\top A\)</span> e <span class="math inline">\(AA^\top\)</span></li>
+<li><p>U, sigma, Vt = np.linalg.svd(img_gray)</p>
+<ul>
+<li><p>U.shape: 1600 x 1600</p></li>
+<li><p>Vt.shape: 2560 x 2560</p></li>
+<li><p>sigma.shape: 1600 x 1600 (sendo apenas 1600 valores diferentes de zero)</p></li>
+</ul></li>
 </ul>
 </section>
-<section id="decompondo-a" class="slide level2 scrollable">
-<h2>Decompondo A</h2>
-<ol type="1">
-<li>Calcule os autovetores <span class="math inline">\(v\)</span>’s de <span class="math inline">\(A^\top A\)</span></li>
-<li>Faça <span class="math inline">\(\sigma_k = \sqrt{\lambda_k}\)</span></li>
-<li>Então calcule:</li>
-</ol>
-<p><span class="math display">\[ u_k = \frac{Av_k}{\sigma_k} \]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Primeiro calcule a decomposição espectral de <span class="math inline">\(\overbrace{A^\top A}^{n\times n} = \overbrace{Q}^{n\times n} \overbrace{\Lambda}^{n\times n} \overbrace{Q^\top}^{n\times n} = V \Lambda V^\top\)</span></p>
-<p>Observe que <span class="math inline">\(\Lambda = \begin{bmatrix}\sigma_1^2 &amp;&amp;&amp;&amp;&amp; \\ &amp; \ddots &amp;&amp;&amp;&amp; \\ &amp;&amp; \sigma_r^2&amp; &amp;&amp;&amp;\\ &amp;&amp;&amp; 0 &amp;&amp;\\ &amp;&amp;&amp;&amp; \ddots &amp; \\ &amp;&amp;&amp;&amp;&amp; 0 \end{bmatrix}\)</span></p>
-<p>Observe também qu <span class="math inline">\(Av_i = \sigma_i u_i \Rightarrow u_i = \frac{Av_i}{\sigma_i}\)</span> ou matricialmente <span class="math inline">\(U = AV\Sigma^{-1}\)</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="geometria-de-svd" class="slide level2 scrollable">
-<h2>Geometria de SVD</h2>
-<p>Vamos começar por uma matriz de rotação <span class="math inline">\(R\)</span>:</p>
-<p><span class="math display">\[R(\theta) =
-\begin{bmatrix}
-\cos(\theta) &amp; -\sin(\theta)\\
-\sin(\theta) &amp; \cos(\theta)
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[R(\pi/4) =
-\begin{bmatrix}
-\cos(\pi/4) &amp; -\sin(\pi/4)\\
-\sin(\pi/4) &amp; \cos(\pi/4)
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[R(\pi/4) =
-\begin{bmatrix}
-1/\sqrt{2} &amp; -1/\sqrt{2}\\
-1/\sqrt{2}&amp; 1/\sqrt{2}
-\end{bmatrix}
-\]</span></p>
-</section>
-<section id="geometria-de-svd-1" class="slide level2 scrollable">
-<h2>Geometria de SVD</h2>
-<p>Vamos começar por uma matriz de rotação <span class="math inline">\(R\)</span>:</p>
-<p><span class="math display">\[R(\pi/4)x =
-\begin{bmatrix}
-1/\sqrt{2} &amp; -1/\sqrt{2}\\
-1/\sqrt{2}&amp; 1/\sqrt{2}
-\end{bmatrix}
-\begin{bmatrix}
-x_1\\
-x_2
-\end{bmatrix}
-= ?
-\]</span></p>
-<p>Ex: <span class="math inline">\(x = \begin{bmatrix}3\\2\end{bmatrix} = 3\begin{bmatrix}1\\0\end{bmatrix}+ 2\begin{bmatrix}0\\1\end{bmatrix} = 3e_1 + 2e_2\)</span></p>
-<p><span class="math display">\[Rx = c_1Re_1 + c_2Re_2 = 3Re_1 + 2Re_2\]</span></p>
-<p><span class="math display">\[
-Rx = 3 \begin{bmatrix}
-1/\sqrt{2} &amp; -1/\sqrt{2}\\
-1/\sqrt{2}&amp; 1/\sqrt{2}
-\end{bmatrix}\begin{bmatrix}
-1\\
-0
-\end{bmatrix} +
-2 \begin{bmatrix}
-1/\sqrt{2} &amp; -1/\sqrt{2}\\
-1/\sqrt{2}&amp; 1/\sqrt{2}
-\end{bmatrix}\begin{bmatrix}
-0\\
-1
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[
-Rx = 3 \begin{bmatrix}
-1/\sqrt{2} \\ 1/\sqrt{2}
-\end{bmatrix} +
-2 \begin{bmatrix}
--1/\sqrt{2}\\ 1/\sqrt{2}
-\end{bmatrix}
-\]</span></p>
-</section>
-<section id="geometria-de-svd-2" class="slide level2">
-<h2>Geometria de SVD</h2>
-<p>O que significa multiplicar um vetor <span class="math inline">\(v\)</span> por <span class="math inline">\(A\)</span></p>
-<p><span class="math display">\[A v = (U\Sigma V^\top)v =  U \Sigma (V^\top v)\]</span></p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math inline">\(V\)</span> (<span class="math inline">\(V^\top\)</span>) é uma matriz ortogonal. Produto de um vetor por uma matriz ortogonal pode ser vista como rotação ou reflexão. Lembrando que <span class="math inline">\(V^\top\)</span> é a inversa de <span class="math inline">\(V\)</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="geometria-de-svd-3" class="slide level2">
-<h2>Geometria de SVD</h2>
+<section id="compressão-de-imagens-4" class="slide level2">
+<h2>Compressão de imagens</h2>
+<ul>
+<li>A primeira aproximação seria <span class="math inline">\(A_1\)</span></li>
+</ul>
 
-<img data-src="figs/Aula10/geometria1.png" class="r-stretch quarto-figure-center"></section>
-<section id="geometria-de-svd-4" class="slide level2">
-<h2>Geometria de SVD</h2>
-<p>Agora vamos ver o que acontece quando usamos uma matriz de escala <span class="math inline">\(\Sigma\)</span>:</p>
-<p><span class="math display">\[ \Sigma(\sigma_1, \sigma_2) =
-\begin{bmatrix}
-\sigma_1 &amp; 0\\
-0 &amp; \sigma_2
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[ \Sigma(2.0, 0.5)x =
-\begin{bmatrix}
-2.0 &amp; 0\\
-0 &amp; 0.5
-\end{bmatrix}
-\begin{bmatrix}
-x_1\\
-x_2
-\end{bmatrix} = \begin{bmatrix}2.0 x_1 \\ 0.5 x_2\end{bmatrix}
-\]</span></p>
+<img data-src="figs/Aula11/A1.png" style="width:70.0%" class="r-stretch quarto-figure-center"></section>
+<section id="compressão-de-imagens-5" class="slide level2 scrollable">
+<h2>Compressão de imagens</h2>
+<p>Como saber se ficou bom?</p>
+<p><span class="math display">\[ RMSE = \sqrt{\frac{1}{MN}\sum_{m=0}^{M-1}\sum_{n=0}^{N-1}\left(I_1(m,n)-I2(m,n)\right)^2}\]</span></p>
+<p><span class="math display">\[RMSE(AK_1) = 131361.669\]</span></p>
+<p><span class="math display">\[RMSE(AK_5) = 80013.826\]</span></p>
+<p><span class="math display">\[RMSE(AK_{20}) = 56411.098\]</span></p>
+<p><span class="math display">\[ RSME(AK_{100}) = 21429.215\]</span></p>
 </section>
-<section id="geometria-de-svd-5" class="slide level2">
-<h2>Geometria de SVD</h2>
-
-<img data-src="figs/Aula10/geometria2.png" class="r-stretch quarto-figure-center"></section>
-<section id="geometria-de-svd-6" class="slide level2">
-<h2>Geometria de SVD</h2>
+<section id="como-ficaram-as-imagens" class="slide level2 scrollable">
+<h2>Como ficaram as imagens?</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figs/Aula10/geometria3.png"></p>
+<p><img data-src="figs/Aula11/A1.png"></p>
+<p></p><figcaption><span class="math inline">\(A_1\)</span></figcaption><p></p>
 </figure>
 </div>
-<p><img src="common/UFMG_HEAD.png" class="slide-logo"></p>
-<div class="footer footer-default">
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula11/A5.png"></p>
+<p></p><figcaption><span class="math inline">\(A_5\)</span></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula11/A20.png"></p>
+<p></p><figcaption><span class="math inline">\(A_{20}\)</span></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula11/A100.png"></p>
+<p></p><figcaption><span class="math inline">\(A_{100}\)</span></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula11/cat.jpeg"></p>
+<p></p><figcaption>Original</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="como-ficaram-os-erros-visualmente" class="slide level2 scrollable">
+<h2>Como ficaram os erros (visualmente)?</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula11/rmseAk1.png"></p>
+<p></p><figcaption><span class="math inline">\(A_1\)</span></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula11/rmseAk5.png"></p>
+<p></p><figcaption><span class="math inline">\(A_5\)</span></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula11/rmseAk20.png"></p>
+<p></p><figcaption><span class="math inline">\(A_{20}\)</span></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula11/rmseAk100.png"></p>
+<p></p><figcaption><span class="math inline">\(A_{100}\)</span></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="até-quando-precisamos-ir" class="slide level2">
+<h2>Até quando precisamos ir?</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="figs/Aula11/escolha_k1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="figs/Aula11/escolhak_log.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="até-quando-precisamos-ir-1" class="slide level2 scrollable">
+<h2>Até quando precisamos ir?</h2>
+<p>Regra do dedão: cortar de maneira a mantar entre 80-90% da “energia”</p>
+<p><span class="math display">\[t = \frac{\sum_{i=1}^k \sigma_i^2}{\sum_{i=1}^n \sigma_i^2} \]</span></p>
+
+<img data-src="figs/Aula11/energia.png" style="width:110.0%" class="r-stretch quarto-figure-center"><p class="caption">Energia</p></section>
+<section id="resultados-com-a_400" class="slide level2 scrollable">
+<h2>Resultados com <span class="math inline">\(A_{400}\)</span></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula11/A400.png"></p>
+<p></p><figcaption><span class="math inline">\(A_{400}\)</span></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula11/cat.jpeg" width="500"></p>
+<p></p><figcaption>Original</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><span class="math display">\[RMSE(A_{400}) = 10969.759\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula11/rmseAk400.png"></p>
+<p></p><figcaption>Diff</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="qual-foi-a-taxa-de-compressão" class="slide level2">
+<h2>Qual foi a taxa de compressão?</h2>
+<p><span class="math display">\[T_x = (400 * 1600 + 400 + 400*2560)/(1600*2560)\]</span></p>
+<p><span class="math display">\[T_x = 40,63\%\]</span></p>
+<p>Razão de compressão: <span class="math inline">\((1600*2560)/(400 * 1600 + 400 + 400*2560) = 2,46\)</span> vezes</p>
+<p>Parece pouco?</p>
+</section>
+<section id="aproximação-da-matriz" class="slide level2">
+<h2>Aproximação da matriz</h2>
+<p>É possível encontrar uma matriz <span class="math inline">\(B\)</span> com posto <span class="math inline">\(k\)</span> que seja mais próxima de <span class="math inline">\(A\)</span> e que não seja <span class="math inline">\(A_k\)</span>?</p>
+</section>
+<section id="aproximação-de-matriz" class="slide level2">
+<h2>Aproximação de matriz</h2>
+<p>Eckart-Young: Suponha <span class="math inline">\(B\)</span> uma matriz de posto <span class="math inline">\(k\)</span>. Então <span class="math inline">\(B\)</span> será uma aproximação no máximo tão boa quanto</p>
+<p><span class="math display">\[A_k = \sigma_1u_1v_1^\top + \ldots + \sigma_ku_kv_k^\top \]</span></p>
+</section>
+<section id="aproximação-de-matriz-1" class="slide level2">
+<h2>Aproximação de matriz</h2>
+<p>Se <span class="math inline">\(B\)</span> tem posto <span class="math inline">\(k\)</span>, então</p>
+<p><span class="math display">\[ \Vert A - B \Vert \ge \Vert A - A_k \Vert\]</span></p>
+<p>Norma de Frobenius:</p>
+<p><span class="math display">\[ \Vert A \Vert_F =  \sqrt{\vert a_{11}\vert^2 + \vert a_{12}\vert^2 +\ldots + \vert a_{mn}\vert^2}\]</span></p>
+
+<img src="common/UFMG_HEAD.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://heitorramos.github.io/alc.html" class="uri">https://heitorramos.github.io/alc.html</a></p>
 </div>
 </section>
@@ -873,20 +751,20 @@ x_2
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Aula10_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="Aula11_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Aula10_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Aula10_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Aula10_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Aula10_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Aula10_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="Aula10_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="Aula11_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Aula11_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Aula11_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Aula11_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Aula11_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="Aula11_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Aula10_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Aula10_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Aula10_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Aula10_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="Aula11_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Aula11_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Aula11_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Aula11_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
