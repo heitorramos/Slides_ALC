@@ -477,6 +477,14 @@ Observe também que $V^\top v_1 = \begin{bmatrix}-&v_1^\top & - \\ - & v_2^\top 
 ## Geometria de SVD
 ![](figs/Aula10/geometria1.png){fig-align="center"}
 
+:::{.callout-note}
+um vetor $v$ pode ser escrito como $v = c_1v_1+c_2v_2 + \ldots$
+
+$V^\top v = \begin{bmatrix}c_1\\c_2\end{bmatrix}$
+
+:::
+
+
 ## Geometria de SVD
 
 Agora vamos ver o que acontece quando usamos uma matriz de escala $\Sigma$:
