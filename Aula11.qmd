@@ -324,7 +324,7 @@ Norma de Frobenius:
 
 $$ \Vert A \Vert_F =  \sqrt{\vert a_{11}\vert^2 + \vert a_{12}\vert^2 +\ldots + \vert a_{mn}\vert^2}$$
 
-:::{.callout-note}
+<!-- :::{.callout-note}
 $\Vert M \Vert_2$ é o maior valor singular $\sigma_1$
-:::
+::: -->
 
