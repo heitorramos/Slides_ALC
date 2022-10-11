@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="Aula11_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Aula11_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Aula11_files/libs/quarto-html/popper.min.js"></script>
-<script src="Aula11_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Aula11_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Aula11_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="Aula11_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+<script src="Aula12_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Aula12_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Aula12_files/libs/quarto-html/popper.min.js"></script>
+<script src="Aula12_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Aula12_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Aula12_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Aula12_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.38">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Aula11_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Aula11_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="Aula12_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Aula12_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -24,13 +24,13 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
   </style>
-  <link rel="stylesheet" href="Aula11_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link href="Aula11_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Aula11_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Aula11_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Aula11_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="Aula11_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="Aula11_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="Aula12_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="Aula12_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Aula12_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Aula12_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Aula12_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="Aula12_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="Aula12_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -322,7 +322,7 @@
 
 <section id="title-slide" class="center">
   <h1 class="title">Álgebra Linear Computacional</h1>
-  <p class="subtitle">Aula 11: SVD e aproximação de matrizes</p>
+  <p class="subtitle">Aula 12: Análise de Componentes Principais</p>
   <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
 </section>
 
@@ -342,30 +342,158 @@
 </div>
 </div>
 </section>
-<section id="objetivos-de-aprendizagem" class="slide level2">
+<section id="objetivos-de-aprendizagem" class="slide level2 scrollable">
 <h2>Objetivos de aprendizagem</h2>
-<ol type="1">
-<li>Entender fundamentos da aplicação do SVD para sistemas de recomendação</li>
-<li>Calcular representação latente de usuários e filmes</li>
-<li>Saber fazer a compressão de imagens usando SVD</li>
-<li>Entender a relação entre qualidade da imagem comprimida e seu espectro (conjunto de valores singulares)</li>
-<li>Saber encontrar aproximação de matrizes (ou de elementos específicos) usando SVD truncado</li>
-<li>Conhecer e entender o Teorema de Eckart-Young</li>
-</ol>
+<ul>
+<li>Entender o que é o PCA e como ele é usado na análise de dados</li>
+<li>Entender por que a dimensionalidade dos dados pode ser reduzida com pouca perda em certos casos (e.g., quando há - correlação entre vars)</li>
+<li>Conhecer e saber executar passos de pré-processamento necessários ao PCA</li>
+<li>Saber calcular projeções ortogonais em hiperplanos</li>
+<li>Saber utilizar o teorema da decomposição ortogonal</li>
+<li>Entender significado das componentes principais e saber utilizá-las pra recuperar dado original</li>
+<li>Entender como o gráfico da variância explicada pode ser usado para definir o número de PCs</li>
+</ul>
 </section>
 <section id="referências-adicionais" class="slide level2">
 <h2>Referências adicionais</h2>
 <ul>
-<li>YouTube
+<li>StatQuest on YouTube
 <ul>
-<li><a href="https://youtu.be/K38wVcdNuFc">Jure Leskovec: SVD for Recommender Systems</a></li>
-<li><a href="https://youtu.be/H7qMMudo3e8">Steve Brunton: SVD for Image Compression (Python)</a></li>
+<li><a href="https://youtu.be/HMOI_lkzW08">PCA main ideas in 5min</a></li>
+<li><a href="https://youtu.be/FgakZw6K1QQ">PCA, Step-by-step</a></li>
 </ul></li>
 </ul>
 </section>
-<section id="av-usigma" class="slide level2 scrollable">
-<h2><span class="math inline">\(AV = U\Sigma\)</span></h2>
-<p><span class="math display">\[A\begin{bmatrix}\vert &amp; \vert &amp; \ldots &amp; \vert \\ v_1 &amp; v_2 &amp; \ldots &amp; v_r\\\vert &amp; \vert &amp; \ldots &amp; \vert  \end{bmatrix} = \begin{bmatrix}\vert &amp; \vert &amp; \ldots &amp; \vert \\ u_1 &amp; u_2 &amp; \ldots &amp; u_r\\\vert &amp; \vert &amp; \ldots &amp; \vert \end{bmatrix}\begin{bmatrix}\sigma_1 &amp; &amp; \\ &amp;\ddots&amp;\\&amp;&amp;\sigma_r\end{bmatrix} \]</span></p>
+<section id="pca" class="slide level2">
+<h2>PCA</h2>
+<p>Técnica de análise de dados para <strong>redução de dimensionalidade</strong></p>
+
+<img data-src="figs/Aula12/reducao.png" class="r-stretch quarto-figure-center"><p class="caption">redução de dimensionalidade</p><p>PCA transforma <em>um conjunto de variáveis possivelmente correlacionadas</em> em um <em>conjunto menor de variáveis</em> chamadas <strong>componentes principais</strong></p>
+</section>
+<section id="para-que-pca-é-usado" class="slide level2">
+<h2>Para que PCA é usado?</h2>
+<ul>
+<li><p>Visualização: normalmente é o primeiro passo ao analisar datasets de alta dimensionalidade</p></li>
+<li><p>Acelerar treinamento de modelos de aprendizado de máquina</p></li>
+</ul>
+</section>
+<section id="pca-visão-geral" class="slide level2">
+<h2>PCA: visão geral</h2>
+<ul>
+<li>Transforma o espaço vetorial dos dados para reduzir a dimensionalidade de grandes conjuntos de dados.</li>
+<li>Usando uma projeção, dados originais (muitas variáveis) podem ser interpretados facilmente (poucas variáveis)
+<ul>
+<li>E.g.: encontrar tendências, padrões e <em>outliers</em></li>
+</ul></li>
+</ul>
+</section>
+<section id="exemplo-automóveis" class="slide level2">
+<h2>Exemplo: automóveis</h2>
+<ul>
+<li>Dataset <span class="math inline">\(\{x^{(i)}: i=1,\ldots,m\}\)</span> de atributos de <span class="math inline">\(m\)</span> tipos de automóveis</li>
+<li>Atributos: velocidade máxima, raio de giro, etc.</li>
+<li>Seja <span class="math inline">\(x^{(i)} \in \mathbb R^n\)</span>, i.e., <span class="math inline">\(n\)</span> atributos</li>
+<li>Suponha que entre atributos, temos vel. max. em km/h e mph</li>
+<li>Estes atributos são quase linearmente dependentes (erros de arredondamento).
+<ul>
+<li>Ou seja: dados estão aproximadamente em espaço de n-1 dimensões!</li>
+</ul></li>
+</ul>
+</section>
+<section id="exemplo-pilotos-de-helicóptero-de-controle-remoto" class="slide level2 scrollable">
+<h2>Exemplo: pilotos de helicóptero de controle remoto</h2>
+<ul>
+<li><span class="math inline">\(x_1^{(i)}\)</span> é uma medida da habilidade do piloto <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(x_2^{(i)}\)</span> é uma medida de quanto ele gosta de voar</li>
+<li>Suponha que apenas pilotos que treinam bastante, aqueles que realmente gostam de voar, se tornam bons pilotos
+<ul>
+<li>Logo, <span class="math inline">\(x_1\)</span> e <span class="math inline">\(x_2\)</span> estão fortemente correlacionados.</li>
+</ul></li>
+<li>Podemos conjecturar que os dados estão em um eixo “diagonal”, com apenas um pouco de ruído saindo do eixo. <img data-src="figs/Aula12/helicoptero.png" data-fig-align="center" alt="x_1 vs x_2"></li>
+</ul>
+<div class="callout callout-important callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>Como determinar a direção de <span class="math inline">\(u_1\)</span>?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="exemplos" class="slide level2 scrollable">
+<h2>Exemplos</h2>
+
+<img data-src="figs/Aula12/iris.png" class="r-stretch quarto-figure-center"></section>
+<section id="exemplos-1" class="slide level2 scrollable">
+<h2>Exemplos</h2>
+
+<img data-src="figs/Aula12/cars.png" class="r-stretch quarto-figure-center"><div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><a href="https://plot.ly/r/3d-scatter-plots/">Visualização em 3D</a></p>
+</div>
+</div>
+</div>
+</section>
+<section id="nuvem-de-pontos" class="slide level2 scrollable">
+<h2>Nuvem de pontos</h2>
+
+<img data-src="figs/Aula12/nuvem.png" class="r-stretch quarto-figure-center"></section>
+<section id="projetando-em-eixos" class="slide level2 scrollable">
+<h2>Projetando em eixos</h2>
+
+<img data-src="figs/Aula12/scatter.png" class="r-stretch quarto-figure-center"></section>
+<section id="rodando-os-eixos-com-cuidado" class="slide level2 scrollable">
+<h2>Rodando os eixos com cuidado</h2>
+
+<img data-src="figs/Aula12/girando_eixos.png" class="r-stretch quarto-figure-center"><div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><a href="http://www.joyofdata.de/public/pca-3d/">Visualização em 3D</a></p>
+</div>
+</div>
+</div>
+</section>
+<section id="ideia" class="slide level2 scrollable">
+<h2>Ideia</h2>
+<ul>
+<li>Pontos <span class="math inline">\((x,y,z) \in \mathbb R^3\)</span></li>
+<li>Entretanto, eles parecem viver num espaço de dimensão menor, num plano bi-dimensional</li>
+<li>O plano não está alinhado com os eixos coordenados</li>
+<li>Num novo sistema de coordenadas, podemos usar apenas DUAS coordenadas para representar os pontos (de forma aproximada)</li>
+</ul>
+</section>
+<section id="de-3d-para-2d" class="slide level2 scrollable">
+<h2>De 3D para 2D</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="figs/Aula12/3D2D.png"></p>
+</div><div class="column" style="width:60%;">
+<ul>
+<li>Veja o novo sistema de coordenadas no gráfico</li>
+<li>Ele está “torto”com respeito ao sistema cartesiano da figura</li>
+<li>Neste NOVO sistema, podemos representar cada ponto de forma aproximada:</li>
+<li>Podemos usar as duas coordenadas dos eixos verde e azul e ignorar a coordenada do eixo vermelho</li>
+</ul>
+</div>
+</div>
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -375,67 +503,70 @@
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>Essas dimensões correspondem ao SVD reduzido</p>
-<p>Precisamos transformar <span class="math inline">\(U\)</span> e <span class="math inline">\(V\)</span> em matrizes quadradas</p>
+<ul>
+<li>Nem sempre será possível obter uma boa aproximação.</li>
+<li>Será preciso checar quando isto será possível.</li>
+<li>Já veremos como fazer isto…</li>
+</ul>
 </div>
 </div>
 </div>
 </section>
-<section id="tornando-v-quadrada" class="slide level2 scrollable">
-<h2>Tornando <span class="math inline">\(V\)</span> quadrada</h2>
-<p>Se o espaço coluna <span class="math inline">\(C(A)\)</span> tem dimensão <span class="math inline">\(r\)</span>, existem <span class="math inline">\(r\)</span> vetores <span class="math inline">\(\sigma_iu_i\)</span> independentes que podem ser escritos como <span class="math inline">\(Av_i\)</span></p>
-<p>Sabemos ainda que o espaço nulo <span class="math inline">\(N(A)\)</span> tem dimensão <span class="math inline">\(n-r\)</span></p>
-<p>Logo, existem <span class="math inline">\(n-r\)</span> vetores <span class="math inline">\(v_j\)</span> independentes tais que <span class="math inline">\(Av_j=0\)</span></p>
-<p>Esses vetores são orgotonais a <span class="math inline">\(v_1,\ldots,v_r\)</span>, concatenando-os a <span class="math inline">\(V\)</span>,</p>
+<section id="como-fazer-a-redução" class="slide level2 scrollable">
+<h2>Como fazer a redução?</h2>
+<ul>
+<li>Não sabemos de antemão se é possível reduzir a dimensão da informação no vetor <span class="math inline">\(x\)</span> sem perder qualidade da representação.</li>
+<li>Se for possível, também não sabemos de antemão de quanto podemos reduzir a dimensão inicial:</li>
+<li>Podemos reduzir em 3, 5, 10, 40, 120 dimensões??</li>
+<li>Como responder a isto de forma automática, sem gastar um segundo de nosso cérebro?</li>
+<li>E mais, de forma ótima: nem gastando muito seu cérebro você vai conseguir algo melhor</li>
+</ul>
+</section>
+<section id="centrando-os-pontos" class="slide level2 scrollable">
+<h2>Centrando os pontos</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="figs/Aula12/centrando_pontos.png"></p>
+</div><div class="column" style="width:60%;">
 <p><span class="math display">\[
-A_{m\times n}
-\underbrace{
-  \begin{bmatrix}
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert\\
-    v_1 &amp;\ldots &amp; v_r &amp;&amp; v_{r+1} &amp; \ldots &amp; v_n\\
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert
-  \end{bmatrix}}_{n\times n}  =
-\underbrace{
-  \begin{bmatrix}
-    \vert &amp; \ldots &amp; \vert\\
-    u_1 &amp; \ldots &amp; u_r\\
-    \vert &amp; \ldots &amp; \vert\\
-  \end{bmatrix}}_{m\times r}
-\underbrace{
-  \begin{bmatrix}
-    \sigma_1 &amp;\ldots &amp; 0 &amp;&amp; 0 &amp;\ldots &amp; 0\\
-    \vdots &amp;\ddots &amp; \vdots &amp;&amp; \vdots &amp;\ddots &amp; \vdots\\
-    0 &amp;\ldots &amp; \sigma_r &amp;&amp; 0 &amp;\ldots &amp; 0\\
-\end{bmatrix}}_{r\times n}
+\begin{bmatrix}
+x_1\\
+x_2\\
+x_3
+\end{bmatrix} =
+\begin{bmatrix}
+\mu_1\\
+\mu_2\\
+\mu_3
+\end{bmatrix} +
+\left[
+\begin{bmatrix}
+x_1\\
+x_2\\
+x_3
+\end{bmatrix}-
+\begin{bmatrix}
+\mu_1\\
+\mu_2\\
+\mu_3
+\end{bmatrix}
+\right]
 \]</span></p>
+<p><span class="math display">\[ x = \mu + [x-\mu] = x+y\]</span></p>
+<p>Subtraindo a média de cada coordenada-variável, temos um novo vetor <span class="math inline">\(y\)</span> com média zero em cada coordenada.</p>
+<p>A nuvem de pontos é deslocada rigidamente para a origem</p>
+</div>
+</div>
 </section>
-<section id="tornando-u-quadrada" class="slide level2 scrollable">
-<h2>Tornando <span class="math inline">\(U\)</span> quadrada</h2>
-<p>Como os vetores <span class="math inline">\(u_i\)</span> estão no <span class="math inline">\(\mathbb R^m\)</span>, existem <span class="math inline">\(m-r\)</span> vetores independentes <span class="math inline">\(u_j\)</span> ortogonais a <span class="math inline">\(u_1, \ldots, u_r\)</span>. Logo, podemos concatená-los a <span class="math inline">\(U\)</span>, desde que sejam adicionadas <span class="math inline">\(m-r\)</span> linhas nulas em <span class="math inline">\(\Sigma\)</span>:</p>
-<p><span class="math display">\[
-A_{m\times n}
-\underbrace{
-  \begin{bmatrix}
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert\\
-    v_1 &amp;\ldots &amp; v_r &amp;&amp; v_{r+1} &amp; \ldots &amp; v_n\\
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert
-  \end{bmatrix}}_{n\times n}  =
-\underbrace{
-  \begin{bmatrix}
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert\\
-    u_1 &amp; \ldots &amp; u_r &amp;&amp; u_{r+1} &amp; \ldots &amp; u_m\\
-    \vert &amp; \ldots &amp; \vert &amp; &amp; \vert&amp; \ldots &amp;\vert\\
-  \end{bmatrix}}_{m\times m}
-\underbrace{
-  \begin{bmatrix}
-    \sigma_1 &amp;\ldots &amp; 0 &amp;&amp; 0 &amp;\ldots &amp; 0\\
-    \vdots &amp;\ddots &amp; \vdots &amp;&amp; \vdots &amp;\ddots &amp; \vdots\\
-    0 &amp;\ldots &amp; \sigma_r &amp;&amp; 0 &amp;\ldots &amp; 0\\ \\
-    0 &amp;\ldots &amp; 0 &amp;&amp; 0 &amp;\ldots &amp; 0\\
-    \vdots &amp;\ddots &amp; \vdots &amp;&amp; \vdots &amp;\ddots &amp; \vdots\\
-    0 &amp;\ldots &amp; 0 &amp;&amp; 0 &amp;\ldots &amp; 0\\
-\end{bmatrix}}_{m\times n}
-\]</span></p>
+<section id="pré-processamento" class="slide level2 scrollable">
+<h2>Pré-processamento</h2>
+<p>Primeiro <em>z-normalizamos</em> os dados:</p>
+<ol type="1">
+<li>Seja <span class="math inline">\(\mu = \frac{1}{m}\sum_{i=1}^m x^{(i)}\)</span></li>
+<li>Substituta cada <span class="math inline">\(x^{(i)}\)</span> por <span class="math inline">\(x^{(i)} - \mu\)</span></li>
+<li>Seja <span class="math inline">\(\sigma^2 = \frac{1}{m-1}\sum_i \left( x_j^{(i)} \right)^2\)</span></li>
+<li>Substitua cada <span class="math inline">\(x_j^{(i)}\)</span> por <span class="math inline">\(\frac{x_j^{(i)}}{\sigma_j}\)</span></li>
+</ol>
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -445,303 +576,72 @@ A_{m\times n}
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>Essas dimensões correspondem ao SVD completo</p>
+<p>Os passos 3-4 garantem que atributos sejam tratados igualmente</p>
 </div>
 </div>
 </div>
 </section>
-<section id="do-svd-completo-ao-reduzido" class="slide level2 scrollable">
-<h2>Do SVD completo ao reduzido</h2>
+<section id="como-calcular-o-eixo-maior" class="slide level2 scrollable">
+<h2>Como calcular o eixo maior?</h2>
+<p><strong>Problema:</strong> encontrar vetor unitário <span class="math inline">\(u\)</span> que maximiza a variância dos dados projetados em <span class="math inline">\(u\)</span>.</p>
+
+<img data-src="figs/Aula12/eixo.png" class="r-stretch quarto-figure-center"></section>
+<section id="projeção-ortogonal" class="slide level2">
+<h2>Projeção ortogonal</h2>
+<ul>
+<li>Seja <span class="math inline">\(W\)</span> um subespaço do <span class="math inline">\(\mathbb R^n\)</span> e <span class="math inline">\(x\)</span> um vetor em <span class="math inline">\(\mathbb R^n\)</span></li>
+<li>Queremos descobrir o vetor <span class="math inline">\(x_W\)</span> mais próximo a <span class="math inline">\(x\)</span> em <span class="math inline">\(W\)</span></li>
+<li>O vetor <span class="math inline">\(x_W\)</span> é chamado projeção ortogonal de <span class="math inline">\(x\)</span> em <span class="math inline">\(W\)</span></li>
+</ul>
+</section>
+<section id="decomposição-ortogonal" class="slide level2">
+<h2>Decomposição ortogonal</h2>
+<p>Dizer que o vetor <span class="math inline">\(x_W\)</span> é o vetor mais próximo a <span class="math inline">\(x\)</span> em <span class="math inline">\(W\)</span> equivale a dizer que a diferença <span class="math inline">\(x - x_W\)</span> é ortogonal a <span class="math inline">\(W\)</span></p>
+
+<img data-src="figs/Aula12/ortogonal.png" class="r-stretch"><p>Se <span class="math inline">\(x_{W\perp} = x - x_W\)</span>, então <span class="math inline">\(x = x_W + x_{W^\perp}\)</span>, onde <span class="math inline">\(x_W\)</span> está em <span class="math inline">\(W\)</span> e <span class="math inline">\(x_{W^\perp}\)</span> está em <span class="math inline">\(W^\perp\)</span></p>
+</section>
+<section id="decomposição-ortogonal-1" class="slide level2">
+<h2>Decomposição ortogonal</h2>
+<p><strong>Teorema.</strong> Seja <span class="math inline">\(W\)</span> um subespaço do <span class="math inline">\(\mathbb R^n\)</span> e <span class="math inline">\(x\)</span> um vetor em <span class="math inline">\(\mathbb R^n\)</span>. Então podemos escrever <span class="math inline">\(x\)</span> de forma única como</p>
+<p><span class="math display">\[x =  x_W + x_{W^\perp}\]</span></p>
+<p>Onde <span class="math inline">\(x_W\)</span> é o vetor mais próximo a <span class="math inline">\(x\)</span> em <span class="math inline">\(W\)</span> e <span class="math inline">\(x_{W\perp}\)</span> está em <span class="math inline">\(W^\perp\)</span></p>
+<p><strong>Definição.</strong> A Equação anterior é chamada decomposição ortogonal de <span class="math inline">\(x\)</span> com relação à <span class="math inline">\(W\)</span>; vetor <span class="math inline">\(x_W\)</span> é a projeção ortogonal de <span class="math inline">\(x\)</span> em <span class="math inline">\(W\)</span>.</p>
+</section>
+<section id="projeção-em-plano-ou-hiperplano" class="slide level2 scrollable">
+<h2>Projeção em plano ou hiperplano</h2>
+<p>Seja <span class="math inline">\(W\)</span> o espaço gerado por <span class="math inline">\(\{v_1,\ldots,v_m\}\)</span> e <span class="math inline">\(A\)</span> a matriz cujas colunas são <span class="math inline">\(\{v_1,\ldots,v_m\}\)</span>. Para calcular a decomposição ortogonal de <span class="math inline">\(x\)</span> em relação a <span class="math inline">\(W\)</span>:</p>
+<ol type="1">
+<li>Calcule a matriz <span class="math inline">\(A^\top A\)</span> e o vetor <span class="math inline">\(b=A^\top x\)</span></li>
+<li>Resolva <span class="math inline">\(A^\top Ac = b\)</span> e encontre o vetor desconhecido <span class="math inline">\(c\)</span>.</li>
+<li>O sistema é sempre consistente, escolha uma solução <span class="math inline">\(c\)</span>:</li>
+</ol>
+<p><span class="math inline">\(x_W = Ac\)</span> e <span class="math inline">\(x_{W\perp} = x-x_W\)</span></p>
+<ol start="4" type="1">
+<li><span class="math inline">\(x_W = \underbrace{A(A^\top A)^{-1}A^T}_{c} x\)</span></li>
+</ol>
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>SVD Completo</strong></p>
+<p><strong>intuição</strong></p>
 </div>
 <div class="callout-content">
-<!-- >> SVD Completo -->
-<p><span class="math display">\[\underbrace{A}_{m\times n} = \underbrace{U}_{m\times m} \underbrace{\Sigma}_{m\times n}\underbrace{V^\top}_{n\times n}\]</span></p>
-</div>
-</div>
-</div>
-<p>Como apenas os <span class="math inline">\(r\)</span> primeiros termos da diagonal de <span class="math inline">\(\Sigma\)</span> são não-nulos, podemos tomar essa submatriz descartando as colunas <span class="math inline">\(r+1,\ldots,m\)</span> de <span class="math inline">\(U\)</span> e as linhas <span class="math inline">\(r+1,\ldots,n\)</span> de <span class="math inline">\(V^\top\)</span>. O resultado, denotado pelas mesmas letras é</p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>SVD Reduzido</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[\underbrace{A}_{m\times n} = \underbrace{U}_{m\times r} \underbrace{\Sigma}_{r\times r}\underbrace{V^\top}_{r\times n}\]</span></p>
+<p>Se <span class="math inline">\(x\)</span> estivesse em <span class="math inline">\(W\)</span> teríamos <span class="math inline">\(Ac = x\)</span>. Como <span class="math inline">\(x\)</span> não está em <span class="math inline">\(W\)</span> não existe <span class="math inline">\(c\)</span> que satisfaça à relação anterior. Então, buscamos por <span class="math inline">\(x_W = \text{arg}\min_{AC} \Vert Ac - x\Vert_2^2\)</span>. Dessa maneira, tomaremos <span class="math inline">\(A^\top Ac = A^\top x\)</span>. Esse último sistema sempre terá solução.</p>
+<p>O produto de <span class="math inline">\(A^\top x_{W\perp} = 0\)</span>. Para isso, temos que <span class="math inline">\(A^\top (x - x_W) = A^\top x - (A^\top A(A^\top A)^{-1}A^\top x) = A^\top x - A^\top x = 0\)</span>, como queríamos mostrar.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="exemplo-de-uma-matriz-tall-thin" class="slide level2">
-<h2>Exemplo de uma matriz tall-thin</h2>
-
-<img data-src="figs/Aula10/tallthin.png" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Tall-thin matrix</p></section>
-<section id="aprendendo-sobre-espaço-latente" class="slide level2">
-<h2>Aprendendo sobre espaço latente</h2>
-
-<img data-src="figs/Aula11/espaco_latente.png" style="width:120.0%" class="r-stretch"></section>
-<section id="usuário-e-conceito" class="slide level2">
-<h2>Usuário e conceito</h2>
-
-<img data-src="figs/Aula11/espaco_latente2.png" style="width:120.0%" class="r-stretch"></section>
-<section id="filme-e-conceito" class="slide level2">
-<h2>Filme e conceito</h2>
-
-<img data-src="figs/Aula11/espaco_latente3.png" style="width:120.0%" class="r-stretch"></section>
-<section id="peso-de-um-conceito" class="slide level2">
-<h2>Peso de um conceito</h2>
-
-<img data-src="figs/Aula11/espaco_latente4.png" style="width:120.0%" class="r-stretch"></section>
-<section id="exemplo-um-pouco-mais-real" class="slide level2">
-<h2>Exemplo um pouco mais real</h2>
-<p>Note que existem usuários que vão assistir filmes de vários tipos (isso pode ser apenas ruído) <img data-src="figs/Aula11/espaco_latente5.png" style="width:120.0%"></p>
-</section>
-<section id="exemplo-um-pouco-mais-real-1" class="slide level2">
-<h2>Exemplo um pouco mais real</h2>
-
-<img data-src="figs/Aula11/espaco_latente6.png" style="width:120.0%" class="r-stretch"></section>
-<section id="um-sistema-de-recomendação-simples" class="slide level2">
-<h2>Um sistema de recomendação simples</h2>
-<ul>
-<li>Temos <span class="math inline">\(k\)</span> perfis de usuários
-<ul>
-<li>Cada usuário será o resultado da combinação linear desses perfis (comédia, drama, ação)</li>
-<li>A matrix “verdadeira” então terá posto <span class="math inline">\(k\)</span>!</li>
-</ul></li>
-<li>Pergunta
-<ul>
-<li>Como recomendar um filme para um determinado usuário?</li>
-</ul></li>
-</ul>
-</section>
-<section id="um-sistema-de-recomendação-simples-1" class="slide level2">
-<h2>Um sistema de recomendação simples</h2>
-
-<img data-src="figs/Aula11/SR1.png" style="width:120.0%" class="r-stretch"></section>
-<section id="um-sistema-de-recomendação-simples-2" class="slide level2">
-<h2>Um sistema de recomendação simples</h2>
-<p>Como estamos supondo termos <span class="math inline">\(k=2\)</span> perfis</p>
-
-<img data-src="figs/Aula11/SR2.png" style="width:120.0%" class="r-stretch"></section>
-<section id="um-sistema-de-recomendação-simples-3" class="slide level2 scrollable">
-<h2>Um sistema de recomendação simples</h2>
-<p>Ao realizar a multiplicação (após remover o menor valor singular)</p>
-
-<img data-src="figs/Aula11/SR3.png" style="width:80.0%" class="r-stretch"></section>
-<section id="compressão-de-imagens" class="slide level2">
-<h2>Compressão de imagens</h2>
-<p><span class="math inline">\(\approx 80\%\)</span> da internet é imagem!</p>
-
-<img data-src="figs/Aula11/imagem_web.png" style="width:70.0%" class="r-stretch quarto-figure-center"></section>
-<section id="compressão-de-imagens-1" class="slide level2">
-<h2>Compressão de imagens</h2>
-<p>Dimensões: (2560 x 1600) Número de bytes: 4.096.000 (imagem em tons de cinza - 1 byte por pixel)</p>
-
-<img data-src="figs/Aula11/cat.jpeg" style="width:70.0%" class="r-stretch quarto-figure-center"></section>
-<section id="compressão-de-imagens-2" class="slide level2">
-<h2>Compressão de imagens</h2>
-<p>Podemos tentar aproximar a matriz <span class="math inline">\(A\)</span> que representa a imagem por <span class="math inline">\(A_k\)</span></p>
-<p><span class="math display">\[ A_k = \sigma_1 u_1 v_1^\top + \ldots + \sigma_k u_k v_k^\top\]</span></p>
-</section>
-<section id="compressão-de-imagens-3" class="slide level2">
-<h2>Compressão de imagens</h2>
-<ul>
-<li><p>U, sigma, Vt = np.linalg.svd(img_gray)</p>
-<ul>
-<li><p>U.shape: 1600 x 1600</p></li>
-<li><p>Vt.shape: 2560 x 2560</p></li>
-<li><p>sigma.shape: 1600 x 1600 (sendo apenas 1600 valores diferentes de zero)</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="compressão-de-imagens-4" class="slide level2">
-<h2>Compressão de imagens</h2>
-<ul>
-<li>A primeira aproximação seria <span class="math inline">\(A_1\)</span></li>
-</ul>
-
-<img data-src="figs/Aula11/A1.png" style="width:70.0%" class="r-stretch quarto-figure-center"></section>
-<section id="compressão-de-imagens-5" class="slide level2 scrollable">
-<h2>Compressão de imagens</h2>
-<p>Como saber se ficou bom?</p>
-<p><span class="math display">\[ RMSE = \sqrt{\frac{1}{MN}\sum_{m=0}^{M-1}\sum_{n=0}^{N-1}\left(I_1(m,n)-I2(m,n)\right)^2}\]</span></p>
-<p><span class="math display">\[RMSE(AK_1) = 131361.669\]</span></p>
-<p><span class="math display">\[RMSE(AK_5) = 80013.826\]</span></p>
-<p><span class="math display">\[RMSE(AK_{20}) = 56411.098\]</span></p>
-<p><span class="math display">\[ RSME(AK_{100}) = 21429.215\]</span></p>
-</section>
-<section id="como-ficaram-as-imagens" class="slide level2 scrollable">
-<h2>Como ficaram as imagens?</h2>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/A1.png"></p>
-<p></p><figcaption><span class="math inline">\(A_1\)</span></figcaption><p></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/A5.png"></p>
-<p></p><figcaption><span class="math inline">\(A_5\)</span></figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/A20.png"></p>
-<p></p><figcaption><span class="math inline">\(A_{20}\)</span></figcaption><p></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/A100.png"></p>
-<p></p><figcaption><span class="math inline">\(A_{100}\)</span></figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/cat.jpeg"></p>
-<p></p><figcaption>Original</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="como-ficaram-os-erros-visualmente" class="slide level2 scrollable">
-<h2>Como ficaram os erros (visualmente)?</h2>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/rmseAk1.png"></p>
-<p></p><figcaption><span class="math inline">\(A_1\)</span></figcaption><p></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/rmseAk5.png"></p>
-<p></p><figcaption><span class="math inline">\(A_5\)</span></figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/rmseAk20.png"></p>
-<p></p><figcaption><span class="math inline">\(A_{20}\)</span></figcaption><p></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/rmseAk100.png"></p>
-<p></p><figcaption><span class="math inline">\(A_{100}\)</span></figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="até-quando-precisamos-ir" class="slide level2">
-<h2>Até quando precisamos ir?</h2>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img data-src="figs/Aula11/escolha_k1.png"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img data-src="figs/Aula11/escolhak_log.png"></p>
-</div>
-</div>
-</div>
-</section>
-<section id="até-quando-precisamos-ir-1" class="slide level2 scrollable">
-<h2>Até quando precisamos ir?</h2>
-<p>Regra do dedão: cortar de maneira a mantar entre 80-90% da “energia”</p>
-<p><span class="math display">\[t = \frac{\sum_{i=1}^k \sigma_i^2}{\sum_{i=1}^n \sigma_i^2} \]</span></p>
-
-<img data-src="figs/Aula11/energia.png" style="width:110.0%" class="r-stretch quarto-figure-center"><p class="caption">Energia</p></section>
-<section id="resultados-com-a_400" class="slide level2 scrollable">
-<h2>Resultados com <span class="math inline">\(A_{400}\)</span></h2>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/A400.png"></p>
-<p></p><figcaption><span class="math inline">\(A_{400}\)</span></figcaption><p></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/cat.jpeg" width="500"></p>
-<p></p><figcaption>Original</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p><span class="math display">\[RMSE(A_{400}) = 10969.759\]</span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula11/rmseAk400.png"></p>
-<p></p><figcaption>Diff</figcaption><p></p>
-</figure>
-</div>
-</section>
-<section id="qual-foi-a-taxa-de-compressão" class="slide level2">
-<h2>Qual foi a taxa de compressão?</h2>
-<p><span class="math display">\[T_x = (400 * 1600 + 400 + 400*2560)/(1600*2560)\]</span></p>
-<p><span class="math display">\[T_x = 40,63\%\]</span></p>
-<p>Razão de compressão: <span class="math inline">\((1600*2560)/(400 * 1600 + 400 + 400*2560) = 2,46\)</span> vezes</p>
-<p>Parece pouco?</p>
-</section>
-<section id="aproximação-da-matriz" class="slide level2">
-<h2>Aproximação da matriz</h2>
-<p>É possível encontrar uma matriz <span class="math inline">\(B\)</span> com posto <span class="math inline">\(k\)</span> que seja mais próxima de <span class="math inline">\(A\)</span> e que não seja <span class="math inline">\(A_k\)</span>?</p>
-</section>
-<section id="aproximação-de-matriz" class="slide level2">
-<h2>Aproximação de matriz</h2>
-<p>Eckart-Young: Suponha <span class="math inline">\(B\)</span> uma matriz de posto <span class="math inline">\(k\)</span>. Então <span class="math inline">\(B\)</span> será uma aproximação no máximo tão boa quanto</p>
-<p><span class="math display">\[A_k = \sigma_1u_1v_1^\top + \ldots + \sigma_ku_kv_k^\top \]</span></p>
-</section>
-<section id="aproximação-de-matriz-1" class="slide level2">
-<h2>Aproximação de matriz</h2>
-<p>Se <span class="math inline">\(B\)</span> tem posto <span class="math inline">\(k\)</span>, então</p>
-<p><span class="math display">\[ \Vert A - B \Vert \ge \Vert A - A_k \Vert\]</span></p>
-<p>Norma de Frobenius:</p>
-<p><span class="math display">\[ \Vert A \Vert_F =  \sqrt{\vert a_{11}\vert^2 + \vert a_{12}\vert^2 +\ldots + \vert a_{mn}\vert^2}\]</span></p>
+<section id="mudança-de-base-canônica-para-base-b" class="slide level2 scrollable">
+<h2>Mudança de base canônica para base <span class="math inline">\(B\)</span></h2>
+<p>Seja <span class="math inline">\(B=\{v_1,\ldots,v_n\}\)</span> uma base de <span class="math inline">\(\mathbb R^n\)</span>. As coordenadas do vetor <span class="math inline">\(x\)</span> em relação à <span class="math inline">\(B\)</span>, <span class="math inline">\(a = [a1,\ldots,an]^\top = [x]_B\)</span> são obtidas a partir de</p>
+<p><span class="math display">\[a_1v_1 + a_2v_2 + \ldots + a_nv_n\]</span> ou seja <span class="math display">\[[v_1 v_2 \ldots v_n][x]_B = [x]\]</span></p>
+<p>Seja <span class="math inline">\(V\)</span> a matriz cujas colunas são os vetores da base</p>
+<p><span class="math display">\[ V = [v_1 v_2 \ldots v_n]\]</span></p>
+<p>Então para qualquer vetor <span class="math inline">\(x\)</span> temos</p>
+<p><span class="math display">\[ V[x]_B = x\]</span> e <span class="math display">\[[x]_B = V^{-1}x\]</span></p>
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -751,14 +651,48 @@ A_{m\times n}
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math inline">\(\Vert M \Vert_2\)</span> é o maior valor singular <span class="math inline">\(\sigma_1\)</span></p>
-<p>Relação entre Frobenius e norma-2:</p>
-<p><span class="math display">\[\Vert A\Vert_F \ge \Vert A\Vert_2\]</span></p>
+<p>O que acontece se <span class="math inline">\(V_{n\times n}\)</span> for ortonormal? (<span class="math inline">\(V^{-1} = V^\top\)</span>)</p>
 </div>
 </div>
 </div>
+</section>
+<section id="exemplo-de-análise-de-dados-multivariada" class="slide level2 scrollable">
+<h2>Exemplo de análise de dados multivariada</h2>
+<p>DEFRA (Department for Environment, Food and Rural Affairs) data: consumo (g/pessoa/semana), 17 tipos de comida, quatro países Reino Unido em 1997.</p>
 
-<img src="common/UFMG_HEAD.png" class="slide-logo r-stretch"><div class="footer footer-default">
+<img data-src="figs/Aula12/defra.png" class="r-stretch quarto-figure-center"><p>Como analisar estes dados? Existem correlações entre os países? Plotar todos de uma vez? Plotar variáveis 2 a 2?</p>
+</section>
+<section id="pca-e-a-primeira-componente-principal-pc1" class="slide level2 scrollable">
+<h2>PCA e a primeira componente principal (PC1)</h2>
+<p>O objetivo do PCA é identificar novo conjunto de eixos ortogonais de coord. a partir dos dados.</p>
+<p>No primeiro passo, PCA encontra a primeira componente principal (PC1), direção que maximiza variância através das coords.</p>
+<p>Após encontrar PC1, projetamos os dados neste novo eixo. Como? <img data-src="figs/Aula12/defra2.png" data-fig-align="center"></p>
+</section>
+<section id="pca-e-a-segunda-componente-principal-pc1" class="slide level2 scrollable">
+<h2>PCA e a segunda componente principal (PC1)</h2>
+<ul>
+<li>PC2 é ortogonal a PC1</li>
+<li>Direção de maior variância dos dados, dentre direções ortogonais a PC1</li>
+<li>De novo, projetar coordenadas em PC2 <img data-src="figs/Aula12/defra3.png" data-fig-align="center" style="width:100.0%"></li>
+</ul>
+</section>
+<section id="pca-vs-variância-explicada" class="slide level2">
+<h2>PCA vs variância explicada</h2>
+<ul>
+<li>PCA também retorna info sobre contribuição de cada PC para a variância total dos dados: 67% por PC1, 97% por PC1+PC2</li>
+</ul>
+
+<img data-src="figs/Aula12/var_explicada.png" class="r-stretch quarto-figure-center"></section>
+<section id="pca-composição-de-cada-pc" class="slide level2">
+<h2>PCA: composição de cada PC</h2>
+<p>Também obtemos influência de cada variável original nos PCs</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/Aula12/pca_composicao.png"></p>
+</figure>
+</div>
+<p><img src="common/UFMG_HEAD.png" class="slide-logo"></p>
+<div class="footer footer-default">
 <p><a href="https://heitorramos.github.io/alc.html" class="uri">https://heitorramos.github.io/alc.html</a></p>
 </div>
 </section>
@@ -766,20 +700,20 @@ A_{m\times n}
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Aula11_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="Aula12_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Aula11_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Aula11_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Aula11_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Aula11_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Aula11_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="Aula11_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="Aula12_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Aula12_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Aula12_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Aula12_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Aula12_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="Aula12_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Aula11_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Aula11_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Aula11_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Aula11_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="Aula12_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Aula12_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Aula12_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Aula12_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
