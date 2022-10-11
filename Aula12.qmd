@@ -212,6 +212,7 @@ Os passos 3-4 garantem que atributos sejam tratados igualmente
 **Problema:** encontrar vetor unitário $u$ que maximiza a variância dos dados projetados em $u$.
 
 ![](figs/Aula12/eixo.png){fig-align="center"}
+![](figs/Aula12/Q7HIP.gif){fig-align="center"}
 
 ## Projeção ortogonal
 
