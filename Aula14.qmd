@@ -188,7 +188,7 @@ exatamente igual, e que (ii) eles sejam simétricos na direção viesada.
 
 **Como decidir que palavras devem ser neutralizadas?** Autores treinaram classificador para identificar quais palavras são definicionais (em inglês, são uma minoria).
 
-**Quais pares equalizar?** Em geral, podem ser escolhidos a mão.
+**Quais pares equalizar?** Em geral, podem ser escolhidos a mão
 
 ## Passo 1: o subespaço gênero {.scrollable}
 
@@ -274,7 +274,7 @@ $e_{doctor} = \frac{e_{doctor}}{\Vert e_{doctor}\Vert_2} = (0.71, -0.71)$
 :::{.column width="50%"}
 ![](figs/Aula14/neutralizacao.png){fig-align="center"}
 :::
-::::
+:::: 
 
 ## Passo 3: equalização{.scrollable}
 
