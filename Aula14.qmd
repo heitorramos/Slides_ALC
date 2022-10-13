@@ -100,9 +100,7 @@ $\mathbb R^d$ a partir de corpus contendo BILHÕES de palavras
 ![](figs/Aula14/word_embeddings.png){fig-align="center"}
 
 ## Analogias {.scrollable}
-
 ![](figs/Aula14/analogias.png){fig-align="center"}
-
 Homem está para mulher assim como Rei está para ?
 $e_{man} \rightarrow e_{woman}$ assim como $e_{king} \rightarrow e_{?}$
 
