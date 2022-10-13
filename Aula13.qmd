@@ -62,7 +62,7 @@ $$Y = PX$$
 
 ## Mudança de base $Y=PX${.scrollable}
 
-Sejam $p_1, p_2, \ldots, p_m$ os vetores linha de $P$ e $x1, \ldots, x_n$ os vetores coluna de $X$. Temos
+Sejam $p_1, p_2, \ldots, p_m$ os vetores linha de $P$ e $x_1, \ldots, x_n$ os vetores coluna de $X$. Temos
 $$
 PX = 
 \begin{bmatrix}
