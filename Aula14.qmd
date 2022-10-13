@@ -78,7 +78,7 @@ Cada vetor tem o tamanho do vocabulário e apenas uma entrada não-nula, igual a
 **Opção 1:** usando “one hot” vectors 
 
 - Similaridade de cosseno entre $u$ e $v$:
-$$cos(u,v) = \frac{u\cdot v}{\Vert u\Vert \Vert v\Vert} $$
+$$\cos(u,v) = \frac{u\cdot v}{\Vert u\Vert \Vert v\Vert} $$
 
 Vetores similares são úteis, p. ex., para auto-completar frases mesmo que sequência de palavras nunca tenha sido vistas
 
