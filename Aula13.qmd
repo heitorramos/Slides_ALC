@@ -1,0 +1,200 @@
+---
+title: "Álgebra Linear Computacional"
+subtitle: "Aula 13: Análise de Componentes Principais II"
+author: Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a>
+# date: 03/08/2022 
+# abstract-title: 
+format:
+  revealjs: 
+    code-fold: true 
+    execute: 
+      enabled: true
+    echo: true
+    jupyter: python3
+    slide-number: true
+    theme: default
+    controls: true
+    progress: true
+    # smaller: true
+    # scrollable: true
+    chalkboard:
+      buttons: true
+      chalk-width: 1
+      theme: whiteboard
+    preview-links: auto
+    logo:  common/UFMG_HEAD.png
+    style: common/style.css
+    footer: <https://heitorramos.github.io/alc.html>
+search: true
+resources:
+  - aula10.pdf
+---
+## Créditos
+:::{.callout-important}
+Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento
+:::
+
+## Objetivos de aprendizagem {.scrollable}
+1. Calcular covariância de uma matriz de dados centralizada através de multiplicação de matrizes
+2. Entender conceito de correlação e que o PCA encontra uma base em que as variáveis são descorrelacionadas
+3. Entender como usar o SVD para calcular o PCA de uma matriz de dados
+4. Entender 2 exemplos de PCA 
+    i) Aplicando PCA para reduzir dimensionalidade no dataset Iris
+    ii) Aplicando PCA para remoção de viés em word embeddings
+
+## Referências adicionais {.scrollable}
+- [Matt Brems on Towards Data Science](https://towardsdatascience.com/a-one-stop-shop-for-principal-component-analysis-5582fb7e0a9c)
+- [Steve Brunton on YouTube](https://youtu.be/fkf4IBRSeEc)
+- [Implementando PCA usando só o numpy no Colab](http://bit.ly/PCAnumpy)
+
+## Fundamentos teóricos do PCA
+
+Problema resolvido pelo PCA: Como obter uma base de dimensão $k < \#\text{atributos}$ que re-expressa os dados de maneira ótima?
+
+Seja $X$ uma matriz $m \times n$ onde: 
+
+- colunas = observações
+- linhas = atributos
+
+Queremos transformar $X$ em matriz $Y_{m\times n}$ usando $P_{m\times m}$:
+
+$$Y = PX$$
+
+## Mudança de base $Y=PX${.scrollable}
+
+Sejam $p_1, p_2, \ldots, p_m$ os vetores linha de $P$ e $x1, \ldots, x_n$ os vetores coluna de $X$. Temos
+$$
+PX = 
+\begin{bmatrix}
+Px_1& Px_2 & \ldots & Px_n
+\end{bmatrix} = 
+\begin{bmatrix}
+p_1x_1 & p_1x_2 &\ldots & p_1x_n\\ 
+p_2x_1 & p_2x_2 &\ldots & p_2x_n\\ 
+\vdots & \vdots &\ddots & \vdots\\ 
+p_mx_1 & p_mx_2 &\ldots & p_mx_n\\ 
+\end{bmatrix} = Y
+$$
+
+As colunas de $X$ estão sendo projetadas nas linhas de $P$. Logo, as linhas de $P \{p_1, p_2, \ldots, p_m\}$ são uma nova base para colunas de $X$. Linhas de $P$ serão as direções das PCs.
+
+## Otimização das PCs: maximizar variância {.scrollable}
+
+PCA considera variância dos dados originais. Tenta descorrelacionar dados usando como base direções em que variância é maximizada.
+**O que é variância?**
+
+Seja a variável $Z$ com média $\mu$. Amostras de $Z \colon z=\{z_1,z_2,\ldots,z_n\}$.
+
+Variância amostral de $Z$
+
+$$\text{var}(z) = \frac{1}{n-1}\sum_{i=1}^n (z_i - \mu)^2$$
+
+Subtraindo a média, ou seja, fazendo $r_i = z_i - \mu$ temos:
+
+$$\text{var}(r) = \frac{1}{n-1}\sum_{i=1}^n r_i^2 = \frac{1}{n-1} rr^\top$$
+
+## Covariância (ou correlação não normalizada) {.scrollable}
+
+Seja $S$ outra variável aleatória com média zero. Amostras de $S\colon s = \{s_1,\ldots,s_n\}$.
+
+Podemos generalizar a idéia anterior para o par $r$ e $s$. Esta medida é a covariância de $r$ e $s$
+
+Interpretação: quanto duas variáveis mudam simultaneamente
+
+$$\text{cov}(r,s) = \frac{1}{n-1} rs^\top$$
+
+## Otimização das PCs: maximizar variância {.scrollable}
+
+Generalizando para matrix $X_{m\times n}$ de dados (m atribs, n obs)
+
+$$
+x = 
+\begin{bmatrix}
+x_{1,1} & x_{1,2} & \ldots & x_{1,n}\\
+x_{2,1} & x_{2,2} & \ldots & x_{2,n}\\
+\vdots & \vdots & \ddots & \vdots \\
+x_{m,1} & x_{m,2} & \ldots & x_{m,n}\\
+\end{bmatrix} = 
+\begin{bmatrix}
+x_1\\ 
+x_2\\ 
+\vdots \\
+x_m
+\end{bmatrix} \in \mathbb R^{m\times n}, x_i^\top \in \mathbb R^n
+$$
+
+$$x_i\colon \text{vetor de n amostras da i-ésima variável}$$
+
+$$ 
+C_X = \frac{1}{n-1}XX^\top = \frac{1}{n-1}\begin{bmatrix}
+x_1x_1^\top & x_1x_2^\top & \ldots & x_1x_n^\top\\
+x_2x_1^\top & x_2x_2^\top & \ldots & x_2x_n^\top\\
+\vdots & \vdots & \ddots & \vdots \\
+x_mx_1^\top & x_mx_2^\top & \ldots & x_mx_n^\top\\
+\end{bmatrix}
+$$
+
+
+## Voltando à transformação $Y=PX$ {.scrollable}
+
+- Perguntas que precisamos responder:
+    - Quais são propriedades desejáveis da matriz transformada $Y$?
+    - Qual a relação com a matriz de covariância $C_Y$?
+- Covariância mede quão bem correlacionadas são 2 variáveis
+
+**Suposição fundamental do PCA:** variáveis em $Y$ são descorrelacionadas. Porém, variâncias tão grandes quanto possível (variância pequena = ruído).
+
+- Logo:
+    - Maximizar sinal, medido pela variância (maximizar entradas da diagonal)
+    - Minimizar covariância entre variáveis (minimizar outras entradas)
+
+:::{.callout-important}
+Conclusão: $C_Y$ deve ser matriz diagonal!
+:::
+
+## Derivando $P$ {.scrollable}
+
+**Suposição extra:** $p_1, p_2, \ldots, p_n$ são ortonormais
+
+Considere a fórmula da matriz de de covariância $C_Y$ e $Y=PX$:
+$$ C_Y = \frac{1}{n-1}YY^\top = \frac{1}{n-1}(PX)(PX)^\top = \frac{1}{n-1}PXX^\top P^\top$$
+
+$$ C_Y = \frac{1}{n-1}PSP^\top \text{ onde } S = XX^\top $$
+
+**Fato:** toda matriz simétrica $S$ é ortonormalmente diagonálizável, ou seja, $S = EDE^\top$, onde $E$ são autovetores ortonormais e $D$ é diagonal com autovalores
+
+## Derivando $P$ {.scrollable}
+Escolhendo as linhas de $P$ como autovetores de $S$, temos $P=E^\top$. Substituindo na expressão da matriz de covariâcia
+
+$$ C_Y = \frac{1}{n-1}PSP^\top = \frac{1}{n-1}E^\top (EDE^\top) E$$
+onde, $S = XX^\top = EDE^\top (Q\Lambda Q^\top)$ e $E_{m\times m}$ é ortonormal
+
+Logo, $C_Y = \frac{1}{n-1} D$ 
+
+:::{.callout-note}
+$D$ traz a importância de cada componente; maior variância dá origem à PC1, 2a maior à PC2 e assim sucessivamente
+:::
+
+## Passo-a-Passo {.scrollable}
+
+1. Calcular $S=XX^\top$ e sua decomposição espectral $S=EDE^\top$
+2. Reordenar os autovalores em $D$ em ordem decrescente
+3. Reordenar colunas da matriz $E$ usando os mesmos índices usados na reordenação de $D$
+4. Fazer $P=E^\top$ e calcular $Y=PX$
+
+:::{.callout-warning}
+Equivale a calcular SVD de $X$? Já vimos isso!
+
+Com isso diagnalizamos a matriz de covariância $C_Y$ dos dados transformados
+:::
+
+
+
+## Exemplo 1 (Iris)
+
+:::{.callout-warning}
+Ir para o jupyter notebook
+:::
+
+
+
