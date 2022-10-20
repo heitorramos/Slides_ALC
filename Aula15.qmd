@@ -550,7 +550,7 @@ print('correlacao (manual):', (x_std.T @ x_std)/x_std.shape[0])
 ```
 ## A qualidade do ajuste{.scrollable}
 
-- A qualidade do ajuste é geralmente indicado pelo quadrado do coeficiente de correlação ($R^2$)
+- A qualidade do ajuste é geralmente indicado pelo quadrado do coeficiente de determinação ($R^2$)
 - Ele indica o percentual de variabilidade da variável de resposta explicado pelo modelo
 - O restante é explicado por variáveis que não estão presentes no modelo ou por variabilidade inerente dos dados
 - Do modelo anterior, temos $R^2 = -0.6973462 * -0.6973462 = 0.4862917$
