@@ -7,7 +7,7 @@
 <link href="Aula15_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula15_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula15_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.38">
+  <meta name="generator" content="quarto-1.0.37">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -976,6 +976,9 @@ n &amp; \sum x_i \\
 \]</span></p>
 <p><span class="math display">\[ \beta_1 = \frac{n \sum x_iy_i - \sum x_i \sum y_i}{n\sum x_i^2 - (\sum x_i)^2}\]</span></p>
 <p><span class="math display">\[ \beta_0 = \frac{\sum y_i - \beta_1 \sum x_i}{n}\]</span></p>
+<p>As equações acima podem ser reorganizadas da seguinte forma</p>
+<p><span class="math display">\[\beta_1 =  \frac{\sum_{i=1}^{n} ( x_i - \bar{x})(y_i - \bar{y}) }{\sum_{i=1}^{n} ( x_i - \bar{x})^2} \]</span></p>
+<p><span class="math display">\[\beta_0 =  \bar{y} - \beta_1 \bar{x} \]</span></p>
 <aside><div>
 <p>a notação dos somatórios foi simplificada para facilitar a visualização</p>
 </div></aside></section>
