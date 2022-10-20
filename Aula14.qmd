@@ -41,7 +41,8 @@ Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do 
 4. Entender como projeções e distâncias podem ser medidas de viés
 5. Saber realizar os passos de neutralização e equalização para remover viés
 
-## Referências Adicionais {.scrollable}
+## Refe
+rências Adicionais {.scrollable}
 - [Embedding Projector](https://projector.tensorflow.org/)
 
 Artigo:
@@ -264,7 +265,7 @@ e_B &= (e_{doctor}\cdot g)g\\
 \begin{align}
 e_{doctor} &= e_{doctor} - e_B \\ 
 &= (0.87, -0.50) - (0.18, 0.18) \\
-&= (0.69, 0.69)
+&= (0.69, -0.69)
 \end{align}
 
 $e_{doctor} = \frac{e_{doctor}}{\Vert e_{doctor}\Vert_2} = (0.71, -0.71)$
