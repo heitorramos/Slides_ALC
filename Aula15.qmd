@@ -412,7 +412,7 @@ y_1 \\ \vdots\\ y_n
 Como solucionar $A^\top A \hat{x} = A^\top b$
  para $\hat{x}$?
 
-Maneira 1:
+Método 1:
 
 \begin{align}
 A^\top A\hat{x} &= A^\top b \\   
