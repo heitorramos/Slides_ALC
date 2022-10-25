@@ -7,7 +7,7 @@
 <link href="Aula16_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula16_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula16_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.38">
+  <meta name="generator" content="quarto-1.0.37">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -23,6 +23,70 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="Aula16_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula16_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -767,6 +831,62 @@ b_{p-1}
 \end{bmatrix}
 \]</span></p>
 <p>Onde o vetor solução <span class="math inline">\(b\)</span> fornece os estimadores de mínimos quadrados dos parâmetros <span class="math inline">\(\beta_i\)</span> da equação de regressão <span class="math inline">\(y(x_1, x_2, \ldots, x_{p-1}) = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_{p-1}x_{p-1} + e\)</span></p>
+</section>
+<section id="considerações-sobre-o-coeficiente-de-determinação" class="slide level2">
+<h2>Considerações sobre o coeficiente de determinação</h2>
+<ul>
+<li>Como avaliar se o modelo é bom?</li>
+<li>Em geral, quando o vetor de resíduos for “pequeno”, temos um bom ajuste</li>
+</ul>
+<p><span class="math display">\[
+\Vert r \Vert^2 = \Vert Y - Y^2\Vert = \sum_{i=1}^n(y_i = \hat{y})^2
+\]</span></p>
+</section>
+<section id="considerações-sobre-o-coeficiente-de-determinação-1" class="slide level2 scrollable">
+<h2>Considerações sobre o coeficiente de determinação</h2>
+<ul>
+<li>Mas o ajuste é bom em relação a que?</li>
+<li>Vamos usar o modelo mais simples, a média.</li>
+</ul>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb1-4"><a href="#cb1-4"></a>x <span class="op">=</span> np.array([<span class="dv">18</span>,<span class="dv">19</span>,<span class="dv">20</span>,<span class="dv">24</span>,<span class="dv">25</span>,<span class="dv">27</span>,<span class="dv">28</span>,<span class="dv">29</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>y <span class="op">=</span> np.array([<span class="fl">76.1</span>, <span class="dv">77</span>, <span class="fl">78.1</span>, <span class="fl">79.9</span>, <span class="fl">81.1</span>, <span class="fl">81.8</span>, <span class="fl">82.8</span>, <span class="fl">83.5</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb1-7"><a href="#cb1-7"></a>model.fit(x, y)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>plt.scatter(x, y)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>plt.plot(x,model.predict(x), color<span class="op">=</span><span class="st">"red"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>):</span>
+<span id="cb1-11"><a href="#cb1-11"></a>    plt.vlines(x[i], y[i], model.predict(x)[i])</span>
+<span id="cb1-12"><a href="#cb1-12"></a>plt.hlines(<span class="fl">80.3</span>, np.<span class="bu">min</span>(x), np.<span class="bu">max</span>(x), color<span class="op">=</span><span class="st">"green"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>):</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    plt.vlines(x[i], y[i], <span class="fl">80.3</span>, color<span class="op">=</span><span class="st">'grey'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Aula16_files/figure-revealjs/cell-2-output-1.png" width="790" height="411"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="considerações-sobre-o-coeficiente-de-determinação-2" class="slide level2 scrollable">
+<h2>Considerações sobre o coeficiente de determinação</h2>
+<ul>
+<li><span class="math inline">\(\text{SQRes} = \sum_{i=1}^n (y_i - \hat{y}_i)^2\)</span> (soma dos quadrados residual)</li>
+<li><span class="math inline">\(\text{SQTot} = \sum_{i=1}^n (y_i - \bar y)^2\)</span> (soma dos quadrados total)</li>
+<li><span class="math inline">\(\text{SQReg} = \sum_{i=1}^n (\hat y_i - \bar y)^2\)</span> (soma dos quadrados devido à regressão)</li>
+</ul>
+<p>Dessa maneira,</p>
+<p><span class="math display">\[
+r^2 = \frac{\text{SQTot} - \text{SQRes}}{\text{SQTot}} = 1 - \frac{\text{SQRes}}{\text{SQTot}}
+\]</span></p>
+<p>sendo <span class="math inline">\(r^2\)</span> denominado coeficiente de determinação e satisfazendo <span class="math inline">\(0\le r^2 \le 1\)</span></p>
 
 <img src="common/UFMG_HEAD.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://heitorramos.github.io/alc.html" class="uri">https://heitorramos.github.io/alc.html</a></p>
