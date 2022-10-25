@@ -7,7 +7,7 @@
 <link href="Aula15_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula15_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula15_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+  <meta name="generator" content="quarto-1.0.38">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -727,9 +727,9 @@
 <div class="column" style="width:50%;">
 <ul>
 <li>Buscar a reta que minimiza a soma de todos os resíduos</li>
-<li>Vamos calcular <span class="math inline">\(\beta_1\)</span> e <span class="math inline">\(\beta_2\)</span> que minimize a soma dos quadrados dos resíduos</li>
+<li>Vamos calcular <span class="math inline">\(\beta_0\)</span> e <span class="math inline">\(\beta_1\)</span> que minimize a soma dos quadrados dos resíduos</li>
 </ul>
-<p><span class="math display">\[E = \sum_{i=1}^n (y_i -\beta_1x_1 - \beta_2)^2\]</span></p>
+<p><span class="math display">\[E = \sum_{i=1}^n (y_i -\beta_1x_0 - \beta_0)^2\]</span></p>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-execution_count="6">
 <details>
@@ -1014,10 +1014,9 @@ n &amp; \sum x_i \\
 <span id="cb7-25"><a href="#cb7-25"></a>xy <span class="op">=</span> np.stack((x,y),axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb7-26"><a href="#cb7-26"></a>x_std <span class="op">=</span> StandardScaler().fit_transform(xy)</span>
 <span id="cb7-27"><a href="#cb7-27"></a></span>
-<span id="cb7-28"><a href="#cb7-28"></a>np.corrcoef(xy)</span>
-<span id="cb7-29"><a href="#cb7-29"></a><span class="bu">print</span>(<span class="st">'correlacao:'</span>, np.corrcoef(x,y))</span>
-<span id="cb7-30"><a href="#cb7-30"></a></span>
-<span id="cb7-31"><a href="#cb7-31"></a><span class="bu">print</span>(<span class="st">'correlacao (manual):'</span>, (x_std.T <span class="op">@</span> x_std)<span class="op">/</span>x_std.shape[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="bu">print</span>(<span class="st">'correlacao:'</span>, np.corrcoef(x,y))</span>
+<span id="cb7-29"><a href="#cb7-29"></a></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="bu">print</span>(<span class="st">'correlacao (manual):'</span>, (x_std.T <span class="op">@</span> x_std)<span class="op">/</span>x_std.shape[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">

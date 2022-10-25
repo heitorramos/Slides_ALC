@@ -34,6 +34,7 @@ resources:
 Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento
 :::
 
+
 ## Objetivos de aprendizagem {.scrollable}
 1. Entender os principais conceitos sobre regressão linear
 2. Entender como formular o problema de mínimos quadrados
@@ -233,9 +234,9 @@ Nosso objetivo é escolher a reta que minimiza os resíduos
 
 :::{.column width="50%"}
 - Buscar a reta que minimiza a soma de todos os resíduos
-- Vamos calcular $\beta_1$ e $\beta_2$ que minimize a soma dos quadrados dos resíduos
+- Vamos calcular $\beta_0$ e $\beta_1$ que minimize a soma dos quadrados dos resíduos
 
-$$E = \sum_{i=1}^n (y_i -\beta_1x_1 - \beta_2)^2$$
+$$E = \sum_{i=1}^n (y_i -\beta_1x_0 - \beta_0)^2$$
 :::
 
 :::{.column width="50%"}
@@ -546,7 +547,6 @@ plt.show()
 xy = np.stack((x,y),axis=1)
 x_std = StandardScaler().fit_transform(xy)
 
-np.corrcoef(xy)
 print('correlacao:', np.corrcoef(x,y))
 
 print('correlacao (manual):', (x_std.T @ x_std)/x_std.shape[0])
