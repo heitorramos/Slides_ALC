@@ -417,3 +417,44 @@ $$
 
 Onde o vetor solução $b$ fornece os estimadores de mínimos quadrados dos parâmetros $\beta_i$ da equação de regressão $y(x_1, x_2, \ldots, x_{p-1}) = \beta_0 +  \beta_1x_1 + \beta_2x_2 + \ldots + \beta_{p-1}x_{p-1} + e$
 
+## Considerações sobre o coeficiente de determinação
+
+- Como avaliar se o modelo é bom?
+- Em geral, quando o vetor de resíduos for "pequeno", temos um bom ajuste
+$$
+\Vert r \Vert^2 = \Vert Y - Y^2\Vert = \sum_{i=1}^n(y_i = \hat{y})^2
+$$
+
+## Considerações sobre o coeficiente de determinação{.scrollable}
+- Mas o ajuste é bom em relação a que?
+- Vamos usar o modelo mais simples, a média.
+```{python}
+#|fig-align: "center"
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+x = np.array([18,19,20,24,25,27,28,29]).reshape(-1, 1)
+y = np.array([76.1, 77, 78.1, 79.9, 81.1, 81.8, 82.8, 83.5]).reshape(-1, 1)
+model = LinearRegression()
+model.fit(x, y)
+plt.scatter(x, y)
+plt.plot(x,model.predict(x), color="red")
+for i in range(8):
+    plt.vlines(x[i], y[i], model.predict(x)[i])
+plt.hlines(80.3, np.min(x), np.max(x), color="green")
+for i in range(8):
+    plt.vlines(x[i], y[i], 80.3, color='grey')
+```
+
+## Considerações sobre o coeficiente de determinação{.scrollable}
+
+- $\text{SQRes} = \sum_{i=1}^n (y_i - \hat{y}_i)^2$ (soma dos quadrados residual)
+- $\text{SQTot} = \sum_{i=1}^n (y_i - \bar y)^2$ (soma dos quadrados total)
+- $\text{SQReg} = \sum_{i=1}^n (\hat y_i - \bar y)^2$ (soma dos quadrados devido à regressão)
+
+Dessa maneira,
+$$
+r^2 = \frac{\text{SQTot} - \text{SQRes}}{\text{SQTot}} = 1 - \frac{\text{SQRes}}{\text{SQTot}}
+$$
+sendo $r^2$ denominado coeficiente de determinação e satisfazendo $0\le r^2 \le 1$
