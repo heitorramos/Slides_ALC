@@ -173,9 +173,8 @@ x_1\\x_2\\x_3
 \end{bmatrix}
 $$
 
-- Vetor solução $x$ é a interseção dos três planos descritos por cada uma das três equações E1, E2 e E3: $x = \begin{bmatrix}5 & 1 & 10 \end{bmatrix}^\top$
-
-![](figs/Aula18/solucao_unica.png){fig-align="center"}
+- Vetor solução $x$ é a interseção dos três planos descritos por cada uma das três equações E1, E2 e E3: $x = \begin{bmatrix}5 & 1 & 10\end{bmatrix}^\top$
+![Geometria](figs/Aula18/solucao_unica.png){fig-align="center"}
 
 ## Sistema com infinitas soluções{.scrollable}
 
@@ -232,7 +231,6 @@ $$
 - Com $\text{det}(A) = 0$, os três planos se interceptam em uma linha reta descrita por $x = \begin{bmatrix}70-6,5\theta & 16-1,5\theta &\theta \end{bmatrix}^\top$
 
 - Para cada valor de $\theta$ ter-se-á uma solução do sistema linear 
-
 ![](figs/Aula18/infintias_solucoes.png){fig-align="center"}
 
 ## Sistema sem solução {.scrollable}
@@ -280,7 +278,6 @@ x_1 \\ x_2 \\ x_3
 $$
 
 - Com $\text{det}(A) = 0$ os planos não têm ponto em comum
-
 ![](figs/Aula18/sem_solucao.png){fig-align="center"}
 
 ## Sistema triangular inferior{.scrollable}
