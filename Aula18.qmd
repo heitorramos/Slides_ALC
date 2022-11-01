@@ -157,7 +157,7 @@ $$
 ## Geometria de sistema com solução única{.scrollable}
 
 - Solução de um sistema linear de ordem $n$ é um ponto no $\mathbb C^n$ comum aos $n$ hiperplanos descritos por cada uma das $n$ equações
-
+ 
 $$
 \begin{bmatrix}
 1 & -3 & 2 \\ 
