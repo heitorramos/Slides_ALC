@@ -243,7 +243,7 @@ $$\frac{\text{eixo maior}}{\text{eixo menor}} = \frac{c\sigma_1}{c\sigma2} = \fr
 ## Jogando fora a raiz quadrada{.scrollable}
 
 - Preferimos trabalhar com a distância AO QUADRADO
-- Se podemos complicar, por quê simplificar?
+- Se podemos complicar, por que simplificar?
 
 \begin{align}
 d^2(y,\mu) &= \left(\frac{y_1-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y_2-\mu_2}{\sigma_2}\right)^2 \\
