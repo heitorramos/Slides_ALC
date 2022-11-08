@@ -603,7 +603,7 @@ Como calcular o determinante de uma matriz triangular?
 
 - Método de Gauss falha quando pivô é nulo
 - Consiste em escolher como pivô o maior elemento em módulo da coluna cujos elementos serão eliminados
-- A pivotação parcial garante qu eo pivô seja não nulo, exceto quando a matriz for singular
+- A pivotação parcial garante que o pivô seja não nulo, exceto quando a matriz for singular
 - Todos os multiplicadores satisfazem
 $$
 -1 \le m_{ij}\le 1
@@ -611,7 +611,7 @@ $$
 - Multiplicadores grandes podem ampliar os erros de arredondamento
 
 ## Exemplo de pivotação parcial{.scrollable}
-Resolver o sistem apelo método de Gauss com pivotação parcial
+Resolver o sistema pelo método de Gauss com pivotação parcial
 $$
 \begin{bmatrix}
 1 & -3 & 2\\
@@ -687,3 +687,10 @@ x_1 \\ x_2 \\ x_3
 29\\ -0,5 \\ 3,6
 \end{bmatrix}
 $$
+
+Por que o determinante ficou diferente? (simétrico)
+
+- Trocar po
+sição de duas linhas: $\text{det}(A) = -\text{det}(A')$
+- Multiplicar todos os elementos de uma linha por uma constante $k$: $\text{det}(A) = k\text{det}(A')$
+- Somar o múltiplo escalar de uma linha à outra linha: $\text{det}(A) = \text{det}(A')$
