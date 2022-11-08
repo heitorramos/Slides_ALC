@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="Aula18_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Aula18_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Aula18_files/libs/quarto-html/popper.min.js"></script>
-<script src="Aula18_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Aula18_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Aula18_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="Aula18_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="Aula20_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Aula20_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Aula20_files/libs/quarto-html/popper.min.js"></script>
+<script src="Aula20_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Aula20_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Aula20_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Aula20_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.0.38">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
@@ -14,8 +14,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Aula18_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Aula18_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="Aula20_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Aula20_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -24,13 +24,13 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
   </style>
-  <link rel="stylesheet" href="Aula18_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link href="Aula18_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Aula18_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Aula18_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Aula18_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="Aula18_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="Aula18_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="Aula20_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="Aula20_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Aula20_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Aula20_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Aula20_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="Aula20_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="Aula20_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -322,7 +322,7 @@
 
 <section id="title-slide" class="center">
   <h1 class="title">Álgebra Linear Computacional</h1>
-  <p class="subtitle">Aula 18: Sistemas Lineares</p>
+  <p class="subtitle">Aula 20: Sistemas Lineares (Decomposição Cholesky)</p>
   <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
 </section>
 
@@ -342,702 +342,267 @@
 </div>
 </div>
 </section>
-<section id="sistemas-de-equações-lineares" class="slide level2 scrollable">
-<h2>Sistemas de equações lineares</h2>
+<section id="decomposição-de-cholesky-e-ldltop" class="slide level2">
+<h2>Decomposição de Cholesky e <span class="math inline">\(LDL^\top\)</span></h2>
 <ul>
-<li>Conjunto de <span class="math inline">\(m\)</span> equações polimoniais com <span class="math inline">\(n\)</span> variáveis <span class="math inline">\(x_i\)</span> de grau 1</li>
-</ul>
-<p><span class="math display">\[\begin{align}
-a_{11}x_1 + a_{12}x_2 + \ldots + a_{1n}x_n &amp;= b_1\\
-a_{21}x_1 + a_{22}x_2 + \ldots + a_{2n}x_n &amp;= b_2\\
-a_{31}x_1 + a_{32}x_2 + \ldots + a_{3n}x_n &amp;= b_3\\
-\vdots &amp;= \vdots \\
-a_{m1}x_1 + a_{m2}x_2 + \ldots + a_{mn}x_n &amp;= b_m\\
-\end{align}\]</span></p>
-<ul>
-<li>Forma matricial</li>
+<li>Matriz de coeficientes <span class="math inline">\(A\)</span> simétrica e definida positiva</li>
 </ul>
 <p><span class="math display">\[
-\begin{bmatrix}
-a_{11} &amp;a_{12} &amp; a_{13} &amp; \ldots &amp; a_{1n}\\
-a_{21} &amp;a_{22} &amp; a_{23} &amp; \ldots &amp; a_{2n}\\
-a_{31} &amp;a_{32} &amp; a_{33} &amp; \ldots &amp; a_{3n}\\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-a_{m1} &amp;a_{m2} &amp; a_{m3} &amp; \ldots &amp; a_{mn}
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_n
-\end{bmatrix}
-=
-\begin{bmatrix}
-b_1\\  b_2 \\ b_3 \\ \vdots \\ b_n
-\end{bmatrix}
+v^\top A v &gt;0, \forall v\neq 0
 \]</span></p>
-</section>
-<section id="sistemas-de-equações-lineares-1" class="slide level2 scrollable">
-<h2>Sistemas de equações lineares</h2>
 <ul>
-<li><span class="math inline">\(Ax = b\)</span>, onde <span class="math inline">\(A\)</span> é a matriz dos coeficientes, <span class="math inline">\(x\)</span> é o vetor solução e <span class="math inline">\(b\)</span> é o vetor de termos independentes</li>
-<li>Se <span class="math inline">\(A\)</span> for uma matriz quadrada (<span class="math inline">\(n\times n\)</span>) não singular</li>
+<li><span class="math inline">\(A\)</span> pode ser decomposta tal que</li>
 </ul>
-<p><span class="math display">\[A x = b \]</span></p>
-<p><span class="math display">\[ A^{-1}Ax = A^{-1}b \]</span></p>
-<p><span class="math display">\[ x = A^{-1}b\]</span></p>
-</section>
-<section id="classificação-de-sistemas-lineares-forma-da-matriz" class="slide level2 scrollable">
-<h2>Classificação de sistemas lineares: forma da matriz</h2>
+<p><span class="math display">\[
+A = LL^\top
+\]</span></p>
 <ul>
-<li>Sobredeterminado: mais equações que icógnitas</li>
-</ul>
-<p><span class="math display">\[ A(m\times n), m\ge n\]</span></p>
-<p><span class="math display">\[ posto(A)=n\]</span></p>
-<ul>
-<li>Problema de quadrados mínimos lineares</li>
-</ul>
-<p><span class="math display">\[ \underset{x}{\text{minimize}} \Vert b - Ax\Vert_2\]</span></p>
-<ul>
-<li>possui uma única solução, chamada de solução de mínimos quadrados</li>
+<li><span class="math inline">\(L\)</span> é triangular inferior</li>
+<li><span class="math inline">\(L^\top\)</span> é triangular superior</li>
 </ul>
 </section>
-<section id="classificação-de-sistemas-lineares-forma-da-matriz-1" class="slide level2 scrollable">
-<h2>Classificação de sistemas lineares: forma da matriz</h2>
-<ul>
-<li>Subdeterminado: existem mais icógnitas do que equações</li>
-</ul>
-<p><span class="math display">\[
-A(m\times n), m &lt;n
-\]</span></p>
-<p><span class="math display">\[ posto (A) = m\]</span></p>
-<ul>
-<li>Sistema não tem solução ou existe um número infinito de soluções que satisfazem <span class="math inline">\(b- Ax = 0\)</span></li>
-<li>Encontrar a solução única <span class="math inline">\(x\)</span> que minimiza <span class="math inline">\(\Vert x \Vert_2\)</span></li>
-<li>Determinar a solução de norma mínima do sistema linear</li>
-<li>Resolver um sistema de ordem <span class="math inline">\(n\)</span></li>
-</ul>
-</section>
-<section id="classificação-de-sistemas-lineares-número-de-soluções" class="slide level2">
-<h2>Classificação de sistemas lineares: número de soluções</h2>
-<ul>
-<li>Número de soluções depende do valor do determinante da matriz dos coeficientes</li>
-<li>Há três situações possíveis:
-<ul>
-<li>única solução</li>
-<li>infinitas soluções</li>
-<li>sem solução</li>
-</ul></li>
-</ul>
-</section>
-<section id="sistema-com-única-solução" class="slide level2 scrollable">
-<h2>Sistema com única solução</h2>
-<ul>
-<li>Por exemplo,</li>
-</ul>
-<p><span class="math display">\[\begin{align}
-x_1 + x_2 &amp;= 3\\
-x_1 - x_2 &amp;= -1
-\end{align}\]</span></p>
-<p><span class="math display">\[
-\begin{bmatrix}
-1 &amp; 1 \\
-1 &amp; -1
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2
-\end{bmatrix}
-=
-\begin{bmatrix}
-3 \\ -1
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[
-A =
-\begin{bmatrix}
-1 &amp; 1 \\
-1 &amp; -1
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[
-\text{det}(A) \ne 0
-\]</span></p>
-<p>e</p>
-<p><span class="math display">\[
-x =
-\begin{bmatrix}
-1 &amp;2
-\end{bmatrix}^\top
-\]</span></p>
-<ul>
-<li><span class="math inline">\(\text{det}(A) \ne 0\)</span>: sistema admite única solução</li>
-</ul>
-</section>
-<section id="geometria-de-sistema-com-solução-única" class="slide level2 scrollable">
-<h2>Geometria de sistema com solução única</h2>
-<ul>
-<li>Solução de um sistema linear de ordem <span class="math inline">\(n\)</span> é um ponto no <span class="math inline">\(\mathbb C^n\)</span> comum aos <span class="math inline">\(n\)</span> hiperplanos descritos por cada uma das <span class="math inline">\(n\)</span> equações</li>
-</ul>
-<p><span class="math display">\[
-\begin{bmatrix}
-1 &amp; -3 &amp; 2 \\
--2 &amp; 8 &amp; -1 \\
--20 &amp; 5 &amp; 3
-\end{bmatrix}
-\begin{bmatrix}
-x_1\\x_2\\x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-22 \\ -12 \\ -65
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li>Vetor solução <span class="math inline">\(x\)</span> é a interseção dos três planos descritos por cada uma das três equações E1, E2 e E3: <span class="math inline">\(x = \begin{bmatrix}5 &amp; 1 &amp; 10\end{bmatrix}^\top\)</span> <img data-src="figs/Aula18/solucao_unica.png" data-fig-align="center" alt="Geometria"></li>
-</ul>
-</section>
-<section id="sistema-com-infinitas-soluções" class="slide level2 scrollable">
-<h2>Sistema com infinitas soluções</h2>
-<ul>
-<li>Por exemplo,</li>
-</ul>
-<p><span class="math display">\[\begin{align}
-x_1 + x_2 &amp;= 2 \\
-2x_1 + 2x_2 &amp;= 4
-\end{align}\]</span></p>
-<p><span class="math display">\[
-\begin{bmatrix}
-1 &amp; 1 \\
-2 &amp; 2
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2
-\end{bmatrix}
-=
-\begin{bmatrix}
-2 \\ 4
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[
-\text{det}(A) = 0
-\]</span></p>
-<p><span class="math display">\[
-x =
-\begin{bmatrix}
-\theta &amp; 2-\theta
-\end{bmatrix}^\top
-\]</span></p>
-<ul>
-<li><span class="math inline">\(\text{det}(A) = 0\)</span>: sistema admite infinitas soluções, uma para cada valor de <span class="math inline">\(\theta\)</span></li>
-</ul>
-</section>
-<section id="geometria-de-sistema-com-infinitas-soluções" class="slide level2 scrollable">
-<h2>Geometria de sistema com infinitas soluções</h2>
-<ul>
-<li>Por exemplo,</li>
-</ul>
-<p><span class="math display">\[
-\begin{bmatrix}
-1 &amp; -3 &amp; 2 \\
--2 &amp; 8 &amp; -1 \\
--1 &amp; 5 &amp; 1
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-22 \\ -12 \\ 10
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li><p>Com <span class="math inline">\(\text{det}(A) = 0\)</span>, os três planos se interceptam em uma linha reta descrita por <span class="math inline">\(x = \begin{bmatrix}70-6,5\theta &amp; 16-1,5\theta &amp;\theta \end{bmatrix}^\top\)</span></p></li>
-<li><p>Para cada valor de <span class="math inline">\(\theta\)</span> ter-se-á uma solução do sistema linear <img data-src="figs/Aula18/infintias_solucoes.png" data-fig-align="center"></p></li>
-</ul>
-</section>
-<section id="sistema-sem-solução" class="slide level2 scrollable">
-<h2>Sistema sem solução</h2>
-<ul>
-<li>Por exemplo,</li>
-</ul>
-<p><span class="math display">\[\begin{align}
-x_1 + x_2 &amp;= 1 \\
-x_1 + x_2 &amp;= -1
-\end{align}\]</span></p>
-<p><span class="math display">\[
-\begin{bmatrix}
-1 &amp; 1 \\
-1 &amp; 1
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2
-\end{bmatrix}
-=
-\begin{bmatrix}
-1 \\ -1
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li><span class="math inline">\(\text{det}(A) = 0\)</span>: sistema não tem solução</li>
-</ul>
-</section>
-<section id="geometria-de-sistema-sem-solução" class="slide level2 scrollable">
-<h2>Geometria de sistema sem solução</h2>
-<ul>
-<li>Por exemplo,</li>
-</ul>
-<p><span class="math display">\[
-\begin{bmatrix}
-1 &amp; -3 &amp; 2 \\
--2 &amp; 8 &amp; -1 \\
--1 &amp; 5 &amp; 1
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-20 \\ -10 \\ 80
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li>Com <span class="math inline">\(\text{det}(A) = 0\)</span> os planos não têm ponto em comum <img data-src="figs/Aula18/sem_solucao.png" data-fig-align="center"></li>
-</ul>
-</section>
-<section id="sistema-triangular-inferior" class="slide level2 scrollable">
-<h2>Sistema triangular inferior</h2>
-<ul>
-<li>Apresenta a forma</li>
-</ul>
-<p><span class="math display">\[
-\begin{bmatrix}
-l_{11} &amp; 0 &amp; 0 &amp; \ldots &amp; 0 \\
-l_{21} &amp; l_{22} &amp; 0 &amp; \ldots &amp; 0 \\
-l_{31} &amp; l_{32} &amp; l_{33} &amp; \ldots &amp; 0 \\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; 0 \\
-l_{n1} &amp; l_{n2} &amp; l_{n3} &amp; \ldots &amp; l_{nn}
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_n
-\end{bmatrix}
-=
-\begin{bmatrix}
-c_1 \\ c_2 \\ c_3 \\ \vdots \\ c_n
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li>Solução via substituições sucessivas</li>
-</ul>
-<p><span class="math display">\[\begin{align}
-l_{11}x_1 = c_1 &amp;\Longrightarrow x_1 = \frac{c_1}{l_{11}} \\
-l_{21}x_1  + l_{22}x_2 = c_2 &amp;\Longrightarrow x_2 = \frac{c_2 - l_{21}x_1}{l_{22}} \\
-l_{31}x_1  + l_{32}x_2 + l_{33}x_3 = c_3 &amp;\Longrightarrow x_3 = \frac{c_3 - l_{31}x_1 - l_{32}x_2}{l_{33}} \\
-\vdots
-\end{align}\]</span></p>
-</section>
-<section id="sistema-triangular-inferior-1" class="slide level2 scrollable">
-<h2>Sistema triangular inferior</h2>
-<ul>
-<li>Generalizando</li>
-</ul>
-<p><span class="math display">\[
-l{n1}x_1 + l{n2}x_2 + \ldots + l_{n,n-1}x_{n-1} + l_{nn}x_n = c_n
-\]</span></p>
-<p><span class="math display">\[
-x_n = \frac{c_n - l_{n1}x_1 - l_{n2}x_2 - \ldots - l_{n,n-1}x_{n-1}}{l_{nn}}
-\]</span></p>
-<ul>
-<li>Esquematicamente</li>
-</ul>
-<p><span class="math display">\[
-x_i = \frac{c_i - \sum_{j=1}^{i-1} l_{ij}x_j}{l_{ii}}
-\]</span></p>
-</section>
-<section id="exemplo-de-substituições-sucessivas" class="slide level2 scrollable">
-<h2>Exemplo de substituições sucessivas</h2>
-<ul>
-<li>Calcular a solução do sistema triangular inferior</li>
-</ul>
-<p><span class="math display">\[
-\begin{bmatrix}
-2 &amp; 0 &amp; 0 &amp; 0 \\
-3 &amp; 5 &amp; 0 &amp; 0 \\
-1 &amp; -6 &amp; 8 &amp; 0 \\
--1 &amp; 4  &amp; -3 &amp; 9
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3 \\ x_4
-\end{bmatrix}
-=
-\begin{bmatrix}
-4 \\ 1\\ 48 \\ 6
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[\begin{align}
-2x_1 = 4 &amp;\Longrightarrow x_1 = 2 \\
-3x_1 + 5x_2 =1 &amp;\Longrightarrow x_2 = \frac{1-3(2)}{5} = -1 \\
-x_1 - 6x_2 + 8x_3 = 48 &amp;\Longrightarrow x_3 = \frac{48 - (2) + 6(-1)}{8} = 5\\
--x_1 + 4x_2 - 3x_3 + 9x_4 =6 &amp;\Longrightarrow x_4 = \frac{6+(2)-4(-1)+ 3(5)}{9} = 3
-\end{align}\]</span></p>
-<ul>
-<li>Solução do sistem triangular inferior: <span class="math inline">\(x = \begin{bmatrix}2 &amp; -1 &amp; 5 &amp; 3\end{bmatrix}^\top\)</span></li>
-</ul>
-</section>
-<section id="sistema-triangular-superior" class="slide level2 scrollable">
-<h2>Sistema triangular superior</h2>
-<ul>
-<li>Apresenta a forma</li>
-</ul>
-<p><span class="math display">\[
-\begin{bmatrix}
-u_{11} &amp; u_{12} &amp; u_{13}&amp; \ldots &amp; u_{1,n-1} &amp; u_{1n}\\
-0 &amp; u_{22} &amp; u_{23}&amp; \ldots &amp; u_{2,n-1} &amp; u_{2n}\\
-\vdots &amp; \vdots &amp; u_{33} &amp; \ldots &amp;\vdots &amp; \vdots\\
-0 &amp; 0 &amp; \vdots &amp; \ddots &amp; u_{n-1,n-1} &amp; u_{n-1,n}\\
-0 &amp; 0 &amp; 0 &amp; \ldots &amp; 0 &amp; u_{nn}
-\end{bmatrix}
-\begin{bmatrix}
-x_1\\ x_2 \\ x_3 \\ \vdots \\ x_{n-1} \\ x_n
-\end{bmatrix}
-=
-\begin{bmatrix}
-d_1 \\ d_2 \\ d_3 \\ \vdots \\ d_{n-1} \\ d_n
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li>Solução via substituições retroativas</li>
-</ul>
-<p><span class="math display">\[\begin{align}
-u_{nn}x_n = d_n &amp;\Longrightarrow x_n = \frac{d_n}{u_{nn}}\\
-u_{n−1,n−1}x_{n−1} + u_{n−1,n}x_n = d_{n-1} &amp;\Longrightarrow x_{n-1} = \frac{d_{n-1}-u_{n-1,n}x_n}{u_{n-1,n-1}}\\
-\vdots
-\end{align}\]</span></p>
-</section>
-<section id="sistema-triangular-superior-1" class="slide level2 scrollable">
-<h2>Sistema triangular superior</h2>
-<ul>
-<li><p>Continuando <span class="math display">\[\begin{align}
-u_{22}x_2 + u_{23}x_3 + \ldots + u_{2n}x_n = d_2 &amp;\Longrightarrow x_2 = \frac{d_2 - u_{23}x_3 - \ldots - u_{2n}x_n}{u_{22}}\\
-u_{11}x_1 + u_{12}x_2 + u_{13}x_3 + \ldots +u_{1n}x_n=d_1 &amp;\Longrightarrow  x_1 = \frac{d_1−u_{12}x_2− u_{13}x_3 − \ldots − u_{1n}x_n}{u_{11}}
-\end{align}\]</span></p></li>
-<li><p>Esquematicamente</p></li>
-</ul>
-<p><span class="math display">\[
-x_i = \frac{d_i - \sum_{j=i+1}^{n} u_{ij}x_j}{u_{ii}}
-\]</span></p>
-<p><span class="math display">\[
-i = n, n-1 , \ldots,1
-\]</span></p>
-</section>
-<section id="exemplo-de-substituições-retroativas" class="slide level2 scrollable">
-<h2>Exemplo de substituições retroativas</h2>
-<ul>
-<li>Determinar a solução do sistema triangular superior</li>
-</ul>
-<p><span class="math display">\[
-\begin{bmatrix}
-5 &amp; -2 &amp; 6 &amp; 1 \\
-0 &amp; 3 &amp; 7 &amp; -7 \\
-0 &amp; 0 &amp; 4 &amp; 5 \\
-0 &amp; 0 &amp; 0 &amp; 2
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3 \\ x_4
-\end{bmatrix}
-=
-\begin{bmatrix}
-1 \\ -2 \\ 28 \\ 8
-\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[\begin{align}
-2x_4 = 8 &amp;\Longrightarrow x_4 = 4 \\
-4x_3 + 5x_4 = 28, x_3 = \frac{28 - 5(4)}{4} &amp;\Longrightarrow x_3 = 2 \\
-3x_2 + 7x_3 − 4x_4 = −2, x_2 = \frac{-2 -7(2) + 4(4)}{3} &amp;\Longrightarrow x_2 = 0 \\
-5x_1− 2x_2 + 6x_3 + x_4 = 1, x_1 = \frac{1+2(0) - 6(2) - (4)}{5} &amp;\Longrightarrow x_1 = -3
-\end{align}\]</span></p>
-<ul>
-<li>Solução do sistema triangular superior: <span class="math inline">\(x = \begin{bmatrix}-3 &amp; 0 &amp; 2 &amp; 4\end{bmatrix}^\top\)</span></li>
-</ul>
-</section>
-<section id="eliminação-de-gauss" class="slide level2 scrollable">
-<h2>Eliminação de Gauss</h2>
-<ul>
-<li>O nome do método foi uma homenagem a Gauss</li>
-<li>O processo aparece no livro chinês <em>Nove capítulos sobre a arte matemática escrito por volta de 250 a.c.</em></li>
-<li>Classes de métodos para resolução de sistemas de equações lineares: métodos diretos e iterativos</li>
-<li>Métodos diretos: a solução exata do sistema é obtida, teoricamente, com um número finito de operações aritméticas
-<ul>
-<li>Na prática, os erros de arredondamento devidos à aritmética de ponto flutuante interferem no resultado verdadeiro</li>
-</ul></li>
-<li>Métodos iterativos: solução exata somente com um número infinito de operações
-<ul>
-<li>Em cada passo dos métodos iterativos a solução é calculada com um nível de exatidão crescente</li>
-<li>Esse nível é limitado pelo número finito de bytes utilizados para armazenar as variáveis do programa que implementa o método iterativo</li>
-</ul></li>
-</ul>
-</section>
-<section id="sistemas-equivalentes" class="slide level2 scrollable">
-<h2>Sistemas equivalentes</h2>
-<ul>
-<li>Dois sistemas de equações lineares são ditos equivalentes quando possuem o mesmo vetor solução</li>
-</ul>
-<p><span class="math display">\[
-A
-\begin{cases}
-2x_1 + 3x_2 = 8 \\
-x_1 - x_2 = -1
-\end{cases}
-\\
-B
-\begin{cases}
-2x_1 - 2x_2 = -2 \\
-x_1 + 4x_2 = 9
-\end{cases}
-\]</span></p>
-<p><span class="math display">\[
-x^A = x^B = \begin{bmatrix}1\\2\end{bmatrix} \Longrightarrow A \sim B
-\]</span></p>
-</section>
-<section id="operações-l-elementares" class="slide level2">
-<h2>Operações l-elementares</h2>
-<ul>
-<li>Um sistema de equações lineares pode ser transformado em outro sistema equivalente utilizando as três operações l-elementares (operações de linha)
-<ul>
-<li>trocar a ordem de duas equações</li>
-<li>multiplicar uma equação por uma constante</li>
-<li>somar uma equação à outra</li>
-</ul></li>
-</ul>
-</section>
-<section id="sistema-triangular-equivalente" class="slide level2 scrollable">
-<h2>Sistema triangular equivalente</h2>
-<ul>
-<li>Método de eliminação de Gauss</li>
-</ul>
-<p><span class="math display">\[
-\begin{bmatrix}
-a_{11}&amp;a_{12}&amp; a_{13}&amp;\ldots&amp;a_{1n}\\
-a_{21}&amp;a_{22}&amp; a_{23}&amp;\ldots&amp;a_{2n}\\
-a_{31}&amp;a_{32}&amp; a_{33}&amp;\ldots&amp;a_{3n}\\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
-a_{n1}&amp;a_{n2}&amp; a_{n3}&amp;\ldots&amp;a_{nn}\\
-\end{bmatrix}
-\begin{bmatrix}
-x_1\\x_2\\x_3\\\vdots\\x_n
-\end{bmatrix}
-=
-\begin{bmatrix}
-b_1\\b_2\\b_3\\\vdots\\b_n
-\end{bmatrix}
-\sim
-\]</span></p>
-<p><span class="math display">\[
-\begin{bmatrix}
-u_{11}&amp;a_{12}&amp; u_{13}&amp;\ldots&amp;u_{1n}\\
-0&amp;u_{22}&amp; u_{23}&amp;\ldots&amp;u_{2n}\\
-0&amp;0&amp; u_{33}&amp;\ldots&amp;u_{3n}\\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
-0&amp;0&amp; 0&amp;\ldots&amp;u_{nn}\\
-\end{bmatrix}
-\begin{bmatrix}
-x_1\\x_2\\x_3\\\vdots\\x_n
-\end{bmatrix}
-=
-\begin{bmatrix}
-b_1\\b_2\\b_3\\\vdots\\b_n
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li>Transformação <span class="math inline">\(Ax = b \sim Ux = d\)</span></li>
-<li>Solução do sistema triangular superior <span class="math inline">\(Ux=d\)</span> obtida pelas substituições retroativas</li>
-<li>Vetor resíduo <span class="math inline">\(r = b - Ax\)</span></li>
-</ul>
-</section>
-<section id="exemplo" class="slide level2 scrollable">
-<h2>Exemplo</h2>
-<p>Resolver o sitema abaixo pelo método da solução de Gauss e verificar a exatidão da solução</p>
-<p><span class="math display">\[
-\begin{bmatrix}
-1 &amp; -3 &amp; 2\\
--2 &amp; 8 &amp; -1\\
-4 &amp; -6 &amp; 5
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-11\\ -15 \\ 29
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li>Eliminar os elementos da primeira coluna</li>
-</ul>
-<p><span class="math display">\[
-\begin{bmatrix}
-1 &amp; -3 &amp; 2\\
-0 &amp; 2 &amp; 3\\
-0  &amp; 6 &amp; -3
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-11\\ 7 \\ -15
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li>Eliminar os elementos da segunda coluna</li>
-</ul>
-<p><span class="math display">\[
-\begin{bmatrix}
-1 &amp; -3 &amp; 2\\
-0 &amp; 2 &amp; 3\\
-0  &amp; 0 &amp; -12
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-11\\ 7 \\ -36
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li><p>Encontrar o vetor solução através de substituições retroativas <span class="math display">\[\begin{align}
--12x_3 = -36 &amp;\Longrightarrow x_3 = 3\\
-2x_2 + 3x_3 = 7 &amp;\Longrightarrow x_2 = -1 \\
-x_1 - 3x_2 + 2x_3 = 11 &amp;\Longrightarrow x_1 = 2
-\end{align}\]</span></p></li>
-<li><p>Vetor solução do sistema: <span class="math inline">\(x = \begin{bmatrix} 2 &amp; -1 &amp;3\end{bmatrix}^\top\)</span></p></li>
-<li><p>Vetor resíduo: <span class="math inline">\(r = b - Ax\)</span></p></li>
-</ul>
-<p><span class="math display">\[
-r =
-\begin{bmatrix}
-11 \\ -15 \\ -29
-\end{bmatrix}
--
-\begin{bmatrix}
-1 &amp; -3 &amp; 2 \\
--2 &amp; 8 &amp; -1 \\
-4 &amp; -6 &amp; 5
-\end{bmatrix}
-\begin{bmatrix}
-2 \\ -1 \\ 3
-\end{bmatrix}
-=
-\begin{bmatrix}
-0 \\ 0 \\0
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li>Solução exata</li>
-</ul>
-<div class="callout callout-tip callout-captioned callout-style-default">
+<section id="decomposição-de-cholesky-e-ldltop-1" class="slide level2 scrollable">
+<h2>Decomposição de Cholesky e <span class="math inline">\(LDL^\top\)</span></h2>
+<div class="callout callout-important callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Tip</strong></p>
+<p><strong>Teorema (Cholesky)</strong></p>
 </div>
 <div class="callout-content">
-<p>Como calcular o determinante de uma matriz triangular?</p>
+<p>Se <span class="math inline">\(A\)</span> for uma matriz simétrica e definida positiva, então existe uma única matriz triangular <span class="math inline">\(L\)</span> com elementos da diagonal positivos tal que <span class="math inline">\(A= LL^\top\)</span></p>
 </div>
 </div>
 </div>
+<ul>
+<li>Produto <span class="math inline">\(LL^\top = A\)</span> de uma matriz de ordem 4</li>
+</ul>
+<p><span class="math display">\[
+\begin{bmatrix}
+l_{11} &amp; 0      &amp; 0      &amp; 0 \\
+l_{21} &amp; l_{22} &amp; 0      &amp; 0 \\
+l_{31} &amp; l_{32} &amp; l_{33} &amp; 0 \\
+l_{41} &amp; l_{42} &amp; l_{43} &amp; l_{44} \\
+\end{bmatrix}
+\begin{bmatrix}
+l_{11} &amp; l_{21} &amp; l_{31} &amp; l_{41} \\
+0      &amp; l_{22} &amp; l_{32} &amp; l_{42} \\
+0      &amp; 0      &amp; l_{33} &amp; l_{43}  \\
+0      &amp; 0      &amp; 0      &amp; l_{44} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; a_{13} &amp; a_{14} \\
+a_{21} &amp; a_{22} &amp; a_{23} &amp; a_{24} \\
+a_{31} &amp; a_{32} &amp; a_{33} &amp; a_{34} \\
+a_{41} &amp; a_{42} &amp; a_{43} &amp; a_{44} \\
+\end{bmatrix}
+\]</span></p>
 </section>
-<section id="pivotação-parcial" class="slide level2 scrollable">
-<h2>Pivotação parcial</h2>
-<ul>
-<li>Método de Gauss falha quando pivô é nulo</li>
-<li>Consiste em escolher como pivô o maior elemento em módulo da coluna cujos elementos serão eliminados</li>
-<li>A pivotação parcial garante que o pivô seja não nulo, exceto quando a matriz for singular</li>
-<li>Todos os multiplicadores satisfazem</li>
-</ul>
+<section id="cálculo-dos-fatores" class="slide level2 scrollable">
+<h2>Cálculo dos fatores</h2>
 <p><span class="math display">\[
--1 \le m_{ij}\le 1
+\begin{bmatrix}
+l_{11} &amp; 0      &amp; 0      &amp; 0 \\
+l_{21} &amp; l_{22} &amp; 0      &amp; 0 \\
+l_{31} &amp; l_{32} &amp; l_{33} &amp; 0 \\
+l_{41} &amp; l_{42} &amp; l_{43} &amp; l_{44} \\
+\end{bmatrix}
+\begin{bmatrix}
+l_{11} &amp; l_{21} &amp; l_{31} &amp; l_{41} \\
+0      &amp; l_{22} &amp; l_{32} &amp; l_{42} \\
+0      &amp; 0      &amp; l_{33} &amp; l_{43}  \\
+0      &amp; 0      &amp; 0      &amp; l_{44} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; a_{13} &amp; a_{14} \\
+a_{21} &amp; a_{22} &amp; a_{23} &amp; a_{24} \\
+a_{31} &amp; a_{32} &amp; a_{33} &amp; a_{34} \\
+a_{41} &amp; a_{42} &amp; a_{43} &amp; a_{44} \\
+\end{bmatrix}
 \]</span></p>
 <ul>
-<li>Multiplicadores grandes podem ampliar os erros de arredondamento</li>
+<li>Calculo de <span class="math inline">\(l_{44}\)</span></li>
 </ul>
+<p><span class="math display">\[
+l^2_{41} + l^2_{42} + l^2_{43} + l^2_{44} = a_{44} \\
+l_{44} =  \sqrt{a_{44} - (l^2_{41} + l^2_{42} + l^2_{43})}\\
+l_{44} = \sqrt{a_{44} - \sum_{k=1}^3 l^2_{4k}}
+\]</span></p>
+<ul>
+<li>Elemento de qualquer diagonal</li>
+</ul>
+<p><span class="math display">\[
+l_{jj} = \sqrt{a_{jj} - \sum_{k=1}^{j-1} l^2_{jk}},
+\]</span></p>
+<p>onde <span class="math inline">\(j = 1, 2, \ldots, n\)</span></p>
+<ul>
+<li>Elemento <span class="math inline">\(l_{43}\)</span> abaixo da diagonal</li>
+</ul>
+<p><span class="math display">\[
+l_{41}l_{31} + l_{42}l_{32} + l_{43}l{33}  = a_{43} \\
+l_{43} =  \frac{a_{43} - (l_{41}l_{31} + l_{42}l_{32})}{l_{33}}\\
+l_{43} = \frac{a_{43} - \sum_{k=1}^2 l_{4k}l_{3k}}{l_{33}}
+\]</span></p>
+<ul>
+<li>Elemento genérico abaixo da diagonal principal</li>
+</ul>
+<p><span class="math display">\[
+l_{ij} = \frac{a_{ij} - \sum_{k=1}^2 l_{ik}l_{jk}}{l_{jj}},
+\]</span></p>
+<p>onde <span class="math inline">\(j=1,2,\ldots,n-1\)</span> e <span class="math inline">\(i=j+1,j+2,\ldots,n\)</span></p>
 </section>
-<section id="exemplo-de-pivotação-parcial" class="slide level2 scrollable">
-<h2>Exemplo de pivotação parcial</h2>
-<p>Resolver o sistema pelo método de Gauss com pivotação parcial</p>
+<section id="solução-do-sistema-ax-b-pela-decomposição-de-cholesky" class="slide level2 scrollable">
+<h2>Solução do sistema <span class="math inline">\(Ax = b\)</span> pela decomposição de Cholesky</h2>
+<p>Seja</p>
+<p><span class="math display">\[
+Ax = b\\
+LL^\top x = b\\
+L^\top x =y, \text{ então } Ly=b
+\]</span></p>
+<p>Sistema triangular inferior <span class="math inline">\(Ly=b\)</span> resolvido pelas substituições sucessivas</p>
+<p><span class="math display">\[
+y_i = \frac{\left( b_i - \sum_{j=1}^{i-1} l_{ij}y_j\right)}{l_{ii}},
+\]</span></p>
+<p>onde <span class="math inline">\(i=1,2,\ldots,n\)</span></p>
+<p>Sistema triangular superior <span class="math inline">\(L^\top x=y\)</span> resolvido pelas substituições retroativas</p>
+<p><span class="math display">\[
+x_i = \frac{\left( y_i - \sum_{j=i+1}^{n} l_{ji}x_j\right)}{l_{ii}},
+\]</span></p>
+<p>onde <span class="math inline">\(i=1,2,\ldots,n\)</span></p>
+</section>
+<section id="cálculo-do-determinante" class="slide level2 scrollable">
+<h2>Cálculo do determinante</h2>
+<p>Pela propriedade dos determinantes</p>
+<p><span class="math display">\[
+\text{det}(A) = \text{det}(L)\text{det}(L^\top)
+\]</span></p>
+<p><span class="math display">\[
+\text{det}(A) = \left(\prod_{i=1}^n l_{ii} \right)^2
+\]</span></p>
+</section>
+<section id="exemplo-da-decomposição-de-cholesky" class="slide level2 scrollable">
+<h2>Exemplo da decomposição de Cholesky</h2>
+<p>Resolver o sistema a seguir usando a decomposição de Cholesky e verificar a exatidão e unicidade da solução</p>
 <p><span class="math display">\[
 \begin{bmatrix}
-1 &amp; -3 &amp; 2\\
--2 &amp; 8 &amp; -1\\
-4 &amp; -6 &amp; 5
+4 &amp; -2 &amp; 2 \\
+-2 &amp; 10 &amp; -7 \\
+2 &amp; -7 &amp; 30
 \end{bmatrix}
 \begin{bmatrix}
 x_1 \\ x_2 \\ x_3
 \end{bmatrix}
-=
 \begin{bmatrix}
-11\\ -15 \\ 29
+8 \\ 11 \\ -31
 \end{bmatrix}
 \]</span></p>
 <ul>
-<li><p>Escolha do pivô: (elemento <span class="math inline">\(a_{31}\)</span>)</p></li>
-<li><p>Escolha do Multiplicador <span class="math inline">\(m_{11} = \frac{a_{11}}{a_{31}} = 0,25\)</span></p></li>
-<li><p>Escolha do Multiplicador <span class="math inline">\(m_{21} = \frac{a_{21}}{a_{31}} = -0,5\)</span></p></li>
-<li><p>Eliminar os elementos da primeira coluna</p></li>
+<li>Coluna 1:</li>
 </ul>
 <p><span class="math display">\[
-\begin{bmatrix}
-0 &amp; -1,5 &amp; 0,75\\
-0 &amp; 5 &amp; 1,5\\
-4  &amp; -6 &amp; 5
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-3,75\\ -0,5 \\ 29
-\end{bmatrix}
+l_{11} = \sqrt{a_{11}} = \sqrt{4} = 2\\
+l_{21} = \frac{a_{21}}{l_{11}} = \frac{-2}{2} = -1\\
+l_{31} = \frac{a_{31}}{l_{11}} = \frac{2}{2} = 1
 \]</span></p>
-<p>Para eliminar o elemento da segunda coluna, escolhe-se o maior elemento em módulo desta coluna, sem considerar o elemento da linha pivotal <span class="math inline">\(L3\)</span>. Sendo assim, o pivô será o elemento <span class="math inline">\(a_{22}\)</span></p>
 <ul>
-<li><p>Escolha do multiplicador <span class="math inline">\(m_{12} = \frac{a_{12}}{a_{22}} = -0,3\)</span></p></li>
-<li><p>Eliminar os elementos da segunda coluna</p></li>
+<li>Coluna 2:</li>
 </ul>
 <p><span class="math display">\[
-\begin{bmatrix}
-0 &amp; 0 &amp; 1,2\\
-0 &amp; 5 &amp; 1,5\\
-4  &amp; -6 &amp; 5
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-3,6\\ -0,5 \\ 29
-\end{bmatrix}
+l_{22} = \sqrt{a_{22}-l^2_{21}} = \sqrt{10 - (-1)^2} = 3\\
+l_{32} = \frac{a_{32} - l_{31}l_{21}}{l_{22}}= \frac{-7-(-1)(-1)}{3} = -2\\
 \]</span></p>
-<p>Para que a matriz fique triangular superior, podemos trocar as linhas <span class="math inline">\(L3\)</span> e <span class="math inline">\(L1\)</span></p>
-<p><span class="math display">\[
-\begin{bmatrix}
-4  &amp; -6 &amp; 5\\
-0 &amp; 5 &amp; 1,5\\
-0 &amp; 0 &amp; 1,2
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-29\\ -0,5 \\ 3,6
-\end{bmatrix}
-\]</span></p>
-<p>Por que o determinante ficou diferente? (simétrico)</p>
 <ul>
-<li>Trocar posição de duas linhas: <span class="math inline">\(\text{det}(A) = -\text{det}(A')\)</span></li>
-<li>Multiplicar todos os elementos de uma linha por uma constante <span class="math inline">\(k\)</span>: <span class="math inline">\(\text{det}(A) = k\text{det}(A')\)</span></li>
-<li>Somar o múltiplo escalar de uma linha à outra linha: <span class="math inline">\(\text{det}(A) = \text{det}(A')\)</span></li>
+<li>Coluna 3:</li>
 </ul>
+<p><span class="math display">\[
+l_{33} = \sqrt{a_{33} - (l^2_{31}+l^2_{32})} = \sqrt{30 - ((-1)^2 + (-2)^2)} = 5
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+4 &amp; -2 &amp; 2 \\
+-2 &amp; 10 &amp; -7 \\
+2 &amp; -7 &amp; 30
+\end{bmatrix}
+=
+\begin{bmatrix}
+2 &amp; 0 &amp; 0 \\
+-1 &amp; 3 &amp; 0 \\
+1 &amp; -2 &amp; 5
+\end{bmatrix}
+\begin{bmatrix}
+2 &amp; -1 &amp; 1 \\
+0 &amp; 3 &amp; -2 \\
+0 &amp; 0 &amp; 5
+\end{bmatrix}
+\]</span></p>
+</section>
+<section id="solução-dos-sistemas-triangulares" class="slide level2 scrollable">
+<h2>Solução dos sistemas triangulares</h2>
+<p>Sistema <span class="math inline">\(Ly=b\)</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+2 &amp; 0 &amp; 0 \\
+-1 &amp; 3 &amp; 0 \\
+1 &amp; -2 &amp; 5
+\end{bmatrix}
+\begin{bmatrix}
+y_1 \\ y_2 \\ y_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+8 \\ 11 \\ -31
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>Solução intermediária: <span class="math inline">\(y = \begin{bmatrix}4 &amp; 5 &amp; -5\end{bmatrix}^\top\)</span></li>
+</ul>
+<p>Sistema <span class="math inline">\(L^\top x = y\)</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+2 &amp; -1 &amp; 1 \\
+0 &amp; 3 &amp; -2 \\
+0 &amp; 0 &amp; 5
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+4 \\ 5 \\ -5
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li><p>Solução: <span class="math inline">\(x = \begin{bmatrix}3 &amp; 1 &amp; -1\end{bmatrix}^\top\)</span></p></li>
+<li><p>Verificação da exatidão e unicidade da solução</p></li>
+</ul>
+<p>Vetor resíduo <span class="math inline">\(r = b - Ax\)</span></p>
+<p><span class="math display">\[
+r =
+\begin{bmatrix}
+8 \\ 11 \\ -31
+\end{bmatrix}
+-
+\begin{bmatrix}
+4 &amp; -2 &amp; 2 \\
+-2 &amp; 10 &amp; -7 \\
+2 &amp; -7 &amp; 30
+\end{bmatrix}
+\begin{bmatrix}3 \\ 1 \\ -1\end{bmatrix}
+=
+\begin{bmatrix}0 \\ 0 \\ 0\end{bmatrix}
+\]</span></p>
+<p>Solução exata!</p>
+<ul>
+<li>Cálculo do determinante</li>
+</ul>
+<p><span class="math display">\[
+\text{det}(A) = \left(\prod_{i=1}^n l_{ii} \right)^2 = \left( 2\cdot 3 \cdot 5)\right)^2 = 900
+\]</span></p>
+<p>Solução única!</p>
 
 <img src="common/UFMG_HEAD.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://heitorramos.github.io/alc.html" class="uri">https://heitorramos.github.io/alc.html</a></p>
@@ -1047,20 +612,20 @@ x_1 \\ x_2 \\ x_3
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Aula18_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="Aula20_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Aula18_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Aula18_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Aula18_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Aula18_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Aula18_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="Aula18_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="Aula20_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Aula20_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Aula20_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Aula20_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Aula20_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="Aula20_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Aula18_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Aula18_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Aula18_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Aula18_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="Aula20_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Aula20_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Aula20_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Aula20_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

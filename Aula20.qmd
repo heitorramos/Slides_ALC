@@ -1,0 +1,297 @@
+---
+title: "Álgebra Linear Computacional"
+subtitle: "Aula 20: Sistemas Lineares (Decomposição Cholesky)"
+author: Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a>
+# date: 03/08/2022 
+# abstract-title: 
+format:
+  revealjs: 
+    code-fold: true 
+    execute: 
+      enabled: true
+    echo: true
+    jupyter: python3
+    slide-number: true
+    theme: default
+    controls: true
+    progress: true
+    # smaller: true
+    # scrollable: true
+    chalkboard:
+      buttons: true
+      chalk-width: 1
+      theme: whiteboard
+    preview-links: auto
+    logo:  common/UFMG_HEAD.png
+    style: common/style.css
+    footer: <https://heitorramos.github.io/alc.html>
+search: true
+resources:
+  - aula19.pdf
+---
+## Créditos
+:::{.callout-important}
+Esses slides são fortemente baseados no livro do prof. Frederico Ferreira Campos, Filho.
+:::
+
+## Decomposição de Cholesky e $LDL^\top$
+
+- Matriz de coeficientes $A$ simétrica e definida positiva
+$$
+v^\top A v >0, \forall v\neq 0
+$$
+
+- $A$ pode ser decomposta tal que 
+$$
+A = LL^\top
+$$
+
+- $L$ é triangular inferior
+- $L^\top$ é triangular superior
+
+
+## Decomposição de Cholesky e $LDL^\top${.scrollable}
+
+:::{.callout-important}
+## Teorema (Cholesky)
+Se $A$ for uma matriz simétrica e definida positiva, então existe uma única matriz triangular $L$ com elementos da diagonal positivos tal que $A= LL^\top$
+:::
+
+- Produto $LL^\top = A$ de uma matriz de ordem 4
+
+$$
+\begin{bmatrix}
+l_{11} & 0      & 0      & 0 \\ 
+l_{21} & l_{22} & 0      & 0 \\
+l_{31} & l_{32} & l_{33} & 0 \\
+l_{41} & l_{42} & l_{43} & l_{44} \\
+\end{bmatrix}
+\begin{bmatrix}
+l_{11} & l_{21} & l_{31} & l_{41} \\ 
+0      & l_{22} & l_{32} & l_{42} \\
+0      & 0      & l_{33} & l_{43}  \\
+0      & 0      & 0      & l_{44} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} & a_{14} \\ 
+a_{21} & a_{22} & a_{23} & a_{24} \\
+a_{31} & a_{32} & a_{33} & a_{34} \\
+a_{41} & a_{42} & a_{43} & a_{44} \\
+\end{bmatrix}
+$$
+
+## Cálculo dos fatores{.scrollable}
+
+$$
+\begin{bmatrix}
+l_{11} & 0      & 0      & 0 \\ 
+l_{21} & l_{22} & 0      & 0 \\
+l_{31} & l_{32} & l_{33} & 0 \\
+l_{41} & l_{42} & l_{43} & l_{44} \\
+\end{bmatrix}
+\begin{bmatrix}
+l_{11} & l_{21} & l_{31} & l_{41} \\ 
+0      & l_{22} & l_{32} & l_{42} \\
+0      & 0      & l_{33} & l_{43}  \\
+0      & 0      & 0      & l_{44} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} & a_{14} \\ 
+a_{21} & a_{22} & a_{23} & a_{24} \\
+a_{31} & a_{32} & a_{33} & a_{34} \\
+a_{41} & a_{42} & a_{43} & a_{44} \\
+\end{bmatrix}
+$$
+
+- Calculo de $l_{44}$
+$$
+l^2_{41} + l^2_{42} + l^2_{43} + l^2_{44} = a_{44} \\
+l_{44} =  \sqrt{a_{44} - (l^2_{41} + l^2_{42} + l^2_{43})}\\ 
+l_{44} = \sqrt{a_{44} - \sum_{k=1}^3 l^2_{4k}}
+$$
+
+- Elemento de qualquer diagonal
+
+$$
+l_{jj} = \sqrt{a_{jj} - \sum_{k=1}^{j-1} l^2_{jk}},
+$$
+onde $j = 1, 2, \ldots, n$
+
+- Elemento $l_{43}$ abaixo da diagonal
+
+$$
+l_{41}l_{31} + l_{42}l_{32} + l_{43}l{33}  = a_{43} \\
+l_{43} =  \frac{a_{43} - (l_{41}l_{31} + l_{42}l_{32})}{l_{33}}\\ 
+l_{43} = \frac{a_{43} - \sum_{k=1}^2 l_{4k}l_{3k}}{l_{33}}
+$$
+
+- Elemento genérico abaixo da diagonal principal
+
+$$
+l_{ij} = \frac{a_{ij} - \sum_{k=1}^2 l_{ik}l_{jk}}{l_{jj}},
+$$
+onde $j=1,2,\ldots,n-1$ e $i=j+1,j+2,\ldots,n$
+
+## Solução do sistema $Ax = b$ pela decomposição de Cholesky{.scrollable}
+
+Seja
+$$
+Ax = b\\ 
+LL^\top x = b\\ 
+L^\top x =y, \text{ então } Ly=b
+$$
+
+Sistema triangular inferior $Ly=b$ resolvido pelas substituições sucessivas
+
+$$
+y_i = \frac{\left( b_i - \sum_{j=1}^{i-1} l_{ij}y_j\right)}{l_{ii}},
+$$
+onde $i=1,2,\ldots,n$
+
+Sistema triangular superior $L^\top x=y$ resolvido pelas substituições retroativas
+
+$$
+x_i = \frac{\left( y_i - \sum_{j=i+1}^{n} l_{ji}x_j\right)}{l_{ii}},
+$$
+onde $i=1,2,\ldots,n$
+
+## Cálculo do determinante{.scrollable}
+
+Pela propriedade dos determinantes
+
+$$
+\text{det}(A) = \text{det}(L)\text{det}(L^\top)
+$$
+
+$$
+\text{det}(A) = \left(\prod_{i=1}^n l_{ii} \right)^2
+$$
+
+## Exemplo da decomposição de Cholesky{.scrollable}
+
+Resolver o sistema a seguir usando a decomposição de Cholesky e verificar a exatidão e unicidade da solução
+
+$$
+\begin{bmatrix}
+4 & -2 & 2 \\ 
+-2 & 10 & -7 \\ 
+2 & -7 & 30
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix}
+\begin{bmatrix}
+8 \\ 11 \\ -31
+\end{bmatrix}
+$$
+
+- Coluna 1:
+
+$$
+l_{11} = \sqrt{a_{11}} = \sqrt{4} = 2\\ 
+l_{21} = \frac{a_{21}}{l_{11}} = \frac{-2}{2} = -1\\
+l_{31} = \frac{a_{31}}{l_{11}} = \frac{2}{2} = 1 
+$$
+
+- Coluna 2:
+
+$$
+l_{22} = \sqrt{a_{22}-l^2_{21}} = \sqrt{10 - (-1)^2} = 3\\
+l_{32} = \frac{a_{32} - l_{31}l_{21}}{l_{22}}= \frac{-7-(-1)(-1)}{3} = -2\\ 
+$$
+
+- Coluna 3:
+$$
+l_{33} = \sqrt{a_{33} - (l^2_{31}+l^2_{32})} = \sqrt{30 - ((-1)^2 + (-2)^2)} = 5
+$$
+
+$$
+\begin{bmatrix}
+4 & -2 & 2 \\ 
+-2 & 10 & -7 \\ 
+2 & -7 & 30
+\end{bmatrix}
+= 
+\begin{bmatrix}
+2 & 0 & 0 \\ 
+-1 & 3 & 0 \\ 
+1 & -2 & 5
+\end{bmatrix}
+\begin{bmatrix}
+2 & -1 & 1 \\ 
+0 & 3 & -2 \\ 
+0 & 0 & 5
+\end{bmatrix}
+$$
+
+## Solução dos sistemas triangulares{.scrollable}
+
+Sistema $Ly=b$
+
+$$
+\begin{bmatrix}
+2 & 0 & 0 \\ 
+-1 & 3 & 0 \\ 
+1 & -2 & 5
+\end{bmatrix}
+\begin{bmatrix}
+y_1 \\ y_2 \\ y_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+8 \\ 11 \\ -31
+\end{bmatrix}
+$$
+
+- Solução intermediária: $y = \begin{bmatrix}4 & 5 & -5\end{bmatrix}^\top$
+
+Sistema $L^\top x = y$
+
+$$
+\begin{bmatrix}
+2 & -1 & 1 \\ 
+0 & 3 & -2 \\ 
+0 & 0 & 5
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+4 \\ 5 \\ -5
+\end{bmatrix}
+$$
+
+- Solução: $x = \begin{bmatrix}3 & 1 & -1\end{bmatrix}^\top$
+
+- Verificação da exatidão e unicidade da solução
+
+Vetor resíduo $r = b - Ax$
+
+$$
+r = 
+\begin{bmatrix}
+8 \\ 11 \\ -31
+\end{bmatrix}
+-
+\begin{bmatrix}
+4 & -2 & 2 \\ 
+-2 & 10 & -7 \\ 
+2 & -7 & 30
+\end{bmatrix}
+\begin{bmatrix}3 \\ 1 \\ -1\end{bmatrix}
+=
+\begin{bmatrix}0 \\ 0 \\ 0\end{bmatrix}
+$$
+
+Solução exata!
+
+- Cálculo do determinante
+
+$$
+\text{det}(A) = \left(\prod_{i=1}^n l_{ii} \right)^2 = \left( 2\cdot 3 \cdot 5)\right)^2 = 900
+$$
+
+Solução única!
