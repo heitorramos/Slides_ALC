@@ -20,7 +20,7 @@ format:
     chalkboard:
       buttons: true
       chalk-width: 1
-      theme: chalkboard
+      theme: whiteboard
     preview-links: auto
     logo:  common/UFMG_HEAD.png
     style: common/style.css
