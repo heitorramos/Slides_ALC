@@ -391,7 +391,7 @@ PA = LU \\
 \text{det}(PA) = \text{det}(LU) \\ 
 \text{det}(A) = \frac{\text{det}(L)\text{det}(U)}{\text{det}(P)}\\ 
 \text{det}(L) = \prod_{i=1}^n l_{ii} = 1\\
-\text{det}(U) = \prod_{i=1}^n u_{ii} = 1\\
+\text{det}(U) = \prod_{i=1}^n u_{ii} \\
 \text{det}(P) = (-1)^t\\
 $$
 onde  $t$ é o número de trocas de linhas necessárias para transformar a matriz de permutação $P$ em uma matriz identidade
