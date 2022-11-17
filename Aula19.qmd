@@ -670,7 +670,7 @@ $$
 - Elemento genérico abaixo da diagonal principal
 
 $$
-l_{ij} = \frac{a_{ij} - \sum_{k=1}^2 l_{ik}l_{jk}}{l_{jj}},
+l_{ij} = \frac{a_{ij} - \sum_{k=1}^{j-1} l_{ik}l_{jk}}{l_{jj}},
 $$
 onde $j=1,2,\ldots,n-1$ e $i=j+1,j+2,\ldots,n$
 
