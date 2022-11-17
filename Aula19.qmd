@@ -20,7 +20,7 @@ format:
     chalkboard:
       buttons: true
       chalk-width: 1
-      theme: whiteboard
+      theme: chalkboard
     preview-links: auto
     logo:  common/UFMG_HEAD.png
     style: common/style.css
@@ -55,7 +55,7 @@ $$
 
 - A matriz $A$ foi fatorada de modo que $A = LU$
 
-- $L$ é uma matriz triangular inferior unitária ($l_{ii}=1 \forall i$)
+- $L$ é uma matriz triangular inferior unitária ($l_{ii}=1, \forall i$)
 
 - $U$ é uma matriz triangular superior
 - Para resolver o sistema $Ax=b$
