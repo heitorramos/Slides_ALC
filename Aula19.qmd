@@ -574,7 +574,7 @@ $$
 
 
 
-## Decomposição de Cholesky e $LDL^\top$
+## Decomposição de Cholesky 
 
 - Matriz de coeficientes $A$ simétrica e definida positiva
 $$
@@ -590,7 +590,7 @@ $$
 - $L^\top$ é triangular superior
 
 
-## Decomposição de Cholesky e $LDL^\top${.scrollable}
+## Decomposição de Cholesky{.scrollable}
 
 :::{.callout-important}
 ## Teorema (Cholesky)
@@ -835,3 +835,24 @@ $$
 $$
 
 Solução única!
+
+<!-- ## Fatoração $LDL^\top${.scrollable}
+
+- Uma matriz $A$ simétrica pode ser decomposta tal que
+$$A = LDL^\top$$
+
+- $L:$ matriz triangular inferior unitária ($l_{jj} = 1, \forall j$)
+- $D:$ matriz diagonal 
+- Matriz $D:$
+
+$$d_{jj} = a_{jj} - \sum_{k=1}^{j-1} l^2_{jk}d_{kk}, j=1,2,\ldots,n $$
+
+- Matriz unitária $L:$
+
+$$
+l_{ji} = \frac{a_{ij}-\sum_{k=1}^{j-1}l_{ik}d_{kk}l_{ji}}{d_{jj}}
+$$
+
+## Solução do sistema $Ax=b$ pela fatoração $LDL^\top$ -->
+
+-

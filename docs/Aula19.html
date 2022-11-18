@@ -898,8 +898,8 @@ c =
 \end{bmatrix}
 \]</span></p>
 </section>
-<section id="decomposição-de-cholesky-e-ldltop" class="slide level2">
-<h2>Decomposição de Cholesky e <span class="math inline">\(LDL^\top\)</span></h2>
+<section id="decomposição-de-cholesky" class="slide level2">
+<h2>Decomposição de Cholesky</h2>
 <ul>
 <li>Matriz de coeficientes <span class="math inline">\(A\)</span> simétrica e definida positiva</li>
 </ul>
@@ -917,8 +917,8 @@ A = LL^\top
 <li><span class="math inline">\(L^\top\)</span> é triangular superior</li>
 </ul>
 </section>
-<section id="decomposição-de-cholesky-e-ldltop-1" class="slide level2 scrollable">
-<h2>Decomposição de Cholesky e <span class="math inline">\(LDL^\top\)</span></h2>
+<section id="decomposição-de-cholesky-1" class="slide level2 scrollable">
+<h2>Decomposição de Cholesky</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -1159,6 +1159,39 @@ r =
 \text{det}(A) = \left(\prod_{i=1}^n l_{ii} \right)^2 = \left( 2\cdot 3 \cdot 5)\right)^2 = 900
 \]</span></p>
 <p>Solução única!</p>
+<!-- ## Fatoração $LDL^\top${.scrollable}
+
+- Uma matriz $A$ simétrica pode ser decomposta tal que
+
+
+$$A = LDL^\top$$
+
+
+
+- $L:$ matriz triangular inferior unitária ($l_{jj} = 1, \forall j$)
+- $D:$ matriz diagonal 
+- Matriz $D:$
+
+
+
+$$d_{jj} = a_{jj} - \sum_{k=1}^{j-1} l^2_{jk}d_{kk}, j=1,2,\ldots,n $$
+
+
+
+- Matriz unitária $L:$
+
+
+
+$$
+l_{ji} = \frac{a_{ij}-\sum_{k=1}^{j-1}l_{ik}d_{kk}l_{ji}}{d_{jj}}
+$$
+
+
+
+## Solução do sistema $Ax=b$ pela fatoração $LDL^\top$ -->
+<ul>
+<li></li>
+</ul>
 
 <img src="common/UFMG_HEAD.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://heitorramos.github.io/alc.html" class="uri">https://heitorramos.github.io/alc.html</a></p>
