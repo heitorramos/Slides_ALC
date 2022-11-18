@@ -52,7 +52,7 @@ $$
 - Método iterativo é dito estacionário quando a matriz $M$ for fixa
 - Exemplos de métodos iterativos: Jacobi, Gauss-Seidel e sobre-relaxação sucessiva
 
-## Condição de convergência
+## Condição de convergência{.scrollable}
 
 :::{.callout-note}
 ## Teorema (Condição necessária):
