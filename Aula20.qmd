@@ -83,7 +83,7 @@ $$
 - Processo deve ser iterrompido quando algum critério de parada for satisfeito
 
 $$
-\frac{\Vert x^k - x^{k-1}}{\Vert x^k \Vert}< \epsilon
+\frac{\Vert x^k - x^{k-1}\Vert}{\Vert x^k \Vert}< \epsilon
 $$
 ou
 $$
