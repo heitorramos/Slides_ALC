@@ -31,7 +31,7 @@ resources:
 ---
 ## Créditos
 :::{.callout-important}
-Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento.
+Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento
 :::
 
 ## Objetivos de aprendizagem {.scrollable}
