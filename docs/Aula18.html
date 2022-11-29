@@ -7,7 +7,7 @@
 <link href="Aula18_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula18_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula18_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="Aula18_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula18_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -320,12 +325,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 18: Sistemas Lineares</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -337,7 +349,7 @@
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>Esses slides são fortemente baseados no livro do prof. Frederico Ferreira Campos, Filho.</p>
+<p>Esses slides são fortemente baseados no livro do prof. Frederico Ferreira Campos, Filho</p>
 </div>
 </div>
 </div>
@@ -378,9 +390,8 @@ b_1\\  b_2 \\ b_3 \\ \vdots \\ b_n
 <h2>Sistemas de equações lineares</h2>
 <ul>
 <li><span class="math inline">\(Ax = b\)</span>, onde <span class="math inline">\(A\)</span> é a matriz dos coeficientes, <span class="math inline">\(x\)</span> é o vetor solução e <span class="math inline">\(b\)</span> é o vetor de termos independentes</li>
-<li>Se <span class="math inline">\(A\)</span> for uma matriz quadrada (<span class="math inline">\(n\times n\)</span>) não singular</li>
+<li>Se <span class="math inline">\(A\)</span> for uma matriz quadrada (<span class="math inline">\(n\times n\)</span>) não singular <span class="math display">\[A x = b \]</span></li>
 </ul>
-<p><span class="math display">\[A x = b \]</span></p>
 <p><span class="math display">\[ A^{-1}Ax = A^{-1}b \]</span></p>
 <p><span class="math display">\[ x = A^{-1}b\]</span></p>
 </section>
@@ -402,17 +413,13 @@ b_1\\  b_2 \\ b_3 \\ \vdots \\ b_n
 <section id="classificação-de-sistemas-lineares-forma-da-matriz-1" class="slide level2 scrollable">
 <h2>Classificação de sistemas lineares: forma da matriz</h2>
 <ul>
-<li>Subdeterminado: existem mais icógnitas do que equações</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Subdeterminado: existem mais icógnitas do que equações <span class="math display">\[
 A(m\times n), m &lt;n
-\]</span></p>
-<p><span class="math display">\[ posto (A) = m\]</span></p>
-<ul>
-<li>Sistema não tem solução ou existe um número infinito de soluções que satisfazem <span class="math inline">\(b- Ax = 0\)</span></li>
-<li>Encontrar a solução única <span class="math inline">\(x\)</span> que minimiza <span class="math inline">\(\Vert x \Vert_2\)</span></li>
-<li>Determinar a solução de norma mínima do sistema linear</li>
-<li>Resolver um sistema de ordem <span class="math inline">\(n\)</span></li>
+\]</span> <span class="math display">\[ posto (A) = m\]</span></p></li>
+<li><p>Sistema não tem solução ou existe um número infinito de soluções que satisfazem <span class="math inline">\(b- Ax = 0\)</span></p></li>
+<li><p>Encontrar a solução única <span class="math inline">\(x\)</span> que minimiza <span class="math inline">\(\Vert x \Vert_2\)</span></p></li>
+<li><p>Determinar a solução de norma mínima do sistema linear</p></li>
+<li><p>Resolver um sistema de ordem <span class="math inline">\(n\)</span></p></li>
 </ul>
 </section>
 <section id="classificação-de-sistemas-lineares-número-de-soluções" class="slide level2">
@@ -458,9 +465,7 @@ A =
 \]</span></p>
 <p><span class="math display">\[
 \text{det}(A) \ne 0
-\]</span></p>
-<p>e</p>
-<p><span class="math display">\[
+\]</span> e <span class="math display">\[
 x =
 \begin{bmatrix}
 1 &amp;2
@@ -514,11 +519,9 @@ x_1 \\ x_2
 \begin{bmatrix}
 2 \\ 4
 \end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[
+\]</span> <span class="math display">\[
 \text{det}(A) = 0
-\]</span></p>
-<p><span class="math display">\[
+\]</span> <span class="math display">\[
 x =
 \begin{bmatrix}
 \theta &amp; 2-\theta
@@ -531,9 +534,7 @@ x =
 <section id="geometria-de-sistema-com-infinitas-soluções" class="slide level2 scrollable">
 <h2>Geometria de sistema com infinitas soluções</h2>
 <ul>
-<li>Por exemplo,</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Por exemplo, <span class="math display">\[
 \begin{bmatrix}
 1 &amp; -3 &amp; 2 \\
 -2 &amp; 8 &amp; -1 \\
@@ -546,8 +547,7 @@ x_1 \\ x_2 \\ x_3
 \begin{bmatrix}
 22 \\ -12 \\ 10
 \end{bmatrix}
-\]</span></p>
-<ul>
+\]</span></p></li>
 <li><p>Com <span class="math inline">\(\text{det}(A) = 0\)</span>, os três planos se interceptam em uma linha reta descrita por <span class="math inline">\(x = \begin{bmatrix}70-6,5\theta &amp; 16-1,5\theta &amp;\theta \end{bmatrix}^\top\)</span></p></li>
 <li><p>Para cada valor de <span class="math inline">\(\theta\)</span> ter-se-á uma solução do sistema linear <img data-src="figs/Aula18/infintias_solucoes.png" data-fig-align="center"></p></li>
 </ul>
@@ -581,9 +581,7 @@ x_1 \\ x_2
 <section id="geometria-de-sistema-sem-solução" class="slide level2 scrollable">
 <h2>Geometria de sistema sem solução</h2>
 <ul>
-<li>Por exemplo,</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Por exemplo, <span class="math display">\[
 \begin{bmatrix}
 1 &amp; -3 &amp; 2 \\
 -2 &amp; 8 &amp; -1 \\
@@ -596,9 +594,8 @@ x_1 \\ x_2 \\ x_3
 \begin{bmatrix}
 20 \\ -10 \\ 80
 \end{bmatrix}
-\]</span></p>
-<ul>
-<li>Com <span class="math inline">\(\text{det}(A) = 0\)</span> os planos não têm ponto em comum <img data-src="figs/Aula18/sem_solucao.png" data-fig-align="center"></li>
+\]</span></p></li>
+<li><p>Com <span class="math inline">\(\text{det}(A) = 0\)</span> os planos não têm ponto em comum <img data-src="figs/Aula18/sem_solucao.png" data-fig-align="center"></p></li>
 </ul>
 </section>
 <section id="sistema-triangular-inferior" class="slide level2 scrollable">
@@ -635,20 +632,15 @@ l_{31}x_1  + l_{32}x_2 + l_{33}x_3 = c_3 &amp;\Longrightarrow x_3 = \frac{c_3 - 
 <section id="sistema-triangular-inferior-1" class="slide level2 scrollable">
 <h2>Sistema triangular inferior</h2>
 <ul>
-<li>Generalizando</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Generalizando <span class="math display">\[
 l{n1}x_1 + l{n2}x_2 + \ldots + l_{n,n-1}x_{n-1} + l_{nn}x_n = c_n
-\]</span></p>
-<p><span class="math display">\[
+\]</span> <span class="math display">\[
 x_n = \frac{c_n - l_{n1}x_1 - l_{n2}x_2 - \ldots - l_{n,n-1}x_{n-1}}{l_{nn}}
-\]</span></p>
-<ul>
-<li>Esquematicamente</li>
-</ul>
-<p><span class="math display">\[
+\]</span></p></li>
+<li><p>Esquematicamente <span class="math display">\[
 x_i = \frac{c_i - \sum_{j=1}^{i-1} l_{ij}x_j}{l_{ii}}
-\]</span></p>
+\]</span></p></li>
+</ul>
 </section>
 <section id="exemplo-de-substituições-sucessivas" class="slide level2 scrollable">
 <h2>Exemplo de substituições sucessivas</h2>
@@ -683,9 +675,7 @@ x_1 - 6x_2 + 8x_3 = 48 &amp;\Longrightarrow x_3 = \frac{48 - (2) + 6(-1)}{8} = 5
 <section id="sistema-triangular-superior" class="slide level2 scrollable">
 <h2>Sistema triangular superior</h2>
 <ul>
-<li>Apresenta a forma</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Apresenta a forma <span class="math display">\[
 \begin{bmatrix}
 u_{11} &amp; u_{12} &amp; u_{13}&amp; \ldots &amp; u_{1,n-1} &amp; u_{1n}\\
 0 &amp; u_{22} &amp; u_{23}&amp; \ldots &amp; u_{2,n-1} &amp; u_{2n}\\
@@ -700,9 +690,8 @@ x_1\\ x_2 \\ x_3 \\ \vdots \\ x_{n-1} \\ x_n
 \begin{bmatrix}
 d_1 \\ d_2 \\ d_3 \\ \vdots \\ d_{n-1} \\ d_n
 \end{bmatrix}
-\]</span></p>
-<ul>
-<li>Solução via substituições retroativas</li>
+\]</span></p></li>
+<li><p>Solução via substituições retroativas</p></li>
 </ul>
 <p><span class="math display">\[\begin{align}
 u_{nn}x_n = d_n &amp;\Longrightarrow x_n = \frac{d_n}{u_{nn}}\\
@@ -721,8 +710,7 @@ u_{11}x_1 + u_{12}x_2 + u_{13}x_3 + \ldots +u_{1n}x_n=d_1 &amp;\Longrightarrow  
 </ul>
 <p><span class="math display">\[
 x_i = \frac{d_i - \sum_{j=i+1}^{n} u_{ij}x_j}{u_{ii}}
-\]</span></p>
-<p><span class="math display">\[
+\]</span> <span class="math display">\[
 i = n, n-1 , \ldots,1
 \]</span></p>
 </section>
@@ -866,11 +854,7 @@ x_1 \\ x_2 \\ x_3
 \begin{bmatrix}
 11\\ -15 \\ 29
 \end{bmatrix}
-\]</span></p>
-<ul>
-<li>Eliminar os elementos da primeira coluna</li>
-</ul>
-<p><span class="math display">\[
+\]</span> - Eliminar os elementos da primeira coluna <span class="math display">\[
 \begin{bmatrix}
 1 &amp; -3 &amp; 2\\
 0 &amp; 2 &amp; 3\\
@@ -885,9 +869,7 @@ x_1 \\ x_2 \\ x_3
 \end{bmatrix}
 \]</span></p>
 <ul>
-<li>Eliminar os elementos da segunda coluna</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Eliminar os elementos da segunda coluna <span class="math display">\[
 \begin{bmatrix}
 1 &amp; -3 &amp; 2\\
 0 &amp; 2 &amp; 3\\
@@ -900,8 +882,7 @@ x_1 \\ x_2 \\ x_3
 \begin{bmatrix}
 11\\ 7 \\ -36
 \end{bmatrix}
-\]</span></p>
-<ul>
+\]</span></p></li>
 <li><p>Encontrar o vetor solução através de substituições retroativas <span class="math display">\[\begin{align}
 -12x_3 = -36 &amp;\Longrightarrow x_3 = 3\\
 2x_2 + 3x_3 = 7 &amp;\Longrightarrow x_2 = -1 \\
@@ -952,19 +933,15 @@ r =
 <li>Método de Gauss falha quando pivô é nulo</li>
 <li>Consiste em escolher como pivô o maior elemento em módulo da coluna cujos elementos serão eliminados</li>
 <li>A pivotação parcial garante que o pivô seja não nulo, exceto quando a matriz for singular</li>
-<li>Todos os multiplicadores satisfazem</li>
-</ul>
-<p><span class="math display">\[
+<li>Todos os multiplicadores satisfazem <span class="math display">\[
 -1 \le m_{ij}\le 1
-\]</span></p>
-<ul>
+\]</span></li>
 <li>Multiplicadores grandes podem ampliar os erros de arredondamento</li>
 </ul>
 </section>
 <section id="exemplo-de-pivotação-parcial" class="slide level2 scrollable">
 <h2>Exemplo de pivotação parcial</h2>
-<p>Resolver o sistema pelo método de Gauss com pivotação parcial</p>
-<p><span class="math display">\[
+<p>Resolver o sistema pelo método de Gauss com pivotação parcial <span class="math display">\[
 \begin{bmatrix}
 1 &amp; -3 &amp; 2\\
 -2 &amp; 8 &amp; -1\\
@@ -977,14 +954,11 @@ x_1 \\ x_2 \\ x_3
 \begin{bmatrix}
 11\\ -15 \\ 29
 \end{bmatrix}
-\]</span></p>
+\]</span> - Escolha do pivô: (elemento <span class="math inline">\(a_{31}\)</span>)</p>
 <ul>
-<li><p>Escolha do pivô: (elemento <span class="math inline">\(a_{31}\)</span>)</p></li>
 <li><p>Escolha do Multiplicador <span class="math inline">\(m_{11} = \frac{a_{11}}{a_{31}} = 0,25\)</span></p></li>
 <li><p>Escolha do Multiplicador <span class="math inline">\(m_{21} = \frac{a_{21}}{a_{31}} = -0,5\)</span></p></li>
-<li><p>Eliminar os elementos da primeira coluna</p></li>
-</ul>
-<p><span class="math display">\[
+<li><p>Eliminar os elementos da primeira coluna <span class="math display">\[
 \begin{bmatrix}
 0 &amp; -1,5 &amp; 0,75\\
 0 &amp; 5 &amp; 1,5\\
@@ -997,13 +971,12 @@ x_1 \\ x_2 \\ x_3
 \begin{bmatrix}
 3,75\\ -0,5 \\ 29
 \end{bmatrix}
-\]</span></p>
+\]</span></p></li>
+</ul>
 <p>Para eliminar o elemento da segunda coluna, escolhe-se o maior elemento em módulo desta coluna, sem considerar o elemento da linha pivotal <span class="math inline">\(L3\)</span>. Sendo assim, o pivô será o elemento <span class="math inline">\(a_{22}\)</span></p>
 <ul>
 <li><p>Escolha do multiplicador <span class="math inline">\(m_{12} = \frac{a_{12}}{a_{22}} = -0,3\)</span></p></li>
-<li><p>Eliminar os elementos da segunda coluna</p></li>
-</ul>
-<p><span class="math display">\[
+<li><p>Eliminar os elementos da segunda coluna <span class="math display">\[
 \begin{bmatrix}
 0 &amp; 0 &amp; 1,2\\
 0 &amp; 5 &amp; 1,5\\
@@ -1016,9 +989,9 @@ x_1 \\ x_2 \\ x_3
 \begin{bmatrix}
 3,6\\ -0,5 \\ 29
 \end{bmatrix}
-\]</span></p>
-<p>Para que a matriz fique triangular superior, podemos trocar as linhas <span class="math inline">\(L3\)</span> e <span class="math inline">\(L1\)</span></p>
-<p><span class="math display">\[
+\]</span></p></li>
+</ul>
+<p>Para que a matriz fique triangular superior, podemos trocar as linhas <span class="math inline">\(L3\)</span> e <span class="math inline">\(L1\)</span> <span class="math display">\[
 \begin{bmatrix}
 4  &amp; -6 &amp; 5\\
 0 &amp; 5 &amp; 1,5\\
@@ -1294,7 +1267,24 @@ x_1 \\ x_2 \\ x_3
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -1324,31 +1314,50 @@ x_1 \\ x_2 \\ x_3
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

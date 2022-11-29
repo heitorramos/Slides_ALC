@@ -7,7 +7,7 @@
 <link href="Aula16_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula16_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula16_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,74 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
     }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="Aula16_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula16_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -384,12 +325,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 16: Regressão Múltipla</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -401,7 +349,7 @@
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento</p>
+<p>Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento.</p>
 </div>
 </div>
 </div>
@@ -488,10 +436,7 @@ renda_2 &amp; área_2 &amp; \ldots &amp; salão_2\\
 renda_{1499} &amp; área_{1499} &amp; \ldots &amp; salão_{1499}\\
 renda_{1500} &amp; área_{1500} &amp; \ldots &amp; salão_{1500}\\
 \end{bmatrix}
-\]</span></p>
-<ul>
-<li>30 características de 1500 imóveis (matrix <span class="math inline">\(X\)</span> de dimensão <span class="math inline">\(1500\times 30\)</span>)</li>
-</ul>
+\]</span> - 30 características de 1500 imóveis (matrix <span class="math inline">\(X\)</span> de dimensão <span class="math inline">\(1500\times 30\)</span>)</p>
 </section>
 <section id="preço-e-uma-soma-ponderada" class="slide level2">
 <h2>Preço e uma soma ponderada</h2>
@@ -778,19 +723,15 @@ b_{30}
 <li>O vetor <span class="math inline">\(Y\)</span> de <span class="math inline">\(b\)</span></li>
 <li>E o vetor <span class="math inline">\(b\)</span> de <span class="math inline">\(x\)</span></li>
 </ul>
-<p>Temos o problema</p>
-<p><span class="math display">\[Ax \approx b\]</span></p>
+<p>Temos o problema <span class="math display">\[Ax \approx b\]</span></p>
 </section>
 <section id="equações-normais-relembrando" class="slide level2 scrollable">
 <h2>Equações normais (Relembrando)</h2>
 <!-- Seja $x\in C(A)$, então $Ax = v$ -->
 <!-- $b\notin C(A)$ pois $b - Ax = e -->
 <p><span class="math display">\[A \underbrace{x}_{\text{coeficientes}} = b + \underbrace{e}_{\text{resíduos}}\]</span></p>
-<p>Ou seja, o erro é dado por</p>
-<p><span class="math display">\[e = Ax+b\]</span></p>
-<p>Consideremos <span class="math inline">\(\hat{x}\)</span> como a melhor solução possível, ou seja</p>
-<p><span class="math display">\[e = A\hat{x} - b\]</span></p>
-<p>é o menor erro possível</p>
+<p>Ou seja, o erro é dado por <span class="math display">\[e = Ax+b\]</span></p>
+<p>Consideremos <span class="math inline">\(\hat{x}\)</span> como a melhor solução possível, ou seja <span class="math display">\[e = A\hat{x} - b\]</span> é o menor erro possível</p>
 <p>Perceba que <span class="math inline">\(A\hat{x}=p\)</span>, onde <span class="math inline">\(p\)</span> é um vetor formado pela combinação linear das colunas de <span class="math inline">\(A\)</span>, ou seja, <span class="math inline">\(p\in C(A)\)</span> <!--  --> <!-- #### Interpretação geométrica --> <img data-src="figs/Aula15/interpretacao_geometrica.png" data-fig-align="center" alt="Interpretação geométrica"></p>
 <p><span class="math inline">\(Ax=p\)</span> será perpendicular ao vetor <span class="math inline">\(e\)</span>. Sendo assim, <span class="math inline">\(p^\top e = 0\)</span>. Como <span class="math inline">\(e = A\hat{x}-b\)</span> temos</p>
 <p><span class="math display">\[\begin{align}
@@ -798,8 +739,7 @@ b_{30}
 x^\top \underbrace{A^\top (A\hat{x} - b)}_{0} &amp;= 0
 \end{align}\]</span></p>
 <h5 id="equação-normal">Equação normal</h5>
-<p><span class="math display">\[ A^\top A \hat{x} - A^\top = 0\]</span></p>
-<p>ou</p>
+<p><span class="math display">\[ A^\top A \hat{x} - A^\top = 0\]</span> ou</p>
 <p><span class="math display">\[ A^\top A \hat{x} = A^\top b\]</span></p>
 </section>
 <section id="equações-normais-para-regressão-múltipla" class="slide level2 scrollable">
@@ -831,62 +771,6 @@ b_{p-1}
 \end{bmatrix}
 \]</span></p>
 <p>Onde o vetor solução <span class="math inline">\(b\)</span> fornece os estimadores de mínimos quadrados dos parâmetros <span class="math inline">\(\beta_i\)</span> da equação de regressão <span class="math inline">\(y(x_1, x_2, \ldots, x_{p-1}) = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_{p-1}x_{p-1} + e\)</span></p>
-</section>
-<section id="considerações-sobre-o-coeficiente-de-determinação" class="slide level2">
-<h2>Considerações sobre o coeficiente de determinação</h2>
-<ul>
-<li>Como avaliar se o modelo é bom?</li>
-<li>Em geral, quando o vetor de resíduos for “pequeno”, temos um bom ajuste</li>
-</ul>
-<p><span class="math display">\[
-\Vert r \Vert^2 = \Vert Y - Y^2\Vert = \sum_{i=1}^n(y_i = \hat{y})^2
-\]</span></p>
-</section>
-<section id="considerações-sobre-o-coeficiente-de-determinação-1" class="slide level2 scrollable">
-<h2>Considerações sobre o coeficiente de determinação</h2>
-<ul>
-<li>Mas o ajuste é bom em relação a que?</li>
-<li>Vamos usar o modelo mais simples, a média.</li>
-</ul>
-<div class="cell" data-execution_count="1">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb1-4"><a href="#cb1-4"></a>x <span class="op">=</span> np.array([<span class="dv">18</span>,<span class="dv">19</span>,<span class="dv">20</span>,<span class="dv">24</span>,<span class="dv">25</span>,<span class="dv">27</span>,<span class="dv">28</span>,<span class="dv">29</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>y <span class="op">=</span> np.array([<span class="fl">76.1</span>, <span class="dv">77</span>, <span class="fl">78.1</span>, <span class="fl">79.9</span>, <span class="fl">81.1</span>, <span class="fl">81.8</span>, <span class="fl">82.8</span>, <span class="fl">83.5</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb1-7"><a href="#cb1-7"></a>model.fit(x, y)</span>
-<span id="cb1-8"><a href="#cb1-8"></a>plt.scatter(x, y)</span>
-<span id="cb1-9"><a href="#cb1-9"></a>plt.plot(x,model.predict(x), color<span class="op">=</span><span class="st">"red"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>):</span>
-<span id="cb1-11"><a href="#cb1-11"></a>    plt.vlines(x[i], y[i], model.predict(x)[i])</span>
-<span id="cb1-12"><a href="#cb1-12"></a>plt.hlines(<span class="fl">80.3</span>, np.<span class="bu">min</span>(x), np.<span class="bu">max</span>(x), color<span class="op">=</span><span class="st">"green"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>):</span>
-<span id="cb1-14"><a href="#cb1-14"></a>    plt.vlines(x[i], y[i], <span class="fl">80.3</span>, color<span class="op">=</span><span class="st">'grey'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Aula16_files/figure-revealjs/cell-2-output-1.png" width="790" height="411"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="considerações-sobre-o-coeficiente-de-determinação-2" class="slide level2 scrollable">
-<h2>Considerações sobre o coeficiente de determinação</h2>
-<ul>
-<li><span class="math inline">\(\text{SQRes} = \sum_{i=1}^n (y_i - \hat{y}_i)^2\)</span> (soma dos quadrados residual)</li>
-<li><span class="math inline">\(\text{SQTot} = \sum_{i=1}^n (y_i - \bar y)^2\)</span> (soma dos quadrados total)</li>
-<li><span class="math inline">\(\text{SQReg} = \sum_{i=1}^n (\hat y_i - \bar y)^2\)</span> (soma dos quadrados devido à regressão)</li>
-</ul>
-<p>Dessa maneira,</p>
-<p><span class="math display">\[
-r^2 = \frac{\text{SQTot} - \text{SQRes}}{\text{SQTot}} = 1 - \frac{\text{SQRes}}{\text{SQTot}}
-\]</span></p>
-<p>sendo <span class="math inline">\(r^2\)</span> denominado coeficiente de determinação e satisfazendo <span class="math inline">\(0\le r^2 \le 1\)</span></p>
 
 <img src="common/UFMG_HEAD.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://heitorramos.github.io/alc.html" class="uri">https://heitorramos.github.io/alc.html</a></p>
@@ -1143,7 +1027,24 @@ r^2 = \frac{\text{SQTot} - \text{SQRes}}{\text{SQTot}} = 1 - \frac{\text{SQRes}}
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -1173,31 +1074,50 @@ r^2 = \frac{\text{SQTot} - \text{SQRes}}{\text{SQTot}} = 1 - \frac{\text{SQRes}}
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

@@ -31,7 +31,7 @@ resources:
 ---
 ## Créditos
 :::{.callout-important}
-Esses slides são fortemente baseados no livro do prof. Frederico Ferreira Campos, Filho.
+Esses slides são fortemente baseados no livro do prof. Frederico Ferreira Campos, Filho
 :::
 
 ## Decomposição $LU${.scrollable}

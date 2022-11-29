@@ -7,7 +7,7 @@
 <link href="Aula09_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula09_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula09_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="Aula09_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula09_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -320,12 +325,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 09: PageRank</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -337,7 +349,7 @@
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento</p>
+<p>Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento.</p>
 </div>
 </div>
 </div>
@@ -489,8 +501,7 @@
 <h2><em>BrokenRank</em> em notação matricial</h2>
 <p><span class="math display">\[p = \begin{bmatrix}p_1 \\ p_2\\ \vdots \\ p_n\end{bmatrix}_{n\times 1}, L = \begin{bmatrix}L_{11} &amp; L_{12} &amp; \ldots &amp; L_{1n}\\ L_{21} &amp; L_{22} &amp; \ldots &amp; L_{2n} \\ \vdots &amp;\vdots&amp;\ddots&amp;\vdots\\ L_{n1} &amp; L_{n2} &amp; \ldots &amp; L_{nn}\end{bmatrix}_{n\times n}\]</span></p>
 <p><span class="math display">\[M = \begin{bmatrix}m_1 &amp; 0 &amp;\ldots &amp; 0\\ 0 &amp; m_2 &amp; \ldots &amp; 0\\\vdots &amp;\vdots&amp;\ddots&amp;\vdots\\ 0 &amp; 0 &amp; \dots &amp; m_n\end{bmatrix}_{n\times n}\]</span></p>
-<p>Vetor <em>BrokenRank</em> de <span class="math inline">\(p\)</span></p>
-<p><span class="math display">\[ p = LM^{-1}p\]</span></p>
+<p>Vetor <em>BrokenRank</em> de <span class="math inline">\(p\)</span> <span class="math display">\[ p = LM^{-1}p\]</span></p>
 <p><span class="math display">\[
 \begin{bmatrix}
 \\
@@ -526,16 +537,13 @@ P
 \\
 \\
 \end{bmatrix}
-\]</span></p>
-<p>Se tomarmos um elemento <span class="math inline">\(i\)</span> da matriz <span class="math inline">\(P\)</span>, teremos:</p>
+\]</span> Se tomarmos um elemento <span class="math inline">\(i\)</span> da matriz <span class="math inline">\(P\)</span>, teremos:</p>
 <p><span class="math display">\[ p_i = \frac{L_{i1}}{m_1}p_i +  \frac{L_{i2}}{m_1}p_2 + \ldots + \frac{L_{in}}{m_n}p_n\]</span></p>
-<p>reescrevendo :</p>
-<p><span class="math display">\[p_i = \sum_{j=1}^n \frac{L_{ij}}{m_j}p_j\]</span></p>
+<p>reescrevendo : <span class="math display">\[p_i = \sum_{j=1}^n \frac{L_{ij}}{m_j}p_j\]</span></p>
 </section>
 <section id="autovalores-e-autovetores" class="slide level2">
 <h2>Autovalores e Autovetores</h2>
-<p><span class="math display">\[p = LM^{-1}p\]</span></p>
-<p>Seja <span class="math inline">\(A = LM^{-1}\)</span>, então <span class="math inline">\(p = Ap\)</span> (ou <span class="math inline">\(Ap = p\)</span>). O que isso quer dizer?</p>
+<p><span class="math display">\[p = LM^{-1}p\]</span> Seja <span class="math inline">\(A = LM^{-1}\)</span>, então <span class="math inline">\(p = Ap\)</span> (ou <span class="math inline">\(Ap = p\)</span>). O que isso quer dizer?</p>
 <div class="callout callout-important callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -630,10 +638,8 @@ P
 <ul>
 <li><em>PageRank</em> é uma pequena variação do <em>BrokenRank</em></li>
 </ul>
-<p><span class="math display">\[ p_i = \frac{1-d}{n} + d\sum_{j\rightarrow i} \frac{p_j}{m_j} = \frac{1-d}{n} + d\sum_{j=1}^n\frac{L_{ij}}{m_j}p_j\]</span></p>
-<p>onde <span class="math inline">\(0&lt;d&lt;1\)</span> é uma constante (ex: <span class="math inline">\(d=0.85\)</span>)</p>
-<p>Em notação matricial</p>
-<p><span class="math display">\[ p =  \left( \frac{1-d}{n}E + dLM^{-1}\right)p\]</span></p>
+<p><span class="math display">\[ p_i = \frac{1-d}{n} + d\sum_{j\rightarrow i} \frac{p_j}{m_j} = \frac{1-d}{n} + d\sum_{j=1}^n\frac{L_{ij}}{m_j}p_j\]</span> onde <span class="math inline">\(0&lt;d&lt;1\)</span> é uma constante (ex: <span class="math inline">\(d=0.85\)</span>)</p>
+<p>Em notação matricial <span class="math display">\[ p =  \left( \frac{1-d}{n}E + dLM^{-1}\right)p\]</span></p>
 <p>onde <span class="math inline">\(E\)</span> é a matriz <span class="math inline">\(n\times n\)</span> de <span class="math inline">\(1s\)</span></p>
 </section>
 <section id="definição-do-pagerank" class="slide level2 scrollable">
@@ -644,8 +650,7 @@ P
 <p><span class="math display">\[ \begin{bmatrix}p\end{bmatrix} = \frac{1-d}{n}\begin{bmatrix}1&amp;\ldots&amp;1\\\vdots&amp;\ddots&amp;\vdots\\1&amp;\ldots&amp;1\end{bmatrix}\begin{bmatrix}p\end{bmatrix} + d\begin{bmatrix}LM^{-1}\end{bmatrix}\begin{bmatrix}p\end{bmatrix}\]</span></p>
 <p><span class="math display">\[ \begin{bmatrix}p\end{bmatrix} = 1-d\begin{bmatrix}1/n&amp;\ldots&amp;1/n\\\vdots&amp;\ddots&amp;\vdots\\1/n&amp;\ldots&amp;1/n\end{bmatrix}\begin{bmatrix}p\end{bmatrix} + d\begin{bmatrix}LM^{-1}\end{bmatrix}\begin{bmatrix}p\end{bmatrix}\]</span></p>
 <p>A matriz com elementos <span class="math inline">\(1/n\)</span> indica que não importa em qual página o surfista aleatório esteja, ele irá para qualquer página com probabilidade <span class="math inline">\(1/n\)</span>, ou seja, é um salto aleatório uniformemente distribuído entre todas as páginas.</p>
-<p>Tomando uma linha específica:</p>
-<p><span class="math display">\[p_i = (1-d)\frac{1}{n}\underbrace{(p_1+p_2+\dots+p_n)}_{1} + d \sum_{i=1}^n \frac{L_{ij}}{m_j}p_j\]</span></p>
+<p>Tomando uma linha específica: <span class="math display">\[p_i = (1-d)\frac{1}{n}\underbrace{(p_1+p_2+\dots+p_n)}_{1} + d \sum_{i=1}^n \frac{L_{ij}}{m_j}p_j\]</span></p>
 <p><span class="math display">\[p_i = \frac{1-d}{n} + d \sum_{i=1}^n \frac{L_{ij}}{m_j}p_j\]</span></p>
 </section>
 <section id="pagerank-possui-p-único" class="slide level2">
@@ -1048,7 +1053,24 @@ p^{(2)}&amp;= \begin{bmatrix}0.394\\0.355\\0.252\end{bmatrix}
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -1078,31 +1100,50 @@ p^{(2)}&amp;= \begin{bmatrix}0.394\\0.355\\0.252\end{bmatrix}
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

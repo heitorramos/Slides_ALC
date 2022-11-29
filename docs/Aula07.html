@@ -7,7 +7,7 @@
 <link href="Aula07_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula07_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula07_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="Aula07_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula07_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -320,12 +325,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 07: Normas de Vetores e Matrizes - Parte II</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -337,7 +349,7 @@
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento</p>
+<p>Os slides desse curso são fortemente baseados no curso do Fabrício Murai e do Erickson Nascimento.</p>
 </div>
 </div>
 </div>
@@ -428,9 +440,8 @@
 <h2>Médias para referência</h2>
 <ul>
 <li>250 instâncias do vetor aleatório: <span class="math inline">\(Y = (Y_1, Y_2)\)</span></li>
-<li>Vetor com os valores esperados de cada variável:</li>
+<li>Vetor com os valores esperados de cada variável: <span class="math display">\[\mathbb E(Y) = \mathbb E(Y_1,Y_2) = (\mathbb E(Y_1), \mathbb E(Y_2)) = (\mu_1, \mu_2) = \mu\]</span></li>
 </ul>
-<p><span class="math display">\[\mathbb E(Y) = \mathbb E(Y_1,Y_2) = (\mathbb E(Y_1), \mathbb E(Y_2)) = (\mu_1, \mu_2) = \mu\]</span></p>
 
 <img data-src="figs/Aula07/pressao.png" style="width:55.0%" class="r-stretch quarto-figure-center"></section>
 <section id="quem-está-distante-do-esperado" class="slide level2 scrollable">
@@ -535,7 +546,7 @@
 <ul>
 <li><span class="math inline">\((\mu_1,\mu_2) = (120,80)\)</span> e <span class="math inline">\((\sigma_1, \sigma_2) = (10,2)\)</span></li>
 <li>Andar <span class="math inline">\(n\sigma_1\)</span> ao longo do eixo 1 é EQUIVALENTE a andar <span class="math inline">\(n\sigma_2\)</span> no eixo 2</li>
-<li>Por exemplo, 20 unidades ao longo do eixo 1 (ou <span class="math inline">\(2\sigma_1\)</span>) é ESTATISTICAMENTE EQUIVALENTE a 4 unidades ao (ou <span class="math inline">\(2\sigma_2\)</span>) longo do eixo 2 <img data-src="figs/Aula07/distancia_centro.png" data-fig-align="center" style="width:55.0%"></li>
+<li>Por exemplo, 20 unidades ao longo do eixo 1 (ou <span class="math inline">\(2\sigma_1\)</span>) é ESTATISTICAMENTE EQUIVALENTE a 4 unidades ao (ou <span class="math inline">\(2\sigma_2\)</span>) longo do eixo 2 <img data-src="figs/Aula07/distancia_centro.png" style="width:55.0%" data-fig-align="center"></li>
 </ul>
 </section>
 <section id="distância-medida-em-dp-2" class="slide level2 scrollable">
@@ -557,23 +568,17 @@ d(y_1,y_2) &amp;= \sqrt{z_1^2 + z_2^2} \\
 <ul>
 <li>NESSA NOVA MÉTRICA, quais os pontos <span class="math inline">\((y_1, y_2)\)</span> que estão a uma MESMA distância do centro <span class="math inline">\((\mu_1, \mu_2)\)</span>?</li>
 <li>Tome uma distância fixa (por exemplo, 1)</li>
-<li>Eles formam uma ELIPSE centrada em <span class="math inline">\((\mu_1, \mu_2)\)</span> e com eixos paralelos aos eixos coordenados <img data-src="figs/Aula07/elipse.png" data-fig-align="center" style="width:100.0%"></li>
+<li>Eles formam uma ELIPSE centrada em <span class="math inline">\((\mu_1, \mu_2)\)</span> e com eixos paralelos aos eixos coordenados <img data-src="figs/Aula07/elipse.png" style="width:100.0%" data-fig-align="center"></li>
 </ul>
 <p><span class="math display">\[ d(y, \mu)  = \sqrt{\left(\frac{y_1-120}{10}\right)^2 + \left(\frac{y_2-80}{2}\right)^2} =1 \]</span></p>
 </section>
 <section id="tamanho-dos-eixos" class="slide level2 scrollable">
 <h2>Tamanho dos eixos</h2>
 <ul>
-<li>Distância <span class="math inline">\(c&gt;0\)</span> do centro: pontos satisfazem a equação</li>
-</ul>
-<p><span class="math display">\[ d(y, \mu)  = \sqrt{\left(\frac{y_1-120}{10}\right)^2 + \left(\frac{y_2-80}{2}\right)^2} =c \]</span></p>
-<ul>
+<li>Distância <span class="math inline">\(c&gt;0\)</span> do centro: pontos satisfazem a equação <span class="math display">\[ d(y, \mu)  = \sqrt{\left(\frac{y_1-120}{10}\right)^2 + \left(\frac{y_2-80}{2}\right)^2} =c \]</span></li>
 <li>Os eixos têm comprimentos iguais a <span class="math inline">\(c\sigma_1\)</span> e <span class="math inline">\(c\sigma_2\)</span>. O eixo maior da elipse: variável com maior DP</li>
 <li>Quantas vezes o maior eixo é maior que o eixo menor?</li>
-<li>Se <span class="math inline">\(\sigma_1\)</span> é o maior DP,</li>
-</ul>
-<p><span class="math display">\[\frac{\text{eixo maior}}{\text{eixo menor}} = \frac{c\sigma_1}{c\sigma2} = \frac{\sigma1}{\sigma_2}\]</span></p>
-<ul>
+<li>Se <span class="math inline">\(\sigma_1\)</span> é o maior DP, <span class="math display">\[\frac{\text{eixo maior}}{\text{eixo menor}} = \frac{c\sigma_1}{c\sigma2} = \frac{\sigma1}{\sigma_2}\]</span></li>
 <li>Não depende da distância <span class="math inline">\(c\)</span>. Ao variarmos <span class="math inline">\(c\)</span> teremos elipses concêntricas</li>
 </ul>
 </section>
@@ -600,9 +605,7 @@ d^2(y,\mu) &amp;= \left(\frac{y_1-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y_2-\m
 <p>-Vimos que <span class="math display">\[\begin{align}
 d^2(y,\mu) &amp;= \left(\frac{y_1-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y_2-\mu_2}{\sigma_2}\right)^2 \\
 &amp;= (y-\mu)^\top \Sigma^{-1}(y-\mu)
-\end{align}\]</span> onde</p>
-<p><span class="math display">\[ \Sigma = \begin{bmatrix} \sigma_1^2 &amp; 0 \\ 0 &amp; \sigma_2^2\end{bmatrix}\]</span></p>
-<p>é a equação de uma elipse centrada em <span class="math inline">\(\mu = (\mu_1, \mu_2)\)</span></p>
+\end{align}\]</span> onde <span class="math display">\[ \Sigma = \begin{bmatrix} \sigma_1^2 &amp; 0 \\ 0 &amp; \sigma_2^2\end{bmatrix}\]</span> é a equação de uma elipse centrada em <span class="math inline">\(\mu = (\mu_1, \mu_2)\)</span></p>
 <ul>
 <li>Quando a matriz <span class="math inline">\(\Sigma\)</span> é DIAGONAL com elementos positivos (com as variâncias <span class="math inline">\(\sigma_i\)</span>’s), então a elipse tem eixos paralelos aos eixos e o tamanho de cada eixo é proporcional ao <span class="math inline">\(\sigma_i\)</span> da variável associada</li>
 </ul>
@@ -629,10 +632,7 @@ d^2(y,\mu) &amp;= \left(\frac{y_1-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y_2-\m
 <section id="forma-quadrática" class="slide level2 scrollable">
 <h2>Forma quadrática</h2>
 <ul>
-<li>Medida de distância é uma FORMA QUADRÁTICA</li>
-</ul>
-<p><span class="math display">\[ d^2(y,\mu) = (y-\mu)^\top \Sigma^{-1}(y-\mu)\]</span></p>
-<ul>
+<li>Medida de distância é uma FORMA QUADRÁTICA <span class="math display">\[ d^2(y,\mu) = (y-\mu)^\top \Sigma^{-1}(y-\mu)\]</span></li>
 <li>É a memsa expressão matricial de distância que usamos antes MAS…</li>
 <li>… a matriz não é mais DIAGONAL</li>
 </ul>
@@ -641,29 +641,17 @@ d^2(y,\mu) &amp;= \left(\frac{y_1-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y_2-\m
 <section id="quem-é-sigma" class="slide level2 scrollable">
 <h2>Quem é <span class="math inline">\(\Sigma\)</span>?</h2>
 <ul>
-<li>Medida de distância é uma FORMA QUADRÁTICA</li>
-</ul>
-<p><span class="math display">\[ d^2(y,\mu) = (y-\mu)^\top \Sigma^{-1}(y-\mu)\]</span></p>
-<ul>
-<li>Matriz <span class="math inline">\(\Sigma\)</span> é uma matriz <span class="math inline">\(2\times 2\)</span> simétrica chamada de matriz de covariância</li>
-</ul>
-<p><span class="math display">\[ \Sigma = \begin{bmatrix}\sigma_1^2 &amp; \rho\sigma_1\sigma_2\\ \rho\sigma_1\sigma_2 &amp; \sigma_2^2\end{bmatrix}\]</span></p>
-<p>onde <span class="math inline">\(\rho = \text{Corr}(Y_1, Y_2)\)</span> é o índice de correlação de Pearson entre <span class="math inline">\(Y_1\)</span> e <span class="math inline">\(Y_2\)</span></p>
-<ul>
-<li>Temos sempre <span class="math inline">\(-1 \le \rho \le 1\)</span></li>
-<li>Os elementos fora da diagonal, <span class="math inline">\(\rho\sigma_1\sigma_2\)</span>, são chamados de covariância entre <span class="math inline">\(Y_1\)</span> e <span class="math inline">\(Y_2\)</span></li>
-<li>Costumamos escrever <span class="math inline">\(\text{Cov}(Y_1,Y_2) = \rho\sigma_1\sigma_2 = \sigma_{12}\)</span></li>
+<li><p>Medida de distância é uma FORMA QUADRÁTICA <span class="math display">\[ d^2(y,\mu) = (y-\mu)^\top \Sigma^{-1}(y-\mu)\]</span></p></li>
+<li><p>Matriz <span class="math inline">\(\Sigma\)</span> é uma matriz <span class="math inline">\(2\times 2\)</span> simétrica chamada de matriz de covariância <span class="math display">\[ \Sigma = \begin{bmatrix}\sigma_1^2 &amp; \rho\sigma_1\sigma_2\\ \rho\sigma_1\sigma_2 &amp; \sigma_2^2\end{bmatrix}\]</span> onde <span class="math inline">\(\rho = \text{Corr}(Y_1, Y_2)\)</span> é o índice de correlação de Pearson entre <span class="math inline">\(Y_1\)</span> e <span class="math inline">\(Y_2\)</span></p></li>
+<li><p>Temos sempre <span class="math inline">\(-1 \le \rho \le 1\)</span></p></li>
+<li><p>Os elementos fora da diagonal, <span class="math inline">\(\rho\sigma_1\sigma_2\)</span>, são chamados de covariância entre <span class="math inline">\(Y_1\)</span> e <span class="math inline">\(Y_2\)</span></p></li>
+<li><p>Costumamos escrever <span class="math inline">\(\text{Cov}(Y_1,Y_2) = \rho\sigma_1\sigma_2 = \sigma_{12}\)</span></p></li>
 </ul>
 </section>
 <section id="relação-entre-sigma-e-a-elipse" class="slide level2 scrollable">
 <h2>Relação entre <span class="math inline">\(\Sigma\)</span> e a elipse</h2>
 <ul>
-<li>distância é</li>
-</ul>
-<p><span class="math display">\[ d^2(y,\mu) = (y-\mu)^\top \Sigma^{-1}(y-\mu)\]</span></p>
-<p>onde <span class="math inline">\(\Sigma\)</span> é uma matriz <span class="math inline">\(2\times 2\)</span> simétrica dada por</p>
-<p><span class="math display">\[ \Sigma = \begin{bmatrix}\sigma_1^2 &amp; \rho\sigma_1\sigma_2\\ \rho\sigma_1\sigma_2 &amp; \sigma_2^2\end{bmatrix}\]</span></p>
-<ul>
+<li>distância é <span class="math display">\[ d^2(y,\mu) = (y-\mu)^\top \Sigma^{-1}(y-\mu)\]</span> onde <span class="math inline">\(\Sigma\)</span> é uma matriz <span class="math inline">\(2\times 2\)</span> simétrica dada por <span class="math display">\[ \Sigma = \begin{bmatrix}\sigma_1^2 &amp; \rho\sigma_1\sigma_2\\ \rho\sigma_1\sigma_2 &amp; \sigma_2^2\end{bmatrix}\]</span></li>
 <li>Pontos equidistantes de <span class="math inline">\(\mu = (\mu_1, \mu_2)\)</span> estão numa elipse</li>
 <li>Eixos da elipse: na direção dos AUTOVETORES da matriz <span class="math inline">\(\Sigma^{-1}\)</span></li>
 <li>O tamanho de cada eixo é proporcional à raiz do AUTOVALOR correspondente</li>
@@ -694,14 +682,9 @@ d^2(y,\mu) &amp;= \left(\frac{y_1-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y_2-\m
 <p><strong>Prova</strong></p>
 </div>
 <div class="callout-content">
-<p>Suponha que <span class="math inline">\(v\)</span> é autovetor de <span class="math inline">\(\Sigma\)</span> com autovalor <span class="math inline">\(\lambda &gt;0\)</span>:</p>
-<p><span class="math display">\[\Sigma v = \lambda v\]</span></p>
-<p><span class="math display">\[ \Sigma^{-1}\Sigma v = \Sigma^{-1}
+<p>Suponha que <span class="math inline">\(v\)</span> é autovetor de <span class="math inline">\(\Sigma\)</span> com autovalor <span class="math inline">\(\lambda &gt;0\)</span>: <span class="math display">\[\Sigma v = \lambda v\]</span> <span class="math display">\[ \Sigma^{-1}\Sigma v = \Sigma^{-1}
 \lambda v\]</span></p>
-<p>ou seja,</p>
-<p><span class="math display">\[ v = \lambda\Sigma^{-1} v\]</span></p>
-<p>ou ainda, como <span class="math inline">\(\lambda &gt;0\)</span>,</p>
-<p><span class="math display">\[ \frac{1}{\lambda}v = \Sigma^{-1}v\]</span></p>
+<p>ou seja, <span class="math display">\[ v = \lambda\Sigma^{-1} v\]</span> ou ainda, como <span class="math inline">\(\lambda &gt;0\)</span>, <span class="math display">\[ \frac{1}{\lambda}v = \Sigma^{-1}v\]</span></p>
 </div>
 </div>
 </div>
@@ -709,14 +692,11 @@ d^2(y,\mu) &amp;= \left(\frac{y_1-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y_2-\m
 <section id="distância-estatística-em-k-dimensões" class="slide level2 scrollable">
 <h2>Distância estatística em <span class="math inline">\(k\)</span> dimensões</h2>
 <ul>
-<li>Seja <span class="math inline">\(Y = (Y_1, Y_2, \ldots, Y_k)\)</span> um vetor aleatório de dimensão <span class="math inline">\(k\)</span></li>
-<li>Seja <span class="math inline">\(\mu = (\mu_1, \mu_2, \ldots, \mu_k)\)</span> seu VETOR-COLUNA de valores esperados</li>
-<li>Seja <span class="math inline">\(\Sigma\)</span> a matriz <span class="math inline">\(k\times k\)</span> com a covariância <span class="math inline">\(\sigma_{ij} = \rho_{ij}\sigma_i\sigma_j\)</span> onde <span class="math inline">\(\rho_{ij}\)</span> é a correlação entre <span class="math inline">\(Y_i\)</span> e <span class="math inline">\(Y_j\)</span></li>
-<li>Distância estatística:</li>
-</ul>
-<p><span class="math display">\[ d^2(y,\mu) = (y-\mu)^\top \Sigma^{-1}(y-\mu)\]</span></p>
-<ul>
-<li>Pontos equidistantes de <span class="math inline">\(\mu\)</span> formam um elipsóide em <span class="math inline">\(k\)</span> dimensões com eixos nas direções dos autovetores de <span class="math inline">\(\Sigma\)</span> e com tamanhos proporcionais aos seus respectivos autovetores</li>
+<li><p>Seja <span class="math inline">\(Y = (Y_1, Y_2, \ldots, Y_k)\)</span> um vetor aleatório de dimensão <span class="math inline">\(k\)</span></p></li>
+<li><p>Seja <span class="math inline">\(\mu = (\mu_1, \mu_2, \ldots, \mu_k)\)</span> seu VETOR-COLUNA de valores esperados</p></li>
+<li><p>Seja <span class="math inline">\(\Sigma\)</span> a matriz <span class="math inline">\(k\times k\)</span> com a covariância <span class="math inline">\(\sigma_{ij} = \rho_{ij}\sigma_i\sigma_j\)</span> onde <span class="math inline">\(\rho_{ij}\)</span> é a correlação entre <span class="math inline">\(Y_i\)</span> e <span class="math inline">\(Y_j\)</span></p></li>
+<li><p>Distância estatística: <span class="math display">\[ d^2(y,\mu) = (y-\mu)^\top \Sigma^{-1}(y-\mu)\]</span></p></li>
+<li><p>Pontos equidistantes de <span class="math inline">\(\mu\)</span> formam um elipsóide em <span class="math inline">\(k\)</span> dimensões com eixos nas direções dos autovetores de <span class="math inline">\(\Sigma\)</span> e com tamanhos proporcionais aos seus respectivos autovetores</p></li>
 </ul>
 </section>
 <section id="caso-3d" class="slide level2">
@@ -765,8 +745,7 @@ d^2(y,\mu) &amp;= \left(\frac{y_1-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y_2-\m
 <section id="norma-de-frobenius" class="slide level2 scrollable">
 <h2>Norma de Frobenius</h2>
 <p>A mais simples de todas: - Empilhe as colunas da matriz como um vetor e calcule sua norma L2</p>
-<p><span class="math display">\[A = \begin{bmatrix}1.3&amp;5.9&amp;-1.8\\1.7&amp;6.1&amp;9.7\end{bmatrix}\]</span></p>
-<p><span class="math display">\[\Vert A\Vert_F = \sqrt{(1.3)^2+(5.9)^2+(-1.8)^2+(1.7)^2+(6.1)^2+(9.7)^2}\]</span></p>
+<p><span class="math display">\[A = \begin{bmatrix}1.3&amp;5.9&amp;-1.8\\1.7&amp;6.1&amp;9.7\end{bmatrix}\]</span> <span class="math display">\[\Vert A\Vert_F = \sqrt{(1.3)^2+(5.9)^2+(-1.8)^2+(1.7)^2+(6.1)^2+(9.7)^2}\]</span></p>
 <p><span class="math display">\[\Vert A\Vert_F = \sqrt{\sum_{ij}\vert a_{ij}\vert^2}\]</span></p>
 </section>
 <section id="frobenius-via-linhacoluna" class="slide level2 scrollable">
@@ -794,11 +773,7 @@ d^2(y,\mu) &amp;= \left(\frac{y_1-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y_2-\m
 - Uma norma qualquer para vetores do $\mathbb R^n$ induz uma norma no espaço das matrizes $m\times n$
 - Seja $C$ conjunto dos $x$ em $\mathbb R^n$ tais que $\Vert x \Vert = 1$
 - Seja $A$ uma matriz $m\times n$ qualquer, então
-
-
 $$ \Vert A \Vert = \max_{x\in C}{\Vert Ax\Vert}$$ 
-
-
 
 ## Interpretação
 
@@ -810,11 +785,7 @@ $\Vert A\Vert$ é a extensão máxima que um vetor em $C$ pode ser "espichado"
 
 - A norma matricial induzida pela norma vetorial euclidiana é
 
-
-
 $$ \Vert A \Vert^2 = \max_{\Vert x\Vert^2 = 1}{\Vert Ax\Vert^2 = \sqrt{\lambda_{\text{max}}}}$$
-
-
 
 onde $\lambda_{\text{max}}$ é o maior autovalor tal que $A^\top A-\lambda I$ é singular
 -->
@@ -1074,7 +1045,24 @@ onde $\lambda_{\text{max}}$ é o maior autovalor tal que $A^\top A-\lambda I$ é
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -1104,31 +1092,50 @@ onde $\lambda_{\text{max}}$ é o maior autovalor tal que $A^\top A-\lambda I$ é
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

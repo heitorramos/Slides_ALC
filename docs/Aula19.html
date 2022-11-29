@@ -7,7 +7,7 @@
 <link href="Aula19_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula19_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula19_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="Aula19_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula19_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -320,12 +325,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 19: Sistemas Lineares (Decomposicões LU e Cholesky)</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -337,7 +349,7 @@
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>Esses slides são fortemente baseados no livro do prof. Frederico Ferreira Campos, Filho.</p>
+<p>Esses slides são fortemente baseados no livro do prof. Frederico Ferreira Campos, Filho</p>
 </div>
 </div>
 </div>
@@ -345,9 +357,7 @@
 <section id="decomposição-lu" class="slide level2 scrollable">
 <h2>Decomposição <span class="math inline">\(LU\)</span></h2>
 <ul>
-<li>Uma matriz quadrada pode ser escrita como o produto de duas matrizes:</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Uma matriz quadrada pode ser escrita como o produto de duas matrizes: <span class="math display">\[
 A =
 \begin{bmatrix}
 4&amp;3\\
@@ -361,18 +371,16 @@ A =
 4&amp;3 \\
 0 &amp; -1
 \end{bmatrix}
-\]</span></p>
-<ul>
+\]</span></p></li>
 <li><p>A matriz <span class="math inline">\(A\)</span> foi fatorada de modo que <span class="math inline">\(A = LU\)</span></p></li>
 <li><p><span class="math inline">\(L\)</span> é uma matriz triangular inferior unitária (<span class="math inline">\(l_{ii}=1, \forall i\)</span>)</p></li>
 <li><p><span class="math inline">\(U\)</span> é uma matriz triangular superior</p></li>
-<li><p>Para resolver o sistema <span class="math inline">\(Ax=b\)</span></p></li>
-</ul>
-<p><span class="math display">\[
+<li><p>Para resolver o sistema <span class="math inline">\(Ax=b\)</span> <span class="math display">\[
 Ax= b\\
 LUx = b\\
 Ux = y, \text{ então } Ly=b
-\]</span></p>
+\]</span></p></li>
+</ul>
 </section>
 <section id="cálculo-dos-fatores" class="slide level2">
 <h2>Cálculo dos fatores</h2>
@@ -406,8 +414,7 @@ x_1\\ x_2\\ x_3
 <li><span class="math inline">\(m_{21} = (-2)/1 = -2\)</span></li>
 <li><span class="math inline">\(m_{31} = 4/1 = 4\)</span></li>
 </ul>
-<p>Eliminando os elementos da primeira coluna</p>
-<p><span class="math display">\[
+<p>Eliminando os elementos da primeira coluna <span class="math display">\[
 U =
 \begin{bmatrix}
 1 &amp;-3 &amp; 2\\
@@ -510,23 +517,19 @@ x_1\\ x_2 \\ x_3
 <ul>
 <li>Evitar pivô nulo</li>
 <li>Evitar multiplicadores com valores muito grandes</li>
-<li>Decomposição da forma</li>
-</ul>
-<p><span class="math display">\[
+<li>Decomposição da forma <span class="math display">\[
 PA = LU
-\]</span></p>
-<ul>
+\]</span></li>
 <li><span class="math inline">\(P\)</span> é a matriz de permutações</li>
 <li><span class="math inline">\(L\)</span> é a matriz triangular inferior unitária formada pelos multiplicadores <span class="math inline">\(m_{ij}\)</span></li>
 <li><span class="math inline">\(U\)</span> é a matriz triangular superior</li>
-<li>Resolver o sistema <span class="math inline">\(Ax = b\)</span></li>
-</ul>
-<p><span class="math display">\[
+<li>Resolver o sistema <span class="math inline">\(Ax = b\)</span> <span class="math display">\[
 Ax = b \\
 PAx = Pb \\
 LUx = Pb\\
 Ux = y, \text{ então } Ly = Pb
-\]</span></p>
+\]</span></li>
+</ul>
 </section>
 <section id="exemplo-de-decomposição-lu-1" class="slide level2 scrollable">
 <h2>Exemplo de decomposição <span class="math inline">\(LU\)</span></h2>
@@ -562,8 +565,7 @@ U =
 <ul>
 <li><span class="math inline">\(m_{12} = -1,5/5 = -0,3\)</span></li>
 </ul>
-<p>Eliminando a segunda coluna:</p>
-<p><span class="math display">\[
+<p>Eliminando a segunda coluna: <span class="math display">\[
 U =
 \begin{bmatrix}
 0 &amp; 0 &amp; 1,2\\
@@ -571,8 +573,7 @@ U =
 4 &amp; -6 &amp; 5
 \end{bmatrix}
 \]</span></p>
-<p>Reescrevendo</p>
-<p><span class="math display">\[
+<p>Reescrevendo <span class="math display">\[
 U =
 \begin{bmatrix}
 4 &amp; -6 &amp; 5 \\
@@ -693,8 +694,7 @@ PA = LU \\
 \text{det}(L) = \prod_{i=1}^n l_{ii} = 1\\
 \text{det}(U) = \prod_{i=1}^n u_{ii} \\
 \text{det}(P) = (-1)^t\\
-\]</span></p>
-<p>onde <span class="math inline">\(t\)</span> é o número de trocas de linhas necessárias para transformar a matriz de permutação <span class="math inline">\(P\)</span> em uma matriz identidade</p>
+\]</span> onde <span class="math inline">\(t\)</span> é o número de trocas de linhas necessárias para transformar a matriz de permutação <span class="math inline">\(P\)</span> em uma matriz identidade</p>
 <p>Assim,</p>
 <p><span class="math display">\[
 \text{det}(A) = (-1)^t\prod_{i=1}^n u_{ii}\\
@@ -772,8 +772,7 @@ x_1 \\ x_2 \\ x_3 \\ x_4
 \end{bmatrix}
 \]</span></p>
 <p>Resposta:</p>
-<p>Vetor de permutação: <span class="math inline">\(p = \begin{bmatrix}4 &amp; 3 &amp; 1 &amp; 2\end{bmatrix}\)</span></p>
-<p><span class="math display">\[
+<p>Vetor de permutação: <span class="math inline">\(p = \begin{bmatrix}4 &amp; 3 &amp; 1 &amp; 2\end{bmatrix}\)</span> <span class="math display">\[
 L =
 \begin{bmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -781,8 +780,7 @@ L =
 0,8 &amp; -0,25 &amp; 1 &amp; 0 \\
 0,2 &amp; -0,5 &amp; 0,4 &amp; 1
 \end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[
+\]</span> <span class="math display">\[
 U =
 \begin{bmatrix}
 5 &amp; 0 &amp; 5 &amp; -1 \\
@@ -790,8 +788,7 @@ U =
 0 &amp; 0 &amp; -5 &amp; 0,05 \\
 0 &amp; 0 &amp; 0 &amp; 0,68
 \end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[
+\]</span> <span class="math display">\[
 P =
 \begin{bmatrix}
 0 &amp; 0 &amp; 0 &amp; 1 \\
@@ -800,8 +797,7 @@ P =
 0 &amp; 1 &amp; 0 &amp; 0
 \end{bmatrix}
 \]</span></p>
-<p>Solução:</p>
-<p><span class="math display">\[x =
+<p>Solução: <span class="math display">\[x =
 \begin{bmatrix}-0,6617 &amp; 0,9412&amp; 0,5441 &amp; -4,5882
 \end{bmatrix}^\top
 \]</span></p>
@@ -863,12 +859,11 @@ r =
 </tbody>
 </table>
 <ul>
-<li>Determinante:</li>
-</ul>
-<p><span class="math display">\[
+<li>Determinante: <span class="math display">\[
 \text{det}(A) = (-1)^t\prod_{i=1}^4 u_{ii} \\
 \text{det}(A) = (-1)^4\cdot 5 \cdot 4 \cdot -5 \cdot 0,68 = 68
-\]</span></p>
+\]</span></li>
+</ul>
 <p>Solução única</p>
 </section>
 <section id="sistema-com-matriz-singular" class="slide level2">
@@ -901,20 +896,14 @@ c =
 <section id="decomposição-de-cholesky" class="slide level2">
 <h2>Decomposição de Cholesky</h2>
 <ul>
-<li>Matriz de coeficientes <span class="math inline">\(A\)</span> simétrica e definida positiva</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Matriz de coeficientes <span class="math inline">\(A\)</span> simétrica e definida positiva <span class="math display">\[
 v^\top A v &gt;0, \forall v\neq 0
-\]</span></p>
-<ul>
-<li><span class="math inline">\(A\)</span> pode ser decomposta tal que</li>
-</ul>
-<p><span class="math display">\[
+\]</span></p></li>
+<li><p><span class="math inline">\(A\)</span> pode ser decomposta tal que <span class="math display">\[
 A = LL^\top
-\]</span></p>
-<ul>
-<li><span class="math inline">\(L\)</span> é triangular inferior</li>
-<li><span class="math inline">\(L^\top\)</span> é triangular superior</li>
+\]</span></p></li>
+<li><p><span class="math inline">\(L\)</span> é triangular inferior</p></li>
+<li><p><span class="math inline">\(L^\top\)</span> é triangular superior</p></li>
 </ul>
 </section>
 <section id="decomposição-de-cholesky-1" class="slide level2 scrollable">
@@ -981,20 +970,16 @@ a_{41} &amp; a_{42} &amp; a_{43} &amp; a_{44} \\
 \end{bmatrix}
 \]</span></p>
 <ul>
-<li>Calculo de <span class="math inline">\(l_{44}\)</span></li>
-</ul>
-<p><span class="math display">\[
+<li><p>Calculo de <span class="math inline">\(l_{44}\)</span> <span class="math display">\[
 l^2_{41} + l^2_{42} + l^2_{43} + l^2_{44} = a_{44} \\
 l_{44} =  \sqrt{a_{44} - (l^2_{41} + l^2_{42} + l^2_{43})}\\
 l_{44} = \sqrt{a_{44} - \sum_{k=1}^3 l^2_{4k}}
-\]</span></p>
-<ul>
-<li>Elemento de qualquer diagonal</li>
+\]</span></p></li>
+<li><p>Elemento de qualquer diagonal</p></li>
 </ul>
 <p><span class="math display">\[
 l_{jj} = \sqrt{a_{jj} - \sum_{k=1}^{j-1} l^2_{jk}},
-\]</span></p>
-<p>onde <span class="math inline">\(j = 1, 2, \ldots, n\)</span></p>
+\]</span> onde <span class="math inline">\(j = 1, 2, \ldots, n\)</span></p>
 <ul>
 <li>Elemento <span class="math inline">\(l_{43}\)</span> abaixo da diagonal</li>
 </ul>
@@ -1008,13 +993,11 @@ l_{43} = \frac{a_{43} - \sum_{k=1}^2 l_{4k}l_{3k}}{l_{33}}
 </ul>
 <p><span class="math display">\[
 l_{ij} = \frac{a_{ij} - \sum_{k=1}^{j-1} l_{ik}l_{jk}}{l_{jj}},
-\]</span></p>
-<p>onde <span class="math inline">\(j=1,2,\ldots,n-1\)</span> e <span class="math inline">\(i=j+1,j+2,\ldots,n\)</span></p>
+\]</span> onde <span class="math inline">\(j=1,2,\ldots,n-1\)</span> e <span class="math inline">\(i=j+1,j+2,\ldots,n\)</span></p>
 </section>
 <section id="solução-do-sistema-ax-b-pela-decomposição-de-cholesky" class="slide level2 scrollable">
 <h2>Solução do sistema <span class="math inline">\(Ax = b\)</span> pela decomposição de Cholesky</h2>
-<p>Seja</p>
-<p><span class="math display">\[
+<p>Seja <span class="math display">\[
 Ax = b\\
 LL^\top x = b\\
 L^\top x =y, \text{ então } Ly=b
@@ -1022,13 +1005,11 @@ L^\top x =y, \text{ então } Ly=b
 <p>Sistema triangular inferior <span class="math inline">\(Ly=b\)</span> resolvido pelas substituições sucessivas</p>
 <p><span class="math display">\[
 y_i = \frac{\left( b_i - \sum_{j=1}^{i-1} l_{ij}y_j\right)}{l_{ii}},
-\]</span></p>
-<p>onde <span class="math inline">\(i=1,2,\ldots,n\)</span></p>
+\]</span> onde <span class="math inline">\(i=1,2,\ldots,n\)</span></p>
 <p>Sistema triangular superior <span class="math inline">\(L^\top x=y\)</span> resolvido pelas substituições retroativas</p>
 <p><span class="math display">\[
 x_i = \frac{\left( y_i - \sum_{j=i+1}^{n} l_{ji}x_j\right)}{l_{ii}},
-\]</span></p>
-<p>onde <span class="math inline">\(i=1,2,\ldots,n\)</span></p>
+\]</span> onde <span class="math inline">\(i=1,2,\ldots,n\)</span></p>
 </section>
 <section id="cálculo-do-determinante-1" class="slide level2 scrollable">
 <h2>Cálculo do determinante</h2>
@@ -1072,11 +1053,10 @@ l_{22} = \sqrt{a_{22}-l^2_{21}} = \sqrt{10 - (-1)^2} = 3\\
 l_{32} = \frac{a_{32} - l_{31}l_{21}}{l_{22}}= \frac{-7-(-1)(-1)}{3} = -2\\
 \]</span></p>
 <ul>
-<li>Coluna 3:</li>
-</ul>
-<p><span class="math display">\[
+<li>Coluna 3: <span class="math display">\[
 l_{33} = \sqrt{a_{33} - (l^2_{31}+l^2_{32})} = \sqrt{30 - ((-1)^2 + (-2)^2)} = 5
-\]</span></p>
+\]</span></li>
+</ul>
 <p><span class="math display">\[
 \begin{bmatrix}
 4 &amp; -2 &amp; 2 \\
@@ -1162,31 +1142,19 @@ r =
 <!-- ## Fatoração $LDL^\top${.scrollable}
 
 - Uma matriz $A$ simétrica pode ser decomposta tal que
-
-
 $$A = LDL^\top$$
-
-
 
 - $L:$ matriz triangular inferior unitária ($l_{jj} = 1, \forall j$)
 - $D:$ matriz diagonal 
 - Matriz $D:$
 
-
-
 $$d_{jj} = a_{jj} - \sum_{k=1}^{j-1} l^2_{jk}d_{kk}, j=1,2,\ldots,n $$
 
-
-
 - Matriz unitária $L:$
-
-
 
 $$
 l_{ji} = \frac{a_{ij}-\sum_{k=1}^{j-1}l_{ik}d_{kk}l_{ji}}{d_{jj}}
 $$
-
-
 
 ## Solução do sistema $Ax=b$ pela fatoração $LDL^\top$ -->
 <ul>
@@ -1448,7 +1416,24 @@ $$
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -1478,31 +1463,50 @@ $$
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>
