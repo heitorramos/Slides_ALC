@@ -213,7 +213,7 @@ $$
 $$
 x^{k+1}_1 = \frac{1}{10}\left(-3x^k_2 + 2x^k_3 + 57 \right), \\ 
 x^{k+1}_2 = \frac{1}{8}\left(-2x^k_1 + x^k_3 + 20 \right), \\ 
-x^{k+1}_3 = \frac{1}{5}\left(-x^k_1 - x^k_2 + 4 \right) 
+x^{k+1}_3 = \frac{1}{5}\left(-x^k_1 - x^k_2 - 4 \right) 
 $$
 
 - Vetor inicial $x^0 = \begin{bmatrix}5,7 & 2,5 & -0,8\end{bmatrix}^\top$
@@ -221,7 +221,7 @@ $$
 $$
 x^{1}_1 = \frac{1}{10}\left(-3x^0_2 + 2x^0_3 + 57 \right)= \frac{1}{10}\left(-3(2,5) + 2(-0,8) + 57 \right) = 4,79, \\ 
 x^{1}_2 = \frac{1}{8}\left(-2x^0_1 + x^0_3 + 20 \right)= \frac{1}{8}\left(-2(5,7) +(-0,8) + 20 \right) = 0,975, \\ 
-x^{1}_3 =  \frac{1}{5}\left(-x^0_1 - x^0_2 + 4 \right)= \frac{1}{5}\left(-(5,7) - (2,5) + 4 \right) = -2,44  
+x^{1}_3 =  \frac{1}{5}\left(-x^0_1 - x^0_2 - 4 \right)= \frac{1}{5}\left(-(5,7) - (2,5) - 4 \right) = -2,44  
 $$
 
 - Vetor da primeira iteração: $x^1 = \begin{bmatrix}4,79 & 0,975& -2,44\end{bmatrix}^\top$

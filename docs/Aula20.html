@@ -7,7 +7,7 @@
 <link href="Aula20_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula20_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula20_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.38">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="Aula20_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula20_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -320,12 +325,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 20: Métodos Iterativos Estacionários (Jacobi e Gauss-Seidel)</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -345,22 +357,16 @@
 <section id="métodos-iterativos-estacionários" class="slide level2 scrollable">
 <h2>Métodos iterativos estacionários</h2>
 <ul>
-<li>Gerar a partir de <span class="math inline">\(x^0\)</span> uma sequência de vetores</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Gerar a partir de <span class="math inline">\(x^0\)</span> uma sequência de vetores <span class="math display">\[
 \{x^1,x^2, \ldots, x^n\}\longrightarrow x
-\]</span></p>
-<ul>
+\]</span></p></li>
 <li><p>Uma mesma série de operações é repetida várias vezes</p></li>
 <li><p>Existem várias classes de métodos iterativos</p></li>
-<li><p>Seja <span class="math inline">\(M\)</span> a matriz de iteração e <span class="math inline">\(c\)</span> um vetor constante</p></li>
-</ul>
-<p><span class="math display">\[
+<li><p>Seja <span class="math inline">\(M\)</span> a matriz de iteração e <span class="math inline">\(c\)</span> um vetor constante <span class="math display">\[
 x^{k+1} = Mx^k +c
-\]</span></p>
-<ul>
-<li>Método iterativo é dito estacionário quando a matriz <span class="math inline">\(M\)</span> for fixa</li>
-<li>Exemplos de métodos iterativos: Jacobi, Gauss-Seidel e sobre-relaxação sucessiva</li>
+\]</span></p></li>
+<li><p>Método iterativo é dito estacionário quando a matriz <span class="math inline">\(M\)</span> for fixa</p></li>
+<li><p>Exemplos de métodos iterativos: Jacobi, Gauss-Seidel e sobre-relaxação sucessiva</p></li>
 </ul>
 </section>
 <section id="condição-de-convergência" class="slide level2 scrollable">
@@ -411,15 +417,9 @@ x^{k+1} = Mx^k +c
 </ul>
 <p><span class="math display">\[
 \frac{\Vert x^k - x^{k-1}\Vert}{\Vert x^k \Vert}&lt; \epsilon
-\]</span></p>
-<p>ou</p>
-<p><span class="math display">\[
+\]</span> ou <span class="math display">\[
 k \ge k_{\max}
-\]</span></p>
-<ul>
-<li><span class="math inline">\(\epsilon:\)</span> tolerância</li>
-<li><span class="math inline">\(k_{\max}:\)</span> número máximo de iterações</li>
-</ul>
+\]</span> - <span class="math inline">\(\epsilon:\)</span> tolerância - <span class="math inline">\(k_{\max}:\)</span> número máximo de iterações</p>
 </section>
 <section id="critério-de-parada-adotado" class="slide level2 scrollable">
 <h2>Critério de parada adotado</h2>
@@ -428,32 +428,20 @@ k \ge k_{\max}
 </ul>
 <p><span class="math display">\[
 \frac{{\max\limits_{i\le i \le n}}\vert x^k_i - x^{k-1}_i\vert }{\max\limits_{i\le i \le n} \vert x^k_i\vert}\le \epsilon,
-\]</span></p>
-<ul>
-<li><span class="math inline">\(x^k_i:\)</span> <span class="math inline">\(i\)</span>-ésimo componente do vetor <span class="math inline">\(x^k\)</span> obtido na <span class="math inline">\(k\)</span>-ésima iteração</li>
-<li>A tolerância <span class="math inline">\(\epsilon\)</span> define com qual exatidão a solução é calculada</li>
-<li>Em aritimética de ponto flutuante a exatidão não pode ser tão grand quanto queira</li>
-<li>Ela é limitada de acordo com o número de <em>bytes</em> das variáveis</li>
-</ul>
+\]</span> - <span class="math inline">\(x^k_i:\)</span> <span class="math inline">\(i\)</span>-ésimo componente do vetor <span class="math inline">\(x^k\)</span> obtido na <span class="math inline">\(k\)</span>-ésima iteração - A tolerância <span class="math inline">\(\epsilon\)</span> define com qual exatidão a solução é calculada - Em aritimética de ponto flutuante a exatidão não pode ser tão grand quanto queira - Ela é limitada de acordo com o número de <em>bytes</em> das variáveis</p>
 </section>
 <section id="método-de-jacobi" class="slide level2 scrollable">
 <h2>Método de Jacobi</h2>
 <ul>
-<li>Decompor a matriz <span class="math inline">\(A\)</span> de modo que</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Decompor a matriz <span class="math inline">\(A\)</span> de modo que <span class="math display">\[
 A = D +E + F
-\]</span></p>
-<ul>
+\]</span></p></li>
 <li><p><span class="math inline">\(D\)</span> é uma matriz diagonal e <span class="math inline">\(E\)</span> e <span class="math inline">\(F\)</span> são matrizes triangulares inferiores e superiores, respectivamente, com diagonais nulas</p></li>
-<li><p>O sistema <span class="math inline">\(Ax + b\)</span> é escrito da forma</p></li>
-</ul>
-<p><span class="math display">\[
+<li><p>O sistema <span class="math inline">\(Ax + b\)</span> é escrito da forma <span class="math display">\[
 (D+E+F)x = b\\
 Dx = -(E+F)x +b
-\]</span></p>
-<ul>
-<li>Que é convertida para o método iterativo</li>
+\]</span></p></li>
+<li><p>Que é convertida para o método iterativo</p></li>
 </ul>
 <p><span class="math display">\[
 x^{k+1} = (-D^{-1}(E+F))x^k + D^{-1}b\\
@@ -466,20 +454,15 @@ x^{k+1} = Jx^k+c
 <section id="forma-análoga-de-dedução-do-método-de-jacobi" class="slide level2 scrollable">
 <h2>Forma análoga de dedução do método de Jacobi</h2>
 <ul>
-<li>Sistema de equações lineares na forma</li>
-</ul>
-<p><span class="math display">\[
+<li>Sistema de equações lineares na forma <span class="math display">\[
 a_{11}x_1 + a_{12}x_2 + a_{13}x_3 + \ldots+ a_{1n}x_n  = b_1\\
 a_{21}x_1 + a_{22}x_2 + a_{23}x_3 + \ldots+ a_{2n}x_n  = b_2\\
 a_{31}x_1 + a_{32}x_2 + a_{33}x_3 + \ldots+ a_{3n}x_n  = b_3\\
 \vdots\\
 a_{n1}x_1 + a_{n2}x_2 + a_{n3}x_3 + \ldots+ a_{nn}x_n  = b_n\\
-\]</span></p>
-<ul>
+\]</span></li>
 <li>Explicitar <span class="math inline">\(x_i\)</span> na <span class="math inline">\(i\)</span>-ésima equação</li>
-<li>Equações de iterações do método de Jacobi</li>
-</ul>
-<p><span class="math display">\[
+<li>Equações de iterações do método de Jacobi <span class="math display">\[
 \begin{cases}
 x^{k+1}_1 = \frac{1}{a_{11}}\left(-a_{12}x^k_2 -a_{13}x^k_3 - \ldots -a_{1n}x^k_n + b_1\right), \\
 x^{k+1}_2 = \frac{1}{a_{22}}\left(-a_{21}x^k_1 -a_{23}x^k_3 - \ldots -a_{2n}x^k_n + b_2\right), \\
@@ -487,7 +470,8 @@ x^{k+1}_3 = \frac{1}{a_{33}}\left(-a_{31}x^k_1 - a_{32}x^k_2 - \ldots -a_{3n}x^k
 \vdots \\
 x^{k+1}_n = \frac{1}{a_{nn}}\left(-a_{n1}x^k_1 - a_{n2}x^k_2 - \ldots -a_{n,n-1}x^k_{n-1} + b_n\right)
 \end{cases}
-\]</span></p>
+\]</span></li>
+</ul>
 </section>
 <section id="forma-de-recorrência-xk1-jxk-c" class="slide level2 scrollable">
 <h2>Forma de recorrência <span class="math inline">\(x^{k+1} = Jx^k + c\)</span></h2>
@@ -518,16 +502,14 @@ x^{k}_1 \\ x^{k}_2 \\ x^{k}_3 \\ \vdots \\ x^{k}_n
 \]</span></p>
 <ul>
 <li>Convergência independe do valor inicial <span class="math inline">\(x^0\)</span></li>
-<li>Vetor inicial:</li>
-</ul>
-<p><span class="math display">\[
+<li>Vetor inicial: <span class="math display">\[
 x^0_i = \frac{b_i}{a_{ii}}
-\]</span></p>
+\]</span></li>
+</ul>
 </section>
 <section id="exemplo-do-método-de-jacobi" class="slide level2 scrollable">
 <h2>Exemplo do método de Jacobi</h2>
-<p>Resolver o sistema de equações pelo método de Jacobi com <span class="math inline">\(\epsilon&lt;10^{-5}\)</span> e <span class="math inline">\(k_{\max}=50\)</span> usando os critérios discutidos anteriormente</p>
-<p><span class="math display">\[
+<p>Resolver o sistema de equações pelo método de Jacobi com <span class="math inline">\(\epsilon&lt;10^{-5}\)</span> e <span class="math inline">\(k_{\max}=50\)</span> usando os critérios discutidos anteriormente <span class="math display">\[
 \begin{bmatrix}
 10 &amp; 3 &amp; -2 \\
 2 &amp; 8 &amp; -1 \\
@@ -542,20 +524,17 @@ x_1 \\ x_2 \\ x_3
 \end{bmatrix}
 \]</span></p>
 <ul>
-<li>Matrix diagonal dos coeficientes estritamente dominante</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Matrix diagonal dos coeficientes estritamente dominante <span class="math display">\[
 \vert 10\vert &gt; \vert 3 \vert + \vert -2\vert \\
 \vert 8 \vert &gt; \vert 2 \vert + \vert -1\vert \\
 \vert 5 \vert &gt; \vert 1 \vert + \vert 1\vert \\
-\]</span></p>
-<ul>
-<li>Equações de iterações</li>
+\]</span></p></li>
+<li><p>Equações de iterações</p></li>
 </ul>
 <p><span class="math display">\[
 x^{k+1}_1 = \frac{1}{10}\left(-3x^k_2 + 2x^k_3 + 57 \right), \\
 x^{k+1}_2 = \frac{1}{8}\left(-2x^k_1 + x^k_3 + 20 \right), \\
-x^{k+1}_3 = \frac{1}{5}\left(-x^k_1 - x^k_2 + 4 \right)
+x^{k+1}_3 = \frac{1}{5}\left(-x^k_1 - x^k_2 - 4 \right)
 \]</span></p>
 <ul>
 <li>Vetor inicial <span class="math inline">\(x^0 = \begin{bmatrix}5,7 &amp; 2,5 &amp; -0,8\end{bmatrix}^\top\)</span></li>
@@ -563,24 +542,20 @@ x^{k+1}_3 = \frac{1}{5}\left(-x^k_1 - x^k_2 + 4 \right)
 <p><span class="math display">\[
 x^{1}_1 = \frac{1}{10}\left(-3x^0_2 + 2x^0_3 + 57 \right)= \frac{1}{10}\left(-3(2,5) + 2(-0,8) + 57 \right) = 4,79, \\
 x^{1}_2 = \frac{1}{8}\left(-2x^0_1 + x^0_3 + 20 \right)= \frac{1}{8}\left(-2(5,7) +(-0,8) + 20 \right) = 0,975, \\
-x^{1}_3 =  \frac{1}{5}\left(-x^0_1 - x^0_2 + 4 \right)= \frac{1}{5}\left(-(5,7) - (2,5) + 4 \right) = -2,44  
+x^{1}_3 =  \frac{1}{5}\left(-x^0_1 - x^0_2 - 4 \right)= \frac{1}{5}\left(-(5,7) - (2,5) - 4 \right) = -2,44  
 \]</span></p>
 <ul>
 <li><p>Vetor da primeira iteração: <span class="math inline">\(x^1 = \begin{bmatrix}4,79 &amp; 0,975&amp; -2,44\end{bmatrix}^\top\)</span></p></li>
-<li><p>Critério de parada</p></li>
-</ul>
-<p><span class="math display">\[
+<li><p>Critério de parada <span class="math display">\[
 \frac{\Vert x^1 - x^0\Vert_\infty}{\Vert x^1 \Vert_\infty} = \frac{\max(\vert 4,79 - 5,7\vert , \vert 0,975 - 2,5\vert, -2,44 - (-0,8)\vert)}{\max(\vert 4,79\vert, \vert 0,975\vert, \vert -2,44\vert)}\\
 \frac{\Vert x^1 - x^0\Vert_\infty}{\Vert x^1 \Vert_\infty} = 0,3424
-\]</span></p>
-<ul>
-<li>Se repitirmos esse procedimento veremos <span class="math inline">\(x \approx x^9 = \begin{bmatrix}5,00000 &amp; 1,00001 &amp; -2,000000\end{bmatrix}^\top\)</span></li>
+\]</span></p></li>
+<li><p>Se repitirmos esse procedimento veremos <span class="math inline">\(x \approx x^9 = \begin{bmatrix}5,00000 &amp; 1,00001 &amp; -2,000000\end{bmatrix}^\top\)</span></p></li>
 </ul>
 </section>
 <section id="exemplo-do-método-de-jacobi-2" class="slide level2 scrollable">
 <h2>Exemplo do método de Jacobi (2)</h2>
-<p>Calcular três aproximações do vetor solução do sistema abaixo usando a formulação</p>
-<p><span class="math display">\[
+<p>Calcular três aproximações do vetor solução do sistema abaixo usando a formulação <span class="math display">\[
 x^{k+1} = -D^{-1}(E+F)x^k + D^{-1}b = Jx^k +c
 \]</span></p>
 <p><span class="math display">\[
@@ -597,8 +572,7 @@ x_1 \\ x_2 \\ x_3
 57 \\ 20 \\ -4
 \end{bmatrix}
 \]</span></p>
-<p>Decompondo <span class="math inline">\(A = D+E+F\)</span> temos</p>
-<p><span class="math display">\[
+<p>Decompondo <span class="math inline">\(A = D+E+F\)</span> temos <span class="math display">\[
 D =
 \begin{bmatrix}
 10 &amp; 0 &amp; 0\\
@@ -628,9 +602,7 @@ J = -D^{-1}(E+F) =
 -0,25 &amp; 0 &amp; 0,125 \\
 -0,2 &amp; -0,2 &amp; 0
 \end{bmatrix}
-\]</span></p>
-<p>e</p>
-<p><span class="math display">\[
+\]</span> e <span class="math display">\[
 c = D^{-1}b = x^0 =
 \begin{bmatrix}
 5,7 &amp; 2,5 &amp; -0,8
@@ -676,45 +648,30 @@ c = D^{-1}b = x^0 =
 <section id="método-de-gauss-seidel" class="slide level2 scrollable">
 <h2>Método de Gauss-Seidel</h2>
 <ul>
-<li>Decompor a matriz <span class="math inline">\(A\)</span> de forma que</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Decompor a matriz <span class="math inline">\(A\)</span> de forma que <span class="math display">\[
 A = D + E + F
-\]</span></p>
-<ul>
-<li><span class="math inline">\(D\)</span> é uma matriz diagonal e <span class="math inline">\(E\)</span> e <span class="math inline">\(F\)</span> são matrizes triangulares inferior e superior, respectivamente, com diagonais nulas</li>
-<li>Sistema linear <span class="math inline">\(Ax=b\)</span> escrito na forma</li>
-</ul>
-<p><span class="math display">\[
+\]</span></p></li>
+<li><p><span class="math inline">\(D\)</span> é uma matriz diagonal e <span class="math inline">\(E\)</span> e <span class="math inline">\(F\)</span> são matrizes triangulares inferior e superior, respectivamente, com diagonais nulas</p></li>
+<li><p>Sistema linear <span class="math inline">\(Ax=b\)</span> escrito na forma <span class="math display">\[
 (D+E+F)x = b\\
 (D+E)x = -F x +b
-\]</span></p>
-<ul>
-<li>Forma de iteração obtida pela recorrência</li>
-</ul>
-<p><span class="math display">\[
+\]</span></p></li>
+<li><p>Forma de iteração obtida pela recorrência <span class="math display">\[
 x^{k+1} = \left(-(D+E)^{-1}\right)x^k + (D+E)^{-1}b\\
 x^{k+1}  = Sx^k + d
-\]</span></p>
-<ul>
-<li>Matriz de iteração do método de Gauss-Seidel: <span class="math inline">\(S = -(D+E)^{-1}F\)</span></li>
+\]</span></p></li>
+<li><p>Matriz de iteração do método de Gauss-Seidel: <span class="math inline">\(S = -(D+E)^{-1}F\)</span></p></li>
 </ul>
 </section>
 <section id="forma-alternativa-de-dedução-do-método-de-gauss-seidel" class="slide level2 scrollable">
 <h2>Forma alternativa de dedução do método de Gauss-Seidel</h2>
 <ul>
-<li>Seja</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Seja <span class="math display">\[
 (D + E + F)x = b \longrightarrow (D + E)x = −Fx + b
-\]</span></p>
-<ul>
-<li>Na forma de recorrência</li>
-</ul>
-<p><span class="math display">\[ (D+E)x^{k+1} = −Fx^k + b \longrightarrow Dx^{k+1} =−Ex^{k+1} −Fx^k + b
-\]</span></p>
-<ul>
-<li>Escrevendo a segunda equação na forma matricial</li>
+\]</span></p></li>
+<li><p>Na forma de recorrência <span class="math display">\[ (D+E)x^{k+1} = −Fx^k + b \longrightarrow Dx^{k+1} =−Ex^{k+1} −Fx^k + b
+\]</span></p></li>
+<li><p>Escrevendo a segunda equação na forma matricial</p></li>
 </ul>
 <p><span class="math display">\[
 Dx^{k+1} = -
@@ -763,18 +720,15 @@ x^{k+1}_n = \frac{1}{a_{nn}}\left(-a_{n1}x^{k+1}_1 - a_{n2}x^{k+1}_2 - \ldots - 
 \]</span></p>
 <ul>
 <li><p>Vetor <span class="math inline">\(x^{k+1}\)</span> obtido a partir dos elementos mais recentes, incluindo o próprio <span class="math inline">\(x^{k+1}\)</span> e <span class="math inline">\(x^{k}\)</span></p></li>
-<li><p>Vetor inicial:</p></li>
-</ul>
-<p><span class="math display">\[
+<li><p>Vetor inicial: <span class="math display">\[
 x^0_i = \frac{b_i}{a_{ii}}
-\]</span></p>
+\]</span></p></li>
+</ul>
 </section>
 <section id="exemplo-do-método-gauss-seidel" class="slide level2 scrollable">
 <h2>Exemplo do método Gauss-Seidel</h2>
 <ul>
-<li>Resolver o sistema a seguir pelo método de Gauss-Seidel com <span class="math inline">\(\epsilon &lt; 10^{-5}\)</span> e <span class="math inline">\(k_{\max} = 50\)</span> usando os critérios discutidos anteriormente</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Resolver o sistema a seguir pelo método de Gauss-Seidel com <span class="math inline">\(\epsilon &lt; 10^{-5}\)</span> e <span class="math inline">\(k_{\max} = 50\)</span> usando os critérios discutidos anteriormente <span class="math display">\[
 \begin{bmatrix}
 10 &amp; 3 &amp; -2 \\
 2 &amp; 8 &amp; -1 \\
@@ -787,18 +741,14 @@ x_1 \\ x_2 \\ x_3
 \begin{bmatrix}
 57 \\ 20 \\ -4
 \end{bmatrix}
-\]</span></p>
-<ul>
-<li>Matriz dos coeficientes é diagnalmente dominante</li>
-<li>Equações de iterações:</li>
-</ul>
-<p><span class="math display">\[
+\]</span></p></li>
+<li><p>Matriz dos coeficientes é diagnalmente dominante</p></li>
+<li><p>Equações de iterações: <span class="math display">\[
 x^{k+1}_1 = \frac{1}{10}\left(-3x^k_2 + 2x^k_3 + 57\right)\\
 x^{k+1}_2 = \frac{1}{8}\left(-2x^{k+1}_1 + x^k_3 + 20\right)\\
 x^{k+1}_3 = \frac{1}{5}\left(-x^{k+1}_1 - x^{k+1}_2 - 4\right)\\
-\]</span></p>
-<ul>
-<li>Vetor inicial: <span class="math inline">\(x^0 = \begin{bmatrix}5,7 &amp; 2,5 &amp; -0,8\end{bmatrix}^\top\)</span></li>
+\]</span></p></li>
+<li><p>Vetor inicial: <span class="math inline">\(x^0 = \begin{bmatrix}5,7 &amp; 2,5 &amp; -0,8\end{bmatrix}^\top\)</span></p></li>
 </ul>
 <p><span class="math display">\[
 x^{1}_1 = \frac{1}{10}\left(-3x^0_2 + 2x^0_3 + 57\right) = \frac{1}{10}\left(-3(2,5) + 2(-0,8) + 57\right) = 4,79\\
@@ -807,20 +757,16 @@ x^{1}_3 = \frac{1}{5}\left(-x^{1}_1 - x^{1}_2 - 4\right) = \frac{1}{5}\left(-(4,
 \]</span></p>
 <ul>
 <li><p>Vetor da primeira iteração: <span class="math inline">\(x^1 = \begin{bmatrix}4,79 &amp; 1,2025 &amp; -1,9985\end{bmatrix}^\top\)</span></p></li>
-<li><p>Critério de parada</p></li>
-</ul>
-<p><span class="math display">\[
+<li><p>Critério de parada <span class="math display">\[
 \frac{\Vert x^1 - x^0\Vert_\infty}{\Vert x^1 \Vert_\infty} = \frac{\max(\vert 4,79 - 5,7\vert , \vert 1,2025 - 2,5\vert, -1,9985 - (-0,8)\vert)}{\max(\vert 4,79\vert, \vert 1,2025\vert, \vert -1,9985\vert)}\\
 \frac{\Vert x^1 - x^0\Vert_\infty}{\Vert x^1 \Vert_\infty} = 0,2709
-\]</span></p>
-<ul>
-<li>Se repitirmos esse procedimento veremos <span class="math inline">\(x \approx x^6 = \begin{bmatrix}5,00000 &amp; 1,000010&amp; -2,000000\end{bmatrix}^\top\)</span></li>
+\]</span></p></li>
+<li><p>Se repitirmos esse procedimento veremos <span class="math inline">\(x \approx x^6 = \begin{bmatrix}5,00000 &amp; 1,000010&amp; -2,000000\end{bmatrix}^\top\)</span></p></li>
 </ul>
 </section>
 <section id="exemplo-do-método-de-gauss-seidel-2" class="slide level2 scrollable">
 <h2>Exemplo do método de Gauss-Seidel (2)</h2>
-<p>Calcular três aproximações do vetor solução do sistema abaixo usando a formulação</p>
-<p><span class="math display">\[
+<p>Calcular três aproximações do vetor solução do sistema abaixo usando a formulação <span class="math display">\[
 x^{k+1} = −(D + E)^{−1}Fx^k + (D + E)^{−1}b = Sx^k + d
 \]</span></p>
 <p><span class="math display">\[
@@ -838,9 +784,7 @@ x_1 \\ x_2 \\ x_3
 \end{bmatrix}
 \]</span></p>
 <ul>
-<li>Decompondo <span class="math inline">\(A = D + E + F\)</span></li>
-</ul>
-<p><span class="math display">\[
+<li><p>Decompondo <span class="math inline">\(A = D + E + F\)</span> <span class="math display">\[
 D =
 \begin{bmatrix}
 10 &amp; 0 &amp; 0\\
@@ -859,8 +803,7 @@ F =
 0 &amp; 0 &amp; -1 \\
 0 &amp; 0 &amp; 0
 \end{bmatrix}
-\]</span></p>
-<ul>
+\]</span></p></li>
 <li><p>Matriz <span class="math inline">\((D+E)^{-1}\)</span> calculada utilizando o esquema: <span class="math inline">\((D + E)(D + E)^{−1} = I\)</span></p></li>
 <li><p>Matrizes <span class="math inline">\((D+E)^{−1}\)</span> e <span class="math inline">\(S\)</span></p></li>
 </ul>
@@ -871,9 +814,7 @@ F =
 -0,025 &amp; 0,125 &amp; 0 \\
 -0,015 &amp; -0,025 &amp; 0,2
 \end{bmatrix}
-\]</span></p>
-<p>e</p>
-<p><span class="math display">\[
+\]</span> e <span class="math display">\[
 S=−(D+E)^{−1}F=
 \begin{bmatrix}
 0 &amp;  −0,3 &amp; 0,2 \\
@@ -886,8 +827,7 @@ S=−(D+E)^{−1}F=
 </ul>
 <p><span class="math display">\[
 d = (D + E)^{−1}b = \begin{bmatrix}5,7 &amp; 1,075 &amp;−2,155\end{bmatrix}^\top
-\]</span></p>
-<p><span class="math display">\[
+\]</span> <span class="math display">\[
 x^0 = D^{−1}b = \begin{bmatrix} 5,7 &amp; 2,5 &amp; −0,8\end{bmatrix}^\top
 \]</span></p>
 </section>
@@ -975,10 +915,7 @@ x^0 = D^{−1}b = \begin{bmatrix} 5,7 &amp; 2,5 &amp; −0,8\end{bmatrix}^\top
 <section id="método-da-sobre-relaxação-sucessiva" class="slide level2 scrollable">
 <h2>Método da sobre-relaxação sucessiva</h2>
 <ul>
-<li>Decompor a matriz <span class="math inline">\(A\)</span> de modo que</li>
-</ul>
-<p><span class="math display">\[A = D + E + F \]</span></p>
-<ul>
+<li><p>Decompor a matriz <span class="math inline">\(A\)</span> de modo que <span class="math display">\[A = D + E + F \]</span></p></li>
 <li><p>D é uma matriz diagonal e <span class="math inline">\(E\)</span> e <span class="math inline">\(F\)</span> são matrizes triangulares inferiores nulas</p></li>
 <li><p>Multiplicando o sistema linear <span class="math inline">\(Ax=b\)</span> por um parâmetro <span class="math inline">\(\omega\)</span></p></li>
 </ul>
@@ -986,28 +923,18 @@ x^0 = D^{−1}b = \begin{bmatrix} 5,7 &amp; 2,5 &amp; −0,8\end{bmatrix}^\top
 \omega(D+E+F)x = wb
 \]</span></p>
 <ul>
-<li>Somando o vetor nulo <span class="math inline">\((D-D)x\)</span> ao primeiro termo</li>
-</ul>
-<p><span class="math display">\[
+<li><p>Somando o vetor nulo <span class="math inline">\((D-D)x\)</span> ao primeiro termo <span class="math display">\[
 (D − D)x + \omega (D + E + F )x = \omega b
-\]</span></p>
-<ul>
-<li>Rearranjando</li>
-</ul>
-<p><span class="math display">\[
+\]</span></p></li>
+<li><p>Rearranjando <span class="math display">\[
 (D + \omega E)x = [(1 − \omega)D − \omega F]x + \omega b
-\]</span></p>
-<ul>
-<li>Forma de iteração</li>
-</ul>
-<p><span class="math display">\[
+\]</span></p></li>
+<li><p>Forma de iteração <span class="math display">\[
 (D+\omega E)x^{k+1} =[(1−\omega )D− \omega F]x^k +\omega b
-\]</span></p>
-<p><span class="math display">\[
+\]</span> <span class="math display">\[
 x^{k+1} =(D+\omega E)^{−1}[(1−\omega )D−\omega F]x^k+\omega (D+\omega E)^{−1}b \\
 x^{k+1} =Rx^k + e
-\]</span></p>
-<ul>
+\]</span></p></li>
 <li><p>Matriz de iteração do método SOR: <span class="math inline">\(R = (D + \omega E)^{−1} [(1 − \omega )D − \omega F ]\)</span></p></li>
 <li><p>SOR: <em>Successive over-relaxation</em></p></li>
 </ul>
@@ -1015,14 +942,11 @@ x^{k+1} =Rx^k + e
 <section id="convergência-do-método-sor" class="slide level2 scrollable">
 <h2>Convergência do método SOR</h2>
 <ul>
-<li>Depende de <span class="math inline">\(\omega\)</span></li>
-<li>Para garantir a converência: <span class="math inline">\(0&lt;\omega &lt;2\)</span></li>
-<li>Usualmente: <span class="math inline">\(1&lt;\omega &lt;2\)</span></li>
-<li>Para <span class="math inline">\(\omega =1\)</span>, a recorrência torna-se</li>
-</ul>
-<p><span class="math display">\[x^{k+1} = −(D + E)^{−1}Fx^k + (D + E)^{−1}b\]</span></p>
-<ul>
-<li>Método de Gauss-Seidel é um caso particular de SOR</li>
+<li><p>Depende de <span class="math inline">\(\omega\)</span></p></li>
+<li><p>Para garantir a converência: <span class="math inline">\(0&lt;\omega &lt;2\)</span></p></li>
+<li><p>Usualmente: <span class="math inline">\(1&lt;\omega &lt;2\)</span></p></li>
+<li><p>Para <span class="math inline">\(\omega =1\)</span>, a recorrência torna-se <span class="math display">\[x^{k+1} = −(D + E)^{−1}Fx^k + (D + E)^{−1}b\]</span></p></li>
+<li><p>Método de Gauss-Seidel é um caso particular de SOR</p></li>
 </ul>
 </section>
 <section id="equações-de-iterações-do-método-sor" class="slide level2 scrollable">
@@ -1055,11 +979,10 @@ x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5
 \end{bmatrix}
 \]</span></p>
 <ul>
-<li>Influência e <span class="math inline">\(\omega\)</span> no raio espectral <span class="math inline">\(\rho\)</span> da matriz de iteração</li>
-</ul>
-<p><span class="math display">\[
+<li>Influência e <span class="math inline">\(\omega\)</span> no raio espectral <span class="math inline">\(\rho\)</span> da matriz de iteração <span class="math display">\[
 R = (D + \omega E)^{−1} [(1 − \omega )D − \omega F]
-\]</span></p>
+\]</span></li>
+</ul>
 <table>
 <colgroup>
 <col style="width: 12%">
@@ -1380,7 +1303,24 @@ R = (D + \omega E)^{−1} [(1 − \omega )D − \omega F]
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -1410,31 +1350,50 @@ R = (D + \omega E)^{−1} [(1 − \omega )D − \omega F]
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>
