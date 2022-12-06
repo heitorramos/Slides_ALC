@@ -352,7 +352,7 @@ Os sistemas lineares podem ser:
     - Maneira  sistemática que mantém semelhanças com o método de  eliminação de Gauss
     - Muito útil para calcular determinante de matrizes
   - Decomposição Cholesky
-    - Quando a matriz dos coeficientes é positiva definida
+    - Quando a matriz dos coeficientes é positiva definida 
     - Muito útil para calcular determinante de matrizes
   - Pseudoinversa de Moore-Penrose
     - Útil para solucionar problema de mínimos quadrados com matrizes de posto baixo (Ver sistemas retangulares)
