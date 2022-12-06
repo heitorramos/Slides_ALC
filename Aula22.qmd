@@ -356,7 +356,7 @@ Os sistemas lineares podem ser:
     - Muito útil para calcular determinante de matrizes
   - Pseudoinversa de Moore-Penrose
     - Útil para solucionar problema de mínimos quadrados com matrizes de posto baixo (Ver sistemas retangulares)
-  - Decomposição QR
+  - Decomposição QR 
     - Útil quando a matriz tem posto cheio
 - Métodos iterativos estacionários (aproximados):
   - Método de Jacobi
