@@ -216,6 +216,7 @@ x^{k+1}_2 = \frac{1}{8}\left(-2x^k_1 + x^k_3 + 20 \right), \\
 x^{k+1}_3 = \frac{1}{5}\left(-x^k_1 - x^k_2 - 4 \right) 
 $$
 
+
 - Vetor inicial $x^0 = \begin{bmatrix}5,7 & 2,5 & -0,8\end{bmatrix}^\top$
 
 $$
