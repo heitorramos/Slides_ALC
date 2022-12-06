@@ -7,7 +7,7 @@
 <link href="Aula12_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula12_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula12_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.38">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="Aula12_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula12_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -320,12 +325,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 12: Análise de Componentes Principais</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -602,8 +614,7 @@ x_3
 </section>
 <section id="decomposição-ortogonal-1" class="slide level2">
 <h2>Decomposição ortogonal</h2>
-<p><strong>Teorema.</strong> Seja <span class="math inline">\(W\)</span> um subespaço do <span class="math inline">\(\mathbb R^n\)</span> e <span class="math inline">\(x\)</span> um vetor em <span class="math inline">\(\mathbb R^n\)</span>. Então podemos escrever <span class="math inline">\(x\)</span> de forma única como</p>
-<p><span class="math display">\[x =  x_W + x_{W^\perp}\]</span></p>
+<p><strong>Teorema.</strong> Seja <span class="math inline">\(W\)</span> um subespaço do <span class="math inline">\(\mathbb R^n\)</span> e <span class="math inline">\(x\)</span> um vetor em <span class="math inline">\(\mathbb R^n\)</span>. Então podemos escrever <span class="math inline">\(x\)</span> de forma única como <span class="math display">\[x =  x_W + x_{W^\perp}\]</span></p>
 <p>Onde <span class="math inline">\(x_W\)</span> é o vetor mais próximo a <span class="math inline">\(x\)</span> em <span class="math inline">\(W\)</span> e <span class="math inline">\(x_{W\perp}\)</span> está em <span class="math inline">\(W^\perp\)</span></p>
 <p><strong>Definição.</strong> A Equação anterior é chamada decomposição ortogonal de <span class="math inline">\(x\)</span> com relação à <span class="math inline">\(W\)</span>; vetor <span class="math inline">\(x_W\)</span> é a projeção ortogonal de <span class="math inline">\(x\)</span> em <span class="math inline">\(W\)</span>.</p>
 </section>
@@ -636,12 +647,9 @@ x_3
 </section>
 <section id="mudança-de-base-canônica-para-base-b" class="slide level2 scrollable">
 <h2>Mudança de base canônica para base <span class="math inline">\(B\)</span></h2>
-<p>Seja <span class="math inline">\(B=\{v_1,\ldots,v_n\}\)</span> uma base de <span class="math inline">\(\mathbb R^n\)</span>. As coordenadas do vetor <span class="math inline">\(x\)</span> em relação à <span class="math inline">\(B\)</span>, <span class="math inline">\(a = [a1,\ldots,an]^\top = [x]_B\)</span> são obtidas a partir de</p>
-<p><span class="math display">\[a_1v_1 + a_2v_2 + \ldots + a_nv_n\]</span> ou seja <span class="math display">\[[v_1 v_2 \ldots v_n][x]_B = [x]\]</span></p>
-<p>Seja <span class="math inline">\(V\)</span> a matriz cujas colunas são os vetores da base</p>
-<p><span class="math display">\[ V = [v_1 v_2 \ldots v_n]\]</span></p>
-<p>Então para qualquer vetor <span class="math inline">\(x\)</span> temos</p>
-<p><span class="math display">\[ V[x]_B = x\]</span> e <span class="math display">\[[x]_B = V^{-1}x\]</span></p>
+<p>Seja <span class="math inline">\(B=\{v_1,\ldots,v_n\}\)</span> uma base de <span class="math inline">\(\mathbb R^n\)</span>. As coordenadas do vetor <span class="math inline">\(x\)</span> em relação à <span class="math inline">\(B\)</span>, <span class="math inline">\(a = [a1,\ldots,an]^\top = [x]_B\)</span> são obtidas a partir de <span class="math display">\[a_1v_1 + a_2v_2 + \ldots + a_nv_n\]</span> ou seja <span class="math display">\[[v_1 v_2 \ldots v_n][x]_B = [x]\]</span></p>
+<p>Seja <span class="math inline">\(V\)</span> a matriz cujas colunas são os vetores da base <span class="math display">\[ V = [v_1 v_2 \ldots v_n]\]</span></p>
+<p>Então para qualquer vetor <span class="math inline">\(x\)</span> temos <span class="math display">\[ V[x]_B = x\]</span> e <span class="math display">\[[x]_B = V^{-1}x\]</span></p>
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -673,7 +681,7 @@ x_3
 <ul>
 <li>PC2 é ortogonal a PC1</li>
 <li>Direção de maior variância dos dados, dentre direções ortogonais a PC1</li>
-<li>De novo, projetar coordenadas em PC2 <img data-src="figs/Aula12/defra3.png" data-fig-align="center" style="width:100.0%"></li>
+<li>De novo, projetar coordenadas em PC2 <img data-src="figs/Aula12/defra3.png" style="width:100.0%" data-fig-align="center"></li>
 </ul>
 </section>
 <section id="pca-vs-variância-explicada" class="slide level2">
@@ -947,7 +955,24 @@ x_3
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -977,31 +1002,50 @@ x_3
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

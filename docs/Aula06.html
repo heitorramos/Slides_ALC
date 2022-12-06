@@ -7,7 +7,7 @@
 <link href="Aula06_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula06_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula06_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="Aula06_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula06_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -320,12 +325,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 06: Normas de Vetores e Matrizes</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -450,9 +462,7 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 <p><span class="math display">\[ | x^\top y| = \Vert x \Vert \Vert y \Vert |\cos(\theta)| \le \Vert x \Vert \Vert y \Vert\]</span></p>
 <p>Teorema da Desigualdade Triangular</p>
 <p><span class="math display">\[ \Vert x+y\Vert \le \Vert x \Vert + \Vert y\Vert \text{, para todo $x,y$}\]</span></p>
-<p>vamos elevar os dois lados ao quadrado, temos</p>
-<p><span class="math display">\[(\Vert x+y\Vert)^2 \le (\Vert x \Vert + \Vert y\Vert)^2 \le \Vert x\Vert^2 + 2\Vert x\Vert \Vert y\Vert + \Vert y\Vert^2\]</span></p>
-<p><span class="math display">\[\begin{align}\Vert v\Vert^2 &amp;= (\sqrt{v^\top v})^2\\ &amp;= (x+y)^\top (x+y) \\ &amp;= \Vert x\Vert^2 + 2x^\top y+\Vert y\Vert^2 \\ &amp;\le \Vert x\Vert^2 + 2\vert x^\top y\vert + \Vert y\Vert^2 \\&amp;\le \Vert x\Vert^2 + 2\Vert x\Vert \Vert y\Vert + \Vert y\Vert^2
+<p>vamos elevar os dois lados ao quadrado, temos <span class="math display">\[(\Vert x+y\Vert)^2 \le (\Vert x \Vert + \Vert y\Vert)^2 \le \Vert x\Vert^2 + 2\Vert x\Vert \Vert y\Vert + \Vert y\Vert^2\]</span> <span class="math display">\[\begin{align}\Vert v\Vert^2 &amp;= (\sqrt{v^\top v})^2\\ &amp;= (x+y)^\top (x+y) \\ &amp;= \Vert x\Vert^2 + 2x^\top y+\Vert y\Vert^2 \\ &amp;\le \Vert x\Vert^2 + 2\vert x^\top y\vert + \Vert y\Vert^2 \\&amp;\le \Vert x\Vert^2 + 2\Vert x\Vert \Vert y\Vert + \Vert y\Vert^2
 \end{align}\]</span></p>
 </section>
 <section id="distância-entre-dois-vetores" class="slide level2 scrollable">
@@ -560,11 +570,8 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 <section id="para-quê-normas-diferentes-1" class="slide level2 scrollable">
 <h2>Para quê normas diferentes?</h2>
 <ul>
-<li>Todas as normas <span class="math inline">\(\mathbb R^n\)</span> são equivalentes, ou seja, se <span class="math inline">\(\Vert \cdot \Vert_\alpha\)</span> e <span class="math inline">\(\Vert \cdot \Vert_\beta\)</span> são normas no <span class="math inline">\(\mathbb R^n\)</span>, então existem constantes positivas <span class="math inline">\(k_1\)</span> e <span class="math inline">\(k_2\)</span>, tais que</li>
+<li>Todas as normas <span class="math inline">\(\mathbb R^n\)</span> são equivalentes, ou seja, se <span class="math inline">\(\Vert \cdot \Vert_\alpha\)</span> e <span class="math inline">\(\Vert \cdot \Vert_\beta\)</span> são normas no <span class="math inline">\(\mathbb R^n\)</span>, então existem constantes positivas <span class="math inline">\(k_1\)</span> e <span class="math inline">\(k_2\)</span>, tais que <span class="math display">\[ k_1\Vert x\Vert_\alpha \le \Vert x \Vert_\beta \le k_2\Vert x\Vert_\alpha,\]</span> para todo <span class="math inline">\(x\in \mathbb R^2\)</span>, particularmente, <span class="math display">\[\Vert x\Vert_2 \le \Vert x\Vert_1 \le \sqrt n \Vert x\Vert_2\]</span></li>
 </ul>
-<p><span class="math display">\[ k_1\Vert x\Vert_\alpha \le \Vert x \Vert_\beta \le k_2\Vert x\Vert_\alpha,\]</span></p>
-<p>para todo <span class="math inline">\(x\in \mathbb R^2\)</span>, particularmente,</p>
-<p><span class="math display">\[\Vert x\Vert_2 \le \Vert x\Vert_1 \le \sqrt n \Vert x\Vert_2\]</span></p>
 <p><span class="math display">\[ \Vert x \Vert_\infty \le \Vert x\Vert_2 \le \sqrt n \Vert x\Vert_\infty\]</span></p>
 <p><span class="math display">\[\Vert x\Vert_\infty \le \Vert x \Vert_1 \le n \Vert x \Vert_\infty\]</span></p>
 <ul>
@@ -580,8 +587,6 @@ Almeida, M.A.D., Vieira, C.C., Melo, P.O.S.V.D. and Assunção, R.M., 2019. Rand
 <li><span class="math inline">\(\Vert x+y\Vert_p \le \Vert x \Vert_p + \Vert y \Vert_p\)</span></li>
 </ul>
 <!-- Se $p>1$, $q>1$ com $\frac{1}{p} + \frac{1}{q} = 1$, então
-
-
 
 $$\vert x^\top y\vert \le \Vert x\Vert_p \Vert y\Vert_p$$ -->
 </section>
@@ -844,7 +849,24 @@ $$\vert x^\top y\vert \le \Vert x\Vert_p \Vert y\Vert_p$$ -->
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -874,31 +896,50 @@ $$\vert x^\top y\vert \le \Vert x\Vert_p \Vert y\Vert_p$$ -->
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

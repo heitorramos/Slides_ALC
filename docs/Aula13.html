@@ -7,7 +7,7 @@
 <link href="Aula13_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula13_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula13_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.38">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="Aula13_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula13_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -320,12 +325,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 13: Análise de Componentes Principais II</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -376,8 +388,7 @@
 </section>
 <section id="mudança-de-base-ypx" class="slide level2 scrollable">
 <h2>Mudança de base <span class="math inline">\(Y=PX\)</span></h2>
-<p>Sejam <span class="math inline">\(p_1, p_2, \ldots, p_m\)</span> os vetores linha de <span class="math inline">\(P\)</span> e <span class="math inline">\(x_1, \ldots, x_n\)</span> os vetores coluna de <span class="math inline">\(X\)</span>. Temos</p>
-<p><span class="math display">\[
+<p>Sejam <span class="math inline">\(p_1, p_2, \ldots, p_m\)</span> os vetores linha de <span class="math inline">\(P\)</span> e <span class="math inline">\(x_1, \ldots, x_n\)</span> os vetores coluna de <span class="math inline">\(X\)</span>. Temos <span class="math display">\[
 PX =
 \begin{bmatrix}
 Px_1&amp; Px_2 &amp; \ldots &amp; Px_n
@@ -470,16 +481,14 @@ x_mx_1^\top &amp; x_mx_2^\top &amp; \ldots &amp; x_mx_n^\top\\
 <section id="derivando-p" class="slide level2 scrollable">
 <h2>Derivando <span class="math inline">\(P\)</span></h2>
 <p><strong>Suposição extra:</strong> <span class="math inline">\(p_1, p_2, \ldots, p_n\)</span> são ortonormais</p>
-<p>Considere a fórmula da matriz de de covariância <span class="math inline">\(C_Y\)</span> e <span class="math inline">\(Y=PX\)</span>:</p>
-<p><span class="math display">\[ C_Y = \frac{1}{n-1}YY^\top = \frac{1}{n-1}(PX)(PX)^\top = \frac{1}{n-1}PXX^\top P^\top\]</span></p>
+<p>Considere a fórmula da matriz de de covariância <span class="math inline">\(C_Y\)</span> e <span class="math inline">\(Y=PX\)</span>: <span class="math display">\[ C_Y = \frac{1}{n-1}YY^\top = \frac{1}{n-1}(PX)(PX)^\top = \frac{1}{n-1}PXX^\top P^\top\]</span></p>
 <p><span class="math display">\[ C_Y = \frac{1}{n-1}PSP^\top \text{ onde } S = XX^\top \]</span></p>
 <p><strong>Fato:</strong> toda matriz simétrica <span class="math inline">\(S\)</span> é ortonormalmente diagonálizável, ou seja, <span class="math inline">\(S = EDE^\top\)</span>, onde <span class="math inline">\(E\)</span> são autovetores ortonormais e <span class="math inline">\(D\)</span> é diagonal com autovalores</p>
 </section>
 <section id="derivando-p-1" class="slide level2 scrollable">
 <h2>Derivando <span class="math inline">\(P\)</span></h2>
 <p>Escolhendo as linhas de <span class="math inline">\(P\)</span> como autovetores de <span class="math inline">\(S\)</span>, temos <span class="math inline">\(P=E^\top\)</span>. Substituindo na expressão da matriz de covariâcia</p>
-<p><span class="math display">\[ C_Y = \frac{1}{n-1}PSP^\top = \frac{1}{n-1}E^\top (EDE^\top) E\]</span></p>
-<p>onde, <span class="math inline">\(S = XX^\top = EDE^\top (Q\Lambda Q^\top)\)</span> e <span class="math inline">\(E_{m\times m}\)</span> é ortonormal</p>
+<p><span class="math display">\[ C_Y = \frac{1}{n-1}PSP^\top = \frac{1}{n-1}E^\top (EDE^\top) E\]</span> onde, <span class="math inline">\(S = XX^\top = EDE^\top (Q\Lambda Q^\top)\)</span> e <span class="math inline">\(E_{m\times m}\)</span> é ortonormal</p>
 <p>Logo, <span class="math inline">\(C_Y = \frac{1}{n-1} D\)</span></p>
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
@@ -789,7 +798,24 @@ x_mx_1^\top &amp; x_mx_2^\top &amp; \ldots &amp; x_mx_n^\top\\
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -819,31 +845,50 @@ x_mx_1^\top &amp; x_mx_2^\top &amp; \ldots &amp; x_mx_n^\top\\
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

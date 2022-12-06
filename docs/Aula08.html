@@ -7,7 +7,7 @@
 <link href="Aula08_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula08_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula08_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="Aula08_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula08_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -320,12 +325,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 08: Matrizes simétricas positivas definidas e semidefinidas</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -393,9 +405,8 @@
 <section id="ex-matrizes-simétricas" class="slide level2 scrollable">
 <h2>Ex: Matrizes simétricas</h2>
 <ul>
-<li>Ex: 1:</li>
+<li>Ex: 1: <span class="math display">\[ S = \begin{bmatrix}0 &amp; 1 \\1 &amp; 0\end{bmatrix}\]</span></li>
 </ul>
-<p><span class="math display">\[ S = \begin{bmatrix}0 &amp; 1 \\1 &amp; 0\end{bmatrix}\]</span></p>
 <p><span class="math display">\[\lambda_1 = ?, \lambda_2 = ?\]</span></p>
 <ul>
 <li><p>Polinômio característico: <span class="math inline">\(\lambda^2 = 1 \Rightarrow \lambda_1 = 1, \lambda_2 = -1\)</span> (note que o traço é zero)</p></li>
@@ -405,8 +416,7 @@
 <section id="decomposição-espectral-de-s" class="slide level2 scrollable">
 <h2>Decomposição espectral de <span class="math inline">\(S\)</span></h2>
 <p>Como <span class="math inline">\(S\)</span> possui <span class="math inline">\(n\)</span> autovetores independentes, existe a decomposição espectral <span class="math display">\[S = X \Lambda X^{-1}\]</span></p>
-<p>onde colunas <span class="math inline">\(x_i\)</span> são os autovetores. Como os autovetores são ortogonais, normalizando cada <span class="math inline">\(x_i\)</span>, temos</p>
-<p><span class="math display">\[ S = Q\Lambda Q^{-1}\]</span></p>
+<p>onde colunas <span class="math inline">\(x_i\)</span> são os autovetores. Como os autovetores são ortogonais, normalizando cada <span class="math inline">\(x_i\)</span>, temos <span class="math display">\[ S = Q\Lambda Q^{-1}\]</span></p>
 <p>Como <span class="math inline">\(Q\)</span> é quadrada (e ortogonal), <span class="math display">\[S = Q\Lambda Q^\top\]</span></p>
 </section>
 <section id="matrizes-definidas-positivas" class="slide level2 scrollable">
@@ -459,8 +469,7 @@
 <section id="como-tornar-o-ex1-dp" class="slide level2 scrollable">
 <h2>Como tornar o Ex1 DP?</h2>
 <p>Ex2: <span class="math inline">\(S=\begin{bmatrix}3 &amp;4\\4&amp;x\end{bmatrix}\)</span></p>
-<p><span class="math display">\[ \text{det}(S) = 3x - 16&gt;0\]</span></p>
-<p><span class="math display">\[ x&gt; \frac{16}{3}\]</span></p>
+<p><span class="math display">\[ \text{det}(S) = 3x - 16&gt;0\]</span> <span class="math display">\[ x&gt; \frac{16}{3}\]</span></p>
 <p><span class="math display">\[S=\begin{bmatrix}3 &amp;4\\4&amp;6\end{bmatrix}\]</span></p>
 </section>
 <section id="como-testar-se-uma-matriz-é-dp" class="slide level2 scrollable">
@@ -486,8 +495,7 @@
 <h2>Como testar se uma matriz é DP?</h2>
 <p><span class="math display">\[S=\begin{bmatrix}3 &amp;4\\4&amp;6\end{bmatrix}\]</span></p>
 <p>Vamos usar o teste (2)</p>
-<p>Energia (ou forma quadrática) é uma função</p>
-<p><span class="math display">\[\begin{bmatrix}x_1 &amp; x_2\end{bmatrix}\begin{bmatrix}3&amp;4\\4&amp;6\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix} = f(x) \]</span></p>
+<p>Energia (ou forma quadrática) é uma função <span class="math display">\[\begin{bmatrix}x_1 &amp; x_2\end{bmatrix}\begin{bmatrix}3&amp;4\\4&amp;6\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix} = f(x) \]</span></p>
 <p><span class="math display">\[\begin{align}
 f(x) &amp;= 3x^2_1 + 6x^2_2 + 8x_1x_2\\
 &amp;= 3\left(x_1 + \frac{4x_2}{3}\right)^2 + \frac{2x_2^2}{3}
@@ -595,8 +603,7 @@ f(x) &amp;= 3x^2_1 + 6x^2_2 + 8x_1x_2\\
 <section id="como-testar-se-s-é-sdp" class="slide level2">
 <h2>Como testar se <span class="math inline">\(S\)</span> é SDP?</h2>
 <p>Ex4: <span class="math inline">\(\begin{bmatrix}3&amp;4\\4 &amp;x\end{bmatrix}\)</span></p>
-<p><span class="math display">\[ 3x - 16 = 0\]</span></p>
-<p><span class="math display">\[ x = \frac{16}{3}\]</span> para que seja SDP, mas não DP</p>
+<p><span class="math display">\[ 3x - 16 = 0\]</span> <span class="math display">\[ x = \frac{16}{3}\]</span> para que seja SDP, mas não DP</p>
 </section>
 <section id="como-testar-se-s-é-sdp-1" class="slide level2">
 <h2>Como testar se <span class="math inline">\(S\)</span> é SDP?</h2>
@@ -623,8 +630,7 @@ S &amp;= Q \Lambda Q^\top\\
 
 \end{align}\]</span></p>
 <p>Então, <span class="math inline">\(S = \lambda_1 q_1q_1^\top + \lambda_2 q_2q_2^\top + \lambda_3 q_3q_3^\top\)</span></p>
-<p><span class="math display">\[x_1 = \begin{bmatrix}1\\1\\1\end{bmatrix}\]</span></p>
-<p><span class="math display">\[q_1 = \frac{x_1}{\Vert x_1\Vert} = \begin{bmatrix}\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\end{bmatrix}\]</span></p>
+<p><span class="math display">\[x_1 = \begin{bmatrix}1\\1\\1\end{bmatrix}\]</span> <span class="math display">\[q_1 = \frac{x_1}{\Vert x_1\Vert} = \begin{bmatrix}\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\end{bmatrix}\]</span></p>
 <p><span class="math display">\[S = \lambda_3q_3q_3^\top = 3\begin{bmatrix}\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{3}}\end{bmatrix} \begin{bmatrix}\frac{1}{\sqrt{3}}&amp;\frac{1}{\sqrt{3}}&amp;\frac{1}{\sqrt{3}}\end{bmatrix}\]</span></p>
 <p><span class="math display">\[S = \begin{bmatrix}1\\1\\1\end{bmatrix}\begin{bmatrix}1&amp;1&amp;1\end{bmatrix}\]</span></p>
 
@@ -883,7 +889,24 @@ S &amp;= Q \Lambda Q^\top\\
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -913,31 +936,50 @@ S &amp;= Q \Lambda Q^\top\\
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

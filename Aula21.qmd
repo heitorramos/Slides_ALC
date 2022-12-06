@@ -27,7 +27,7 @@ format:
     footer: <https://heitorramos.github.io/alc.html>
 search: true
 resources:
-  - aula20.pdf
+  - aula21.pdf
 ---
 ## Créditos
 :::{.callout-important}
