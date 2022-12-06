@@ -50,6 +50,7 @@ $b=
 1,97
 \end{bmatrix}$
 
+:::{.incremental}
 - Solução exata: $x = \begin{bmatrix}1&1\end{bmatrix}^\top$
 - Vetor $\tilde{b}=\begin{bmatrix}1,99 & 1,98\end{bmatrix}^\top \approx b$
 - Solução exata de $Ay = \tilde{b} = \begin{bmatrix}100 & -99\end{bmatrix}^\top$
@@ -64,17 +65,36 @@ $$
 - Solução exata de $\tilde{A}z=b = \begin{bmatrix}2 & -1/99\end{bmatrix}^\top$
 - Matriz $A$ é quase singular ($\text{det}(A) = -10^{-4}$)
 - Sistema linear malcondicionado
+:::
 
 ## Interpretação geométrica do malcondicionamento{.scrollable}
 
 ::::{.columns}
 :::{.column width='40%'}
-- Três planos definidos por um sistema linear
-- Dois planos são quase coincidentes
+- Sistema linear $Ax = b$
+
+$A = 
+\begin{bmatrix}
+1 & 0,99 \\
+0,99 & 0,98
+\end{bmatrix}$
+e 
+$b=
+\begin{bmatrix}
+1,99 \\ 
+1,97
+\end{bmatrix}$
+
+- Solução exata: $x = \begin{bmatrix}1&1\end{bmatrix}^\top$
+- Vetor $\tilde{b}=\begin{bmatrix}1,99 & 1,98\end{bmatrix}^\top \approx b$
+- Solução exata de $Ay = \tilde{b} = \begin{bmatrix}100 & -99\end{bmatrix}^\top$
+- Duas retas definidas por um sistema linear
+- Duas retas são quase coincidentes
 - Deslocamento no ponto de interseção
 :::
 :::{.column width='60%'}
-![](figs/Aula22/malcondicionamento.png){fig-align="center"}
+![](figs/Aula22/malcondicionamento1.png){fig-align="center"}
+![](figs/Aula22/malcondicionamento2.png){fig-align="center"}
 :::
 ::::
 
@@ -93,7 +113,7 @@ $$
 - Instabilidade da solução
 - Se $A$ e/ou $b$ forem medidas experimentais
 
-## Singularidade da matriz
+## Singularidade da matriz{.scrollable}
 
 - Medir singularidade de $A$ pelo determinante não constitui boa prática
 - $\text{det}(A) \approx 0$ não indica necessariamente a ocorrência de malcondicionamento
@@ -104,7 +124,7 @@ $$
 - $\text{det}(A) = 2\cdot 10^{-6}$ e é muito bem condicionada
 - Seu determinante é pequeno porque seus elementos são pequenos
 
-## Número de condição
+## Número de condição{.scrollable}
 
 $$
 \text{condição}(A) = \kappa(A) = \Vert A\Vert \Vert A^{-1}\Vert
@@ -222,11 +242,14 @@ $$
 $$
 e 
 $$
-\vert \delta b \Vert \le \Vert A^{-1}\Vert \Vert \delta b\Vert
+\Vert \delta x \Vert \le \Vert A^{-1}\Vert \Vert \delta b\Vert
 $$
 
 - Combinando
 
+$$
+\frac{\Vert \delta x\Vert}{\Vert x\Vert} \le \Vert A\Vert \Vert A^{-1}\Vert \frac{\Vert \delta b\Vert}{\Vert b\Vert}
+$$
 $$
 \frac{\Vert \delta x\Vert}{\Vert x\Vert} \le \kappa(A)\frac{\Vert \delta b\Vert}{\Vert b\Vert}
 $$
@@ -308,4 +331,37 @@ $$
 \frac{\Vert\delta x\Vert_2}{x + \delta x} = \frac{1,4214}{2,0000} = 7,1070\cdot 10^{-1}
 $$
 
-## Resumo de sistemas lineares
+## Resumo de sistemas lineares{.scrollable}
+
+Os sistemas lineares podem ser:
+
+- Singulares vs Não-singulares 
+  - Sistemas singulares podem admitir infinitas soluções ou nenhuma solução
+  - Sistemas não-singulares admitem solução única
+- Bem condicionados vs Malcondicionados
+  - O condicionamento está relacionado a como erros numéricos são propagados
+- Sistemas lineares quadrados vs retangulares
+  - Sistemas retangulares podem ser sobre ou sub determinados. Esses sistemas, quando apresentam infinitas soluções, devem ser resolvidos minimizando a norma-2 (método dos mínimos quadrados)
+
+## Métodos estudados no curso{.scrollable}
+
+:::{.incremental}
+- Métodos exatos:
+  - Eliminação de Gauss
+  - Decomposição LU
+    - Maneira  sistemática que mantém semelhanças com o método de  eliminação de Gauss
+    - Muito útil para calcular determinante de matrizes
+  - Decomposição Cholesky
+    - Quando a matriz dos coeficientes é positiva definida
+    - Muito útil para calcular determinante de matrizes
+  - Pseudoinversa de Moore-Penrose
+    - Útil para solucionar problema de mínimos quadrados com matrizes de posto baixo (Ver sistemas retangulares)
+  - Decomposição QR
+    - Útil quando a matriz tem posto cheio
+- Métodos iterativos estacionários (aproximados):
+  - Método de Jacobi
+  - Método de Gauss-Seidel
+  - Método da Sobre-relaxação sucessiva
+    - importante estudar a análise de convergência desses métodos
+
+:::

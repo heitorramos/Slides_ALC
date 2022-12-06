@@ -7,7 +7,7 @@
 <link href="Aula03_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula03_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula03_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.38">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -384,12 +389,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 03: Quatro Subespaços Fundamentais</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -496,8 +508,7 @@
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[ A = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 6\end{bmatrix}\]</span></p>
-<p><span class="math display">\[A^\top = \begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 6\end{bmatrix}\]</span></p>
+<p><span class="math display">\[ A = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 6\end{bmatrix}\]</span> <span class="math display">\[A^\top = \begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 6\end{bmatrix}\]</span></p>
 <p><span class="math display">\[C(A^\top) = \{A^\top v\mid v\in \mathbb R^2\}\]</span></p>
 <div class="cell" data-execution_count="2">
 <details>
@@ -534,9 +545,7 @@
 <ul>
 <li>Para quais valores de <span class="math inline">\(x\)</span> a equação <span class="math inline">\(A x = 0\)</span> é válida?</li>
 </ul>
-<p><span class="math display">\[ Ax = x_1\begin{bmatrix}1\\3\end{bmatrix} + x_2\begin{bmatrix}2\\6\end{bmatrix} = 0\]</span></p>
-<p><span class="math display">\[ Ax = 2\begin{bmatrix}1\\3\end{bmatrix} + (-1)\begin{bmatrix}2\\6\end{bmatrix} = 0\]</span></p>
-<p><span class="math display">\[x = \begin{bmatrix}2 &amp; -1\end{bmatrix}^\top \in N(A)\]</span></p>
+<p><span class="math display">\[ Ax = x_1\begin{bmatrix}1\\3\end{bmatrix} + x_2\begin{bmatrix}2\\6\end{bmatrix} = 0\]</span> <span class="math display">\[ Ax = 2\begin{bmatrix}1\\3\end{bmatrix} + (-1)\begin{bmatrix}2\\6\end{bmatrix} = 0\]</span> <span class="math display">\[x = \begin{bmatrix}2 &amp; -1\end{bmatrix}^\top \in N(A)\]</span></p>
 <ul>
 <li>O espaço nulo de <span class="math inline">\(A\)</span> é a reta com direção <span class="math inline">\(x = \begin{bmatrix}2 &amp; -1\end{bmatrix}^\top\)</span></li>
 </ul>
@@ -572,8 +581,7 @@
 <ul>
 <li>Os espaço linha e nulo são ortogonais!</li>
 </ul>
-<p><span class="math display">\[ Ax = \begin{bmatrix}1 &amp; 2 \\ 3 &amp; 6\end{bmatrix}\begin{bmatrix}x_1 \\ x_2\end{bmatrix}= x_1\begin{bmatrix}1 \\ 3\end{bmatrix}+ x_2 \begin{bmatrix}2 \\ 6\end{bmatrix} = \begin{bmatrix}0 \\ 0\end{bmatrix}\]</span></p>
-<p><span class="math display">\[x\in N(A)\]</span></p>
+<p><span class="math display">\[ Ax = \begin{bmatrix}1 &amp; 2 \\ 3 &amp; 6\end{bmatrix}\begin{bmatrix}x_1 \\ x_2\end{bmatrix}= x_1\begin{bmatrix}1 \\ 3\end{bmatrix}+ x_2 \begin{bmatrix}2 \\ 6\end{bmatrix} = \begin{bmatrix}0 \\ 0\end{bmatrix}\]</span> <span class="math display">\[x\in N(A)\]</span></p>
 </section>
 <section id="espaço-nulo-de-atop" class="slide level2 scrollable">
 <h2>Espaço Nulo de <span class="math inline">\(A^\top\)</span></h2>
@@ -581,9 +589,7 @@
 <li><p><span class="math inline">\(N(A^\top)\)</span> contém todas as soluções para a equação <span class="math display">\[A^\top y = 0\]</span></p></li>
 <li><p>Também chamado de <em>Left Nullspace</em></p></li>
 </ul>
-<p><span class="math display">\[ Ax = y_1\begin{bmatrix}1\\2\end{bmatrix} + y_2\begin{bmatrix}3\\6\end{bmatrix} = 0\]</span></p>
-<p><span class="math display">\[ Ax = 3\begin{bmatrix}1\\2\end{bmatrix} + (-1)\begin{bmatrix}3\\6\end{bmatrix} = 0\]</span></p>
-<p><span class="math display">\[x = \begin{bmatrix}3 &amp; -1\end{bmatrix}^\top \in N(A)\]</span></p>
+<p><span class="math display">\[ Ax = y_1\begin{bmatrix}1\\2\end{bmatrix} + y_2\begin{bmatrix}3\\6\end{bmatrix} = 0\]</span> <span class="math display">\[ Ax = 3\begin{bmatrix}1\\2\end{bmatrix} + (-1)\begin{bmatrix}3\\6\end{bmatrix} = 0\]</span> <span class="math display">\[x = \begin{bmatrix}3 &amp; -1\end{bmatrix}^\top \in N(A)\]</span></p>
 <div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
@@ -616,21 +622,11 @@
 <ul>
 <li>Os espaços e nulo de <span class="math inline">\(A^\top\)</span> são ortogonais!</li>
 </ul>
-<p><span class="math display">\[ A^\top y = \begin{bmatrix}1 &amp; 3 \\ 2 &amp; 6\end{bmatrix}\begin{bmatrix} y_1 \\ y_2\end{bmatrix} = y_1\begin{bmatrix}1 \\ 3\end{bmatrix}+ y_2 \begin{bmatrix}2 \\ 6\end{bmatrix} = \begin{bmatrix}0 \\ 0\end{bmatrix}\]</span></p>
-<p><span class="math display">\[y\in N(A^\top)\]</span></p>
+<p><span class="math display">\[ A^\top y = \begin{bmatrix}1 &amp; 3 \\ 2 &amp; 6\end{bmatrix}\begin{bmatrix} y_1 \\ y_2\end{bmatrix} = y_1\begin{bmatrix}1 \\ 3\end{bmatrix}+ y_2 \begin{bmatrix}2 \\ 6\end{bmatrix} = \begin{bmatrix}0 \\ 0\end{bmatrix}\]</span> <span class="math display">\[y\in N(A^\top)\]</span></p>
 </section>
 <section id="os-4-espaços-fundamentais" class="slide level2 scrollable">
 <h2>Os 4 Espaços Fundamentais</h2>
-<p><span class="math display">\[A = \begin{bmatrix}1 &amp; 2 \\ 3 &amp; 6\end{bmatrix}\]</span></p>
-<ul>
-<li><span class="math inline">\(A\)</span> é um mapa <span class="math inline">\(f\colon \mathbb R^2 \rightarrow \mathbb R^2\)</span></li>
-<li>Posto de <span class="math inline">\(A\)</span> é 1</li>
-</ul>
-<p><span class="math display">\[ C(A) = \begin{bmatrix}1 &amp; 3\end{bmatrix}^\top \]</span></p>
-<p><span class="math display">\[ C(A^\top) = \begin{bmatrix}1 &amp; 2\end{bmatrix}^\top \]</span></p>
-<p><span class="math display">\[ N(A) = \begin{bmatrix}2 &amp; -1\end{bmatrix}^\top \]</span></p>
-<p><span class="math display">\[ N(A^\top) = \begin{bmatrix}3 &amp; -1\end{bmatrix}^\top \]</span></p>
-<!-- ![Quatro espaços Fundamentais](figs/quatroespacos.png) -->
+<p><span class="math display">\[A = \begin{bmatrix}1 &amp; 2 \\ 3 &amp; 6\end{bmatrix}\]</span> - <span class="math inline">\(A\)</span> é um mapa <span class="math inline">\(f\colon \mathbb R^2 \rightarrow \mathbb R^2\)</span> - Posto de <span class="math inline">\(A\)</span> é 1 <span class="math display">\[ C(A) = \begin{bmatrix}1 &amp; 3\end{bmatrix}^\top \]</span> <span class="math display">\[ C(A^\top) = \begin{bmatrix}1 &amp; 2\end{bmatrix}^\top \]</span> <span class="math display">\[ N(A) = \begin{bmatrix}2 &amp; -1\end{bmatrix}^\top \]</span> <span class="math display">\[ N(A^\top) = \begin{bmatrix}3 &amp; -1\end{bmatrix}^\top \]</span> <!-- ![Quatro espaços Fundamentais](figs/quatroespacos.png) --></p>
 <div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
@@ -703,13 +699,9 @@
 </ul>
 <p><span class="math display">\[ B =  \begin{bmatrix} 1 &amp; -2 &amp; -2 \\ 3 &amp; -6 &amp; -6\end{bmatrix}\begin{bmatrix}a\\b\\c\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix}\]</span></p>
 <ul>
-<li>A equação acima admite as seguintes soluções</li>
-</ul>
-<p><span class="math display">\[x_1 = \begin{bmatrix}2\\1\\0\end{bmatrix} \, x_2 = \begin{bmatrix}2\\0\\1\end{bmatrix}\]</span></p>
-<!-- $$x_2 = \begin{bmatrix}2\\0\\1\end{bmatrix} $$ -->
-<ul>
-<li>Essas não são as melhores soluções pois não são perpendiculares</li>
-<li>Aprenderemos como encontrar soluções perpendiculares através de Gram-Schmidt</li>
+<li><p>A equação acima admite as seguintes soluções <span class="math display">\[x_1 = \begin{bmatrix}2\\1\\0\end{bmatrix} \, x_2 = \begin{bmatrix}2\\0\\1\end{bmatrix}\]</span> <!-- $$x_2 = \begin{bmatrix}2\\0\\1\end{bmatrix} $$ --></p></li>
+<li><p>Essas não são as melhores soluções pois não são perpendiculares</p></li>
+<li><p>Aprenderemos como encontrar soluções perpendiculares através de Gram-Schmidt</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -973,7 +965,24 @@
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -1003,31 +1012,50 @@
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

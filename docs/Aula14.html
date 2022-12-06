@@ -7,7 +7,7 @@
 <link href="Aula14_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula14_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula14_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.38">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="Aula14_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Aula14_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -320,12 +325,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 14: Removendo Viés com PCA</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -388,9 +400,8 @@
 <h2>Como representar as palavras?</h2>
 <p><strong>Opção 1:</strong> usando “one hot” vectors</p>
 <ul>
-<li>Similaridade de cosseno entre <span class="math inline">\(u\)</span> e <span class="math inline">\(v\)</span>:</li>
+<li>Similaridade de cosseno entre <span class="math inline">\(u\)</span> e <span class="math inline">\(v\)</span>: <span class="math display">\[\cos(u,v) = \frac{u\cdot v}{\Vert u\Vert \Vert v\Vert} \]</span></li>
 </ul>
-<p><span class="math display">\[\cos(u,v) = \frac{u\cdot v}{\Vert u\Vert \Vert v\Vert} \]</span></p>
 <p>Vetores similares são úteis, p.&nbsp;ex., para auto-completar frases mesmo que sequência de palavras nunca tenha sido vistas</p>
 <p>“Eu gostaria de tomar um suco de ________”</p>
 <p>[laranja] [limão] [cupuaçú]</p>
@@ -526,11 +537,9 @@
 </section>
 <section id="subespaço-não-viesado" class="slide level2">
 <h2>Subespaço não-viesado</h2>
-<p>Agora que definimos o subespaço gênero,</p>
-<p><span class="math display">\[ \text{a reta } B = \{ag\colon a\in \mathbb R\}\]</span></p>
+<p>Agora que definimos o subespaço gênero, <span class="math display">\[ \text{a reta } B = \{ag\colon a\in \mathbb R\}\]</span></p>
 <p>Podemos definir o subespaço não-viesado ortogonal a ele:</p>
-<p><span class="math display">\[S_{\perp B} = \{x \in \mathbb R^d\colon g^\top x = 0\}\]</span></p>
-<p><span class="math display">\[S_{\perp B}\colon g_1x_1 + g_2x_2 + \ldots + g_nx_n = 0\]</span></p>
+<p><span class="math display">\[S_{\perp B} = \{x \in \mathbb R^d\colon g^\top x = 0\}\]</span> <span class="math display">\[S_{\perp B}\colon g_1x_1 + g_2x_2 + \ldots + g_nx_n = 0\]</span></p>
 </section>
 <section id="passo-2-neutralização" class="slide level2">
 <h2>Passo 2: neutralização</h2>
@@ -552,8 +561,7 @@
 <p>Neutralize <span class="math inline">\(e_{doctor}\)</span></p>
 <p><span class="math inline">\(g = e_{man} - e_{woman}\)</span></p>
 <p><span class="math inline">\(g = (0.37, 0.37)\)</span></p>
-<p>Queremos que ele seja unitário:</p>
-<p><span class="math display">\[ g = \frac{g}{\Vert g\Vert}_2 = (0.71, 0.71)\]</span></p>
+<p>Queremos que ele seja unitário: <span class="math display">\[ g = \frac{g}{\Vert g\Vert}_2 = (0.71, 0.71)\]</span></p>
 <p><span class="math display">\[\begin{align}
 e_B &amp;= (e_{doctor}\cdot g)g\\
 &amp;= (0.87 \times 0.71 - 0.50 \times 0.71)g\\
@@ -862,7 +870,24 @@ e_{doctor} &amp;= e_{doctor} - e_B \\
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -892,31 +917,50 @@ e_{doctor} &amp;= e_{doctor} - e_B \\
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

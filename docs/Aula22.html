@@ -424,37 +424,42 @@ Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a>
 <li>Sistema linear <span class="math inline">\(Ax = b\)</span></li>
 </ul>
 <p><span class="math inline">\(A = \begin{bmatrix} 1 &amp; 0,99 \\ 0,99 &amp; 0,98 \end{bmatrix}\)</span> e <span class="math inline">\(b= \begin{bmatrix} 1,99 \\ 1,97 \end{bmatrix}\)</span></p>
+<div>
 <ul>
-<li>Solução exata: <span class="math inline">\(x = \begin{bmatrix}1&amp;1\end{bmatrix}^\top\)</span></li>
-<li>Vetor <span class="math inline">\(\tilde{b}=\begin{bmatrix}1,99 &amp; 1,98\end{bmatrix}^\top \approx b\)</span></li>
-<li>Solução exata de <span class="math inline">\(Ay = \tilde{b} = \begin{bmatrix}100 &amp; -99\end{bmatrix}^\top\)</span></li>
-<li>Seja a matriz <span class="math display">\[
+<li class="fragment">Solução exata: <span class="math inline">\(x = \begin{bmatrix}1&amp;1\end{bmatrix}^\top\)</span></li>
+<li class="fragment">Vetor <span class="math inline">\(\tilde{b}=\begin{bmatrix}1,99 &amp; 1,98\end{bmatrix}^\top \approx b\)</span></li>
+<li class="fragment">Solução exata de <span class="math inline">\(Ay = \tilde{b} = \begin{bmatrix}100 &amp; -99\end{bmatrix}^\top\)</span></li>
+<li class="fragment">Seja a matriz <span class="math display">\[
 \tilde{A} =
 \begin{bmatrix}
 1 &amp; 0,99 \\
 0,99 &amp; 0,99
 \end{bmatrix} \approx A
 \]</span></li>
-<li>Solução exata de <span class="math inline">\(\tilde{A}z=b = \begin{bmatrix}2 &amp; -1/99\end{bmatrix}^\top\)</span></li>
-<li>Matriz <span class="math inline">\(A\)</span> é quase singular (<span class="math inline">\(\text{det}(A) = -10^{-4}\)</span>)</li>
-<li>Sistema linear malcondicionado</li>
+<li class="fragment">Solução exata de <span class="math inline">\(\tilde{A}z=b = \begin{bmatrix}2 &amp; -1/99\end{bmatrix}^\top\)</span></li>
+<li class="fragment">Matriz <span class="math inline">\(A\)</span> é quase singular (<span class="math inline">\(\text{det}(A) = -10^{-4}\)</span>)</li>
+<li class="fragment">Sistema linear malcondicionado</li>
 </ul>
+</div>
 </section>
 <section id="interpretação-geométrica-do-malcondicionamento" class="slide level2 scrollable">
 <h2>Interpretação geométrica do malcondicionamento</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
-<li>Três planos definidos por um sistema linear</li>
-<li>Dois planos são quase coincidentes</li>
+<li>Sistema linear <span class="math inline">\(Ax = b\)</span></li>
+</ul>
+<p><span class="math inline">\(A = \begin{bmatrix} 1 &amp; 0,99 \\ 0,99 &amp; 0,98 \end{bmatrix}\)</span> e <span class="math inline">\(b= \begin{bmatrix} 1,99 \\ 1,97 \end{bmatrix}\)</span></p>
+<ul>
+<li>Solução exata: <span class="math inline">\(x = \begin{bmatrix}1&amp;1\end{bmatrix}^\top\)</span></li>
+<li>Vetor <span class="math inline">\(\tilde{b}=\begin{bmatrix}1,99 &amp; 1,98\end{bmatrix}^\top \approx b\)</span></li>
+<li>Solução exata de <span class="math inline">\(Ay = \tilde{b} = \begin{bmatrix}100 &amp; -99\end{bmatrix}^\top\)</span></li>
+<li>Duas retas definidas por um sistema linear</li>
+<li>Duas retas são quase coincidentes</li>
 <li>Deslocamento no ponto de interseção</li>
 </ul>
 </div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/Aula22/malcondicionamento.png"></p>
-</figure>
-</div>
+<p><img data-src="figs/Aula22/malcondicionamento1.png" data-fig-align="center"> <img data-src="figs/Aula22/malcondicionamento2.png" data-fig-align="center"></p>
 </div>
 </div>
 </section>
@@ -473,7 +478,7 @@ Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a>
 <li>Se <span class="math inline">\(A\)</span> e/ou <span class="math inline">\(b\)</span> forem medidas experimentais</li>
 </ul>
 </section>
-<section id="singularidade-da-matriz" class="slide level2">
+<section id="singularidade-da-matriz" class="slide level2 scrollable">
 <h2>Singularidade da matriz</h2>
 <ul>
 <li>Medir singularidade de <span class="math inline">\(A\)</span> pelo determinante não constitui boa prática</li>
@@ -485,7 +490,7 @@ A = \begin{bmatrix} 0,001 &amp; 0,001 \\ -0,001 &amp; 0,001\end{bmatrix}
 <li>Seu determinante é pequeno porque seus elementos são pequenos</li>
 </ul>
 </section>
-<section id="número-de-condição" class="slide level2">
+<section id="número-de-condição" class="slide level2 scrollable">
 <h2>Número de condição</h2>
 <p><span class="math display">\[
 \text{condição}(A) = \kappa(A) = \Vert A\Vert \Vert A^{-1}\Vert
@@ -671,12 +676,14 @@ Norma infinito de H^-1:  13619.999999998996</code></pre>
 <p><span class="math display">\[
 \Vert A\Vert\Vert x\Vert \ge \Vert b\Vert
 \]</span> e <span class="math display">\[
-\vert \delta b \Vert \le \Vert A^{-1}\Vert \Vert \delta b\Vert
+\Vert \delta x \Vert \le \Vert A^{-1}\Vert \Vert \delta b\Vert
 \]</span></p>
 <ul>
 <li>Combinando</li>
 </ul>
 <p><span class="math display">\[
+\frac{\Vert \delta x\Vert}{\Vert x\Vert} \le \Vert A\Vert \Vert A^{-1}\Vert \frac{\Vert \delta b\Vert}{\Vert b\Vert}
+\]</span> <span class="math display">\[
 \frac{\Vert \delta x\Vert}{\Vert x\Vert} \le \kappa(A)\frac{\Vert \delta b\Vert}{\Vert b\Vert}
 \]</span></p>
 <ul>
@@ -756,8 +763,62 @@ A\delta x = -\delta A(x+\delta x)
 \frac{\Vert\delta x\Vert_2}{x + \delta x} = \frac{1,4214}{2,0000} = 7,1070\cdot 10^{-1}
 \]</span></p>
 </section>
-<section id="resumo-de-sistemas-lineares" class="slide level2">
+<section id="resumo-de-sistemas-lineares" class="slide level2 scrollable">
 <h2>Resumo de sistemas lineares</h2>
+<p>Os sistemas lineares podem ser:</p>
+<ul>
+<li>Singulares vs Não-singulares
+<ul>
+<li>Sistemas singulares podem admitir infinitas soluções ou nenhuma solução</li>
+<li>Sistemas não-singulares admitem solução única</li>
+</ul></li>
+<li>Bem condicionados vs Malcondicionados
+<ul>
+<li>O condicionamento está relacionado a como erros numéricos são propagados</li>
+</ul></li>
+<li>Sistemas lineares quadrados vs retangulares
+<ul>
+<li>Sistemas retangulares podem ser sobre ou sub determinados. Esses sistemas, quando apresentam infinitas soluções, devem ser resolvidos minimizando a norma-2 (método dos mínimos quadrados)</li>
+</ul></li>
+</ul>
+</section>
+<section id="métodos-estudados-no-curso" class="slide level2 scrollable">
+<h2>Métodos estudados no curso</h2>
+<div>
+<ul>
+<li class="fragment">Métodos exatos:
+<ul>
+<li class="fragment">Eliminação de Gauss</li>
+<li class="fragment">Decomposição LU
+<ul>
+<li class="fragment">Maneira sistemática que mantém semelhanças com o método de eliminação de Gauss</li>
+<li class="fragment">Muito útil para calcular determinante de matrizes</li>
+</ul></li>
+<li class="fragment">Decomposição Cholesky
+<ul>
+<li class="fragment">Quando a matriz dos coeficientes é positiva definida</li>
+<li class="fragment">Muito útil para calcular determinante de matrizes</li>
+</ul></li>
+<li class="fragment">Pseudoinversa de Moore-Penrose
+<ul>
+<li class="fragment">Útil para solucionar problema de mínimos quadrados com matrizes de posto baixo (Ver sistemas retangulares)</li>
+</ul></li>
+<li class="fragment">Decomposição QR
+<ul>
+<li class="fragment">Útil quando a matriz tem posto cheio</li>
+</ul></li>
+</ul></li>
+<li class="fragment">Métodos iterativos estacionários (aproximados):
+<ul>
+<li class="fragment">Método de Jacobi</li>
+<li class="fragment">Método de Gauss-Seidel</li>
+<li class="fragment">Método da Sobre-relaxação sucessiva
+<ul>
+<li class="fragment">importante estudar a análise de convergência desses métodos</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
 
 <img src="common/UFMG_HEAD.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://heitorramos.github.io/alc.html" class="uri">https://heitorramos.github.io/alc.html</a></p>

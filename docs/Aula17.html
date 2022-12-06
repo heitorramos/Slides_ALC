@@ -7,7 +7,7 @@
 <link href="Aula17_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula17_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula17_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.38">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -384,12 +389,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 17: Coeficiente de Determinação / Resolução do problema de Mínimos Quadrados</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -410,11 +422,10 @@
 <h2>Considerações sobre o coeficiente de determinação</h2>
 <ul>
 <li>Como avaliar se o modelo é bom?</li>
-<li>Em geral, quando o vetor de resíduos for “pequeno”, temos um bom ajuste</li>
-</ul>
-<p><span class="math display">\[
+<li>Em geral, quando o vetor de resíduos for “pequeno”, temos um bom ajuste <span class="math display">\[
 \Vert r \Vert^2 = \Vert Y - Y^2\Vert = \sum_{i=1}^n \left(y_i - \hat{y}\right )^2
-\]</span></p>
+\]</span></li>
+</ul>
 </section>
 <section id="considerações-sobre-o-coeficiente-de-determinação-1" class="slide level2 scrollable">
 <h2>Considerações sobre o coeficiente de determinação</h2>
@@ -456,11 +467,9 @@
 <li><span class="math inline">\(\text{SQTot} = \sum_{i=1}^n (y_i - \bar y)^2\)</span> (soma dos quadrados total)</li>
 <li><span class="math inline">\(\text{SQReg} = \sum_{i=1}^n (\hat y_i - \bar y)^2\)</span> (soma dos quadrados devido à regressão)</li>
 </ul>
-<p>Dessa maneira,</p>
-<p><span class="math display">\[
+<p>Dessa maneira, <span class="math display">\[
 r^2 = \frac{\text{SQTot} - \text{SQRes}}{\text{SQTot}} = 1 - \frac{\text{SQRes}}{\text{SQTot}}
-\]</span></p>
-<p>sendo <span class="math inline">\(r^2\)</span> denominado coeficiente de determinação e satisfazendo <span class="math inline">\(0\le r^2 \le 1\)</span></p>
+\]</span> sendo <span class="math inline">\(r^2\)</span> denominado coeficiente de determinação e satisfazendo <span class="math inline">\(0\le r^2 \le 1\)</span></p>
 </section>
 <section id="mínimos-quadrados" class="slide level2">
 <h2>Mínimos quadrados</h2>
@@ -475,8 +484,7 @@ x &amp;= (A^\top A)^{-1}A^\top b
 </section>
 <section id="moore-penrose-pseudoinversa" class="slide level2 scrollable">
 <h2>Moore-Penrose pseudoinversa</h2>
-<p>Considere</p>
-<p><span class="math display">\[A^\top A x = A^\top b\]</span></p>
+<p>Considere <span class="math display">\[A^\top A x = A^\top b\]</span></p>
 <p>Toda matriz <span class="math inline">\(A = U\Sigma V^\top\)</span></p>
 <p>Assim</p>
 <p><span class="math display">\[ (U\Sigma V^\top)^\top (U\Sigma V^\top) x = (U\Sigma V^\top)^\top b\]</span></p>
@@ -487,16 +495,13 @@ V\Sigma^\top U^\top b\]</span></p>
 <p><span class="math display">\[V\Sigma^2  V^\top x = V\Sigma^\top U^\top b\]</span></p>
 <p><span class="math display">\[V^\top V\Sigma^2  V^\top x = V^\top V\Sigma^\top U^\top b\]</span></p>
 <p><span class="math display">\[\Sigma^2  V^\top x =\Sigma^\top U^\top b\]</span></p>
-<p><span class="math display">\[V^\top x =\frac{\Sigma}{\Sigma^2} U^\top b\]</span></p>
-<p><span class="math display">\[x = V\Sigma^{-1} U^\top b\]</span></p>
+<p><span class="math display">\[V^\top x =\frac{\Sigma}{\Sigma^2} U^\top b\]</span> <span class="math display">\[x = V\Sigma^{-1} U^\top b\]</span></p>
 </section>
 <section id="exercício" class="slide level2 scrollable">
 <h2>Exercício</h2>
 <p>Calcule a pseudoinversa da matrix <span class="math inline">\(A = \begin{bmatrix}1 &amp; 2 \\ 1 &amp; 2\end{bmatrix}\)</span></p>
 <p><span class="math display">\[ A^\top A = \begin{bmatrix}1 &amp; 1 \\ 2 &amp; 2\end{bmatrix}\begin{bmatrix}1&amp;2\\ 1&amp;2\end{bmatrix} = \begin{bmatrix}2&amp;4\\ 4&amp;8\end{bmatrix}\]</span></p>
-<p>Polinômio característico:</p>
-<p><span class="math display">\[(2- \lambda)(8 - \lambda) -16 = 0\]</span></p>
-<p><span class="math display">\[16 - 2\lambda - 8\lambda +\lambda^2 -16 = 0\]</span></p>
+<p>Polinômio característico: <span class="math display">\[(2- \lambda)(8 - \lambda) -16 = 0\]</span> <span class="math display">\[16 - 2\lambda - 8\lambda +\lambda^2 -16 = 0\]</span></p>
 <p><span class="math display">\[ \lambda^2 - 10\lambda = 0\]</span></p>
 <p><span class="math display">\[\lambda = 10 \text{ e } \lambda = 0\]</span></p>
 <p>Calculando autovetor 1:</p>
@@ -506,16 +511,14 @@ V\Sigma^\top U^\top b\]</span></p>
 <p><span class="math display">\[\begin{bmatrix}-8x_1+4x_2\\ 4x_1 - 2x_2\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix}\]</span></p>
 <p><span class="math display">\[-8x_1 = -4x_2 \Rightarrow x_1=\frac{1}{2}x_2\]</span></p>
 <p>Normalizando o vetor <span class="math inline">\(X_1 = \begin{bmatrix}-\frac{1}{2}&amp; -1\end{bmatrix}^\top\)</span>, temos <span class="math inline">\(X_1 = \begin{bmatrix}-0.4472136&amp;-0.89442719 \end{bmatrix}^\top\)</span></p>
-<p>Calculando autovetor 2</p>
-<p><span class="math display">\[AX_2 = \lambda_1 X_2\]</span></p>
+<p>Calculando autovetor 2 <span class="math display">\[AX_2 = \lambda_1 X_2\]</span></p>
 <p><span class="math display">\[\begin{bmatrix}2&amp;4\\ 4 &amp; 8\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix}\]</span></p>
 <p><span class="math display">\[\begin{bmatrix}2x_1+4x_2\\ 4x_1 + 8x_2\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix}\]</span></p>
 <p><span class="math display">\[2x_1 = -4x_2 \Rightarrow x_1=-2x_2\]</span></p>
 <p>Normalizando o vetor <span class="math inline">\(X_2 = \begin{bmatrix}-2&amp;1\end{bmatrix}^\top\)</span>, temos <span class="math inline">\(X_2 = \begin{bmatrix}-0.89442719&amp; 0.4472136 \end{bmatrix}^\top\)</span></p>
 <p>Sendo assim, temos a decomposição SVD de <span class="math inline">\(A\)</span> como</p>
 <p><span class="math display">\[A = U\Sigma V^\top\]</span></p>
-<p>com</p>
-<p><span class="math display">\[V^\top = \begin{bmatrix}-0.89442719&amp; -0.4472136\\ 0.4472136&amp; - 0.89442719\end{bmatrix}\]</span></p>
+<p>com <span class="math display">\[V^\top = \begin{bmatrix}-0.89442719&amp; -0.4472136\\ 0.4472136&amp; - 0.89442719\end{bmatrix}\]</span></p>
 <p><span class="math display">\[\Sigma = \begin{bmatrix}0 &amp; 0 \\ 0 &amp; \sqrt{10} \end{bmatrix}\]</span></p>
 <p><span class="math display">\[U = AV\Sigma^{-1} = \begin{bmatrix}1 &amp; 2 \\ 1 &amp; 2\end{bmatrix}\begin{bmatrix}-0.89442719 &amp; -0.4472136 \\ 0.4472136&amp; - 0.89442719 \end{bmatrix}\begin{bmatrix}0 &amp; 0 \\ 0 &amp; \frac{1}{\sqrt{10}} \end{bmatrix}\]</span></p>
 <p>continua…. (ir para o Jupyter)</p>
@@ -543,8 +546,7 @@ V\Sigma^\top U^\top b\]</span></p>
 <section id="equações-normais" class="slide level2 scrollable">
 <h2>Equações normais</h2>
 <p><span class="math inline">\(A^\top A x = A^\top b\)</span>, com <span class="math inline">\(A = QR\)</span></p>
-<p><span class="math display">\[ (QR)^\top (QR) x = (QR)^\top b\]</span></p>
-<p><span class="math display">\[ R^\top Q^\top Q R x = R^\top Q^\top b\]</span></p>
+<p><span class="math display">\[ (QR)^\top (QR) x = (QR)^\top b\]</span> <span class="math display">\[ R^\top Q^\top Q R x = R^\top Q^\top b\]</span></p>
 <p><span class="math display">\[ R^\top R x = R^\top Q^\top b\]</span></p>
 <p><span class="math display">\[(R^\top)^{-1}(R^\top) R x = (R^\top)^{-1}R^\top Q^\top b \]</span></p>
 <p><span class="math display">\[ R x = Q^\top b\]</span></p>
@@ -842,7 +844,24 @@ V\Sigma^\top U^\top b\]</span></p>
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -872,31 +891,50 @@ V\Sigma^\top U^\top b\]</span></p>
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

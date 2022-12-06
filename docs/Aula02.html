@@ -7,7 +7,7 @@
 <link href="Aula02_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Aula02_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Aula02_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.38">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Heitor S. Ramos   ramosh@dcc.ufmg.br">
   <title>Álgebra Linear Computacional</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -384,12 +389,19 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Álgebra Linear Computacional</h1>
   <p class="subtitle">Aula 02: Multiplicando e Fatorando Matrizes</p>
-  <p class="author">Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Heitor S. Ramos <br> <a href="mailto:ramosh@dcc.ufmg.br">ramosh@dcc.ufmg.br</a> 
+</div>
+</div>
+</div>
+
+</section>
 <section id="créditos" class="slide level2">
 <h2>Créditos</h2>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -485,9 +497,8 @@
 </div>
 <ul>
 <li><p>Todas as combinações de coluna são apenas…</p></li>
-<li><p><span class="math inline">\(posto(A) = rank(A) = 1\)</span></p></li>
+<li><p><span class="math inline">\(posto(A) = rank(A) = 1\)</span> <span class="math display">\[ x_1\begin{bmatrix}1\\1\\1\end{bmatrix}+x_2\begin{bmatrix}3\\3\\3\end{bmatrix} + x_3\begin{bmatrix}8\\8\\8\end{bmatrix}\]</span></p></li>
 </ul>
-<p><span class="math display">\[ x_1\begin{bmatrix}1\\1\\1\end{bmatrix}+x_2\begin{bmatrix}3\\3\\3\end{bmatrix} + x_3\begin{bmatrix}8\\8\\8\end{bmatrix}\]</span></p>
 <p><span class="math display">\[x_1 + 3x_2 + 8x_3\]</span></p>
 </section>
 <section id="exemplo-2" class="slide level2 scrollable">
@@ -526,9 +537,8 @@
 </div>
 </div>
 <ul>
-<li><span class="math inline">\(posto(A) = rank(A) = 2\)</span> (por quê?)</li>
+<li><span class="math inline">\(posto(A) = rank(A) = 2\)</span> (por quê?) <span class="math display">\[ x_1\begin{bmatrix}2\\3\\5\end{bmatrix}+x_2\begin{bmatrix}1\\1\\7\end{bmatrix} + x_3\begin{bmatrix}3\\4\\12\end{bmatrix}\]</span></li>
 </ul>
-<p><span class="math display">\[ x_1\begin{bmatrix}2\\3\\5\end{bmatrix}+x_2\begin{bmatrix}1\\1\\7\end{bmatrix} + x_3\begin{bmatrix}3\\4\\12\end{bmatrix}\]</span></p>
 <p><span class="math display">\[\begin{cases}2x_1 + x_2 + 3x_3\\3x_1 + x_2 + 4x_3\\5x_1 + 7x_2 + 12x_3\end{cases}\]</span></p>
 </section>
 <section id="exemplo-3" class="slide level2 scrollable">
@@ -567,9 +577,8 @@
 </div>
 </div>
 <ul>
-<li><span class="math inline">\(posto(A) = rank(A) = 3\)</span> (por quê?)</li>
+<li><span class="math inline">\(posto(A) = rank(A) = 3\)</span> (por quê?) <span class="math display">\[ x_1\begin{bmatrix}2\\3\\5\end{bmatrix}+x_2\begin{bmatrix}1\\1\\7\end{bmatrix} + x_3\begin{bmatrix}3\\4\\1\end{bmatrix}\]</span></li>
 </ul>
-<p><span class="math display">\[ x_1\begin{bmatrix}2\\3\\5\end{bmatrix}+x_2\begin{bmatrix}1\\1\\7\end{bmatrix} + x_3\begin{bmatrix}3\\4\\1\end{bmatrix}\]</span></p>
 <p><span class="math display">\[\begin{cases}2x_1 + x_2 + 3x_3\\3x_1 + x_2 + 4x_3\\5x_1 + 7x_2 + 1\end{cases}\]</span></p>
 </section>
 <section id="conceito-espaço-coluna" class="slide level2">
@@ -609,8 +618,7 @@
 <ul>
 <li>Combinação linear das colunas de <span class="math inline">\(A\)</span></li>
 </ul>
-<p><span class="math display">\[ \begin{bmatrix} x_1 &amp; \ldots&amp; x_m\end{bmatrix}\begin{bmatrix} - &amp; a_1^\top &amp; -\\ - &amp;a_2^\top &amp; -\\ &amp; \vdots &amp;\\- &amp; a_m^\top &amp; - \\\end{bmatrix} \]</span></p>
-<p><span class="math display">\[  x_1\overrightarrow{a_1} + x_2\overrightarrow{a_2} + \ldots + x_m\overrightarrow{a_m}\]</span></p>
+<p><span class="math display">\[ \begin{bmatrix} x_1 &amp; \ldots&amp; x_m\end{bmatrix}\begin{bmatrix} - &amp; a_1^\top &amp; -\\ - &amp;a_2^\top &amp; -\\ &amp; \vdots &amp;\\- &amp; a_m^\top &amp; - \\\end{bmatrix} \]</span> <span class="math display">\[  x_1\overrightarrow{a_1} + x_2\overrightarrow{a_2} + \ldots + x_m\overrightarrow{a_m}\]</span></p>
 <p><span class="math display">\[  x_1\begin{bmatrix}a_{11} \\ a_{12}\\ \vdots \\ a_{1n} \end{bmatrix} + x_2\begin{bmatrix}a_{21} \\ a_{22}\\ \vdots \\ a_{2n} \end{bmatrix} + \ldots + x_m \begin{bmatrix}a_{m1} \\ a_{m2}\\ \vdots\\ a_{mn} \end{bmatrix}\]</span></p>
 </section>
 <section id="conceito-colunas-linearmente-independentes" class="slide level2">
@@ -774,14 +782,12 @@ Solve(A,b, fraction=T)
 </section>
 <section id="produto-externo" class="slide level2">
 <h2>Produto externo</h2>
-<p><span class="math display">\[ u \oplus v = uv^\top = \begin{bmatrix}u_1\\u_2\\u_3\\u_4\end{bmatrix}\begin{bmatrix}v_1 &amp; v_2 &amp; v_3\end{bmatrix}\]</span></p>
-<p><span class="math display">\[ u \oplus v =  \begin{bmatrix} u_1v_1 &amp; u_1v_2 &amp; u_1v_3 \\ u_2v_1 &amp; u_2v_2 &amp; u_2v_3 \\ u_3v_1 &amp; u_3v_2 &amp; u_3v_3 \\ u_4v_1 &amp; u_4v_2 &amp; u_4v_3\end{bmatrix}\]</span></p>
+<p><span class="math display">\[ u \oplus v = uv^\top = \begin{bmatrix}u_1\\u_2\\u_3\\u_4\end{bmatrix}\begin{bmatrix}v_1 &amp; v_2 &amp; v_3\end{bmatrix}\]</span> <span class="math display">\[ u \oplus v =  \begin{bmatrix} u_1v_1 &amp; u_1v_2 &amp; u_1v_3 \\ u_2v_1 &amp; u_2v_2 &amp; u_2v_3 \\ u_3v_1 &amp; u_3v_2 &amp; u_3v_3 \\ u_4v_1 &amp; u_4v_2 &amp; u_4v_3\end{bmatrix}\]</span></p>
 </section>
 <section id="produto-de-matrizes-como-soma-de-produtos-externos" class="slide level2 scrollable">
 <h2>Produto de matrizes como soma de produtos externos</h2>
 <p><span class="math display">\[\begin{bmatrix}a_{11} &amp; a_{12} &amp; \ldots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \ldots &amp; a_{2n}  \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\a_{m1} &amp; a_{m2} &amp; \ldots &amp; a_{mn}  \end{bmatrix} \begin{bmatrix}b_{11} &amp; b_{12} &amp; \ldots &amp; b_{1p} \\ b_{21} &amp; b_{22} &amp; \ldots &amp; b_{2p}  \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ b_{n1} &amp; b_{n2} &amp; \ldots &amp; b_{np}  \end{bmatrix}\]</span></p>
-<p><span class="math display">\[ a_1 = \begin{bmatrix}a_{11}\\ a_{21} \\ \vdots\\ a_{m1} \end{bmatrix},   b_1 = \begin{bmatrix}b_{11}\\ b_{12} \\ \vdots\\ b_{1p} \end{bmatrix}\]</span></p>
-<p><span class="math display">\[ a_1b_1^\top + a_2b_2^\top + \ldots + a_nb_n^\top\]</span></p>
+<p><span class="math display">\[ a_1 = \begin{bmatrix}a_{11}\\ a_{21} \\ \vdots\\ a_{m1} \end{bmatrix},   b_1 = \begin{bmatrix}b_{11}\\ b_{12} \\ \vdots\\ b_{1p} \end{bmatrix}\]</span> <span class="math display">\[ a_1b_1^\top + a_2b_2^\top + \ldots + a_nb_n^\top\]</span></p>
 <p><span class="math display">\[ a_1b_1^\top = a_1 \oplus b_1 \ldots\]</span></p>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
@@ -825,8 +831,7 @@ Solve(A,b, fraction=T)
 <ul>
 <li>Considere a base que encontramos</li>
 </ul>
-<p><span class="math display">\[\begin{bmatrix}2 &amp; 1\\ 3 &amp; 1\\ 5 &amp; 7\end{bmatrix}\begin{bmatrix}1 &amp; 0 &amp; 1\\ 0 &amp; 1 &amp; 1\end{bmatrix} = A\]</span></p>
-<p><span class="math display">\[ A = CR\]</span></p>
+<p><span class="math display">\[\begin{bmatrix}2 &amp; 1\\ 3 &amp; 1\\ 5 &amp; 7\end{bmatrix}\begin{bmatrix}1 &amp; 0 &amp; 1\\ 0 &amp; 1 &amp; 1\end{bmatrix} = A\]</span> <span class="math display">\[ A = CR\]</span></p>
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -843,9 +848,7 @@ Solve(A,b, fraction=T)
 </section>
 <section id="espaço-linha-de-a" class="slide level2">
 <h2>Espaço linha de <span class="math inline">\(A\)</span></h2>
-<p>Todas as combinações de linha - Espaço linha <span class="math inline">\(C(A^\top)\)</span></p>
-<p><span class="math display">\[ C = \begin{bmatrix}2 &amp; 1\\ 3 &amp; 1\\ 5 &amp; 7\end{bmatrix}\]</span></p>
-<p><span class="math display">\[ R = \begin{bmatrix}1 &amp; 0 &amp; 1\\ 0 &amp; 1 &amp; 1\end{bmatrix}\]</span></p>
+<p>Todas as combinações de linha - Espaço linha <span class="math inline">\(C(A^\top)\)</span> <span class="math display">\[ C = \begin{bmatrix}2 &amp; 1\\ 3 &amp; 1\\ 5 &amp; 7\end{bmatrix}\]</span> <span class="math display">\[ R = \begin{bmatrix}1 &amp; 0 &amp; 1\\ 0 &amp; 1 &amp; 1\end{bmatrix}\]</span></p>
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -1152,7 +1155,24 @@ Solve(A,b, fraction=T)
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -1182,31 +1202,50 @@ Solve(A,b, fraction=T)
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>
