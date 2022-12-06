@@ -33,7 +33,7 @@ Prova 1 (30 pontos)
 Prova 2 (30 pontos)
 Listas de exercícios teóricos e de programação (40 pontos) (a serem entregues ao longo do semestre)
 
-##vMaterial de apoio
+## Material de apoio
 
 Moodle (slides e outros materiais)
 Vídeos
