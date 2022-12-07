@@ -315,11 +315,11 @@ $A = \begin{bmatrix}1&0,99\\ 0,99 & 0,98\end{bmatrix}$, $b = \begin{bmatrix}1,99
 - Erro relativo em termos da norma-2
 
 $$
-\frac{\Vert\delta x\Vert_2}{x + \delta x} \le \kappa_2(A)\frac{\Vert\delta A\Vert_2}{\Vert A\Vert_2} = 1,9206\cdot 10^4\frac{10^{-2}}{1,9801}
+\frac{\Vert\delta x\Vert_2}{\Vert x + \delta x\Vert} \le \kappa_2(A)\frac{\Vert\delta A\Vert_2}{\Vert A\Vert_2} = 1,9206\cdot 10^4\frac{10^{-2}}{1,9801}
 $$
 
 $$
-\frac{\Vert\delta x\Vert_2}{x + \delta x} \le 1,9800\cdot 10^2
+\frac{\Vert\delta x\Vert_2}{\Vert x + \delta x\Vert} \le 1,9800\cdot 10^2
 $$
 
 - Com a perturbação $\delta A$, x variou de $x=\begin{bmatrix}1&1\end{bmatrix}^\top$ para $\tilde{x} = \begin{bmatrix}2&-1/99\end{bmatrix}^\top$ 
@@ -328,7 +328,7 @@ $$
 - Erro relativo real
 
 $$
-\frac{\Vert\delta x\Vert_2}{x + \delta x} = \frac{1,4214}{2,0000} = 7,1070\cdot 10^{-1}
+\frac{\Vert\delta x\Vert_2}{\Vert x + \delta x\Vert} = \frac{1,4214}{2,0000} = 7,1070\cdot 10^{-1}
 $$
 
 ## Resumo de sistemas lineares{.scrollable}
